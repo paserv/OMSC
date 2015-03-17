@@ -3,13 +3,9 @@
 <head>
 <title>Facebook Login JavaScript Example</title>
 <meta charset="UTF-8">
-<script src="js/test.js"></script>
 <script src="js/jquery.js"></script>
-<script type="text/javascript" src="../testFBjavascriptAPI/build/ol.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
-
 <link href="css/jquery.dataTables.css" rel="stylesheet" type="text/css">
-<link href="css/ol.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -17,7 +13,6 @@
 	<div id="fb-root"></div>
 
 	<script>
-	var jsonData;
 	/**	INIT FACEBOOK */
 		window.fbAsyncInit = function() {
 			FB.init({
@@ -34,15 +29,39 @@
 
 		/**   INIT MATRIX */
 		$(document).ready(function() {
-			document.getElementById('show-btn').style.display = 'none';
 			
-			$.getJSON( "js/data.json", function(data) {
-				document.getElementById('show-btn').style.display = 'block';
-				jsonData = data;
-			});
+			getData();
+						
+			var numCell = matrix.numCell;
+			var numCol = matrix.numCol;
+			var trHTML = '<tbody>';
+			for (var cell = 0; cell < numCell; cell = (parseInt(cell) + parseInt(numCol))) {
+				trHTML += '<tr>';
+				for (var col = 0; col < numCol; col++) {
+					//trHTML += '<td>' + matrix.cell[cell + col].id + '</td>';
+					trHTML += '<td>' + '<img src="' + imgUrl + '"> ' + '</td>';
+				}
+				trHTML += '</tr>';
+			}
+			trHTML += '</tbody>';
+			$('#matrix2').append(trHTML);
+            $('#matrix2').DataTable();
         });
 		
-	
+		function getData()  {
+			$.ajax({
+                url: 'js/data.js',
+                type: 'get',
+                dataType: 'json',
+                cache: true,
+                success: function(data) {
+                    if(data != null) { 
+                        alert(data); 
+                    } 
+                },
+            });
+		}
+		
 		// Load the SDK asynchronously
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
@@ -106,15 +125,10 @@
 				checkLoginState();
 			});
 		}
-		
-		function show() {
-            console.log(jsonData);
-        }
 	</script>
 
 
 
-    <a href="#" id="show-btn" onclick="show()">Show</a>
 
 	<a href="#" id="login-btn" onclick="loginFB()">Log in with Facebook</a>
 	<a href="#" id="logout-btn" onclick="logoutFB()">Log out with Facebook</a>
