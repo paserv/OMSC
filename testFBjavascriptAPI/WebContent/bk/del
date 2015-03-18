@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Facebook Login JavaScript Example</title>
+<meta charset="UTF-8">
+<script src="js/jquery.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<link href="css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+	<div id="fb-root"></div>
+
+	<script>
+	/**	INIT FACEBOOK */
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '1629515017282874',
+				cookie : true, // enable cookies to allow the server to access the session
+				xfbml : true, // parse social plugins on this page
+				version : 'v2.2' // use version 2.2
+			});
+
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		};
+
+		/**   INIT MATRIX */
+		$(document).ready(function() {
+			
+			getData();
+						
+			var numCell = matrix.numCell;
+			var numCol = matrix.numCol;
+			var trHTML = '<tbody>';
+			for (var cell = 0; cell < numCell; cell = (parseInt(cell) + parseInt(numCol))) {
+				trHTML += '<tr>';
+				for (var col = 0; col < numCol; col++) {
+					//trHTML += '<td>' + matrix.cell[cell + col].id + '</td>';
+					trHTML += '<td>' + '<img src="' + imgUrl + '"> ' + '</td>';
+				}
+				trHTML += '</tr>';
+			}
+			trHTML += '</tbody>';
+			$('#matrix2').append(trHTML);
+            $('#matrix2').DataTable();
+        });
+		
+		function getData()  {
+			$.ajax({
+                url: 'js/data.js',
+                type: 'get',
+                dataType: 'json',
+                cache: true,
+                success: function(data) {
+                    if(data != null) { 
+                        alert(data); 
+                    } 
+                },
+            });
+		}
+		
+		// Load the SDK asynchronously
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		// This is called with the results from FB.getLoginStatus().
+		function statusChangeCallback(response) {
+			if (response.status === 'connected') {
+				// Logged into your app and Facebook.
+				document.getElementById('login-btn').style.display = 'none';
+				document.getElementById('logout-btn').style.display = 'block';
+				displayUser();
+			} else if (response.status === 'not_authorized') {
+				// The person is logged into Facebook, but not your app.
+				document.getElementById('login-btn').style.display = 'block';
+				document.getElementById('logout-btn').style.display = 'none';
+				document.getElementById('status').innerHTML = 'Please log into this app.';
+			} else {
+				// The person is not logged into Facebook, so we're not sure if
+				// they are logged into this app or not.
+				document.getElementById('login-btn').style.display = 'block'
+				document.getElementById('logout-btn').style.display = 'none';
+				document.getElementById('status').innerHTML = 'Please log into Facebook.';
+			}
+		}
+
+		// This function is called when someone finishes with the Login
+		// Button.  See the onlogin handler attached to it in the sample
+		// code below.
+		function checkLoginState() {
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		}
+
+		function displayUser() {
+			FB.api('/me?fields=name,picture', function(response) {
+								console.log('API response', response);
+								document.getElementById('status').innerHTML = ('<img src="' + response.picture.data.url + '"> ' + response.name);
+							});
+		}
+
+		function loginFB() {
+			FB.login(function(response) {
+				console.log(JSON.stringify(response));
+				checkLoginState();
+			}), {
+				scope : 'user_friends, publish_actions'
+			};
+		}
+
+		function logoutFB() {
+			FB.logout(function(response) {
+				// Person is now logged out
+				checkLoginState();
+			});
+		}
+	</script>
+
+
+
+
+	<a href="#" id="login-btn" onclick="loginFB()">Log in with Facebook</a>
+	<a href="#" id="logout-btn" onclick="logoutFB()">Log out with Facebook</a>
+
+	<div id="status"></div>
+
+    <div style="height: 50px;"></div>
+
+    <table id="matrix2" class="display" style="cellspacing:0; cellpadding:0; width:100%"></table>
+
+	
+
+</body>
+</html>
