@@ -1,4 +1,4 @@
-var count = 20000;
+var count = 200000;
 var features = new Array(count);
 var e = 18000000;
 for (var i = 0; i < count; ++i) {

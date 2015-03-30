@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+    function createRandomFusionTable() {
+    	var offset = 90000;
+    	for (var i = 0; i < 10000; i++) {
+    		var id = i + offset;
+            $("#table").append('marker' + id + ';' + id + ';' + getRandomArbitrary(-85, 85) + ',' + getRandomArbitrary(-180, 180) + "<br>");
+        }
+    }
+    
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    </script>
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+  </head>
+  
+  <body onload="createRandomFusionTable()">
+    <div id="table"></div>
+  </body>
+</html>
