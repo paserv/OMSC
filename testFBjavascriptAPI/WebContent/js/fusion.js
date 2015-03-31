@@ -15,6 +15,7 @@ function initialize() {
 		zoom: 8
 	});
 
+	//Example data
 	new google.maps.FusionTablesLayer({
 		map: map,
 		query: {
@@ -28,6 +29,7 @@ function initialize() {
 		}
 	});
 
+	//Example data
 	new google.maps.FusionTablesLayer({
 		map: map,  
 		query: {
@@ -41,6 +43,7 @@ function initialize() {
 		}
 	});
 
+	//Example data
 	new google.maps.FusionTablesLayer({
 		map: map,  
 		query: {
@@ -54,11 +57,12 @@ function initialize() {
 		}
 	});
 
+	//Test data
 	new google.maps.FusionTablesLayer({
 		map: map,  
 		query: {
 			select: "col1",
-			from: "1Ug4nbVUA1pXz_guYMOwID_mgCoufHs-YdcJGo_5I",
+			from: "1smtYhPcYgrZ5LjH8D6Uz5iTH8qsCu6sPxGO3m9sQ",
 			where: ""
 		},
 		options: {
@@ -67,6 +71,7 @@ function initialize() {
 		}
 	});
 
+	//Example data
 	new google.maps.FusionTablesLayer({
 		map: map,  
 		query: {
