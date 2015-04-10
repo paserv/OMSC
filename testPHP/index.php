@@ -5,7 +5,7 @@
  <body>
  
  <?php   
- 	ini_set('include_path', 'C:\\Users\servill7\git\google-api-php-client');
+ 	set_include_path(get_include_path() . PATH_SEPARATOR . 'C:\\Users\servill7\git\google-api-php-client');
  	require_once 'src\Google\autoload.php';
  
  	echo "<h1>Hello World!</h1>";
