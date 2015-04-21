@@ -1,6 +1,7 @@
 <?php
 include_once '../configuration/DBconfig.php';
 include_once '../dto/DBUserData.php';
+
 class DBModel {
 	function getConnection() {
 		$conn = new mysqli ( DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE );
@@ -28,6 +29,20 @@ class DBModel {
 		}
 		$conn->close ();
 	}
+	
+	function insertFakeFusionUser(DBUserData $dbData) {
+		$conn = $this->getConnection ();
+		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
+		$location = "'" . $dbData->latitude . "," . $dbData->longitude . "'";
+		$sql = "INSERT INTO fusionuser (id, name, location, link, description) VALUES ('$dbData->id', '$dbData->name', $location, '$profileUrl', '$dbData->description')";
+		if ($conn->query ( $sql ) === TRUE) {
+			echo "New record created successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+		$conn->close ();
+	}
+	
 }
 
 ?>

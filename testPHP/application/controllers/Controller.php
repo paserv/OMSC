@@ -24,5 +24,10 @@ class Controller {
 		$model->insertUser($dbData);
 	}
 	
+	function registerFakeUserIntoFusionTable(DBUserData $dbData) {
+		$model = new FusionModel();
+		$model->insertUserFake($dbData);
+	}
+	
 }
 ?>

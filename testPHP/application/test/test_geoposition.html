@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ASSA</title>
+<script type="text/javascript">
+var div_id = "demo"; 
+
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(success, error, options);
+}
+
+var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+};
+
+function success(pos) {
+    var x = document.getElementById(div_id);
+    var crd = pos.coords;
+    console.log('Your current position is:');
+    console.log('Latitude : ' + crd.latitude);
+    console.log('Longitude: ' + crd.longitude);
+    console.log('More or less ' + crd.accuracy + ' meters.');
+    x.innerHTML = "Latitude: " + pos.coords.latitude + 
+    "<br>Longitude: " + pos.coords.longitude; 
+};
+
+function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+</script>
+</head>
+<body onload="getLocation()">
+	<h1>GeoLocation</h1>
+	<div id="demo"></div>
+</body>
+</html>

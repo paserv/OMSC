@@ -26,6 +26,12 @@ class FusionModel {
 		$res = $service->query->sql ($insQuery);
 		echo $res;
 	}
+	
+	function insertUserFake(DBUserData $dbData) {
+		$dbModel = new DBModel();
+		$dbModel->insertFakeFusionUser($dbData);
+	}
+	
 }
 
 ?>

@@ -9,7 +9,7 @@ class DBUserData {
 	public $socialPageUrl;
 	public $avatarUrl;
 	
-	function __construct($id, $name, $email, $longitude, $latitude, $description, $socialPageUrl, $avatarUrl) {
+	function __construct($id, $name, $email, $latitude, $longitude, $description, $socialPageUrl, $avatarUrl) {
 		$this->id = $id;
 		$this->name = $name;
 		$this->email = $email;
