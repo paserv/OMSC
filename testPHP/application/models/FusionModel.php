@@ -22,9 +22,8 @@ class FusionModel {
 	
 	function insertUser(DBUserData $dbData) {
 		$service = $this->getService();
-		$insQuery = "INSERT INTO " + FUSION_TABLE_ID + " (Name, Link, Location) VALUES ($dbData->id, $dbData->socialPageUrl, $dbData->latitude)";
+		$insQuery = "INSERT INTO " . FUSION_TABLE_ID . " (id, name, location, description, timestamp) VALUES ( '$dbData->id', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";
 		$res = $service->query->sql ($insQuery);
-		echo $res;
 	}
 	
 	function insertUserFake(DBUserData $dbData) {
