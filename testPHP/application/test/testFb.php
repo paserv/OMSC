@@ -4,7 +4,7 @@
 	include_once '../dto/SocialUser.php';
 	
 	$controller = new Controller();
-	$fbUser = $controller->getLoggedUser();
+	$fbUser = $controller->getFBLoggedUser();
 	?>
 
 <!doctype html>
@@ -12,8 +12,7 @@
 <head>
 <title>Login with Facebook</title>
 <link
-	href="http://www.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
-	rel="stylesheet">
+	href="../public/cssbootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
 	<div>

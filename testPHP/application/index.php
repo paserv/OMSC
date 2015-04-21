@@ -9,7 +9,7 @@
 <body>
 
 	<div id="map-canvas"></div>
- 	<a href="join.php"><img src="../public/img/join_us.png"></a> 
+ 	<a href="views/join_choose.php"><img src="../public/img/join_us.png"></a> 
  
  </body>
 </html>

@@ -3,6 +3,7 @@ set_include_path(get_include_path() . PATH_SEPARATOR . '../../library/facebook-p
 require_once 'autoload.php';
 
 include_once '../configuration/FBconfig.php';
+include_once '../models/AbstractSocialModel.php';
 include_once '../dto/SocialUser.php';
 
 use Facebook\FacebookSession;
@@ -18,7 +19,7 @@ use Facebook\Entities\AccessToken;
 use Facebook\HttpClients\FacebookCurlHttpClient;
 use Facebook\HttpClients\FacebookHttpable;
 
-class FBModel {
+class FBModel extends AbstractSocialModel {
 	
 	function login() {
 		FacebookSession::setDefaultApplication (FB_APP_ID, FB_APP_SECRET);
@@ -42,7 +43,7 @@ class FBModel {
 		
 	}
 	
-	function getUser() {
+	public function getUser() {
 		$fbSession = $this->login(); 
 		$request = new FacebookRequest ($fbSession, 'GET', '/me');
 		$response = $request->execute ();
@@ -51,7 +52,10 @@ class FBModel {
 		$fbid = $graphObject->getProperty('id'); // To Get Facebook ID
 		$fbfullname = $graphObject->getProperty('name'); // To Get Facebook full name
 		$femail = $graphObject->getProperty ('email'); // To Get Facebook email ID
-		$user = new SocialUser($fbid, $fbfullname, $femail);
+		$user = new SocialUser();
+		$user->setId($fbid);
+		$user->setName($fbfullname);
+		$user->setEmail($femail);
 		return $user;
 	}
 }
