@@ -1,5 +1,5 @@
 <?php
-class DBUserData extends FusionUser {
+class DBUserData {
 	public $socialId;
 	public $name;
 	public $email;
