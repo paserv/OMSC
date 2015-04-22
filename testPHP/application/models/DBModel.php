@@ -21,7 +21,7 @@ class DBModel {
 		$conn = $this->getConnection ();
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
-		$sql = "INSERT INTO user (id, name, email, avatarUrl, description, socialPageUrl, latitude, longitude) VALUES ('$dbData->id', '$dbData->name', '$dbData->email', '$avatUrl', '$dbData->description', '$profileUrl', '$dbData->latitude', '$dbData->longitude')";
+		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->id', '$dbData->name', '$dbData->email', '$avatUrl', '$dbData->description', '$profileUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
 		if ($conn->query ( $sql ) === TRUE) {
 			echo "New record created successfully";
 		} else {
