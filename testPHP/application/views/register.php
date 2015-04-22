@@ -8,10 +8,14 @@
 	$mail = $_SESSION["mail"];
 	$socialNetwork = $_SESSION["sn"];
 	
+	$date = new DateTime();
+	$timestamp =  $date->getTimestamp();
+	
 	$controller = new Controller();
-	$user = new DBUserData($socialId, $name, $mail, 42.10, 12.12, "Description", "URL", "Avatar");
+	//Controller hasto check if already registered
+	$user = new DBUserData($socialId, $name, $mail, 42.10, 12.12, "Description", "URL", "Avatar", $timestamp, $socialNetwork);
 	$controller->registerUserIntoDB($user);
-	$controller->registerFakeUserIntoFusionTable($user);
+	$controller->registerUserIntoFusionTable($user);
 
 	?>
 
