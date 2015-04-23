@@ -1,15 +1,17 @@
 <?php
 class DBUserData {
-	public $id;
+	public $socialId;
 	public $name;
 	public $email;
-	public $longitude;
+	public $socialNetwork;
 	public $latitude;
+	public $longitude;
 	public $description;
+	public $timestamp;
 	public $socialPageUrl;
 	public $avatarUrl;
 	
-	function __construct($id, $name, $email, $latitude, $longitude, $description, $socialPageUrl, $avatarUrl) {
+	function __construct($id, $name, $email, $latitude, $longitude, $description, $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork) {
 		$this->id = $id;
 		$this->name = $name;
 		$this->email = $email;
@@ -18,6 +20,8 @@ class DBUserData {
 		$this->description = $description;
 		$this->socialPageUrl = $socialPageUrl;
 		$this->avatarUrl = $avatarUrl;
+		$this->timestamp = $timestamp;
+		$this->socialNetwork = $socialNetwork;
 	}
 }
 ?>
