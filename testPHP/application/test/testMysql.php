@@ -1,6 +1,6 @@
  <?php
 	include_once '../controllers/Controller.php';
-	include_once '../dto/DBUserData.php';
+	include_once '../dto/DBUser.php';
 	
 	$controller = new Controller();
 	$date = new DateTime();
