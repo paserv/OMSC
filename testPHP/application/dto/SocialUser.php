@@ -4,24 +4,17 @@ class SocialUser {
 	public $name;
 	public $email;
 	public $socialNetwork;
+	public $socialPageUrl;
+	public $avatarUrl;
 	
-		
-	function setId($socialId){
-		$this->socialId = $socialId;
-	}
-	
-	function setName($name){
+	function __construct($id, $name, $email, $socialPageUrl, $avatarUrl, $socialNetwork) {
+		$this->socialId = $id;
 		$this->name = $name;
-	}
-	
-	function setEmail($email){
 		$this->email = $email;
-	}
-	
-	function setSocialNetwork($socialNetwork){
+		$this->socialPageUrl = $socialPageUrl;
+		$this->avatarUrl = $avatarUrl;
 		$this->socialNetwork = $socialNetwork;
 	}
-	
 	
 }
 ?>
