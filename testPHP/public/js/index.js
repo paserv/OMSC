@@ -1,10 +1,10 @@
 window.onload = loadScript;
 
 function loadScript() {
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = 'https://maps.googleapis.com/maps/api/js?v=3.19&signed_in=true&callback=initialize&key=AIzaSyD15UMjUyEUgkroE57c1j0hGrsFGbo0Is0';
-	document.body.appendChild(script);
+	var mapApi = document.createElement('script');
+	mapApi.type = 'text/javascript';
+	mapApi.src = 'https://maps.googleapis.com/maps/api/js?v=3.19&signed_in=true&callback=initialize&key=AIzaSyD15UMjUyEUgkroE57c1j0hGrsFGbo0Is0';
+	document.body.appendChild(mapApi);
 }
 
 function initialize() {
