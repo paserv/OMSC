@@ -10,8 +10,7 @@
 	$avatarUrl = $_SESSION["avatarUrl"];
 	$socialPageUrl = $_SESSION["socialPageUrl"];
 	
-	$date = new DateTime();
-	$timestamp =  $date->getTimestamp();
+	$timestamp = date('Y-m-d G:i:s');
 	
 	if ( !empty($_POST['latitude'])){
 		$latitude = $_POST['latitude'];
