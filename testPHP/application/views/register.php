@@ -4,6 +4,7 @@
 	include_once '../dto/SocialUser.php';
 	
 	$socialId = $_SESSION["id"];
+	
 	$name = $_SESSION["name"];
 	$mail = $_SESSION["mail"];
 	$socialNetwork = $_SESSION["sn"];
@@ -21,11 +22,10 @@
 	}
 	
 	$controller = new Controller();
-	//Controller has to check if already registered
 	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, "Description", $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
-	$controller->registerUserIntoDB($user);
-	//Controller has to check in which fusion table register user
-	$controller->registerUserIntoFusionTable($user);
+	$ok = $controller->register($user);
+	echo $ok;
+	//FusionModel has to check in which fusion table register user
 
 	?>
 

@@ -178,8 +178,8 @@ class FacebookCurlHttpClient implements FacebookHttpable
       CURLOPT_SSL_VERIFYHOST => 2,
       CURLOPT_SSL_VERIFYPEER => false,
       CURLOPT_CAINFO         => __DIR__ . '/certs/DigiCertHighAssuranceEVRootCA.pem',
-	  CURLOPT_PROXY          => 'http://localhost:5865',
-      CURLOPT_PROXYPORT      => 5865
+	  //CURLOPT_PROXY          => 'http://localhost:5865',
+      //CURLOPT_PROXYPORT      => 5865
     );
 
     if ($method !== 'GET') {

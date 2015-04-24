@@ -11,6 +11,16 @@ class DBModel {
 		}
 		return $conn;
 	}
+	function isUserRegistered($idUser) {
+		$conn = $this->getConnection ();
+		$sql = "SELECT COUNT * FROM user WHERE user.socialId like " . $idUser;
+		$result = $conn->query($sql);
+		$conn->close ();
+		if ($result->num_rows > 0) {
+			return TRUE;
+		}
+		return FALSE;
+	}
 	static function escapeUrl($conn, $url) {
 		$urlEscaped = $url;
 		$urlEscaped = urlencode ( $urlEscaped );
@@ -22,11 +32,11 @@ class DBModel {
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
 		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
-		if ($conn->query ( $sql ) === TRUE) {
-			echo "New DB User created successfully";
-		} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
-		}
+		if ($conn->query ( $sql ) === FALSE) {
+			$error =  $conn->error;
+			$conn->close ();
+			throw new Exception("Error: " . $sql . "<br>" . $error);
+		} 
 		$conn->close ();
 	}
 	
