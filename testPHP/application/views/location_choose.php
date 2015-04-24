@@ -36,6 +36,7 @@
 	<form name="coordinateForm" action="register.php" method="post">
 		Lat.: <input type="text" name="latitude" id="latitude" readonly/>
 		Long.: <input type="text" name="longitude" id="longitude" readonly/>
+		Something about me.: <input type="text" name="aboutme" id="aboutme"/>
 		<input type="submit" name="submit_button" value="Register" />
 	</form>
 	<div>

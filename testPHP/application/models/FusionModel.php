@@ -22,6 +22,8 @@ class FusionModel {
 	}
 	
 	function insertUser(SocialUser $dbData) {
+		//FusionModel has to check in which fusion table register user
+		
 		$service = $this->getService();
 		//Insert image or link to image URL?
 		$insQuery = "INSERT INTO " . FUSION_TABLE_ID . " (id, name, location, description, timestamp) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";

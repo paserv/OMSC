@@ -11,22 +11,25 @@
 	$avatarUrl = $_SESSION["avatarUrl"];
 	$socialPageUrl = $_SESSION["socialPageUrl"];
 	
-	$date = new DateTime();
-	$timestamp =  $date->getTimestamp();
+	$timestamp = date("Y-m-d H:i:s");
 	
-	if ( !empty($_POST['latitude'])){
-		$latitude = $_POST['latitude'];
-	}
-	if ( !empty($_POST['latitude'])){
-		$longitude = $_POST['longitude'];
+	$latitude = $_POST['latitude'];
+	$longitude = $_POST['longitude'];
+	
+	$aboutme = "";
+	if ( !empty($_POST['aboutme'])){
+		$aboutme = $_POST['aboutme'];
 	}
 	
 	$controller = new Controller();
-	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, "Description", $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
+	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, $aboutme, $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
 	$ok = $controller->register($user);
-	echo $ok;
-	//FusionModel has to check in which fusion table register user
-
+	if ($ok) {
+		echo "Registered to OMSC";
+	} else {
+		echo "Not Registered, retry later!";
+	}
+	
 	?>
 
 <!doctype html>
@@ -36,8 +39,5 @@
 <link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
-	<div>
-		Registration OK
-	</div>
 </body>
 </html>

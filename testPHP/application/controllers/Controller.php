@@ -51,7 +51,6 @@ class Controller {
 			$this->registerUserIntoFusionTable ( $dbData );
 			return true;
 		} catch ( Exception $e ) {
-			echo 'Message: ' . $e->getMessage ();
 			return false;
 		}
 	}
