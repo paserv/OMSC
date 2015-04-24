@@ -1,20 +1,30 @@
  <?php
 	session_start ();
 	include_once '../controllers/Controller.php';
-	include_once '../dto/DBUserData.php';
+	include_once '../dto/SocialUser.php';
 	
 	$socialId = $_SESSION["id"];
 	$name = $_SESSION["name"];
 	$mail = $_SESSION["mail"];
 	$socialNetwork = $_SESSION["sn"];
+	$avatarUrl = $_SESSION["avatarUrl"];
+	$socialPageUrl = $_SESSION["socialPageUrl"];
 	
 	$date = new DateTime();
 	$timestamp =  $date->getTimestamp();
 	
+	if ( !empty($_POST['latitude'])){
+		$latitude = $_POST['latitude'];
+	}
+	if ( !empty($_POST['latitude'])){
+		$longitude = $_POST['longitude'];
+	}
+	
 	$controller = new Controller();
-	//Controller hasto check if already registered
-	$user = new DBUserData($socialId, $name, $mail, 42.10, 12.12, "Description", "URL", "Avatar", $timestamp, $socialNetwork);
+	//Controller has to check if already registered
+	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, "Description", $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
 	$controller->registerUserIntoDB($user);
+	//Controller has to check in which fusion table register user
 	$controller->registerUserIntoFusionTable($user);
 
 	?>
@@ -25,7 +35,7 @@
 <title>Registration</title>
 <link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
-<body onload="getLocation()">
+<body>
 	<div>
 		Registration OK
 	</div>

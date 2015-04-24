@@ -3,7 +3,6 @@ include_once '../models/FBModel.php';
 include_once '../models/DBModel.php';
 include_once '../models/FusionModel.php';
 include_once '../models/DummyModel.php';
-include_once '../dto/DBUserData.php';
 include_once '../dto/SocialUser.php';
 
 class Controller {
@@ -43,18 +42,18 @@ class Controller {
 		}
 		
 		$user = $model->getUser();
-		$user->setSocialNetwork ( $socialNetwork );
+		$user->socialNetwork = $socialNetwork;
 		return $user;
 	}
-	function registerUserIntoDB(DBUserData $dbData) {
+	function registerUserIntoDB(SocialUser $dbData) {
 		$model = new DBModel ();
 		$model->insertUser ( $dbData );
 	}
-	function registerUserIntoFusionTable(DBUserData $dbData) {
+	function registerUserIntoFusionTable(SocialUser $dbData) {
 		$model = new FusionModel ();
 		$model->insertUser ( $dbData );
 	}
-	function registerFakeUserIntoFusionTable(DBUserData $dbData) {
+	function registerFakeUserIntoFusionTable(SocialUser $dbData) {
 		$model = new FusionModel ();
 		$model->insertUserFake ( $dbData );
 	}

@@ -3,7 +3,7 @@ set_include_path ( get_include_path () . PATH_SEPARATOR . '../../library/google-
 require_once 'src\Google\autoload.php';
 
 include_once '../configuration/FusionConfig.php';
-include_once '../dto/DBUserData.php';
+include_once '../dto/SocialUser.php';
 
 class FusionModel {
 	
@@ -20,13 +20,14 @@ class FusionModel {
 		return $service;
 	}
 	
-	function insertUser(DBUserData $dbData) {
+	function insertUser(SocialUser $dbData) {
 		$service = $this->getService();
-		$insQuery = "INSERT INTO " . FUSION_TABLE_ID . " (id, name, location, description, timestamp) VALUES ( '$dbData->id', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";
+		//Insert image or link to image URL?
+		$insQuery = "INSERT INTO " . FUSION_TABLE_ID . " (id, name, location, description, timestamp) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";
 		$res = $service->query->sql ($insQuery);
 	}
 	
-	function insertUserFake(DBUserData $dbData) {
+	function insertUserFake(SocialUser $dbData) {
 		$dbModel = new DBModel();
 		$dbModel->insertFakeFusionUser($dbData);
 	}

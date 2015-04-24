@@ -52,10 +52,9 @@ class FBModel extends AbstractSocialModel {
 		$fbid = $graphObject->getProperty('id'); // To Get Facebook ID
 		$fbfullname = $graphObject->getProperty('name'); // To Get Facebook full name
 		$femail = $graphObject->getProperty ('email'); // To Get Facebook email ID
-		$user = new SocialUser();
-		$user->setId($fbid);
-		$user->setName($fbfullname);
-		$user->setEmail($femail);
+		$socialPageUrl = FB_ROOT_URL . $fbid;
+		$avatarUrl = FB_GRAPH_URL . $fbid . "/picture";
+		$user = new SocialUser($fbid, $fbfullname, $femail, $socialPageUrl, $avatarUrl, FB_ID);
 		return $user;
 	}
 }

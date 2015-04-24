@@ -1,6 +1,6 @@
 <?php
 include_once '../configuration/DBconfig.php';
-include_once '../dto/DBUserData.php';
+include_once '../dto/DBUser.php';
 
 class DBModel {
 	function getConnection() {
@@ -17,11 +17,11 @@ class DBModel {
 		$urlEscaped = $conn->real_escape_string ( $urlEscaped );
 		return $urlEscaped;
 	}
-	function insertUser(DBUserData $dbData) {
+	function insertUser(DBUser $dbData) {
 		$conn = $this->getConnection ();
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
-		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->id', '$dbData->name', '$dbData->email', '$avatUrl', '$dbData->description', '$profileUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
+		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$avatUrl', '$dbData->description', '$profileUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
 		if ($conn->query ( $sql ) === TRUE) {
 			echo "New record created successfully";
 		} else {
@@ -30,11 +30,11 @@ class DBModel {
 		$conn->close ();
 	}
 	
-	function insertFakeFusionUser(DBUserData $dbData) {
+	function insertFakeFusionUser(DBUser $dbData) {
 		$conn = $this->getConnection ();
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
 		$location = "'" . $dbData->latitude . "," . $dbData->longitude . "'";
-		$sql = "INSERT INTO fusionuser (id, name, location, link, description) VALUES ('$dbData->id', '$dbData->name', $location, '$profileUrl', '$dbData->description')";
+		$sql = "INSERT INTO fusionuser (id, name, location, link, description) VALUES ('$dbData->socialId', '$dbData->name', $location, '$profileUrl', '$dbData->description')";
 		if ($conn->query ( $sql ) === TRUE) {
 			echo "New record created successfully";
 		} else {
