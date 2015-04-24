@@ -4,6 +4,7 @@ include_once '../models/DBModel.php';
 include_once '../models/FusionModel.php';
 include_once '../models/DummyModel.php';
 include_once '../dto/SocialUser.php';
+include_once '../dto/DBUser.php';
 
 class Controller {
 	function getLoggedUser($socialNetwork) {
@@ -45,7 +46,7 @@ class Controller {
 		$user->socialNetwork = $socialNetwork;
 		return $user;
 	}
-	function registerUserIntoDB(SocialUser $dbData) {
+	function registerUserIntoDB(DBUser $dbData) {
 		$model = new DBModel ();
 		$model->insertUser ( $dbData );
 	}
@@ -53,7 +54,7 @@ class Controller {
 		$model = new FusionModel ();
 		$model->insertUser ( $dbData );
 	}
-	function registerFakeUserIntoFusionTable(SocialUser $dbData) {
+	function registerFakeUserIntoFusionTable(DBUser $dbData) {
 		$model = new FusionModel ();
 		$model->insertUserFake ( $dbData );
 	}
