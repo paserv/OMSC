@@ -24,11 +24,7 @@
 	$controller = new Controller();
 	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, $aboutme, $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
 	$ok = $controller->register($user);
-	if ($ok) {
-		echo "Registered to OMSC";
-	} else {
-		echo "Not Registered, retry later!";
-	}
+	echo $ok;
 	
 	?>
 

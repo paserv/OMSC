@@ -48,11 +48,17 @@ class Controller {
 	function register(DBUser $dbData) {
 		try {
 			$this->registerUserIntoDB ( $dbData );
-			$this->registerUserIntoFusionTable ( $dbData );
-			return true;
 		} catch ( Exception $e ) {
-			return false;
+			return "Unable to register in DB, Retry Later!";
 		}
+		try {
+		$this->registerUserIntoFusionTable ( $dbData );
+		} catch ( Exception $e ) {
+			$model = new DBModel ();
+			$model->deleteUser($dbData->socialId);
+			return "Unable to register in Table, Retry Later!";
+		}
+		return "Successfully registered!";
 	}
 	function registerUserIntoDB(DBUser $dbData) {
 		$model = new DBModel ();

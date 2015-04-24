@@ -30,6 +30,13 @@ class FusionModel {
 		$res = $service->query->sql ($insQuery);
 	}
 	
+	function countRows($tableId) {
+		$service = $this->getService();
+		$countQuery = "SELECT COUNT * FROM " . $tableId;
+		$res = $service->query->sql ($countQuery);
+		return $res;
+	}
+	
 	function insertUserFake(DBUSer $dbData) {
 		$dbModel = new DBModel();
 		$dbModel->insertFakeFusionUser($dbData);

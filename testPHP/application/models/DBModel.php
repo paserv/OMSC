@@ -11,6 +11,12 @@ class DBModel {
 		}
 		return $conn;
 	}
+	function deleteUser($idUser) {
+		$conn = $this->getConnection ();
+		$sql = "DELETE FROM user WHERE user.socialId like " . $idUser;
+		$result = $conn->query($sql);
+		$conn->close ();
+	}
 	function isUserRegistered($idUser) {
 		$conn = $this->getConnection ();
 		$sql = "SELECT COUNT * FROM user WHERE user.socialId like " . $idUser;
