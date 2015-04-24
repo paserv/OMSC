@@ -21,9 +21,9 @@ class DBModel {
 		$conn = $this->getConnection ();
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
-		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$avatUrl', '$dbData->description', '$profileUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
+		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
 		if ($conn->query ( $sql ) === TRUE) {
-			echo "New record created successfully";
+			echo "New DB User created successfully";
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
@@ -34,9 +34,9 @@ class DBModel {
 		$conn = $this->getConnection ();
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
 		$location = "'" . $dbData->latitude . "," . $dbData->longitude . "'";
-		$sql = "INSERT INTO fusionuser (id, name, location, link, description) VALUES ('$dbData->socialId', '$dbData->name', $location, '$profileUrl', '$dbData->description')";
+		$sql = "INSERT INTO fusionuser (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
 		if ($conn->query ( $sql ) === TRUE) {
-			echo "New record created successfully";
+			echo "New Fake Fusion User created successfully";
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}

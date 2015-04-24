@@ -54,7 +54,7 @@ class Controller {
 		$model = new FusionModel ();
 		$model->insertUser ( $dbData );
 	}
-	function registerFakeUserIntoFusionTable(SocialUser $dbData) {
+	function registerFakeUserIntoFusionTable(DBUser $dbData) {
 		$model = new FusionModel ();
 		$model->insertUserFake ( $dbData );
 	}

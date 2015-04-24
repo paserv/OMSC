@@ -25,7 +25,7 @@
 	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, "Description", $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
 	$controller->registerUserIntoDB($user);
 	//Controller has to check in which fusion table register user
-	$controller->registerUserIntoFusionTable($user);
+	$controller->registerFakeUserIntoFusionTable($user);
 
 	?>
 

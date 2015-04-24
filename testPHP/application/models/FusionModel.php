@@ -4,6 +4,7 @@ require_once 'src\Google\autoload.php';
 
 include_once '../configuration/FusionConfig.php';
 include_once '../dto/SocialUser.php';
+include_once '../dto/DBUser.php';
 
 class FusionModel {
 	
@@ -27,7 +28,7 @@ class FusionModel {
 		$res = $service->query->sql ($insQuery);
 	}
 	
-	function insertUserFake(SocialUser $dbData) {
+	function insertUserFake(DBUSer $dbData) {
 		$dbModel = new DBModel();
 		$dbModel->insertFakeFusionUser($dbData);
 	}
