@@ -22,19 +22,37 @@ class FusionModel {
 	}
 	
 	function insertUser(SocialUser $dbData) {
-		//FusionModel has to check in which fusion table register user
-		
+		$tableID = $this->getTableId();
+		if (!$tableID) {
+			throw new Exception("OMSC is full");
+		}
 		$service = $this->getService();
 		//Insert image or link to image URL?
-		$insQuery = "INSERT INTO " . FUSION_TABLE_ID . " (id, name, location, description, timestamp) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";
+		$insQuery = "INSERT INTO " . $tableID . " (id, name, location, description, timestamp) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";
 		$res = $service->query->sql ($insQuery);
+	}
+	
+	function getTableId() {
+		if ($this->countRows(FUSION_TABLE_ID1) < 100000) {
+			return FUSION_TABLE_ID1;
+		} else if ($this->countRows(FUSION_TABLE_ID2) < 100000) {
+			return FUSION_TABLE_ID2;
+		} else if ($this->countRows(FUSION_TABLE_ID3) < 100000) {
+			return FUSION_TABLE_ID3;
+		} else if ($this->countRows(FUSION_TABLE_ID4) < 100000) {
+			return FUSION_TABLE_ID4;
+		} else if ($this->countRows(FUSION_TABLE_ID5) < 100000) {
+			return FUSION_TABLE_ID5;
+		}
+		return false;
 	}
 	
 	function countRows($tableId) {
 		$service = $this->getService();
-		$countQuery = "SELECT COUNT * FROM " . $tableId;
+		$countQuery = "SELECT COUNT () FROM " . $tableId;
 		$res = $service->query->sql ($countQuery);
-		return $res;
+		$result = $res->rows[0];
+		return $result[0];
 	}
 	
 	function insertUserFake(DBUSer $dbData) {

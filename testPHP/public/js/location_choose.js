@@ -17,7 +17,8 @@ function drawMap(pos) {
 	        latitudeInput: $('#latitude'),
 	        longitudeInput: $('#longitude'),
 	        locationNameInput: $('#address')
-	    }
+	    },
+	    enableAutocomplete: true,
 		});
 }
 

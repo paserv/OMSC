@@ -34,8 +34,8 @@
 	<input type="text" id="address" style="width: 200px" />
 	<div id="map" style="width: 500px; height: 400px;"></div>
 	<form name="coordinateForm" action="register.php" method="post">
-		Lat.: <input type="text" name="latitude" id="latitude" readonly/>
-		Long.: <input type="text" name="longitude" id="longitude" readonly/>
+		Lat.: <input type="text" id="latitude" readonly/>
+		Long.: <input type="text" id="longitude" readonly/>
 		Something about me.: <input type="text" name="aboutme" id="aboutme"/>
 		<input type="submit" name="submit_button" value="Register" />
 	</form>
@@ -52,7 +52,5 @@
 			<li><?php echo $currentUser->email; ?></li>
 		</ul>
 	</div>
-	<div id="location"></div>
-	<a href="register.php">Register</a>
 </body>
 </html>
