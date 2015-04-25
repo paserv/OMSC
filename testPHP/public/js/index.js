@@ -8,8 +8,20 @@ function loadScript() {
 }
 
 function initialize() {
-	//Gestire se il browser non gestisce geolocation
-    navigator.geolocation.getCurrentPosition(drawMap, drawMapNoPosition, geo_options);
+	
+	if (typeof latitude !== 'undefined' && typeof longitude !== 'undefined' ) {
+	    $registeredPos = {
+    			coords: {
+    				latitude: latitude,
+    		        longitude: longitude,
+    				}
+	    		};
+	    drawMap($registeredPos);
+	} else if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(drawMap, drawMapNoPosition, geo_options);
+	} else {
+		drawMapNoPosition();
+	}
 }
 
 function drawMapNoPosition() {
@@ -24,6 +36,21 @@ function drawMap(pos) {
 		zoom: map_options.zoom
 	});
 
+	//Test data
+	new google.maps.FusionTablesLayer({
+		map: map,  
+		query: {
+			select: map_options.col_name,
+			from: map_options.id_map4,
+			where: ""
+		},
+		options: {
+			styleId: 2,
+			templateId: 2
+		}
+	});
+	
+	/*
 	//Example data
 	new google.maps.FusionTablesLayer({
 		map: map,
@@ -66,19 +93,6 @@ function drawMap(pos) {
 		}
 	});
 
-	//Test data
-	new google.maps.FusionTablesLayer({
-		map: map,  
-		query: {
-			select: map_options.col_name,
-			from: map_options.id_map4,
-			where: ""
-		},
-		options: {
-			styleId: 2,
-			templateId: 2
-		}
-	});
 
 	//Example data
 	new google.maps.FusionTablesLayer({
@@ -93,6 +107,6 @@ function drawMap(pos) {
 			templateId: 2
 		}
 	});
-
+*/
 }
 

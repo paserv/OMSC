@@ -8,8 +8,18 @@
 </head>
 <body>
 
+<?php 
+session_start();
+if ( !empty($_SESSION['latitude']) && !empty($_SESSION['longitude'])) {
+?>
+	<script type="text/javascript">var latitude = <?php echo $_SESSION['latitude']; ?>;</script>
+	<script type="text/javascript">var longitude = <?php echo $_SESSION['longitude']; ?>;</script>
+<?php 
+}
+?>
+
 	<div id="map-canvas"></div>
- 	<a href="views/social_choose.php"><img src="../public/img/join_us.png"></a> 
- 
- </body>
+	<a href="views/social_choose.php"><img src="../public/img/join_us.png"></a>
+	
+</body>
 </html>

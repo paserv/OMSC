@@ -1,11 +1,10 @@
 window.onload = initialize();;
 
 function initialize() {
-	var x = document.getElementById("location");
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(drawMap, drawMapNoPosition, geo_options);
 	} else {
-		x.innerHTML = "Geolocation is not supported by this browser. Pick Location Manually";
+		drawMapNoPosition();
 	}
 }
 

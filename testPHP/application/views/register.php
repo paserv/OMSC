@@ -14,7 +14,9 @@
 	$timestamp = date("Y-m-d H:i:s");
 	
 	$latitude = $_POST['latitude'];
+	$_SESSION["latitude"] = $latitude;
 	$longitude = $_POST['longitude'];
+	$_SESSION["longitude"] = $longitude;
 	
 	$aboutme = "";
 	if ( !empty($_POST['aboutme'])){
@@ -23,9 +25,8 @@
 	
 	$controller = new Controller();
 	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, $aboutme, $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
-	$ok = $controller->register($user);
-	echo $ok;
-	
+	$message = $controller->register($user);
+	echo $message;
 	?>
 
 <!doctype html>
@@ -35,5 +36,6 @@
 <link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
+<a href="../index.php">Home</a>
 </body>
 </html>

@@ -2,8 +2,8 @@ var map_options = {
         zoom: 6,
         default_position: {
     			coords: {
-    				latitude: 5,
-    		        longitude: 5000,
+    				latitude: 42,
+    		        longitude: 12,
     			},
     	},
     	col_name: "col1",

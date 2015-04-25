@@ -5,7 +5,11 @@
 	
 	$controller = new Controller ();
 	$socialNetwork = $_SESSION ["sn"];
-	$currentUser = $controller->getLoggedUser ( $socialNetwork );
+	try {
+		$currentUser = $controller->getLoggedUser ( $socialNetwork );
+	} catch (Exception $ex) {
+		echo ($socialNetwork . "Login not available at the moment");
+	}
 	
 	$_SESSION ["id"] = $currentUser->socialId;
 	$_SESSION ["name"] = $currentUser->name;
@@ -34,8 +38,8 @@
 	<input type="text" id="address" style="width: 200px" />
 	<div id="map" style="width: 500px; height: 400px;"></div>
 	<form name="coordinateForm" action="register.php" method="post">
-		Lat.: <input type="text" id="latitude" readonly/>
-		Long.: <input type="text" id="longitude" readonly/>
+		Lat.: <input type="text" name="latitude" id="latitude" readonly/>
+		Long.: <input type="text" name="longitude" id="longitude" readonly/>
 		Something about me.: <input type="text" name="aboutme" id="aboutme"/>
 		<input type="submit" name="submit_button" value="Register" />
 	</form>

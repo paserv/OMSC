@@ -27,6 +27,7 @@ class FusionModel {
 			throw new Exception("OMSC is full");
 		}
 		$service = $this->getService();
+		//Insert Address???
 		//Insert image or link to image URL?
 		$insQuery = "INSERT INTO " . $tableID . " (id, name, location, description, timestamp) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";
 		$res = $service->query->sql ($insQuery);
