@@ -1,5 +1,5 @@
 var map_options = {
-        zoom: 6,
+        zoom: 3,
         default_position: {
     			coords: {
     				latitude: 42,

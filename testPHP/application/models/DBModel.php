@@ -19,7 +19,7 @@ class DBModel {
 	}
 	function isUserRegistered($idUser) {
 		$conn = $this->getConnection ();
-		$sql = "SELECT COUNT * FROM user WHERE user.socialId like " . $idUser;
+		$sql = "SELECT * FROM user WHERE user.socialId like " . $idUser;
 		$result = $conn->query($sql);
 		$conn->close ();
 		if ($result->num_rows > 0) {
@@ -34,6 +34,9 @@ class DBModel {
 		return $urlEscaped;
 	}
 	function insertUser(DBUser $dbData) {
+		if ($this->isUserRegistered($dbData->socialId)) {
+			throw new Exception("Error: Already Registered");
+		}
 		$conn = $this->getConnection ();
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );

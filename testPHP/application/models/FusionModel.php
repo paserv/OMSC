@@ -28,7 +28,7 @@ class FusionModel {
 		}
 		$service = $this->getService();
 		//Insert Address???
-		//Insert image or link to image URL?
+		//Insert link to image URL and social page url
 		$insQuery = "INSERT INTO " . $tableID . " (id, name, location, description, timestamp) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";
 		$res = $service->query->sql ($insQuery);
 	}
