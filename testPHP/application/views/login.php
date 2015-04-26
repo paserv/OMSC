@@ -3,6 +3,10 @@
 	include_once '../controllers/Controller.php';
 	include_once '../dto/SocialUser.php';
 	
+	if(isset($_GET['sn'])){
+		$_SESSION['sn'] = $_GET['sn'];
+	}
+	
 	$controller = new Controller ();
 	$socialNetwork = $_SESSION ["sn"];
 	try {
