@@ -18,6 +18,8 @@ if ( !empty($_SESSION['latitude']) && !empty($_SESSION['longitude'])) {
 }
 ?>
 
+	<div class="header">Home</div>
+
 	<div id="map-canvas"></div>
 	<a href="views/social_choose.php"><img src="../public/img/join_us.png"></a>
 	
