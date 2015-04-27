@@ -7,8 +7,14 @@
 		$_SESSION['sn'] = $_GET['sn'];
 	}
 	
+	if (isset($_SESSION ["sn"])) {
+		$socialNetwork = $_SESSION ["sn"];
+	} else {
+		header ("Location: ../index.php");
+	}
+	
 	$controller = new Controller ();
-	$socialNetwork = $_SESSION ["sn"];
+	
 	try {
 		$currentUser = $controller->getLoggedUser ( $socialNetwork );
 	} catch (Exception $ex) {
@@ -26,39 +32,46 @@
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <title>Login with your Favourite Social Network</title>
-<link href="../../public/css/bootstrap-combined.min.css"
-	rel="stylesheet">
+<link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="../../public/css/omsc.css" rel="stylesheet">
 <script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="../../public/js/config.js"></script>
-<script type="text/javascript"
-	src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
-<script type="text/javascript"
-	src="../../public/js/locationpicker.jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript" src="../../public/js/locationpicker.jquery.min.js"></script>
 <script type="text/javascript" src="../../public/js/location_choose.js"></script>
 </head>
 <body>
-	Location:
-	<input type="text" id="address" style="width: 200px" />
-	<div id="map" style="width: 500px; height: 400px;"></div>
-	<form name="coordinateForm" action="register.php" method="post">
-		Lat.: <input type="text" name="latitude" id="latitude" readonly/>
-		Long.: <input type="text" name="longitude" id="longitude" readonly/>
-		Something about me.: <input type="text" name="aboutme" id="aboutme"/>
-		<input type="submit" name="submit_button" value="Register" />
-	</form>
-	<div>
-		<ul>
-			<li>Image</li>
-			<li><img
-				src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture"></li>
-			<li>ID</li>
-			<li><?php echo $currentUser->socialId; ?></li>
-			<li>Fullname</li>
-			<li><?php echo $currentUser->name; ?></li>
-			<li>Email</li>
-			<li><?php echo $currentUser->email; ?></li>
-		</ul>
+
+<?php include 'header.php'; ?>
+
+	<div id="headerseparator"></div>
+	<div class="corpo">
+		<div class="wrap">
+		<form name="coordinateForm" action="register.php" method="post">
+			<div class="left_col">
+				<p><img src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture" /></p>
+				<p class="label">Name</p>
+				<p><?php echo $currentUser->name; ?></p>
+				<p class="label">Email</p>
+				<p><?php echo $currentUser->email; ?></p>
+				<p class="label">My Coordinates</p>
+				<p><b>Latitude</b></p>
+				<p><input type="text" name="latitude" id="latitude" readonly/></p>
+				<p><b>Longitude</b></p>
+				<p><input type="text" name="longitude" id="longitude" readonly/></p>
+				<p class="label">Something about me</p>
+				<p><textarea name="aboutme" id="aboutme" rows="5" cols="40" maxlength="512" >Write here...</textarea></p>
+				<input type="submit" name="submit_button" value="Register"/>
+			</div>
+			<div class="right_col">
+				<p class="label">Search Coordinates by Address</p>
+				<p><input type="text" id="address" /></p>
+				<p class="label">Pick Your Address</p>
+	        	<div id="map" style="width: 100%; height: 500px;"></div>
+	    	</div>
+			</form>
+		</div>
 	</div>
+<?php include 'footer.php'; ?>
 </body>
 </html>

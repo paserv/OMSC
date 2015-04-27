@@ -36,6 +36,6 @@
 <link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
-<a href="../index.php">Home</a>
+<a href="index.php">Home</a>
 </body>
 </html>
