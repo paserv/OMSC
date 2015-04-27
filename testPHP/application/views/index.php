@@ -17,19 +17,25 @@ if (! empty ( $_SESSION ['latitude'] ) && ! empty ( $_SESSION ['longitude'] )) {
 	<script type="text/javascript">var longitude = <?php echo $_SESSION['longitude']; ?>;</script>
 <?php
 }
+
+if(isset($_GET['searchPlace'])){
+?>
+	<script type="text/javascript">var searchPlace = "<?php echo $_GET['searchPlace']; ?>;"</script>
+	<?php
+}
+
+if(isset($_GET['searchPerson'])){
+?>
+	<script type="text/javascript">var searchPerson = "<?php echo $_GET['searchPerson']; ?>;"</script>
+	<?php
+}
+
 include 'header.php';
 ?>
 
 	<div id="map-canvas" class="corpo"></div>
 
 <?php include 'footer.php'; ?>
-
-<script type="text/javascript">
-	$( "#sociallogin" ).hide();
-	$( "#joinus" ).click(function() {
-		$( "#sociallogin" ).toggle("blind", 300);
-	});
-</script>
 
 </body>
 </html>

@@ -26,7 +26,6 @@
 	$controller = new Controller();
 	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, $aboutme, $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
 	$message = $controller->register($user);
-	echo $message;
 	?>
 
 <!doctype html>
@@ -34,8 +33,19 @@
 <head>
 <title>Registration</title>
 <link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="../../public/css/omsc.css" rel="stylesheet">
+<script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="../../public/js/config.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript" src="../../public/js/locationpicker.jquery.min.js"></script>
+<script type="text/javascript" src="../../public/js/location_choose.js"></script>
 </head>
 <body>
-<a href="index.php">Home</a>
+<?php include 'header.php'; ?>
+	<div id="headerseparator"></div>
+	<div class="corpo">
+		<?php echo $message; ?>
+	</div>
+<?php include 'footer.php'; ?>
 </body>
 </html>

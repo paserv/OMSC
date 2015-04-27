@@ -13,10 +13,11 @@ html,body {
 	position: fixed;
 	opacity: 0.9;
 	z-index: 1;
+	padding-left: 10px;
 }
 
 #headerseparator {
-    min-height: 100px;
+    min-height: 60px;
 }
 
 .corpo {
@@ -36,6 +37,7 @@ html,body {
 #header .menuButton {
 	height: 100%;
 	max-width: 150px;
+	float: left;
 }
 
 #header .menuButton img {
@@ -48,7 +50,7 @@ html,body {
 
 #header .menuButton:hover {
     background-color: #F5F6CE;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 
@@ -60,15 +62,18 @@ html,body {
 }
 
 #sociallogin p {
-	margin-top: 10px;
+	margin-top: 5px;
 }
-
-
 
 .wrap {
-   width:90%;
-   padding: 20px 20px;
+   width:85%;
+   padding: 0px 20px 0px 20px;
 }
+
+.wrap div {
+	margin-top: 3px;
+}
+
 .left_col {
    float:left;
    width:35%;
@@ -94,6 +99,7 @@ html,body {
 
 .label {
     font-weight: bold;
+    margin-top: 5px;
 }
 
 

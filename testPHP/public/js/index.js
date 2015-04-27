@@ -1,4 +1,5 @@
 window.onload = loadScript;
+var zoom;
 
 function loadScript() {
 	var mapApi = document.createElement('script');
@@ -8,14 +9,17 @@ function loadScript() {
 }
 
 function initialize() {
-	
-	if (typeof latitude !== 'undefined' && typeof longitude !== 'undefined' ) {
+	zoom = map_options.zoom;
+	if (typeof searchPlace !== 'undefined') {
+		
+	} else if (typeof latitude !== 'undefined' && typeof longitude !== 'undefined' ) {
 	    $registeredPos = {
     			coords: {
     				latitude: latitude,
     		        longitude: longitude,
     				}
 	    		};
+	    zoom = 8;
 	    drawMap($registeredPos);
 	} else if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(drawMap, drawMapNoPosition, geo_options);
@@ -33,11 +37,11 @@ function drawMap(pos) {
 	
 	var map = new google.maps.Map(document.getElementById('map-canvas'), {
 		center: myPosition,
-		zoom: map_options.zoom
+		zoom: $zoom
 	});
 
 	//Test data
-	new google.maps.FusionTablesLayer({
+	var layer1 = new google.maps.FusionTablesLayer({
 		map: map,  
 		query: {
 			select: map_options.col_name,
@@ -108,5 +112,24 @@ function drawMap(pos) {
 		}
 	});
 */
-}
+};
+
+
+function whereStatement(place) {
+	var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+      address: place
+    }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        map.setZoom(10);
+        // OPTIONAL: run spatial query to find results within bounds.
+        var sw = map.getBounds().getSouthWest();
+        var ne = map.getBounds().getNorthEast();
+        return where = 'ST_INTERSECTS(' + map_options.col_name + ', RECTANGLE(LATLNG' + sw + ', LATLNG' + ne + '))';
+      } else {
+        window.alert('Address could not be geocoded: ' + status);
+      }
+    });
+  }
 

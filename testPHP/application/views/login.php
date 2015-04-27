@@ -49,25 +49,25 @@
 		<div class="wrap">
 		<form name="coordinateForm" action="register.php" method="post">
 			<div class="left_col">
-				<p><img src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture" /></p>
-				<p class="label">Name</p>
-				<p><?php echo $currentUser->name; ?></p>
-				<p class="label">Email</p>
-				<p><?php echo $currentUser->email; ?></p>
-				<p class="label">My Coordinates</p>
-				<p><b>Latitude</b></p>
-				<p><input type="text" name="latitude" id="latitude" readonly/></p>
-				<p><b>Longitude</b></p>
-				<p><input type="text" name="longitude" id="longitude" readonly/></p>
-				<p class="label">Something about me</p>
-				<p><textarea name="aboutme" id="aboutme" rows="5" cols="40" maxlength="512" >Write here...</textarea></p>
-				<input type="submit" name="submit_button" value="Register"/>
+				<div><img src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture" /></div>
+				<div class="label">Name</div>
+				<div><?php echo $currentUser->name; ?></div>
+				<div class="label">Email</div>
+				<div><?php echo $currentUser->email; ?></div>
+				<div class="label">My Coordinates</div>
+				<div><b>Latitude</b></div>
+				<div><input type="text" name="latitude" id="latitude" readonly/></div>
+				<div><b>Longitude</b></div>
+				<div><input type="text" name="longitude" id="longitude" readonly/></div>
+				<div class="label">Something about me</div>
+				<div><textarea name="aboutme" id="aboutme" rows="5" cols="40" maxlength="512" >Write here...</textarea></div>
+				<div><input type="submit" name="submit_button" value="Register"/></div>
 			</div>
 			<div class="right_col">
-				<p class="label">Search Coordinates by Address</p>
-				<p><input type="text" id="address" /></p>
-				<p class="label">Pick Your Address</p>
-	        	<div id="map" style="width: 100%; height: 500px;"></div>
+				<div class="label">Search Coordinates by Address</div>
+				<div><input type="text" id="address" /></div>
+				<div class="label">Pick Your Address</div>
+	        	<div id="map" style="width: 100%; height: 380px;"></div>
 	    	</div>
 			</form>
 		</div>

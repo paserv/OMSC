@@ -1,6 +1,6 @@
 <div id="header">
 	<div id="joinus" class="menuButton"><a><img src="../../public/img/joinus.png"></a></div>
-	<div class="menuButton"><a href="index.php">Home</a></div>
+	<div class="menuButton"><a href="index.php"><img src="../../public/img/home.png"></a></div>
 </div>
 <div id="sociallogin">
 	<p>
@@ -28,6 +28,10 @@
 		<a href="login.php?sn=IN"><img src="../../public/img/instagram.png"></a>
 	</p>
 </div>
+
 <script type="text/javascript">
 	$( "#sociallogin" ).hide();
+	$( "#joinus" ).click(function() {
+		$( "#sociallogin" ).toggle("blind", 300);
+	});
 </script>
