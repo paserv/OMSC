@@ -20,6 +20,7 @@
 	<p>
 		<a href="login.php?sn=PL"><img src="../../public/img/gplus.png"></a>
 	</p>
+	<!--  
 	<p>
 		<a href="login.php?sn=LI"><img src="../../public/img/linkedin.png"></a>
 	</p>
@@ -35,6 +36,7 @@
 	<p>
 		<a href="login.php?sn=IN"><img src="../../public/img/instagram.png"></a>
 	</p>
+	-->
 </div>
 
 <script type="text/javascript">
@@ -65,7 +67,7 @@
 
 	$( "#searchPerText" ).keypress(function(e) {
 		if (e.keyCode == 13) {
-			window.location = "search.php?name=" + $( "#searchPerText" ).val();
+			window.location = "search.php?query=" + $( "#searchPerText" ).val();
 		}
 	});
 

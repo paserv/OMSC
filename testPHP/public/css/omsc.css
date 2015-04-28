@@ -11,7 +11,7 @@ html,body {
 	min-height: 60px;
 	background-color: #3F61BE;
 	position: fixed;
-	opacity: 0.9;
+	opacity: 1.0;
 	z-index: 1;
 	padding-left: 10px;
 }
@@ -130,6 +130,12 @@ html,body {
     margin-top: 5px;
 }
 
+.searchresult {
+	margin-top: 10px;
+	border-bottom-style: dotted;
+	border-bottom-color: #3F61BE;
+	
+}
 
 #target {
 	width: 345px;

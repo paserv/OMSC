@@ -1,7 +1,7 @@
 var map_options = {
         default_zoom: 3,
         search_zoom: 6,
-        deep_zoom: 8,
+        deep_zoom: 14,
         default_position: {
     			coords: {
     				latitude: 42,

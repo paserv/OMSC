@@ -60,6 +60,11 @@ class Controller {
 		}
 		return "Successfully registered!";
 	}
+	function searchByName($name) {
+		$model = new DBModel();
+		$result = $model->searchByName($name);
+		return $result;
+	}
 	function registerUserIntoDB(DBUser $dbData) {
 		$model = new DBModel ();
 		$model->insertUser ( $dbData );
