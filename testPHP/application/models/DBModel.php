@@ -55,10 +55,10 @@ class DBModel {
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
 		$location = "'" . $dbData->latitude . "," . $dbData->longitude . "'";
 		$sql = "INSERT INTO fusionuser (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
-		if ($conn->query ( $sql ) === TRUE) {
-			echo "New Fake Fusion User created successfully";
-		} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
+		if ($conn->query ( $sql ) === FALSE) {
+			$error =  $conn->error;
+			$conn->close ();
+			throw new Exception("Error: " . $sql . "<br>" . $error);
 		}
 		$conn->close ();
 	}

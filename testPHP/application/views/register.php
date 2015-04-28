@@ -45,7 +45,9 @@
 	<div id="headerseparator"></div>
 	<div class="corpo">
 		<?php echo $message; ?>
+	<div><a href="index.php<?php echo "?latitude=" . $_SESSION["latitude"] . "&longitude=" . $_SESSION["longitude"] ?>">Come Back Home</a></div>
 	</div>
+	
 <?php include 'footer.php'; ?>
 </body>
 </html>

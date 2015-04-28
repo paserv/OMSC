@@ -1,5 +1,5 @@
 window.onload = loadScript;
-var zoom;
+var geom = null;
 
 function loadScript() {
 	var mapApi = document.createElement('script');
@@ -9,21 +9,43 @@ function loadScript() {
 }
 
 function initialize() {
-	zoom = map_options.zoom;
+	var registeredPos;
+	var vieport;
+	 var boundingBoxPoints;
 	if (typeof searchPlace !== 'undefined') {
-		
+		var geocoder = new google.maps.Geocoder();
+	    geocoder.geocode({
+	      address: searchPlace
+	    }, function(results, status) {
+	      if (status == google.maps.GeocoderStatus.OK) {
+	    	geom = results[0].geometry;
+	    	registeredPos = {
+	    			coords: {
+	    				latitude: geom.location.lat(),
+	    		        longitude: geom.location.lng(),
+	    				}
+		    		};
+	        drawMap(registeredPos);
+	      } else {
+	        window.alert('Address could not be geocoded: ' + status);
+	        zoom = map_options.default_zoom;
+	        drawMapNoPosition();
+	      }
+	    });
 	} else if (typeof latitude !== 'undefined' && typeof longitude !== 'undefined' ) {
-	    $registeredPos = {
+	    registeredPos = {
     			coords: {
     				latitude: latitude,
     		        longitude: longitude,
     				}
 	    		};
-	    zoom = 8;
-	    drawMap($registeredPos);
+	    zoom = map_options.deep_zoom;
+	    drawMap(registeredPos);
 	} else if (navigator.geolocation) {
+		zoom = map_options.default_zoom;
 		navigator.geolocation.getCurrentPosition(drawMap, drawMapNoPosition, geo_options);
 	} else {
+		zoom = map_options.default_zoom;
 		drawMapNoPosition();
 	}
 }
@@ -37,9 +59,25 @@ function drawMap(pos) {
 	
 	var map = new google.maps.Map(document.getElementById('map-canvas'), {
 		center: myPosition,
-		zoom: $zoom
 	});
-
+	
+	if (geom === null) {
+		map.setZoom(zoom);
+	} else {
+		var ne = geom.viewport.getNorthEast();
+        var sw = geom.viewport.getSouthWest();
+        map.fitBounds(geom.viewport);
+        
+        var boundingBoxPoints = [ne, new google.maps.LatLng(ne.lat(), sw.lng()), sw, new google.maps.LatLng(sw.lat(), ne.lng()), ne];
+        var boundingBox = new google.maps.Polyline({
+            path: boundingBoxPoints,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+         });
+        boundingBox.setMap(map);
+	}
+	
 	//Test data
 	var layer1 = new google.maps.FusionTablesLayer({
 		map: map,  
@@ -115,7 +153,7 @@ function drawMap(pos) {
 };
 
 
-function whereStatement(place) {
+function spatialQuery(place) {
 	var geocoder = new google.maps.Geocoder();
     geocoder.geocode({
       address: place

@@ -52,7 +52,7 @@ class Controller {
 			return "Unable to register in DB, Retry Later!";
 		}
 		try {
-		$this->registerUserIntoFusionTable ( $dbData );
+		$this->registerFakeUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$model = new DBModel ();
 			$model->deleteUser($dbData->socialId);

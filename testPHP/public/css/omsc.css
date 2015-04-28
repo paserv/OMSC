@@ -17,7 +17,7 @@ html,body {
 }
 
 #headerseparator {
-    min-height: 60px;
+    min-height: 100px;
 }
 
 .corpo {
@@ -38,6 +38,8 @@ html,body {
 	height: 100%;
 	max-width: 150px;
 	float: left;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 #header .menuButton img {
@@ -47,10 +49,35 @@ html,body {
     max-height: 80px;
 }
 
+#header .menuButton a:hover{ 
+	cursor: pointer;
+	}
 
 #header .menuButton:hover {
     background-color: #F5F6CE;
     opacity: 1;
+}
+
+#inputSearchPl {
+    top: 11%;
+    left: 300px;
+    position: fixed;
+    z-index: 1;
+}
+
+#inputSearchPl input {
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#inputSearchPer {
+    top: 11%;
+    left: 400px;
+    position: fixed;
+    z-index: 1;
+}
+
+#inputSearchPer input {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -86,7 +113,8 @@ html,body {
 
 .left_col textarea {
     width: 100%;  
-    resize: none; 
+    resize: none;
+    
 }
 
 .left_col input {
