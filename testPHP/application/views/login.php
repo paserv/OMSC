@@ -28,8 +28,7 @@
 	$_SESSION ["socialPageUrl"] = $currentUser->socialPageUrl;
 	?>
 
-<!DOCTYPE html>
-<html xmlns:fb="http://www.facebook.com/2008/fbml">
+<!doctype html>
 <head>
 <title>Login with your Favourite Social Network</title>
 <script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>

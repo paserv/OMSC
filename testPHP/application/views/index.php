@@ -1,4 +1,4 @@
-<html>
+<!doctype html>
 <head>
 <title>One Million Social Club</title>
 <script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>

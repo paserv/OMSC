@@ -1,8 +1,8 @@
  <?php
+ 
  	ini_set('max_execution_time', 10000);
 	include_once '../controllers/Controller.php';
-	include_once '../dto/DBUser.php';
-	
+	/*
 	$conn = new mysqli ( "localhost", "fusion", "fusion", "fusion" );
 	$sql =	"SELECT * FROM user	WHERE user.lat BETWEEN -1 AND +1 AND user.lng BETWEEN -1 AND +1";
 	
@@ -15,4 +15,14 @@
 		echo "No Rows";
 	}
 	$conn->close ();
+	*/
+	$controller = new Controller();
+	$results = $controller->searchByName($_GET['query']);
+	if ($results !== null) {
+		foreach ($results as $currUser) {
+			echo "Lat: " . $currUser->latitude . " Lon: " . $currUser->longitude . " Name: " . $currUser->name . "<br>";
+			}		
+		} else {
+			echo "No results found";
+			}
 	?>

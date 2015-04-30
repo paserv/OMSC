@@ -1,6 +1,9 @@
 <?php
 include_once '../configuration/DBconfig.php';
 include_once '../dto/DBUser.php';
+
+$findCoordByNameStatement = "SELECT lat, lng FROM user WHERE name LIKE ?";
+
 class DBModel {
 	function getConnection() {
 		$conn = new mysqli ( DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE );
@@ -29,11 +32,12 @@ class DBModel {
 	function searchByName($name) {
 		$res = array();
 		$conn = $this->getConnection ();
-		$sql = "SELECT * FROM user WHERE user.name like '%" . $name . "%' ORDER BY user.socialId ASC limit 100";
+		$sql = "SELECT * FROM user WHERE user.name like '%" . $name . "%' limit 100";
 		$result = $conn->query ( $sql );
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				array_push($res, $row);
+				$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
+				array_push($res, $currUser);
 			}
 			return $res;
 		} else {
