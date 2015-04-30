@@ -11,12 +11,15 @@ function initialize() {
 	var bounds = new google.maps.LatLngBounds();
 	var mapOptions = { mapTypeId: google.maps.MapTypeId.ROADMAP };
 	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	
-	addMarkers(map, bounds);
-	
+	var loc;
+	for (var i = 0; i < markers.length; i++) {
+		curr = markers[i];
+		loc = new google.maps.LatLng(curr.latitude,curr.longitude);
+		bounds.extend(loc);
+		addMarker(loc, curr.name, "active", map);
+	}
 	map.fitBounds(bounds);
     map.panToBounds(bounds); 
-	
 }
 
 function addMarker(location, name, active, map) {       

@@ -9,8 +9,7 @@
 <link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="../../public/css/omsc.css" rel="stylesheet">
 <script type="text/javascript">
-function addMarkers(map, bounds) {
-	var loc;
+var markers = [];
 <?php
 include_once '../controllers/Controller.php';
 if(isset($_GET['query'])){
@@ -19,17 +18,18 @@ if(isset($_GET['query'])){
 	if ($results !== null) {
 		foreach ($results as $currUser) {
 		?>
-		loc = new google.maps.LatLng("<?php echo $currUser->latitude; ?>","<?php echo $currUser->longitude; ?>");
-		bounds.extend(loc);
-		addMarker(loc, "<?php echo $currUser->name; ?>", "active", map);
-		<?php
+		markers.push({
+	        latitude: "<?php echo $currUser->latitude; ?>",
+	        longitude: "<?php echo $currUser->longitude; ?>",
+	        name: "<?php echo $currUser->name; ?>",
+	    });
+	    <?php 
 		}		
 	} else {
 		echo "No results found";
 		}
 	}
 ?>
-}
 </script>
 
 </head>
