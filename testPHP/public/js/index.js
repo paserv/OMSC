@@ -92,7 +92,7 @@ function drawMap(pos) {
 		}
 	});
 	
-	/*
+	
 	//Example data
 	new google.maps.FusionTablesLayer({
 		map: map,
@@ -149,7 +149,7 @@ function drawMap(pos) {
 			templateId: 2
 		}
 	});
-*/
+
 };
 
 
