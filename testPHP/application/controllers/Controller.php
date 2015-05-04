@@ -1,10 +1,18 @@
 <?php
-include_once '../models/FBModel.php';
-include_once '../models/DBModel.php';
-include_once '../models/FusionModel.php';
-include_once '../models/DummyModel.php';
-include_once '../dto/SocialUser.php';
-include_once '../dto/DBUser.php';
+#include_once '../models/FBModel.php';
+#include_once '../models/DBModel.php';
+#include_once '../models/FusionModel.php';
+#include_once '../models/DummyModel.php';
+#include_once '../dto/SocialUser.php';
+#include_once '../dto/DBUser.php';
+
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/FBModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/DBModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/FusionModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/DummyModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/DBUser.php';
+
 class Controller {
 	function getLoggedUser($socialNetwork) {
 		switch ($socialNetwork) {

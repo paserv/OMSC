@@ -1,10 +1,14 @@
 <?php
-set_include_path(get_include_path() . PATH_SEPARATOR . '../../library/facebook-php-sdk-v4-4.0-dev');
+set_include_path(get_include_path() . PATH_SEPARATOR . '../../library/facebook-php-sdk');
 require_once 'autoload.php';
 
-include_once '../configuration/FBconfig.php';
-include_once '../models/AbstractSocialModel.php';
-include_once '../dto/SocialUser.php';
+#include_once '../configuration/FBconfig.php';
+#include_once '../models/AbstractSocialModel.php';
+#include_once '../dto/SocialUser.php';
+
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/configuration/FBConfig.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/AbstractSocialModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRedirectLoginHelper;
@@ -38,7 +42,12 @@ class FBModel extends AbstractSocialModel {
 			$loginUrl = $helper->getLoginUrl ( array (
 					'scope' => FB_REQUIRED_SCOPE
 			) );
-			header ("Location: " . $loginUrl);
+			echo '<a href="' . $loginUrl . '">Login</a>';
+			//window.alert('Go to Facebook Login: <a href="' . $loginUrl . '">Login</a>');
+			//echo("<script>window.location.href = 'http://www.mrwebmaster.it';</script>");
+			exit;
+			
+			//header ("Location: " . $loginUrl);
 		}
 		
 	}

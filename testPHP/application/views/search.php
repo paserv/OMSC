@@ -11,7 +11,8 @@
 <script type="text/javascript">
 var markers = [];
 <?php
-include_once '../controllers/Controller.php';
+#include_once '../controllers/Controller.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
 if(isset($_GET['query'])){
 	$controller = new Controller();
 	$results = $controller->searchByName($_GET['query']);

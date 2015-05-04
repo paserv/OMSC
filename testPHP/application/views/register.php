@@ -1,7 +1,10 @@
+ <?php session_start(); ?>
+ 
  <?php
-	session_start ();
-	include_once '../controllers/Controller.php';
-	include_once '../dto/SocialUser.php';
+	#include_once '../controllers/Controller.php';
+	#include_once '../dto/SocialUser.php';
+	require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
+	require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
 	
 	$socialId = $_SESSION["id"];
 	

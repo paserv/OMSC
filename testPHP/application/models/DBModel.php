@@ -1,6 +1,9 @@
 <?php
-include_once '../configuration/DBconfig.php';
-include_once '../dto/DBUser.php';
+#include_once '../configuration/DBconfig.php';
+#include_once '../dto/DBUser.php';
+
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/configuration/DBConfig.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/DBUser.php';
 
 $findCoordByNameStatement = "SELECT lat, lng FROM user WHERE name LIKE ?";
 

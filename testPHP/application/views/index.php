@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <head>
 <title>One Million Social Club</title>
@@ -11,7 +12,6 @@
 <body>
 
 <?php
-session_start ();
 if (! empty ( $_GET['latitude'] ) && ! empty ( $_GET['longitude'] )) {
 	?>
 	<script type="text/javascript">var latitude = <?php echo $_GET['latitude']; ?>;</script>

@@ -1,7 +1,11 @@
- <?php
-	session_start ();
-	include_once '../controllers/Controller.php';
-	include_once '../dto/SocialUser.php';
+<?php session_start(); ?>
+
+<?php
+	#require_once $_SERVER["DOCUMENT_ROOT"] . '/OMSC/testPhp/application/controllers/Controller.php';
+	#require_once $_SERVER["DOCUMENT_ROOT"] . '/OMSC/testPhp/application/dto/SocialUser.php';
+	
+	require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
+	require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
 	
 	if(isset($_GET['sn'])){
 		$_SESSION['sn'] = $_GET['sn'];
@@ -10,7 +14,7 @@
 	if (isset($_SESSION ["sn"])) {
 		$socialNetwork = $_SESSION ["sn"];
 	} else {
-		header ("Location: ../index.php");
+		die("<script>location.href = 'index.php'</script>");
 	}
 	
 	$controller = new Controller ();
@@ -26,8 +30,9 @@
 	$_SESSION ["mail"] = $currentUser->email;
 	$_SESSION ["avatarUrl"] = $currentUser->avatarUrl;
 	$_SESSION ["socialPageUrl"] = $currentUser->socialPageUrl;
+	$_SESSION ["sn"] = $socialNetwork;
 	?>
-
+	
 <!doctype html>
 <head>
 <title>Login with your Favourite Social Network</title>
