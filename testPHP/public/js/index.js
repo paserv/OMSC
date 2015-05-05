@@ -92,7 +92,7 @@ function drawMap(pos) {
 		}
 	});
 	
-	
+	/*
 	//Example data
 	new google.maps.FusionTablesLayer({
 		map: map,
@@ -149,25 +149,6 @@ function drawMap(pos) {
 			templateId: 2
 		}
 	});
-
+*/
 };
-
-
-function spatialQuery(place) {
-	var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({
-      address: place
-    }, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        map.setZoom(10);
-        // OPTIONAL: run spatial query to find results within bounds.
-        var sw = map.getBounds().getSouthWest();
-        var ne = map.getBounds().getNorthEast();
-        return where = 'ST_INTERSECTS(' + map_options.col_name + ', RECTANGLE(LATLNG' + sw + ', LATLNG' + ne + '))';
-      } else {
-        window.alert('Address could not be geocoded: ' + status);
-      }
-    });
-  }
 

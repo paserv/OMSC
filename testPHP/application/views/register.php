@@ -1,10 +1,10 @@
- <?php session_start(); ?>
+<?php session_start(); ?>
  
- <?php
-	#include_once '../controllers/Controller.php';
-	#include_once '../dto/SocialUser.php';
-	require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
-	require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
+<?php
+	require_once '../controllers/Controller.php';
+	require_once '../dto/SocialUser.php';
+	#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
+	#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
 	
 	$socialId = $_SESSION["id"];
 	
@@ -29,7 +29,7 @@
 	$controller = new Controller();
 	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, $aboutme, $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
 	$message = $controller->register($user);
-	?>
+?>
 
 <!doctype html>
 <head>

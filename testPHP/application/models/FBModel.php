@@ -2,13 +2,13 @@
 set_include_path(get_include_path() . PATH_SEPARATOR . '../../library/facebook-php-sdk');
 require_once 'autoload.php';
 
-#include_once '../configuration/FBconfig.php';
-#include_once '../models/AbstractSocialModel.php';
-#include_once '../dto/SocialUser.php';
+require_once '../configuration/FBconfig.php';
+require_once '../models/AbstractSocialModel.php';
+require_once '../dto/SocialUser.php';
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/configuration/FBConfig.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/AbstractSocialModel.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
+#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/configuration/FBConfig.php';
+#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/AbstractSocialModel.php';
+#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRedirectLoginHelper;
