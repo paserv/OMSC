@@ -32,11 +32,17 @@ class FusionModel {
 		$service = $this->getService();
 		//Insert Address???
 		//Insert link to image URL and social page url
+		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
+		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
 		$imgSocial = $this->getImgSocial($dbData->socialNetwork);
-		$insQuery = "INSERT INTO " . $tableID . " (socialId, name, avatarUrl, description, socialPageUrl, location, socialNetwork, imgSocial) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude,$dbData->longitude', '$dbData->socialNetwork', '$imgSocial')";
+		$insQuery = "INSERT INTO " . $tableID . " (socialId, name, avatarUrl, description, socialPageUrl, location, socialNetwork, imgSocial) VALUES ( '$dbData->socialId', '$dbData->name', '$avatUrl', '$dbData->description', '$profileUrl', '$dbData->latitude,$dbData->longitude', '$dbData->socialNetwork', '$imgSocial')";
 		$res = $service->query->sql ($insQuery);
 	}
-	
+	static function escapeUrl($url) {
+		$urlEscaped = $url;
+		$urlEscaped = urlencode ( $urlEscaped );
+		return $urlEscaped;
+	}
 	function getImgSocial($socialNetwork) {
 		switch ($socialNetwork) {
 			case "FB" :
