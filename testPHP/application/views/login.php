@@ -1,11 +1,11 @@
 <?php session_start(); ?>
 
 <?php
-	require_once '../controllers/Controller.php';
-	require_once '../dto/SocialUser.php';
+	#require_once '../controllers/Controller.php';
+	#require_once '../dto/SocialUser.php';
 	
-	#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
-	#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
+	require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
+	require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
 	
 	if(isset($_GET['sn'])){
 		$_SESSION['sn'] = $_GET['sn'];

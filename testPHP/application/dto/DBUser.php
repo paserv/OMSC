@@ -1,6 +1,6 @@
 <?php
-require_once 'SocialUser.php';
-#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
+#require_once 'SocialUser.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
 
 class DBUser extends SocialUser {
 	public $latitude;

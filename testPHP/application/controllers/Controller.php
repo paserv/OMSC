@@ -1,17 +1,17 @@
 <?php
-require_once '../models/FBModel.php';
-require_once '../models/DBModel.php';
-require_once '../models/FusionModel.php';
-require_once '../models/DummyModel.php';
-require_once '../dto/SocialUser.php';
-require_once '../dto/DBUser.php';
+#require_once '../models/FBModel.php';
+#require_once '../models/DBModel.php';
+#require_once '../models/FusionModel.php';
+#require_once '../models/DummyModel.php';
+#require_once '../dto/SocialUser.php';
+#require_once '../dto/DBUser.php';
 
-#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/FBModel.php';
-#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/DBModel.php';
-#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/FusionModel.php';
-#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/DummyModel.php';
-#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
-#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/DBUser.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/FBModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/DBModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/FusionModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/DummyModel.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/DBUser.php';
 
 class Controller {
 	function getLoggedUser($socialNetwork) {
@@ -58,14 +58,14 @@ class Controller {
 		try {
 			$this->registerUserIntoDB ( $dbData );
 		} catch ( Exception $e ) {
-			return "Unable to register in DB, Retry Later!";
+			return "Unable to register in DB, Retry Later! " . $e->getMessage();
 		}
 		try {
 		$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$model = new DBModel ();
 			$model->deleteUser($dbData->socialId);
-			return "Unable to register in Table, Retry Later!";
+			return "Unable to register in Table, Retry Later! " . $e->getMessage();
 		}
 		return "Successfully registered!";
 	}
