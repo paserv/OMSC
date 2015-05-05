@@ -24,7 +24,7 @@ class DBModel {
 	}
 	function isUserRegistered($idUser) {
 		$conn = $this->getConnection ();
-		$sql = "SELECT * FROM user WHERE user.socialId like " . $idUser;
+		$sql = "SELECT * FROM user WHERE user.socialId = " . $idUser;
 		$result = $conn->query ( $sql );
 		$conn->close ();
 		if ($result->num_rows > 0) {
@@ -62,7 +62,7 @@ class DBModel {
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
 		// Insert Address???
-		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
+		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, lat, lng, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();
@@ -74,7 +74,7 @@ class DBModel {
 		$conn = $this->getConnection ();
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
 		$location = "'" . $dbData->latitude . "," . $dbData->longitude . "'";
-		$sql = "INSERT INTO fusionuser (socialId, name, email, avatarUrl, description, socialPageUrl, latitude, longitude, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
+		$sql = "INSERT INTO fusionuser (socialId, name, email, avatarUrl, description, socialPageUrl, lat, lng, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$dbData->timestamp', '$dbData->socialNetwork')";
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();

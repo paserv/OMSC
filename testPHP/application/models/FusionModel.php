@@ -1,6 +1,6 @@
 <?php
-set_include_path ( get_include_path () . PATH_SEPARATOR . '../../library/google-php-api' );
-require_once 'autoload.php';
+//set_include_path ( get_include_path () . PATH_SEPARATOR . '../../library/google-php-api' );
+require_once '../../library/google-php-api/autoload.php';
 
 require_once '../configuration/FusionConfig.php';
 require_once '../dto/SocialUser.php';
@@ -33,8 +33,23 @@ class FusionModel {
 		$service = $this->getService();
 		//Insert Address???
 		//Insert link to image URL and social page url
-		$insQuery = "INSERT INTO " . $tableID . " (id, name, location, description, timestamp) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->latitude,$dbData->longitude', '$dbData->description', '$dbData->timestamp')";
+		$imgSocial = $this->getImgSocial($dbData->socialNetwork);
+		$insQuery = "INSERT INTO " . $tableID . " (socialId, name, avatarUrl, description, socialPageUrl, location, socialNetwork, imgSocial) VALUES ( '$dbData->socialId', '$dbData->name', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude,$dbData->longitude', '$dbData->socialNetwork', '$imgSocial')";
 		$res = $service->query->sql ($insQuery);
+	}
+	
+	function getImgSocial($socialNetwork) {
+		switch ($socialNetwork) {
+			case "FB" :
+				return "blu_circle";
+				break;
+			case "TW" :
+				return "ltblu_circle";
+				break;
+			case "PL" :
+				return "red_circle";
+				break;
+		}
 	}
 	
 	function getTableId() {

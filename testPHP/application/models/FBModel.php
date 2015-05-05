@@ -1,6 +1,6 @@
 <?php
-set_include_path(get_include_path() . PATH_SEPARATOR . '../../library/facebook-php-sdk');
-require_once 'autoload.php';
+//set_include_path(get_include_path() . PATH_SEPARATOR . '../../library/facebook-php-sdk');
+require_once '../../library/facebook-php-sdk/autoload.php';
 
 require_once '../configuration/FBconfig.php';
 require_once '../models/AbstractSocialModel.php';

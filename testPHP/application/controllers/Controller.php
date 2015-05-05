@@ -61,7 +61,7 @@ class Controller {
 			return "Unable to register in DB, Retry Later!";
 		}
 		try {
-		$this->registerFakeUserIntoFusionTable ( $dbData );
+		$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$model = new DBModel ();
 			$model->deleteUser($dbData->socialId);
