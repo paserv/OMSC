@@ -33,7 +33,7 @@
 
 <!doctype html>
 <head>
-<title>Registration</title>
+<title>One Million Social Club - Registration</title>
 <script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="../../public/js/jquery-ui-1.11.4.js"></script>
 <script type="text/javascript" src="../../public/js/config.js"></script>

@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <!doctype html>
 <head>
-<title>One Million Social Club</title>
+<title>One Million Social Club - Home Page</title>
 <script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="../../public/js/jquery-ui-1.11.4.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.19&libraries=places"></script>

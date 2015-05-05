@@ -14,21 +14,51 @@ function initialize() {
 	var loc;
 	for (var i = 0; i < markers.length; i++) {
 		curr = markers[i];
-		loc = new google.maps.LatLng(curr.latitude,curr.longitude);
-		bounds.extend(loc);
-		addMarker(loc, curr.name, "active", map);
+		addMarker(curr, bounds, map);
 	}
 	map.fitBounds(bounds);
     map.panToBounds(bounds); 
 }
 
-function addMarker(location, name, active, map) {       
+function addMarker(mark, bounds, map) {
+	loc = new google.maps.LatLng(mark.latitude, mark.longitude);
+	bounds.extend(loc);
+	
+	var contentString = 
+	'<div class="wrap">' + 
+		'<div class="left_col">'+
+			'<div><a href="' + mark.socialPageUrl + '" target="_blank"><img src="' + mark.avatarUrl + '" /></a></div>' +
+			'<div><img src="../../public/img/' + mark.socialNetwork + '_pic.png" /></div>' +
+		'</div>' +
+		'<div class="right_col">'+
+			'<div>Name: ' + mark.name + '</div>' +
+			'<div>About me: ' + mark.description + '</div>' +
+		'</div>' +
+	'</div>';
+	
+	var infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        maxWidth: 400
+	});
+	
+	var image = {
+		    url: mark.avatarUrl,
+		    size: new google.maps.Size(50, 50),
+		    origin: new google.maps.Point(0,0),
+		    anchor: new google.maps.Point(0, 50)
+	};
+	
     var marker = new google.maps.Marker({
-        position: location,
+        position: loc,
         map: map,
-        title: name,
-        status: active
+        title: mark.name,
+        status: "active",
+        icon: image
     });
+    
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
+      });
 }
 
 

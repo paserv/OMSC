@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-<title>Registration</title>
+<title>One Million Social Club - Search People</title>
 <script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="../../public/js/jquery-ui-1.11.4.js"></script>
 <script type="text/javascript" src="../../public/js/config.js"></script>
@@ -23,6 +23,13 @@ if(isset($_GET['query'])){
 	        latitude: "<?php echo $currUser->latitude; ?>",
 	        longitude: "<?php echo $currUser->longitude; ?>",
 	        name: "<?php echo $currUser->name; ?>",
+	        description: "<?php echo $currUser->description; ?>",
+	        timestamp: "<?php echo $currUser->timestamp; ?>",
+	        socialId: "<?php echo $currUser->socialId; ?>",
+	        email: "<?php echo $currUser->email; ?>",
+	        socialPageUrl: "<?php echo $currUser->socialPageUrl; ?>",
+	        avatarUrl: "<?php echo $currUser->avatarUrl; ?>",
+	        socialNetwork: "<?php echo $currUser->socialNetwork; ?>",
 	    });
 	    <?php 
 		}		

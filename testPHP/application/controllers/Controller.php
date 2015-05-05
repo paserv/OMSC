@@ -49,9 +49,10 @@ class Controller {
 				break;
 		}
 		
-		$user = $model->getUser ();
-		$user->socialNetwork = $socialNetwork;
-		return $user;
+			$user = $model->getUser ();
+			$user->socialNetwork = $socialNetwork;
+			return $user;
+				
 	}
 	function register(DBUser $dbData) {
 		try {

@@ -18,24 +18,24 @@
 	}
 	
 	$controller = new Controller ();
-	
+	$currentUser = null;
+	$loginUrl = null;
 	try {
 		$currentUser = $controller->getLoggedUser ( $socialNetwork );
-	} catch (Exception $ex) {
-		echo ($socialNetwork . "Login not available at the moment");
+		$_SESSION ["id"] = $currentUser->socialId;
+		$_SESSION ["name"] = $currentUser->name;
+		$_SESSION ["mail"] = $currentUser->email;
+		$_SESSION ["avatarUrl"] = $currentUser->avatarUrl;
+		$_SESSION ["socialPageUrl"] = $currentUser->socialPageUrl;
+		$_SESSION ["sn"] = $socialNetwork;
+	} catch (SocialException $se) {
+		$loginUrl = $se->loginUrl;
 	}
-	
-	$_SESSION ["id"] = $currentUser->socialId;
-	$_SESSION ["name"] = $currentUser->name;
-	$_SESSION ["mail"] = $currentUser->email;
-	$_SESSION ["avatarUrl"] = $currentUser->avatarUrl;
-	$_SESSION ["socialPageUrl"] = $currentUser->socialPageUrl;
-	$_SESSION ["sn"] = $socialNetwork;
 	?>
 	
 <!doctype html>
 <head>
-<title>Login with your Favourite Social Network</title>
+<title>One Million Social Club - Login with your favourite Social Network</title>
 <script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="../../public/js/jquery-ui-1.11.4.js"></script>
 <script type="text/javascript" src="../../public/js/config.js"></script>
@@ -52,6 +52,7 @@
 	<div id="headerseparator"></div>
 	<div class="corpo">
 		<div class="wrap">
+		<?php if ($currentUser !== null ) { ?>
 		<form name="coordinateForm" action="register.php" method="post">
 			<div class="left_col">
 				<div><img src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture" /></div>
@@ -75,6 +76,11 @@
 	        	<div id="map" style="width: 100%; height: 380px;"></div>
 	    	</div>
 			</form>
+		<?php } else if ($loginUrl !== null) { ?>
+		<div><a href="<?php echo $loginUrl; ?>">Login</a></div>
+		<?php } else { ?>
+		<div>Something Wrong</div>
+		<?php } ?>
 		</div>
 	</div>
 <?php include 'footer.php'; ?>

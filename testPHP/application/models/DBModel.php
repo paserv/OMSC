@@ -35,7 +35,7 @@ class DBModel {
 	function searchByName($name) {
 		$res = array();
 		$conn = $this->getConnection ();
-		$sql = "SELECT * FROM user WHERE user.name like '%" . $name . "%' limit 100";
+		$sql = "SELECT * FROM user WHERE user.name like '%" . $name . "%' limit 1000";
 		$result = $conn->query ( $sql );
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
