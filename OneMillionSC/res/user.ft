@@ -1,0 +1,8 @@
+socialId (Number)
+name (Text)
+avatarURL (Text)
+description (Text)
+socialPageUrl (Text)
+location (Location)
+socialNetwork (Text)
+imgSocial (Text)
