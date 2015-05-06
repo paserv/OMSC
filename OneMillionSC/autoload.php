@@ -7,14 +7,13 @@ function getDirs() {
 			"configuration" => __DIR__ . '/configuration/',
 			"controllers" =>  __DIR__ . '/controllers/',
 			"library" =>  __DIR__ . '/library/',
-			"tcp" => '_t',
+			"tcp" => '_c',
 	);
 	return $dirs;
 }
 
 function controller_autoload() {
 	$dirs = getDirs();
-	$tcp = $dirs['tcp'];
 	
 	$file1 = $dirs['models'] . 'FBModel.php';
 	$file2 = $dirs['models'] . 'DBModel.php';
@@ -33,7 +32,7 @@ function FBModel_autoload() {
 	$tcp = $dirs['tcp'];
 	
 	$file1 = $dirs['library'] . '/facebook-php-sdk/autoload.php';
-	$file2 = $dirs['configuration'] . 'FBconfig' . $tcp . '.php';
+	$file2 = $dirs['configuration'] . 'FBConfig' . $tcp . '.php';
 	$file3 = $dirs['models'] . 'AbstractSocialModel.php';
 	$file4 = $dirs['dto'] . 'SocialUser.php';
 	$file5 = $dirs['controllers'] . 'SocialException.php';

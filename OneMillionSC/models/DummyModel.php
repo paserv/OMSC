@@ -4,10 +4,8 @@ DummyModel_autoload();
 
 class DummyModel extends AbstractSocialModel {
 	public function getUser() {
-		$user = new SocialUser();
-		$user->setId(0);
-		$user->setName("DummyName");
-		$user->setEmail("DummyMail");
+		$randId = rand ( 1 , 999999 );
+		$user = new SocialUser($randId, "DummyName", "DummyMail", "http://www.aoapao.com", "http://www.aoapao.com/public/img/dummy.png", "socialNetwork");
 		return $user;
 	}
 }
