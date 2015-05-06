@@ -1,20 +1,5 @@
 <?php
-#require_once '../models/FBModel.php';
-#require_once '../models/DBModel.php';
-#require_once '../models/FusionModel.php';
-#require_once '../models/DummyModel.php';
-#require_once '../dto/SocialUser.php';
-#require_once '../dto/DBUser.php';
-/*
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/FBModel.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/DBModel.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/FusionModel.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/DummyModel.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/DBUser.php';
-*/
-
-require_once '../autoload.php';
+require_once 'autoload.php';
 controller_autoload();
 
 class Controller {
@@ -65,7 +50,8 @@ class Controller {
 			return "Unable to register in DB, Retry Later! " . $e->getMessage();
 		}
 		try {
-		$this->registerUserIntoFusionTable ( $dbData );
+		//$this->registerUserIntoFusionTable ( $dbData );
+		$this->registerFakeUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$model = new DBModel ();
 			$model->deleteUser($dbData->socialId);

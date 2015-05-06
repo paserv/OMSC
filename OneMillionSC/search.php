@@ -1,19 +1,17 @@
 <!doctype html>
 <head>
 <title>One Million Social Club - Search People</title>
-<script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/jquery-ui-1.11.4.js"></script>
-<script type="text/javascript" src="../../public/js/config.js"></script>
-<script type="text/javascript" src="../../public/js/search.js"></script>
+<script type="text/javascript" src="public/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="public/js/jquery-ui-1.11.4.js"></script>
+<script type="text/javascript" src="public/js/config.js"></script>
+<script type="text/javascript" src="public/js/search.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
-<link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
-<link href="../../public/css/omsc.css" rel="stylesheet">
+<link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="public/css/omsc.css" rel="stylesheet">
 <script type="text/javascript">
 var markers = [];
 <?php
-#require_once '../controllers/Controller.php';
-// require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
-require_once '../autoload.php';
+require_once 'autoload.php';
 loginRegister_autoload();
 
 if(isset($_GET['query'])){

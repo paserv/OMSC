@@ -1,8 +1,5 @@
 <?php
-#require_once 'SocialUser.php';
-#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
-
-require_once '../autoload.php';
+require_once 'autoload.php';
 DBUser_autoload();
 
 class DBUser extends SocialUser {

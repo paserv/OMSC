@@ -1,15 +1,5 @@
 <?php
-#require_once '../../library/google-php-api/autoload.php';
-#require_once '../configuration/FusionConfig.php';
-#require_once '../dto/SocialUser.php';
-#require_once '../dto/DBUser.php';
-
-// require_once $_SERVER["DOCUMENT_ROOT"] . '/application/configuration/FusionConfig.php';
-// require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
-// require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/DBUser.php';
-// require_once $_SERVER["DOCUMENT_ROOT"] . '/library/google-php-api/autoload.php';
-
-require_once '../autoload.php';
+require_once 'autoload.php';
 FusionModel_autoload();
 
 class FusionModel {

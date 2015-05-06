@@ -1,18 +1,5 @@
 <?php
-// require_once '../../library/facebook-php-sdk/autoload.php';
-// require_once '../configuration/FBconfig.php';
-// require_once '../models/AbstractSocialModel.php';
-// require_once '../dto/SocialUser.php';
-// require_once '../controllers/SocialException.php';
-/*
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/configuration/FBConfig.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/models/AbstractSocialModel.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/SocialException.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/library/facebook-php-sdk/autoload.php';
-*/
-
-require_once '../autoload.php';
+require_once 'autoload.php';
 FBModel_autoload();
 
 use Facebook\FacebookSession;

@@ -1,12 +1,7 @@
 <?php session_start(); ?>
 
 <?php
-// 	require_once '../controllers/Controller.php';
-// 	require_once '../dto/SocialUser.php';
-	
-	#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/controllers/Controller.php';
-	#require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/SocialUser.php';
-	require_once '../autoload.php';
+	require_once 'autoload.php';
 	loginRegister_autoload();
 	
 	if(isset($_GET['sn'])){
@@ -38,14 +33,14 @@
 <!doctype html>
 <head>
 <title>One Million Social Club - Login with your favourite Social Network</title>
-<script type="text/javascript" src="../../public/js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/jquery-ui-1.11.4.js"></script>
-<script type="text/javascript" src="../../public/js/config.js"></script>
+<script type="text/javascript" src="public/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="public/js/jquery-ui-1.11.4.js"></script>
+<script type="text/javascript" src="public/js/config.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
-<script type="text/javascript" src="../../public/js/locationpicker.jquery.min.js"></script>
-<script type="text/javascript" src="../../public/js/location_choose.js"></script>
-<link href="../../public/css/bootstrap-combined.min.css" rel="stylesheet">
-<link href="../../public/css/omsc.css" rel="stylesheet">
+<script type="text/javascript" src="public/js/locationpicker.jquery.min.js"></script>
+<script type="text/javascript" src="public/js/location_choose.js"></script>
+<link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="public/css/omsc.css" rel="stylesheet">
 </head>
 <body>
 

@@ -1,11 +1,5 @@
 <?php
-#require_once '../configuration/DBconfig.php';
-#require_once '../dto/DBUser.php';
-
-// require_once $_SERVER["DOCUMENT_ROOT"] . '/application/configuration/DBConfig.php';
-// require_once $_SERVER["DOCUMENT_ROOT"] . '/application/dto/DBUser.php';
-
-require_once '../autoload.php';
+require_once 'autoload.php';
 DBModel_autoload();
 
 class DBModel {
@@ -70,6 +64,14 @@ class DBModel {
 			throw new Exception ( "Error: " . $sql . "<br>" . $error );
 		}
 		$conn->close ();
+	}
+	function areUsersLessThan($num) {
+		$conn = $this->getConnection ();
+		$sql = "SELECT COUNT(*) FROM user WHERE 1";
+		$result = $conn->query ( $sql );
+		$conn->close ();
+		//TODO
+		return FALSE;
 	}
 	function insertFakeFusionUser(DBUser $dbData) {
 		$conn = $this->getConnection ();
