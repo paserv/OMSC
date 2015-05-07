@@ -38,7 +38,6 @@
 <script type="text/javascript" src="public/js/config.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript" src="public/js/locationpicker.jquery.min.js"></script>
-<script type="text/javascript" src="public/js/location_choose.js"></script>
 <link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="public/css/omsc.css" rel="stylesheet">
 </head>
@@ -81,5 +80,6 @@
 		</div>
 	</div>
 <?php include 'footer.php'; ?>
+<script type="text/javascript" src="public/js/location_choose.js"></script>
 </body>
 </html>
