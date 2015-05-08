@@ -17,6 +17,7 @@
 	$controller = new Controller ();
 	$currentUser = null;
 	$loginUrl = null;
+	
 	try {
 		$currentUser = $controller->getLoggedUser ( $socialNetwork );
 		$_SESSION ["id"] = $currentUser->socialId;
@@ -25,8 +26,10 @@
 		$_SESSION ["avatarUrl"] = $currentUser->avatarUrl;
 		$_SESSION ["socialPageUrl"] = $currentUser->socialPageUrl;
 		$_SESSION ["sn"] = $socialNetwork;
-	} catch (SocialException $se) {
-		$loginUrl = $se->loginUrl;
+		
+		$isRegistered = $controller->isUserRegistered($currentUser->socialId);
+	} catch (Exception $se) {
+		$loginUrl = $se->getMessage();
 	}
 	?>
 	
@@ -49,7 +52,7 @@
 	<div class="corpo">
 		<div class="wrap">
 		<?php if ($currentUser !== null ) { ?>
-		<form name="coordinateForm" action="register.php" method="post">
+		<form name="coordinateForm" action="manage_account.php" method="post">
 			<div class="left_col">
 				<div><img src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture" /></div>
 				<div class="label">Name</div>
@@ -62,8 +65,13 @@
 				<div><b>Longitude</b></div>
 				<div><input type="text" name="longitude" id="longitude" readonly/></div>
 				<div class="label">Something about me</div>
-				<div><textarea name="aboutme" id="aboutme" rows="5" cols="40" maxlength="512" ></textarea></div>
-				<div><input type="submit" name="submit_button" value="Register"/></div>
+				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
+				<?php if ($isRegistered) { ?>
+				<div><input type="submit" name="modify_button" value="Modify"/></div>
+				<div><input type="submit" name="delete_button" value="Delete"/></div>
+				<?php } else { ?>
+				<div><input type="submit" name="register_button" value="Register"/></div>
+				<?php } ?>
 			</div>
 			<div class="right_col">
 				<div class="label">Search Coordinates by Address</div>

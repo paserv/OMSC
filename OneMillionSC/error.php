@@ -1,7 +1,7 @@
 <div id="error">
 	<?php
 	$codes = array(
-			400 => array('400 Bad Request', 'The request cannot be fulfilled due to bad syntax.'),
+			100 => array('Impossible to delete User', 'public/img/login_ico.png'),
 			403 => array('403 Forbidden', 'The server has refused to fulfil your request.'),
 			404 => array('404 Not Found', 'The page you requested was not found on this server.'),
 			405 => array('405 Method Not Allowed', 'The method specified in the request is not allowed for the specified resource.'),

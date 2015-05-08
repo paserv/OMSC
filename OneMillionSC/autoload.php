@@ -35,9 +35,8 @@ function FBModel_autoload() {
 	$file2 = $dirs['configuration'] . 'FBConfig' . $tcp . '.php';
 	$file3 = $dirs['models'] . 'AbstractSocialModel.php';
 	$file4 = $dirs['dto'] . 'SocialUser.php';
-	$file5 = $dirs['controllers'] . 'SocialException.php';
 
-	$dep_array = array($file1, $file2, $file3, $file4, $file5);
+	$dep_array = array($file1, $file2, $file3, $file4);
 
 	require_array($dep_array);
 }

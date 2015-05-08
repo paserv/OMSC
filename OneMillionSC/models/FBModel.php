@@ -44,13 +44,7 @@ class FBModel extends AbstractSocialModel {
 			$loginUrl = $helper->getLoginUrl ( array (
 					'scope' => FB_REQUIRED_SCOPE
 			) );
-			$se = new SocialException ( "Login needed: " . $loginUrl . "<br>");
-			$se->loginUrl = $loginUrl;
-			throw $se;
-			//echo '<a href="' . $loginUrl . '">Login</a>';
-			//window.alert('Go to Facebook Login: <a href="' . $loginUrl . '">Login</a>');
-			//echo("<script>window.location.href = 'http://www.mrwebmaster.it';</script>");
-			//header ("Location: " . $loginUrl);
+			throw new Exception ($loginUrl);
 			exit;
 		}
 		

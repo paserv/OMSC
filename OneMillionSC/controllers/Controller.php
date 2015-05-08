@@ -16,54 +16,54 @@ class Controller {
 				echo "PLUS NOT PRESENT";
 				$model = new DummyModel ();
 				break;
-			case "LI" :
-				echo "LINKEDIN NOT PRESENT";
-				$model = new DummyModel ();
-				break;
-			case "PI" :
-				echo "PINTEREST NOT PRESENT";
-				$model = new DummyModel ();
-				break;
-			case "TU" :
-				echo "TUMBLR NOT PRESENT";
-				$model = new DummyModel ();
-				break;
-			case "YT" :
-				echo "YOUTUBE NOT PRESENT";
-				$model = new DummyModel ();
-				break;
-			case "IN" :
-				echo "INSTAGRAM NOT PRESENT";
-				$model = new DummyModel ();
-				break;
 		}
 		
-			$user = $model->getUser ();
-			$user->socialNetwork = $socialNetwork;
-			return $user;
-				
+		$user = $model->getUser ();
+		$user->socialNetwork = $socialNetwork;
+		return $user;				
 	}
+	
 	function register(DBUser $dbData) {
+		$this->registerUserIntoDB ( $dbData );
 		try {
-			$this->registerUserIntoDB ( $dbData );
-		} catch ( Exception $e ) {
-			return "Unable to register in DB, Retry Later! " . $e->getMessage();
-		}
-		try {
-		$this->registerUserIntoFusionTable ( $dbData );
-		//$this->registerFakeUserIntoFusionTable ( $dbData );
+			//$this->registerUserIntoFusionTable ( $dbData );
+			$this->registerFakeUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$model = new DBModel ();
 			$model->deleteUser($dbData->socialId);
-			return "Unable to register in Table, Retry Later! " . $e->getMessage();
+			throw new Exception($e->getMessage(), $e->getCode());
 		}
-		return "Successfully registered!";
 	}
+	
+	function delete(DBUser $dbData) {
+		$this->deleteUserFromDB($dbData);
+		$this->deleteUserFromFusionTable($dbData);
+	}
+	
+	function update(DBUser $dbData) {
+		$this->updateUserToDB($dbData);
+		$this->updateUserToFusionTable($dbData);
+	}
+	
+	function search(DBUser $dbData) {
+		$model = new DBModel();
+		$result = $model->searchById($dbData->socialId);
+		return $result;
+	}
+	
+	
+	
+	function isUserRegistered($socialId) {
+		$model = new DBModel ();
+		return $model->isUserRegistered($socialId);
+	}
+	
 	function searchByName($name) {
 		$model = new DBModel();
 		$result = $model->searchByName($name);
 		return $result;
 	}
+	
 	function registerUserIntoDB(DBUser $dbData) {
 		$model = new DBModel ();
 		$model->insertUser ( $dbData );
@@ -75,6 +75,33 @@ class Controller {
 	function registerFakeUserIntoFusionTable(DBUser $dbData) {
 		$model = new FusionModel ();
 		$model->insertUserFake ( $dbData );
+	}
+	
+	
+	function deleteUserFromDB(DBUser $dbData) {
+		$model = new DBModel ();
+		$model->deleteUser($dbData->socialId);
+	}
+	function deleteUserFromFusionTable(DBUser $dbData) {
+		//TODO
+	}
+	
+	
+	function updateUserToDB(DBUser $dbData) {
+		$model = new DBModel ();
+		$model->updateUser($dbData);
+	}
+	function updateUserToFusionTable(DBUser $dbData) {
+		//TODO
+	}
+	
+	
+	
+	function sendMail($errno, $errstr) {
+		echo "<b>Error:</b> [$errno] $errstr<br>";
+		echo "Webmaster has been notified";
+		error_log("Error: [$errno] $errstr",1,
+		"someone@example.com","From: webmaster@example.com");
 	}
 }
 ?>
