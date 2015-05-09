@@ -1,10 +1,14 @@
-window.onload = initialize();;
+window.onload = initialize();
 
 function initialize() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(drawMap, drawMapNoPosition, geo_options);
+	if (coordinate !== false) {
+		drawMap(coordinate);
 	} else {
-		drawMapNoPosition();
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(drawMap, drawMapNoPosition, geo_options);
+		} else {
+			drawMapNoPosition();
+		}
 	}
 }
 

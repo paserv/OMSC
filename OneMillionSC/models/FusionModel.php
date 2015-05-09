@@ -18,6 +18,7 @@ class FusionModel {
 	}
 	
 	function insertUser(SocialUser $dbData) {
+		
 		$tableID = $this->getTableId();
 		if (!$tableID) {
 			throw new Exception("OMSC is full");
@@ -30,6 +31,90 @@ class FusionModel {
 		$imgSocial = $this->getImgSocial($dbData->socialNetwork);
 		$insQuery = "INSERT INTO " . $tableID . " (socialId, name, avatarUrl, description, socialPageUrl, location, socialNetwork, imgSocial) VALUES ( '$dbData->socialId', '$dbData->name', '$avatUrl', '$dbData->description', '$profileUrl', '$dbData->latitude,$dbData->longitude', '$dbData->socialNetwork', '$imgSocial')";
 		$res = $service->query->sql ($insQuery);
+	}
+	function selectRow(SocialUser $dbData, $tableId) {
+		$service = $this->getService();
+		$query = "SELECT ROWID FROM " . $tableId . " WHERE socialId = " . $dbData->socialId;
+		$res = $service->query->sql ($query);
+		if ($res->rows > 0) {
+			return $res->rows;
+		}
+		return false;
+	}
+	function deleteUser(SocialUser $dbData) {
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID1);
+		if ($row !== false) {
+			$this->deleteRow(FUSION_TABLE_ID1, $row);
+			return;
+		}
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID2);
+		if ($row !== false) {
+			$this->deleteRow(FUSION_TABLE_ID2, $row);
+			return;
+		}
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID3);
+		if ($row !== false) {
+			$this->deleteRow(FUSION_TABLE_ID3, $row);
+			return;
+		}
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID4);
+		if ($row !== false) {
+			$this->deleteRow(FUSION_TABLE_ID4, $row);
+			return;
+		}
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID5);
+		if ($row !== false) {
+			$this->deleteRow(FUSION_TABLE_ID5, $row);
+			return;
+		}
+		 
+		
+// 		$query = "SELECT ROWID FROM " . FUSION_TABLE_ID1 . " WHERE socialId = " . $dbData->socialId;
+// 		$res = $service->query->sql ($query);
+// 		if ($res->rows > 0) {
+// 			$this->deleteRow($service, FUSION_TABLE_ID1, $res->rows);
+// 			return;
+// 		}
+		
+// 		$query = "SELECT socialId FROM " . FUSION_TABLE_ID2 . " WHERE socialId = " . $dbData->socialId;
+// 		$res = $service->query->sql ($query);
+// 		if ($res->rows > 0) {
+// 			$this->deleteRow($service, FUSION_TABLE_ID2, $res->rows);
+// 			return;
+// 		}
+		
+// 		$query = "SELECT socialId FROM " . FUSION_TABLE_ID3 . " WHERE socialId = " . $dbData->socialId;
+// 		$res = $service->query->sql ($query);
+// 		if ($res->rows > 0) {
+// 			$this->deleteRow($service, FUSION_TABLE_ID3, $res->rows);
+// 			return;
+// 		}
+		
+// 		$query = "SELECT socialId FROM " . FUSION_TABLE_ID4 . " WHERE socialId = " . $dbData->socialId;
+// 		$res = $service->query->sql ($query);
+// 		if ($res->rows > 0) {
+// 			$this->deleteRow($service, FUSION_TABLE_ID4, $res->rows);
+// 			return;
+// 		}
+		
+// 		$query = "SELECT socialId FROM " . FUSION_TABLE_ID15 . " WHERE socialId = " . $dbData->socialId;
+// 		$res = $service->query->sql ($query);
+// 		if ($res->rows > 0) {
+// 			$this->deleteRow($service, FUSION_TABLE_ID5, $res->rows);
+// 			return;
+// 		}
+		
+		
+	}
+	function deleteRow ($tableId, $rows) {
+		$service = $this->getService();
+		foreach ($rows as $rowid) {
+			$query = "DELETE FROM " . $tableId . " WHERE ROWID = '" . $rowid[0] . "'";
+			$res = $service->query->sql ($query);
+		}
+	}
+	function updateUser(SocialUser $dbData) {
+	
 	}
 	static function escapeUrl($url) {
 		$urlEscaped = $url;

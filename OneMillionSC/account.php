@@ -1,8 +1,19 @@
 <?php session_start(); ?>
-
+<!doctype html>
+<head>
+<title>One Million Social Club - Login with your favourite Social Network</title>
+<script type="text/javascript" src="public/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="public/js/jquery-ui-1.11.4.js"></script>
+<script type="text/javascript" src="public/js/config.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript" src="public/js/locationpicker.jquery.min.js"></script>
+<link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="public/css/omsc.css" rel="stylesheet">
+<script type="text/javascript">
+var coordinate = false;
 <?php
 	require_once 'autoload.php';
-	loginRegister_autoload();
+	account_autoload();
 	
 	if(isset($_GET['sn'])){
 		$_SESSION['sn'] = $_GET['sn'];
@@ -20,6 +31,18 @@
 	
 	try {
 		$currentUser = $controller->getLoggedUser ( $socialNetwork );
+		$isRegistered = $controller->isUserRegistered($currentUser->socialId);
+		if ($isRegistered) {
+			$currentUser = $controller->search($currentUser->socialId);
+			?>
+			coordinate = {
+    			coords: {
+    				latitude: <?php echo $currentUser->latitude ?> ,
+    		        longitude: <?php echo $currentUser->longitude ?>,
+    				}
+				};
+			<?php
+		}
 		$_SESSION ["id"] = $currentUser->socialId;
 		$_SESSION ["name"] = $currentUser->name;
 		$_SESSION ["mail"] = $currentUser->email;
@@ -27,22 +50,11 @@
 		$_SESSION ["socialPageUrl"] = $currentUser->socialPageUrl;
 		$_SESSION ["sn"] = $socialNetwork;
 		
-		$isRegistered = $controller->isUserRegistered($currentUser->socialId);
 	} catch (Exception $se) {
 		$loginUrl = $se->getMessage();
 	}
 	?>
-	
-<!doctype html>
-<head>
-<title>One Million Social Club - Login with your favourite Social Network</title>
-<script type="text/javascript" src="public/js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="public/js/jquery-ui-1.11.4.js"></script>
-<script type="text/javascript" src="public/js/config.js"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
-<script type="text/javascript" src="public/js/locationpicker.jquery.min.js"></script>
-<link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
-<link href="public/css/omsc.css" rel="stylesheet">
+</script>
 </head>
 <body>
 
@@ -52,7 +64,7 @@
 	<div class="corpo">
 		<div class="wrap">
 		<?php if ($currentUser !== null ) { ?>
-		<form name="coordinateForm" action="manage_account.php" method="post">
+		<form name="coordinateForm" action="operation.php" method="post">
 			<div class="left_col">
 				<div><img src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture" /></div>
 				<div class="label">Name</div>
@@ -65,12 +77,17 @@
 				<div><b>Longitude</b></div>
 				<div><input type="text" name="longitude" id="longitude" readonly/></div>
 				<div class="label">Something about me</div>
-				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
-				<?php if ($isRegistered) { ?>
+				<?php 
+				if ($isRegistered) {
+				?>
+				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ><?php echo $currentUser->description; ?></textarea></div>
 				<div><input type="submit" name="modify_button" value="Modify"/></div>
 				<div><input type="submit" name="delete_button" value="Delete"/></div>
-				<?php } else { ?>
-				<div><input type="submit" name="register_button" value="Register"/></div>
+					<?php	
+				} else {
+				?>
+				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
+				<input type="submit" name="register_button" value="Register"/></div>
 				<?php } ?>
 			</div>
 			<div class="right_col">
@@ -80,6 +97,7 @@
 	        	<div id="map" style="width: 100%; height: 380px;"></div>
 	    	</div>
 			</form>
+		</div>
 		<?php } else if ($loginUrl !== null) { ?>
 		<div><a href="<?php echo $loginUrl; ?>">Login</a></div>
 		<?php } else { ?>

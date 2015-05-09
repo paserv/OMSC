@@ -2,7 +2,7 @@
  
 <?php
 	require_once 'autoload.php';
-	loginRegister_autoload();
+	operation_autoload();
 	
 	$_SESSION ["error_code"] = false;
 	
@@ -27,7 +27,7 @@
 	
 	try {
 		if (isset($_POST['delete_button'])) {
-		    $controller->deleteUser($user);
+		    $controller->delete($user);
 		} else if (isset($_POST['modify_button'])) {
 		    $controller->update($user);
 		} else if (isset($_POST['register_button'])){
@@ -57,7 +57,7 @@ if ($_SESSION ["error_code"]) {
 ?>
 	<div id="headerseparator"></div>
 	<div class="corpo">
-	Successfully Registered
+	Operation Success!
 	<div><a href="index.php<?php echo "?latitude=" . $_SESSION["latitude"] . "&longitude=" . $_SESSION["longitude"] ?>">Come Back Home</a></div>
 	</div>
 <?php 

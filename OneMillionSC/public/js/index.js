@@ -83,7 +83,7 @@ function drawMap(pos) {
 		map: map,  
 		query: {
 			select: map_options.col_name,
-			from: map_options.id_map4,
+			from: map_options.id_map1,
 			where: ""
 		},
 		options: {
@@ -98,7 +98,7 @@ function drawMap(pos) {
 		map: map,
 		query: {
 			select:"col2",
-			from: map_options.id_map1,
+			from: map_options.id_map2,
 			where: ""
 		},
 		options: {
@@ -112,7 +112,7 @@ function drawMap(pos) {
 		map: map,  
 		query: {
 			select: map_options.col_name,
-			from: map_options.id_map2,
+			from: map_options.id_map3,
 			where: ""
 		},
 		options: {
@@ -126,7 +126,7 @@ function drawMap(pos) {
 		map: map,  
 		query: {
 			select: map_options.col_name,
-			from: map_options.id_map3,
+			from: map_options.id_map4,
 			where: ""
 		},
 		options: {

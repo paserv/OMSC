@@ -11,8 +11,6 @@
 <link href="public/css/omsc.css" rel="stylesheet">
 <script type="text/javascript">
 var markers = [];
-</script>
-<script type="text/javascript">
 <?php
 $_SESSION ["error_code"] = false;
 if(isset($_GET['query'])){

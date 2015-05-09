@@ -81,7 +81,15 @@ function DBUser_autoload() {
 	require_array($dep_array);
 }
 
-function loginRegister_autoload() {
+function operation_autoload() {
+	$dirs = getDirs();
+	$file1 = $dirs['controllers'] . 'Controller.php';
+	$file2 = $dirs['dto'] . 'SocialUser.php';
+	$dep_array = array($file1, $file2);
+	require_array($dep_array);
+}
+
+function account_autoload() {
 	$dirs = getDirs();
 	$file1 = $dirs['controllers'] . 'Controller.php';
 	$file2 = $dirs['dto'] . 'SocialUser.php';

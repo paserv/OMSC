@@ -8,7 +8,7 @@
 			408 => array('408 Request Timeout', 'Your browser failed to send a request in the time allowed by the server.'),
 			500 => array('500 Internal Server Error', 'The request was unsuccessful due to an unexpected condition encountered by the server.'),
 			502 => array('502 Bad Gateway', 'The server received an invalid response while trying to carry out the request.'),
-			504 => array('504 Gateway Timeout', 'The upstream server failed to send a request in the time allowed by the server.'),
+			400 => array('504 Gateway Timeout', 'The upstream server failed to send a request in the time allowed by the server.'),
 	);
 	
 	if(isset($_SESSION ["error_code"]) && $_SESSION ["error_code"] !== false){

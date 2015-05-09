@@ -12,13 +12,13 @@
 </div>
 <div id="sociallogin">
 	<p>
-		<a href="login.php?sn=FB"><img src="public/img/facebook.png"></a>
+		<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>
 	</p>
 	<p>
-		<a href="login.php?sn=TW"><img src="public/img/twitter.png"></a>
+		<a href="account.php?sn=TW"><img src="public/img/twitter.png"></a>
 	</p>
 	<p>
-		<a href="login.php?sn=PL"><img src="public/img/gplus.png"></a>
+		<a href="account.php?sn=PL"><img src="public/img/gplus.png"></a>
 	</p>
 </div>
 
