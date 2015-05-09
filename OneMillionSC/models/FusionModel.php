@@ -24,8 +24,6 @@ class FusionModel {
 			throw new Exception("OMSC is full");
 		}
 		$service = $this->getService();
-		//Insert Address???
-		//Insert link to image URL and social page url
 		$avatUrl = FusionModel::escapeUrl ( $dbData->avatarUrl );
 		$profileUrl = FusionModel::escapeUrl ( $dbData->socialPageUrl );
 		$imgSocial = $this->getImgSocial($dbData->socialNetwork);
@@ -67,44 +65,6 @@ class FusionModel {
 			$this->deleteRow(FUSION_TABLE_ID5, $row);
 			return;
 		}
-		 
-		
-// 		$query = "SELECT ROWID FROM " . FUSION_TABLE_ID1 . " WHERE socialId = " . $dbData->socialId;
-// 		$res = $service->query->sql ($query);
-// 		if ($res->rows > 0) {
-// 			$this->deleteRow($service, FUSION_TABLE_ID1, $res->rows);
-// 			return;
-// 		}
-		
-// 		$query = "SELECT socialId FROM " . FUSION_TABLE_ID2 . " WHERE socialId = " . $dbData->socialId;
-// 		$res = $service->query->sql ($query);
-// 		if ($res->rows > 0) {
-// 			$this->deleteRow($service, FUSION_TABLE_ID2, $res->rows);
-// 			return;
-// 		}
-		
-// 		$query = "SELECT socialId FROM " . FUSION_TABLE_ID3 . " WHERE socialId = " . $dbData->socialId;
-// 		$res = $service->query->sql ($query);
-// 		if ($res->rows > 0) {
-// 			$this->deleteRow($service, FUSION_TABLE_ID3, $res->rows);
-// 			return;
-// 		}
-		
-// 		$query = "SELECT socialId FROM " . FUSION_TABLE_ID4 . " WHERE socialId = " . $dbData->socialId;
-// 		$res = $service->query->sql ($query);
-// 		if ($res->rows > 0) {
-// 			$this->deleteRow($service, FUSION_TABLE_ID4, $res->rows);
-// 			return;
-// 		}
-		
-// 		$query = "SELECT socialId FROM " . FUSION_TABLE_ID15 . " WHERE socialId = " . $dbData->socialId;
-// 		$res = $service->query->sql ($query);
-// 		if ($res->rows > 0) {
-// 			$this->deleteRow($service, FUSION_TABLE_ID5, $res->rows);
-// 			return;
-// 		}
-		
-		
 	}
 	function deleteRow ($tableId, $rows) {
 		$service = $this->getService();
