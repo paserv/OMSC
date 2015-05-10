@@ -24,6 +24,8 @@
 		$icon = $codes[$error_code][1];
 		if ($message != false) {
 			echo '<div style="margin-top:100px, align="center""><img src="' . $icon . '">' . $message . '</div>';
+			//TODO log into DB
+			//TODO send mail
 		} else {
 			echo '<div style="margin-top:100px, align="center""><img src="public/img/login_ico.png">Error Code not found</div>';
 		}
