@@ -25,11 +25,11 @@
 		if ($message != false) {
 			echo '<div style="margin-top:100px, align="center""><img src="' . $icon . '">' . $message . '</div>';
 		} else {
-			echo "<br><br><br><br><br><h1>No Code for Error found</h1>";
+			echo '<div style="margin-top:100px, align="center""><img src="public/img/login_ico.png">Error Code not found</div>';
 		}
 		
 	} else {
-		echo "<br><br><br><br><br><h1>No Error to Display</h1>";
+		echo '<div style="margin-top:100px, align="center""><img src="public/img/login_ico.png">No Error to display</div>';
 	}
 	?>	
 </div>
