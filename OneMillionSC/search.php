@@ -24,12 +24,13 @@ if(isset($_GET['query'])){
 
 	if ($_SESSION ["numSearch"] <= 3) {
 		require_once 'autoload.php';
-		loginRegister_autoload();
+		search_autoload();
 		$controller = new Controller();
-		$results = $controller->searchByName($_GET['query']);
-		if ($results !== null) {
+		try {
+			$results = $controller->searchByName($_GET['query']);
+			if ($results !== null) {
 			foreach ($results as $currUser) {
-				?>
+			?>
 				markers.push({
 			        latitude: "<?php echo $currUser->latitude; ?>",
 			        longitude: "<?php echo $currUser->longitude; ?>",
@@ -45,14 +46,17 @@ if(isset($_GET['query'])){
 			    <?php 
 				}		
 			} else {
-				$_SESSION ["error_code"] = 400;
+				$_SESSION ["error_code"] = 100;
 				}
-			}
-			else {
-				$_SESSION ["error_code"] = 403;
+		} catch (Exception $ex) {
+			$_SESSION ["error_code"] = $ex->getCode();
+		}
+		
+			} else {
+				$_SESSION ["error_code"] = 101;
 			}
 	} else {
-		$_SESSION ["error_code"] = 404;
+		$_SESSION ["error_code"] = 102;
 	}
 	
 ?>
@@ -60,8 +64,9 @@ if(isset($_GET['query'])){
 
 </head>
 <body>
+<?php include 'header.php'; ?>
+<div id="headerseparator"></div>
 <?php 
-include 'header.php'; 
 if ($_SESSION ["error_code"]) {
 	include 'error.php';
 } else {

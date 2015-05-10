@@ -17,7 +17,7 @@ class FusionModel {
 		return $service;
 	}
 	
-	function insertUser(SocialUser $dbData) {
+	function insertUser(DBUser $dbData) {
 		
 		$tableID = $this->getTableId();
 		if (!$tableID) {
@@ -30,7 +30,7 @@ class FusionModel {
 		$insQuery = "INSERT INTO " . $tableID . " (socialId, name, avatarUrl, description, socialPageUrl, location, socialNetwork, imgSocial) VALUES ( '$dbData->socialId', '$dbData->name', '$avatUrl', '$dbData->description', '$profileUrl', '$dbData->latitude,$dbData->longitude', '$dbData->socialNetwork', '$imgSocial')";
 		$res = $service->query->sql ($insQuery);
 	}
-	function selectRow(SocialUser $dbData, $tableId) {
+	function selectRow(DBUser $dbData, $tableId) {
 		$service = $this->getService();
 		$query = "SELECT ROWID FROM " . $tableId . " WHERE socialId = " . $dbData->socialId;
 		$res = $service->query->sql ($query);
@@ -39,7 +39,34 @@ class FusionModel {
 		}
 		return false;
 	}
-	function deleteUser(SocialUser $dbData) {
+	function updateUser(DBUser $dbData) {
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID1);
+		if ($row !== false) {
+			$this->updateRow(FUSION_TABLE_ID1, $row, $dbData);
+			return;
+		}
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID2);
+		if ($row !== false) {
+			$this->updateRow(FUSION_TABLE_ID2, $row, $dbData);
+			return;
+		}
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID3);
+		if ($row !== false) {
+			$this->updateRow(FUSION_TABLE_ID3, $row, $dbData);
+			return;
+		}
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID4);
+		if ($row !== false) {
+			$this->updateRow(FUSION_TABLE_ID4, $row, $dbData);
+			return;
+		}
+		$row = $this->selectRow($dbData, FUSION_TABLE_ID5);
+		if ($row !== false) {
+			$this->updateRow(FUSION_TABLE_ID5, $row, $dbData);
+			return;
+		}
+	}
+	function deleteUser(DBUser $dbData) {
 		$row = $this->selectRow($dbData, FUSION_TABLE_ID1);
 		if ($row !== false) {
 			$this->deleteRow(FUSION_TABLE_ID1, $row);
@@ -73,8 +100,12 @@ class FusionModel {
 			$res = $service->query->sql ($query);
 		}
 	}
-	function updateUser(SocialUser $dbData) {
-	
+	function updateRow ($tableId, $rows, DBUser $user) {
+		$service = $this->getService();
+		foreach ($rows as $rowid) {
+			$query = "UPDATE " . $tableId . " SET description = '" . $user->description . "', location = '" . $user->latitude . "," . $user->longitude . "' WHERE ROWID = '" . $rowid[0] . "'";
+			$res = $service->query->sql ($query);
+		}
 	}
 	static function escapeUrl($url) {
 		$urlEscaped = $url;

@@ -29,20 +29,31 @@ class Controller {
 			$this->registerUserIntoFusionTable ( $dbData );
 			//$this->registerFakeUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
-			$model = new DBModel ();
-			$model->deleteUser($dbData->socialId);
+			$this->deleteUserFromDB($dbData);
 			throw new Exception($e->getMessage(), $e->getCode());
 		}
 	}
 	
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
-		$this->deleteUserFromFusionTable($dbData);
+		try {
+			$this->deleteUserFromFusionTable($dbData);
+		} catch ( Exception $e ) {
+			$this->registerUserIntoDB($dbData);
+			throw new Exception($e->getMessage(), $e->getCode());
+		}
 	}
 	
 	function update(DBUser $dbData) {
-		$this->updateUserToDB($dbData);
-		$this->updateUserToFusionTable($dbData);
+		$oldUser = $this->search($dbData->socialId);
+		$this->updateUserIntoDB($dbData);
+		try {
+			$this->updateUserIntoFusionTable($dbData);
+		} catch ( Exception $e ) {
+			$this->updateUserIntoDB($oldUser);
+			throw new Exception($e->getMessage(), $e->getCode());
+		}
+		
 	}
 	
 	function search($socialId) {
@@ -87,23 +98,22 @@ class Controller {
 		$model->deleteUser ( $dbData );
 	}
 	
-	
-	function updateUserToDB(DBUser $dbData) {
+	function updateUserIntoDB(DBUser $dbData) {
 		$model = new DBModel ();
 		$model->updateUser($dbData);
 	}
-	function updateUserToFusionTable(DBUser $dbData) {
-		$model = new FusionModel ();
-		$model->updateUser ( $dbData );
-	}
 	
+	function updateUserIntoFusionTable(DBUser $dbData) {
+		$model = new FusionModel();
+		$model->updateUser($dbData);
+	}
 	
 	
 	function sendMail($errno, $errstr) {
 		echo "<b>Error:</b> [$errno] $errstr<br>";
 		echo "Webmaster has been notified";
 		error_log("Error: [$errno] $errstr",1,
-		"someone@example.com","From: webmaster@example.com");
+		"paserv@gmail.com","From: webmaster@omsc.com");
 	}
 }
 ?>
