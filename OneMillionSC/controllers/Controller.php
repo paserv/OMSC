@@ -26,7 +26,7 @@ class Controller {
 	function register(DBUser $dbData) {
 		$this->registerUserIntoDB ( $dbData );
 		try {
-			$this->registerUserIntoFusionTable ( $dbData );
+			//$this->registerUserIntoFusionTable ( $dbData );
 			//$this->registerFakeUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$this->deleteUserFromDB($dbData);
@@ -37,7 +37,7 @@ class Controller {
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
-			$this->deleteUserFromFusionTable($dbData);
+			//$this->deleteUserFromFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
 			throw new Exception($e->getMessage(), $e->getCode());
@@ -48,7 +48,7 @@ class Controller {
 		$oldUser = $this->search($dbData->socialId);
 		$this->updateUserIntoDB($dbData);
 		try {
-			$this->updateUserIntoFusionTable($dbData);
+			//$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), $e->getCode());
@@ -62,8 +62,6 @@ class Controller {
 		return $result;
 	}
 	
-	
-	
 	function isUserRegistered($socialId) {
 		$model = new DBModel ();
 		return $model->isUserRegistered($socialId);
@@ -73,6 +71,12 @@ class Controller {
 		$model = new DBModel();
 		$result = $model->searchByName($name);
 		return $result;
+	}
+	
+	function searchByNameAndCoords ($name, $lat, $lng) {
+	}
+	
+	function searchByCoords ($lat, $lng) {
 	}
 	
 	function registerUserIntoDB(DBUser $dbData) {
@@ -87,7 +91,6 @@ class Controller {
 		$model = new FusionModel ();
 		$model->insertUserFake ( $dbData );
 	}
-	
 	
 	function deleteUserFromDB(DBUser $dbData) {
 		$model = new DBModel ();
@@ -108,12 +111,5 @@ class Controller {
 		$model->updateUser($dbData);
 	}
 	
-	
-	function sendMail($errno, $errstr) {
-		echo "<b>Error:</b> [$errno] $errstr<br>";
-		echo "Webmaster has been notified";
-		error_log("Error: [$errno] $errstr",1,
-		"paserv@gmail.com","From: webmaster@omsc.com");
-	}
 }
 ?>

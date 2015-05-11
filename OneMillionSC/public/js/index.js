@@ -55,6 +55,7 @@ function drawMapNoPosition() {
 };
 
 function drawMap(pos) {
+	
 	myPosition = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 	
 	var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -151,4 +152,3 @@ function drawMap(pos) {
 	});
 */
 };
-

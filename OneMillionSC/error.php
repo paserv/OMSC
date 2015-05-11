@@ -23,15 +23,15 @@
 		$message = $codes[$error_code][0];
 		$icon = $codes[$error_code][1];
 		if ($message != false) {
-			echo '<div style="margin-top:100px, align="center""><img src="' . $icon . '">' . $message . '</div>';
+			echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="' . $icon . '">' . $message . '</div>';
 			//TODO log into DB
 			//TODO send mail
 		} else {
-			echo '<div style="margin-top:100px, align="center""><img src="public/img/login_ico.png">Error Code not found</div>';
+			echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="public/img/login_ico.png">Error Code not found</div>';
 		}
 		
 	} else {
-		echo '<div style="margin-top:100px, align="center""><img src="public/img/login_ico.png">No Error to display</div>';
+		echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="public/img/login_ico.png">No Error to display</div>';
 	}
 	?>	
 </div>
