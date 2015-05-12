@@ -9,6 +9,11 @@
 	<p>Find people</p>
 	<p><input id="nameInput" type="text" placeholder="Enter a name"></input></p>
 	<p><input id="searchPerLoc" type="text"></input></p>
+	<p>
+		<label for="kilometers">Ray (Km): </label>
+		<input type="text" id="kilometers" readonly style="border:0; color:#8E9FE2; font-weight:bold; width: 30px; line-height: 1.5; font-family: sans-serif;">
+	</p>
+	<div id="slider" style="width:80%; margin-left:auto; margin-right:auto;"></div>
 	<p><a href="#" onMouseOver="return changeImage()" onMouseOut= "return changeImageBack()" onMouseDown="return handleMDown()" onMouseUp="return handleMUp()"><div id = "findBtn"><img name="findButton" src="public/img/find.png"></div></a></p>
 </div>
 <div id="sociallogin">
@@ -27,6 +32,20 @@
 	$( "#sociallogin" ).hide();
 	$( "#inputSearchPer" ).hide();
 
+	$(function() {
+	    $( "#slider" ).slider({
+	      orientation: "horizontal",
+	      range: "min",
+	      min: 0,
+	      max: 100,
+	      value: 50,
+	      slide: function( event, ui ) {
+	        $( "#kilometers" ).val( ui.value );
+	      }
+	    });
+	    $( "#kilometers" ).val( $( "#slider" ).slider( "value" ) );
+	  });
+	  
 	var input = document.getElementById('searchPerLoc');
 	var autocomplete = new google.maps.places.Autocomplete(input);
 // 	$( "#searchPerLoc" ).keypress(function(e) {

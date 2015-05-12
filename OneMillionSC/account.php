@@ -7,6 +7,7 @@
 <script type="text/javascript" src="public/js/config.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript" src="public/js/locationpicker.jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="public/css/omsc.css" rel="stylesheet">
 <script type="text/javascript">
