@@ -60,8 +60,9 @@ function DBModel_autoload() {
 	
 	$file1 = $dirs['configuration'] . 'DBConfig' . $tcp . '.php';
 	$file2 = $dirs['dto'] . 'DBUser.php';
+	$file3 = $dirs['library'] . '/GeoLocation/GeoLocation.php';
 
-	$dep_array = array($file1, $file2);
+	$dep_array = array($file1, $file2, $file3);
 
 	require_array($dep_array);
 }

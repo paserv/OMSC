@@ -16,6 +16,9 @@
 			208 => array('Error User Not Registered', 'public/img/login_ico.png'),
 			209 => array('Error update User', 'public/img/login_ico.png'),
 			210 => array('Select count error', 'public/img/login_ico.png'),
+			211 => array('Impossible search by Coords', 'public/img/login_ico.png'),
+			212 => array('No Result found in search by Coords', 'public/img/login_ico.png'),
+			
 	);
 	
 	if(isset($_SESSION ["error_code"]) && $_SESSION ["error_code"] !== false){

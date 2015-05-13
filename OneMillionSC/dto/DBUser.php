@@ -22,5 +22,18 @@ class DBUser extends SocialUser {
 		$this->socialNetwork = $socialNetwork;
 	}
 	
+	function stringify() {
+		echo "Social ID: " . $this->socialId ."<br>" . 
+		"Name: " . $this->name ."<br>" .
+		"Email: " . $this->email ."<br>" .
+		"longitude: " . $this->longitude ."<br>" .
+		"latitude: " . $this->latitude ."<br>" .
+		"description: " . $this->description ."<br>" .
+		"socialPageUrl: " . $this->socialPageUrl ."<br>" .
+		"avatarUrl: " . $this->avatarUrl ."<br>" .
+		"timestamp: " . $this->timestamp ."<br>" .
+		"socialNetwork: " . $this->socialNetwork ."<br>";
+	}
+	
 }
 ?>

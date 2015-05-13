@@ -32,11 +32,14 @@ html,body {
 #footer {
     width: 100%;
     position: fixed;
-    top: 97%;
-    height: 3%;
-    min-height: 40px;
-    max-height: 80px;
+    top: 96%;
+    height: 4%;
     background-color: #3F61BE;
+    padding: 3px;
+    text-align: right;
+    font-family: sans-serif;
+    font-style: italic;
+    color: #ECECEC;
 }
 
 #header .menuButton {

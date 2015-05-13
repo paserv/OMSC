@@ -3,8 +3,6 @@
 	<div class="menuButton" id="searchPerBtn"><a><img src="public/img/searchPerson.png"></a></div>
 	<div class="menuButton" id="joinus"><a><img src="public/img/joinus.png"></a></div>
 </div>
-<input id="lat" type="text" style="display: none;"></input>
-<input id="lng" type="text" style="display: none;"></input>
 <div id="inputSearchPer">
 	<p>Find people</p>
 	<p><input id="nameInput" type="text" placeholder="Enter a name"></input></p>
@@ -55,11 +53,17 @@
 // 	});
 
 	$( "#findBtn" ).click(function() {
-
 		var queryString = "?";
-		if ($( "#searchPerLoc" ).val().lenght > 0) {
+		var test = $( "#searchPerLoc" ).val();
+		var ray = $( "#kilometers" ).val();
+		if ($( "#searchPerLoc" ).val() !== '' && $( "#nameInput" ).val() !== '') {
+			 window.alert('Find by Coords and Name');
+			}
+		
+		if ($( "#searchPerLoc" ).val() !== '') {
 			var lat;
 			var lng;
+			var ray;
 			var geocoder = new google.maps.Geocoder();
 		    geocoder.geocode({
 		      address: $( "#searchPerLoc" ).val()
@@ -68,13 +72,14 @@
 		    	geom = results[0].geometry;
 		    	lat = geom.location.lat();
 		    	lng = geom.location.lng();
-		    	queryString = queryString + "lat=" + lat + "&lng=" + lng + "&";
+		    	queryString = queryString + "lat=" + lat + "&lng=" + lng + "&ray=" + ray;
 		      } else {
 		    	  window.alert('Address could not be geocoded: ' + status);
 			      }
 		    });
 		}
-		if (!$( "#nameInput" ).val()) {
+		
+		if ($( "#nameInput" ).val() !== '') {
 			queryString = queryString + "name=" + $( "#nameInput" ).val();
 			}
 		window.location = "search.php" + queryString;

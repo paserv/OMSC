@@ -29,13 +29,13 @@ if ($_SESSION ["numSearch"] <= 300) {
 	
 	try {
 	
-		if (isset ( $_GET ['name'] ) && $_GET ['name'] != '' && isset ($_GET ['lat']) && $_GET ['lat'] != '' && isset($_GET ['lng']) && $_GET ['lng'] != '') {
-			$results = $controller->searchByNameAndCoords ( $_GET ['name'], $_GET ['lat'], $_GET ['lng'] );
+		if (isset ( $_GET ['name'] ) && $_GET ['name'] != '' && isset ($_GET ['lat']) && $_GET ['lat'] != '' && isset($_GET ['lng']) && $_GET ['lng'] != '' && isset($_GET ['ray']) && $_GET ['ray'] != '') {
+			$results = $controller->searchByNameAndCoords ( $_GET ['name'], $_GET ['lat'], $_GET ['lng'], $_GET ['ray'] );
 		} else if (isset ( $_GET ['name'] ) && $_GET ['name'] != '' ) {
 				$results = $controller->searchByName ( $_GET ['name'] );
 			}
-		else if ( isset ($_GET ['lat']) && $_GET ['lat'] != '' && isset($_GET ['lng']) && $_GET ['lng'] != '') {
-			$results = $controller->searchByCoords ( $_GET ['lat'], $_GET ['lng'] );
+		else if ( isset ($_GET ['lat']) && $_GET ['lat'] != '' && isset($_GET ['lng']) && $_GET ['lng'] != '' && isset($_GET ['ray']) && $_GET ['ray'] != '') {
+			$results = $controller->searchByCoords ( $_GET ['lat'], $_GET ['lng'], $_GET ['ray'], $_GET ['ray'] );
 		} else {
 			$_SESSION ["error_code"] = 102;
 			}

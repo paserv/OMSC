@@ -76,7 +76,10 @@ class Controller {
 	function searchByNameAndCoords ($name, $lat, $lng) {
 	}
 	
-	function searchByCoords ($lat, $lng) {
+	function searchByCoords ($lat, $lng, $ray) {
+		$model = new DBModel ();
+		$result = $model->searchByCoords($lat, $lng, $ray);
+		return $result;
 	}
 	
 	function registerUserIntoDB(DBUser $dbData) {

@@ -2,6 +2,11 @@
 <!doctype html>
 <head>
 <title>One Million Social Club - Home Page</title>
+<meta property="og:title" content="OMSC">
+<meta property="og:image" content="http://www.blitzquotidiano.it/wp/wp/wp-content/uploads/2014/12/servillo.jpg">
+<meta property="og:site_name" content="One Million Social Club">
+<meta property="og:description" content="Become a member of One Million Social Club in few clicks">
+<meta property="og:locale" content="en_UK">
 <script type="text/javascript" src="public/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="public/js/jquery-ui-1.11.4.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.19&libraries=places&language=en"></script>

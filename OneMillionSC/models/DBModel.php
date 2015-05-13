@@ -63,6 +63,35 @@ class DBModel {
 			return $currUser;
 		}
 	}
+	function searchByCoords($lat, $lng, $ray) {
+		$res = array();
+		
+		$unit_of_measurement = 'kilometers';
+		$gl = GeoLocation::fromDegrees($lat, $lng);
+		$result = $gl->boundingCoordinates($ray, $unit_of_measurement);
+		
+		$minLat = $result[0]->getLatitudeInDegrees();
+		$minLng = $result[0]->getLongitudeInDegrees();
+		
+		$maxLat = $result[1]->getLatitudeInDegrees();
+		$maxLng = $result[1]->getLongitudeInDegrees();
+		
+		$conn = $this->getConnection ();
+		$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND Lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ")";
+		$result = $conn->query ( $sql );
+		if (!$result) {
+			throw new Exception("Impossible search by Coords", 211);
+		} else if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
+				array_push($res, $currUser);
+			}
+			return $res;
+		} else {
+			throw new Exception("No Result found in search by Coords", 212);
+		}
+		$conn->close ();
+	}
 	static function escapeUrl($conn, $url) {
 		$urlEscaped = $url;
 		$urlEscaped = urlencode ( $urlEscaped );
