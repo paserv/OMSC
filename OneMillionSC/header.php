@@ -53,36 +53,35 @@
 // 	});
 
 	$( "#findBtn" ).click(function() {
-		var queryString = "?";
-		var test = $( "#searchPerLoc" ).val();
+		var queryString;
 		var ray = $( "#kilometers" ).val();
 		if ($( "#searchPerLoc" ).val() !== '' && $( "#nameInput" ).val() !== '') {
 			 window.alert('Find by Coords and Name');
-			}
-		
-		if ($( "#searchPerLoc" ).val() !== '') {
+			} else if ($( "#searchPerLoc" ).val() !== '') {
 			var lat;
 			var lng;
-			var ray;
 			var geocoder = new google.maps.Geocoder();
 		    geocoder.geocode({
 		      address: $( "#searchPerLoc" ).val()
 		    }, function(results, status) {
+			  var res = results;
+			  var st = status;
 		      if (status == google.maps.GeocoderStatus.OK) {
 		    	geom = results[0].geometry;
 		    	lat = geom.location.lat();
 		    	lng = geom.location.lng();
-		    	queryString = queryString + "lat=" + lat + "&lng=" + lng + "&ray=" + ray;
+		    	queryString = "?lat=" + lat + "&lng=" + lng + "&ray=" + ray;
+		    	window.location = "search.php" + queryString;
 		      } else {
 		    	  window.alert('Address could not be geocoded: ' + status);
 			      }
 		    });
-		}
-		
-		if ($( "#nameInput" ).val() !== '') {
-			queryString = queryString + "name=" + $( "#nameInput" ).val();
-			}
-		window.location = "search.php" + queryString;
+		} else if ($( "#nameInput" ).val() !== '') {
+			queryString = "?name=" + $( "#nameInput" ).val();
+			window.location = "search.php" + queryString;
+			} else {
+				window.location = "search.php";
+				}
 	});
 
 	

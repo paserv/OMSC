@@ -66,6 +66,10 @@ class DBModel {
 	function searchByCoords($lat, $lng, $ray) {
 		$res = array();
 		
+		if ($ray > 100) {
+			$ray = 100;
+		}
+		
 		$unit_of_measurement = 'kilometers';
 		$gl = GeoLocation::fromDegrees($lat, $lng);
 		$result = $gl->boundingCoordinates($ray, $unit_of_measurement);
