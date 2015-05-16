@@ -9,11 +9,9 @@ class Controller {
 				$model = new FBModel ();
 				break;
 			case "TW" :
-				echo "TWITTER NOT PRESENT";
 				$model = new DummyModel ();
 				break;
 			case "PL" :
-				echo "PLUS NOT PRESENT";
 				$model = new DummyModel ();
 				break;
 		}
@@ -26,7 +24,7 @@ class Controller {
 	function register(DBUser $dbData) {
 		$this->registerUserIntoDB ( $dbData );
 		try {
-			//$this->registerUserIntoFusionTable ( $dbData );
+			$this->registerUserIntoFusionTable ( $dbData );
 			//$this->registerFakeUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$this->deleteUserFromDB($dbData);
@@ -37,7 +35,7 @@ class Controller {
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
-			//$this->deleteUserFromFusionTable($dbData);
+			$this->deleteUserFromFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
 			throw new Exception($e->getMessage(), $e->getCode());
@@ -48,7 +46,7 @@ class Controller {
 		$oldUser = $this->search($dbData->socialId);
 		$this->updateUserIntoDB($dbData);
 		try {
-			//$this->updateUserIntoFusionTable($dbData);
+			$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), $e->getCode());
@@ -73,7 +71,10 @@ class Controller {
 		return $result;
 	}
 	
-	function searchByNameAndCoords ($name, $lat, $lng) {
+	function searchByNameAndCoords ($name, $lat, $lng, $ray) {
+		$model = new DBModel();
+		$result = $model->searchByNameAndCoords($name, $lat, $lng, $ray);
+		return $result;
 	}
 	
 	function searchByCoords ($lat, $lng, $ray) {

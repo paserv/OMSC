@@ -57,7 +57,13 @@ if ($_SESSION ["error_code"]) {
 } else {
 ?>
 	<div id="headerseparator"></div>
+	<br>
+	<br>
 	<div class="corpo">
+	<br>
+	<br>
+	<br>
+	<br>
 	Operation Success!
 	<div><a href="index.php<?php echo "?latitude=" . $_SESSION["latitude"] . "&longitude=" . $_SESSION["longitude"] ?>">Come Back Home</a></div>
 	</div>

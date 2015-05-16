@@ -8,7 +8,7 @@
 	<p><input id="nameInput" type="text" placeholder="Enter a name"></input></p>
 	<p><input id="searchPerLoc" type="text"></input></p>
 	<p>
-		<label for="kilometers">Ray (Km): </label>
+		<label id="labelkm" for="kilometers">Ray (Km): </label>
 		<input type="text" id="kilometers" readonly style="border:0; color:#8E9FE2; font-weight:bold; width: 30px; line-height: 1.5; font-family: sans-serif;">
 	</p>
 	<div id="slider" style="width:80%; margin-left:auto; margin-right:auto;"></div>
@@ -29,6 +29,9 @@
 <script type="text/javascript">
 	$( "#sociallogin" ).hide();
 	$( "#inputSearchPer" ).hide();
+	$( "#slider" ).hide();
+	$( "#kilometers" ).hide();
+	$( "#labelkm" ).hide();
 
 	$(function() {
 	    $( "#slider" ).slider({
@@ -46,6 +49,24 @@
 	  
 	var input = document.getElementById('searchPerLoc');
 	var autocomplete = new google.maps.places.Autocomplete(input);
+
+	$('#searchPerLoc').bind('input', function() {
+		if (input.value === '') {
+			$( "#slider" ).hide();
+			$( "#kilometers" ).hide();
+			$( "#labelkm" ).hide();
+		} else {
+			$( "#kilometers" ).show();
+			$( "#labelkm" ).show();
+			$( "#slider" ).show();
+		}
+	});
+	
+// 	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+// 		$( "#kilometers" ).show();
+// 		$( "#labelkm" ).show();
+// 		$( "#slider" ).show();
+// 		});
 // 	$( "#searchPerLoc" ).keypress(function(e) {
 // 		if (e.keyCode == 13) {
 // 			window.location = "search.php?searchPlace=" + $( "#searchPlText" ).val();
@@ -56,7 +77,24 @@
 		var queryString;
 		var ray = $( "#kilometers" ).val();
 		if ($( "#searchPerLoc" ).val() !== '' && $( "#nameInput" ).val() !== '') {
-			 window.alert('Find by Coords and Name');
+			var lat;
+			var lng;
+			var geocoder = new google.maps.Geocoder();
+		    geocoder.geocode({
+		      address: $( "#searchPerLoc" ).val()
+		    }, function(results, status) {
+			  var res = results;
+			  var st = status;
+		      if (status == google.maps.GeocoderStatus.OK) {
+		    	geom = results[0].geometry;
+		    	lat = geom.location.lat();
+		    	lng = geom.location.lng();
+		    	queryString = "?name=" + $( "#nameInput" ).val() + "&lat=" + lat + "&lng=" + lng + "&ray=" + ray;
+				window.location = "search.php" + queryString;
+		      } else {
+		    	  window.alert('Address could not be geocoded: ' + status);
+			      }
+		    });
 			} else if ($( "#searchPerLoc" ).val() !== '') {
 			var lat;
 			var lng;

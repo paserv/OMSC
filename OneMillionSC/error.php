@@ -18,6 +18,7 @@
 			210 => array('Select count error', 'public/img/login_ico.png'),
 			211 => array('Impossible search by Coords', 'public/img/login_ico.png'),
 			212 => array('No Result found in search by Coords', 'public/img/login_ico.png'),
+			212 => array('No Result found in search by ame And Coords', 'public/img/login_ico.png'),
 			
 	);
 	

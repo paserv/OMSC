@@ -88,7 +88,7 @@ var coordinate = false;
 				} else {
 				?>
 				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
-				<input type="submit" name="register_button" value="Register"/></div>
+				<input type="submit" name="register_button" value="Register"/>
 				<?php } ?>
 			</div>
 			<div class="right_col">
@@ -98,12 +98,11 @@ var coordinate = false;
 	        	<div id="map" style="width: 100%; height: 380px;"></div>
 	    	</div>
 			</form>
-		</div>
-		<?php } else if ($loginUrl !== null) { ?>
-		<div><a href="<?php echo $loginUrl; ?>">Login</a></div>
-		<?php } else { ?>
-		<div>Something Wrong</div>
-		<?php } ?>
+			<?php } else if ($loginUrl !== null) { ?>
+				<div><a href="<?php echo $loginUrl; ?>">Login</a></div>
+				<?php } else { ?>
+				<div>Something Wrong</div>
+				<?php } ?>
 		</div>
 	</div>
 <?php include 'footer.php'; ?>

@@ -32,8 +32,8 @@ html,body {
 #footer {
     width: 100%;
     position: fixed;
-    top: 96%;
-    height: 4%;
+    top: 94%;
+    height: 6%;
     background-color: #3F61BE;
     padding: 3px;
     text-align: right;
@@ -81,7 +81,7 @@ html,body {
 }
 
 #inputSearchPer {
-    top: 9%;
+    top: 12%;
     left: 20px;
     width: 240px;
     position: fixed;
@@ -104,7 +104,7 @@ html,body {
 
 
 #sociallogin {
-	top: 7%;
+	top: 10%;
 	left: 20px;
     position: fixed;
     z-index: 1;
@@ -115,8 +115,8 @@ html,body {
 }
 
 .wrap {
-   width:85%;
-   padding: 0px 20px 0px 20px;
+   width:80%;
+   padding: 40px 20px 0px 20px;
 }
 
 .wrap div {
