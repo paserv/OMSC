@@ -90,6 +90,13 @@ function operation_autoload() {
 	require_array($dep_array);
 }
 
+function header_autoload() {
+	$dirs = getDirs();
+	$file1 = $dirs['controllers'] . 'Controller.php';
+	$dep_array = array($file1);
+	require_array($dep_array);
+}
+
 function account_autoload() {
 	$dirs = getDirs();
 	$file1 = $dirs['controllers'] . 'Controller.php';
