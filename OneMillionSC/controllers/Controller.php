@@ -24,7 +24,7 @@ class Controller {
 	function register(DBUser $dbData) {
 		$this->registerUserIntoDB ( $dbData );
 		try {
-			//$this->registerUserIntoFusionTable ( $dbData );
+			$this->registerUserIntoFusionTable ( $dbData );
 			//$this->registerFakeUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$this->deleteUserFromDB($dbData);
@@ -35,7 +35,7 @@ class Controller {
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
-			//$this->deleteUserFromFusionTable($dbData);
+			$this->deleteUserFromFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
 			throw new Exception($e->getMessage(), $e->getCode());
@@ -46,7 +46,7 @@ class Controller {
 		$oldUser = $this->search($dbData->socialId);
 		$this->updateUserIntoDB($dbData);
 		try {
-			//$this->updateUserIntoFusionTable($dbData);
+			$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), $e->getCode());
@@ -57,12 +57,6 @@ class Controller {
 	function search($socialId) {
 		$model = new DBModel();
 		$result = $model->searchById($socialId);
-		return $result;
-	}
-	
-	function count() {
-		$model = new DBModel();
-		$result = $model->countUsers();
 		return $result;
 	}
 	
