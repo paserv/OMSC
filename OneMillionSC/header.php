@@ -14,16 +14,6 @@
 	<div id="slider" style="width:80%; margin-left:auto; margin-right:auto;"></div>
 	<p><a href="#" onMouseOver="return changeImage()" onMouseOut= "return changeImageBack()" onMouseDown="return handleMDown()" onMouseUp="return handleMUp()"><div id = "findBtn"><img name="findButton" src="public/img/find.png"></div></a></p>
 </div>
-<div>
-<?php
-require_once 'autoload.php';
-header_autoload();
-
-$controller = new Controller();
-$users = $controller->count();
-
-?>
-</div>
 <div id="sociallogin">
 	<p>
 		<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>

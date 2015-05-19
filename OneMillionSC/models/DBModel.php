@@ -96,20 +96,6 @@ class DBModel {
 		}
 		$conn->close ();
 	}
-	function countUsers() {
-		$result = 0;
-		$conn = $this->getConnection ();
-		$sql = "SELECT COUNT(socialId) as total_users FROM user WHERE 1";
-		$result = $conn->query ( $sql );
-		if (!$result) {
-			throw new Exception ( "Select count error", 210 );
-		} else if ($result->num_rows == 1) {
-			$row = $result->fetch_assoc();
-			$result = $row["total_users"];
-		}
-		$conn->close ();
-		return result;
-	}
 	function searchByCoords($lat, $lng, $ray) {
 		$res = array();
 		
