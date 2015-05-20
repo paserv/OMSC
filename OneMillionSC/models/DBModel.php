@@ -108,7 +108,7 @@ class DBModel {
 			$result = $row["total_users"];
 		}
 		$conn->close ();
-		return result;
+		return $result;
 	}
 	function searchByCoords($lat, $lng, $ray) {
 		$res = array();

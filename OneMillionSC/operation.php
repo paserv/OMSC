@@ -55,6 +55,9 @@ include 'header.php';
 if ($_SESSION ["error_code"]) {
 	include 'error.php';
 } else {
+$controller = new Controller();
+$users = $controller->count();
+$_SESSION ["users_count"] = $users;
 ?>
 	<div id="headerseparator"></div>
 	<br>

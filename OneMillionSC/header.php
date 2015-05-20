@@ -2,6 +2,21 @@
 	<div class="menuButton"><a href="index.php"><img src="public/img/home.png"></a></div>
 	<div class="menuButton" id="searchPerBtn"><a><img src="public/img/searchPerson.png"></a></div>
 	<div class="menuButton" id="joinus"><a><img src="public/img/joinus.png"></a></div>
+	<div>
+<?php
+require_once 'autoload.php';
+header_autoload();
+
+if (isset ($_SESSION ["users_count"] )) {
+	$users = $_SESSION ["users_count"];
+} else {
+	$controller = new Controller();
+	$users = $controller->count();
+	$_SESSION ["users_count"] = $users;
+}
+?>
+	<div class="textusers">Members: <?php echo $users ?></div>
+</div>
 </div>
 <div id="inputSearchPer">
 	<p>Find people</p>
@@ -14,16 +29,7 @@
 	<div id="slider" style="width:80%; margin-left:auto; margin-right:auto;"></div>
 	<p><a href="#" onMouseOver="return changeImage()" onMouseOut= "return changeImageBack()" onMouseDown="return handleMDown()" onMouseUp="return handleMUp()"><div id = "findBtn"><img name="findButton" src="public/img/find.png"></div></a></p>
 </div>
-<div>
-<?php
-require_once 'autoload.php';
-header_autoload();
 
-$controller = new Controller();
-$users = $controller->count();
-
-?>
-</div>
 <div id="sociallogin">
 	<p>
 		<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>

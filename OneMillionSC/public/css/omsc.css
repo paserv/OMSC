@@ -42,6 +42,16 @@ html,body {
     color: #ECECEC;
 }
 
+#header .textusers {
+	width: 98%;
+	padding-top: 40px;
+	text-align: right;
+    font-family: sans-serif;
+    font-style: italic;
+    color: #ECECEC;
+	}
+
+
 #header .menuButton {
 	height: 100%;
 	max-width: 150px;
