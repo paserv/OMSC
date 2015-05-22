@@ -1,6 +1,6 @@
 <?php
 require_once 'autoload.php';
-FusionModel_autoload();
+Google_API_autoload();
 
 class FusionModel {
 	

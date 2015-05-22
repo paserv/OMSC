@@ -23,7 +23,7 @@ if (isset ( $_SESSION ["numSearch"] )) {
 }
 
 require_once 'autoload.php';
-search_autoload ();
+autoload ();
 if ($_SESSION ["isRegistered"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
 	
 	$controller = new Controller ();

@@ -1,6 +1,6 @@
 <?php
 require_once 'autoload.php';
-FBModel_autoload();
+FB_API_autoload();
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRedirectLoginHelper;

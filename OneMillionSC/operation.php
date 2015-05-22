@@ -2,7 +2,7 @@
  
 <?php
 	require_once 'autoload.php';
-	operation_autoload();
+	autoload();
 	
 	$_SESSION ["error_code"] = false;
 	

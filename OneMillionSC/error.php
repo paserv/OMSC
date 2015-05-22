@@ -3,7 +3,7 @@
 	$codes = array(
 			#Search Error#
 			100 => array('Sorry no results found', 'public/img/login_ico.png'),
-			101 => array('Please Sign in for unlimited search', 'public/img/login_ico.png'),
+			101 => array('Please Register for unlimited search', 'public/img/login_ico.png'),
 			102 => array('No query', 'public/img/login_ico.png'),
 			
 			#DB Error#
@@ -23,9 +23,11 @@
 			212 => array('No Result found in search by Name And Coords', 'public/img/login_ico.png'),
 			213 => array('Select count Home error', 'public/img/login_ico.png'),
 			
-			300 => array('Select count Home error', 'public/img/login_ico.png'),
-			
 			#Fusion Error#
+			300 => array('Impossible Register User Into Fusion Table', 'public/img/login_ico.png'),
+			301 => array('Impossible Delete User From Fusion Table', 'public/img/login_ico.png'),
+			302 => array('Impossible Update User From Fusion Table', 'public/img/login_ico.png'),
+			
 			400 => array('Fusion Tables are full', 'public/img/login_ico.png'),
 			
 	);

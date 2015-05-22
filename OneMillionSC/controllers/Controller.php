@@ -26,7 +26,7 @@ class Controller {
 					$model = new DummyModel ();
 					break;
 				case "PL" :
-					$model = new DummyModel ();
+					$model = new PLModel ();
 					break;
 			}
 			$user = $model->getUser();
@@ -58,7 +58,7 @@ class Controller {
 			$_SESSION ["isRegistered"] = true;
 		} catch ( Exception $e ) {
 			$this->deleteUserFromDB($dbData);
-			throw new Exception($e->getMessage(), $e->getCode());
+			throw new Exception($e->getMessage(), 300);
 		}
 	}
 	
@@ -75,7 +75,7 @@ class Controller {
 			$_SESSION ["isRegistered"] = null;
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
-			throw new Exception($e->getMessage(), $e->getCode());
+			throw new Exception($e->getMessage(), 301);
 		}
 	}
 	
@@ -86,7 +86,7 @@ class Controller {
 			//$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
-			throw new Exception($e->getMessage(), $e->getCode());
+			throw new Exception($e->getMessage(), 302);
 		}
 		
 	}

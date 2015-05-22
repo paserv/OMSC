@@ -12,59 +12,43 @@ function getDirs() {
 	return $dirs;
 }
 
+function autoload() {
+	$dirs = getDirs();
+	$file = $dirs['controllers'] . 'Controller.php';
+	require_once($file);
+}
+
 function controller_autoload() {
 	$dirs = getDirs();
+	$tcp = $dirs['tcp'];
 	
+	$file0 = $dirs['models'] . 'AbstractSocialModel.php';
 	$file1 = $dirs['models'] . 'FBModel.php';
 	$file2 = $dirs['models'] . 'DBModel.php';
-	$file3 = $dirs['models'] . 'FusionModel.php';
-	$file4 = $dirs['models'] . 'DummyModel.php';
-	$file5 = $dirs['dto'] . 'SocialUser.php';
+	$file3 = $dirs['models'] . 'PLModel.php';
+	$file4 = $dirs['models'] . 'FusionModel.php';
+	$file5 = $dirs['models'] . 'DummyModel.php';
 	$file6 = $dirs['dto'] . 'DBUser.php';
-	
-	$dep_array = array($file1, $file2, $file3, $file4, $file5, $file6);
-	
+	$file7 = $dirs['configuration'] . 'Config' . $tcp . '.php';
+	$dep_array = array($file0, $file1, $file2, $file3, $file4, $file5, $file6, $file7);
 	require_array($dep_array);
 }
 
-function FBModel_autoload() {
+function FB_API_autoload() {
 	$dirs = getDirs();
-	$tcp = $dirs['tcp'];
-	
-	$file1 = $dirs['library'] . '/facebook-php-sdk/autoload.php';
-	$file2 = $dirs['configuration'] . 'FBConfig' . $tcp . '.php';
-	$file3 = $dirs['models'] . 'AbstractSocialModel.php';
-	$file4 = $dirs['dto'] . 'SocialUser.php';
-
-	$dep_array = array($file1, $file2, $file3, $file4);
-
-	require_array($dep_array);
+	require_once($file);
 }
 
-function FusionModel_autoload() {
+function Google_API_autoload() {
 	$dirs = getDirs();
-	$tcp = $dirs['tcp'];
-	
-	$file1 = $dirs['library'] . '/google-php-api/autoload.php';
-	$file2 = $dirs['configuration'] . 'FusionConfig' . $tcp . '.php';
-	$file3 = $dirs['dto'] . 'DBUser.php';
-	
-	$dep_array = array($file1, $file2, $file3);
-
-	require_array($dep_array);
+	$file = $dirs['library'] . '/google-php-api/autoload.php';
+	require_once($file);
 }
 
-function DBModel_autoload() {
+function GeoLocation_autoload() {
 	$dirs = getDirs();
-	$tcp = $dirs['tcp'];
-	
-	$file1 = $dirs['configuration'] . 'DBConfig' . $tcp . '.php';
-	$file2 = $dirs['dto'] . 'DBUser.php';
-	$file3 = $dirs['library'] . '/GeoLocation/GeoLocation.php';
-
-	$dep_array = array($file1, $file2, $file3);
-
-	require_array($dep_array);
+	$file = $dirs['library'] . '/GeoLocation/GeoLocation.php';
+	require_once ($file);
 }
 
 function DummyModel_autoload() {
@@ -77,41 +61,8 @@ function DummyModel_autoload() {
 
 function DBUser_autoload() {
 	$dirs = getDirs();
-	$file1 = $dirs['dto'] . 'SocialUser.php';
-	$dep_array = array($file1);
-	require_array($dep_array);
-}
-
-function operation_autoload() {
-	$dirs = getDirs();
-	$file1 = $dirs['controllers'] . 'Controller.php';
-	$file2 = $dirs['dto'] . 'SocialUser.php';
-	$dep_array = array($file1, $file2);
-	require_array($dep_array);
-}
-
-function header_autoload() {
-	$dirs = getDirs();
-	$file1 = $dirs['controllers'] . 'Controller.php';
-	$dep_array = array($file1);
-	require_array($dep_array);
-}
-
-function account_autoload() {
-	$dirs = getDirs();
-	$file1 = $dirs['controllers'] . 'Controller.php';
-	$file2 = $dirs['dto'] . 'SocialUser.php';
-	$dep_array = array($file1, $file2);
-	require_array($dep_array);
-}
-
-function search_autoload() {
-	$dirs = getDirs();
-	$tcp = $dirs['tcp'];
-	$file1 = $dirs['controllers'] . 'Controller.php';
-	$file2 = $dirs['configuration'] . 'SiteConfig' . $tcp . '.php';
-	$dep_array = array($file1, $file2);
-	require_array($dep_array);
+	$file = $dirs['dto'] . 'SocialUser.php';
+	require_once($file);
 }
 
 function require_array($dep_array) {

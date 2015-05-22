@@ -14,9 +14,14 @@
 var coordinate = false;
 <?php
 	require_once 'autoload.php';
-	account_autoload();
+	autoload();
+	
+	$controller = new Controller ();
 	
 	if(isset($_GET['sn'])){
+		if ($_SESSION['sn'] !== $_GET['sn']) {
+			$controller->logout();
+		}
 		$_SESSION['sn'] = $_GET['sn'];
 	}
 	
@@ -26,7 +31,6 @@ var coordinate = false;
 		die("<script>location.href = 'index.php'</script>");
 	}
 	
-	$controller = new Controller ();
 	$currentUser = null;
 	$loginUrl = null;
 	
