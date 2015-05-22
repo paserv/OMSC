@@ -2,21 +2,7 @@
 	<div class="menuButton"><a href="index.php"><img src="public/img/home.png"></a></div>
 	<div class="menuButton" id="searchPerBtn"><a><img src="public/img/searchPerson.png"></a></div>
 	<div class="menuButton" id="joinus"><a><img src="public/img/joinus.png"></a></div>
-	<div>
-<?php
-require_once 'autoload.php';
-header_autoload();
 
-if (isset ($_SESSION ["users_count"] )) {
-	$users = $_SESSION ["users_count"];
-} else {
-	$controller = new Controller();
-	$users = $controller->count();
-	$_SESSION ["users_count"] = $users;
-}
-?>
-	<div class="textusers">Members: <?php echo $users ?></div>
-</div>
 </div>
 <div id="inputSearchPer">
 	<p>Find people</p>

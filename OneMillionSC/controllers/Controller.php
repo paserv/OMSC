@@ -3,22 +3,45 @@ require_once 'autoload.php';
 controller_autoload();
 
 class Controller {
+	function logout() {
+		$_SESSION ["id"] = null;
+		$_SESSION ["name"] =null;
+		$_SESSION ["mail"] = null;
+		$_SESSION ["avatarUrl"] = null;
+		$_SESSION ["socialPageUrl"] = null;
+		$_SESSION ["sn"] = null;
+		$_SESSION ["isRegistered"] = null;
+	}
 	function getLoggedUser($socialNetwork) {
-		switch ($socialNetwork) {
-			case "FB" :
-				$model = new FBModel ();
-				break;
-			case "TW" :
-				$model = new DummyModel ();
-				break;
-			case "PL" :
-				$model = new DummyModel ();
-				break;
+		$_SESSION ["sn"] = $socialNetwork;
+		if (isset ($_SESSION ["id"]) && $_SESSION ["id"] !== null ) {
+			$_SESSION ["isRegistered"] = $this->isUserRegistered($_SESSION ["id"]);
+			return new SocialUser($_SESSION ["id"], $_SESSION ["name"], $_SESSION ["mail"], $_SESSION ["socialPageUrl"], $_SESSION ["avatarUrl"], $_SESSION ["sn"]);
+		} else {
+			switch ($socialNetwork) {
+				case "FB" :
+					$model = new FBModel ();
+					break;
+				case "TW" :
+					$model = new DummyModel ();
+					break;
+				case "PL" :
+					$model = new DummyModel ();
+					break;
+			}
+			$user = $model->getUser();
+			if ($user->socialId !== null) {
+				$user->socialNetwork = $socialNetwork;
+				$_SESSION ["id"] = $user->socialId;
+				$_SESSION ["name"] = $user->name;
+				$_SESSION ["mail"] = $user->email;
+				$_SESSION ["avatarUrl"] = $user->avatarUrl;
+				$_SESSION ["socialPageUrl"] = $user->socialPageUrl;
+				$_SESSION ["isRegistered"] = $this->isUserRegistered($_SESSION ["id"]);
+			}
+			
+			return $user;
 		}
-		
-		$user = $model->getUser ();
-		$user->socialNetwork = $socialNetwork;
-		return $user;				
 	}
 	
 	function register(DBUser $dbData) {
@@ -26,6 +49,13 @@ class Controller {
 		try {
 			//$this->registerUserIntoFusionTable ( $dbData );
 			//$this->registerFakeUserIntoFusionTable ( $dbData );
+			$_SESSION ["id"] = $dbData->socialId;
+			$_SESSION ["name"] = $dbData->name;
+			$_SESSION ["mail"] = $dbData->email;
+			$_SESSION ["avatarUrl"] = $dbData->avatarUrl;
+			$_SESSION ["socialPageUrl"] = $dbData->socialPageUrl;
+			$_SESSION ["sn"] = $dbData->socialNetwork;
+			$_SESSION ["isRegistered"] = true;
 		} catch ( Exception $e ) {
 			$this->deleteUserFromDB($dbData);
 			throw new Exception($e->getMessage(), $e->getCode());
@@ -36,6 +66,13 @@ class Controller {
 		$this->deleteUserFromDB($dbData);
 		try {
 			//$this->deleteUserFromFusionTable($dbData);
+			$_SESSION ["id"] = null;
+			$_SESSION ["name"] =null;
+			$_SESSION ["mail"] = null;
+			$_SESSION ["avatarUrl"] = null;
+			$_SESSION ["socialPageUrl"] = null;
+			$_SESSION ["sn"] = null;
+			$_SESSION ["isRegistered"] = null;
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
 			throw new Exception($e->getMessage(), $e->getCode());

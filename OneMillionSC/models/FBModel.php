@@ -23,9 +23,9 @@ class FBModel extends AbstractSocialModel {
 		try {
 			$session = $helper->getSessionFromRedirect();
 		} catch ( FacebookRequestException $ex ) {
-			echo $ex;
+			throw new Exception($ex->getMessage(), 300);
 		} catch (Exception $ex) {
-			echo $ex;
+			throw new Exception($ex->getMessage(), 301);
 		}
 		
 		if (isset ( $session )) {
@@ -44,8 +44,7 @@ class FBModel extends AbstractSocialModel {
 			$loginUrl = $helper->getLoginUrl ( array (
 					'scope' => FB_REQUIRED_SCOPE
 			) );
-			throw new Exception ($loginUrl);
-			exit;
+			return SocialUser::createLoginUrl($loginUrl);
 		}
 		
 	}

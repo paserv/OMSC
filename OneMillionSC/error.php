@@ -1,10 +1,12 @@
 <div id="error">
 	<?php
 	$codes = array(
+			#Search Error#
 			100 => array('Sorry no results found', 'public/img/login_ico.png'),
 			101 => array('Please Sign in for unlimited search', 'public/img/login_ico.png'),
 			102 => array('No query', 'public/img/login_ico.png'),
 			
+			#DB Error#
 			200 => array('Connection to database unaivailable', 'public/img/login_ico.png'),
 			201 => array('Impossible to delete User', 'public/img/login_ico.png'),
 			202 => array('Impossible check User is registered', 'public/img/login_ico.png'),
@@ -18,17 +20,26 @@
 			210 => array('Select count error', 'public/img/login_ico.png'),
 			211 => array('Impossible search by Coords', 'public/img/login_ico.png'),
 			212 => array('No Result found in search by Coords', 'public/img/login_ico.png'),
-			212 => array('No Result found in search by ame And Coords', 'public/img/login_ico.png'),
+			212 => array('No Result found in search by Name And Coords', 'public/img/login_ico.png'),
 			213 => array('Select count Home error', 'public/img/login_ico.png'),
+			
+			300 => array('Select count Home error', 'public/img/login_ico.png'),
+			
+			#Fusion Error#
+			400 => array('Fusion Tables are full', 'public/img/login_ico.png'),
 			
 	);
 	
 	if(isset($_SESSION ["error_code"]) && $_SESSION ["error_code"] !== false){
 		$error_code = $_SESSION ['error_code'];
 		$message = $codes[$error_code][0];
+		$private_err_msg = "";
+		if (isset ($_SESSION ["error_private_msg"]) ) {
+			$private_err_msg = $_SESSION ["error_private_msg"];
+		}
 		$icon = $codes[$error_code][1];
 		if ($message != false) {
-			echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="' . $icon . '">' . $message . '</div>';
+			echo '<br><br><br><br><div style="margin-left:30px; align=center"><div><img src="' . $icon . '">' . $message . '</div><div>' . $private_err_msg . '</div></div>';
 			//TODO log into DB
 			//TODO send mail
 		} else {

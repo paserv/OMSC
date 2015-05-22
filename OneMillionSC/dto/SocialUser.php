@@ -6,6 +6,7 @@ class SocialUser {
 	public $socialNetwork;
 	public $socialPageUrl;
 	public $avatarUrl;
+	public $loginUrl;
 	
 	function __construct($id, $name, $email, $socialPageUrl, $avatarUrl, $socialNetwork) {
 		$this->socialId = $id;
@@ -14,6 +15,12 @@ class SocialUser {
 		$this->socialPageUrl = $socialPageUrl;
 		$this->avatarUrl = $avatarUrl;
 		$this->socialNetwork = $socialNetwork;
+	}
+	
+	static function createLoginUrl($loginUrl) {
+		$user = new SocialUser(null, null, null, null, null, null);
+		$user->loginUrl = $loginUrl;
+		return $user;
 	}
 	
 }

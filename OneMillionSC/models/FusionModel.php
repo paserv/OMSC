@@ -21,7 +21,7 @@ class FusionModel {
 		
 		$tableID = $this->getTableId();
 		if (!$tableID) {
-			throw new Exception("OMSC is full");
+			throw new Exception("Fusion Tables are full", 400);
 		}
 		$service = $this->getService();
 		$avatUrl = FusionModel::escapeUrl ( $dbData->avatarUrl );

@@ -14,9 +14,9 @@
 	$socialPageUrl = $_SESSION["socialPageUrl"];
 	$timestamp = date("Y-m-d H:i:s");
 	$latitude = $_POST['latitude'];
-	$_SESSION["latitude"] = $latitude;
+// 	$_SESSION["latitude"] = $latitude;
 	$longitude = $_POST['longitude'];
-	$_SESSION["longitude"] = $longitude;
+// 	$_SESSION["longitude"] = $longitude;
 	$aboutme = "";
 	if ( !empty($_POST['aboutme'])){
 		$aboutme = $_POST['aboutme'];
@@ -28,13 +28,20 @@
 	try {
 		if (isset($_POST['delete_button'])) {
 		    $controller->delete($user);
+		    $latitude = "";
+		    $longitude = "";
 		} else if (isset($_POST['modify_button'])) {
 		    $controller->update($user);
 		} else if (isset($_POST['register_button'])){
-		    $message = $controller->register($user);
+		    $controller->register($user);
+		} else if (isset($_POST['logout_button'])){
+		    $controller->logout();
+		    $latitude = "";
+		    $longitude = "";
 		}
 	} catch (Exception $e) {
 		$_SESSION ["error_code"] = $e->getCode();
+		$_SESSION ["error_private_msg"] = $e->getMessage();
 	}
 ?>
 
@@ -54,10 +61,7 @@
 include 'header.php'; 
 if ($_SESSION ["error_code"]) {
 	include 'error.php';
-} else {
-$controller = new Controller();
-$users = $controller->count();
-$_SESSION ["users_count"] = $users;
+} 
 ?>
 	<div id="headerseparator"></div>
 	<br>
@@ -68,10 +72,8 @@ $_SESSION ["users_count"] = $users;
 	<br>
 	<br>
 	Operation Success!
-	<div><a href="index.php<?php echo "?latitude=" . $_SESSION["latitude"] . "&longitude=" . $_SESSION["longitude"] ?>">Come Back Home</a></div>
+	<div><a href="index.php<?php echo "?latitude=" . $latitude . "&longitude=" . $longitude ?>">Come Back Home</a></div>
 	</div>
-<?php 
-} 
-include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 </body>
 </html>

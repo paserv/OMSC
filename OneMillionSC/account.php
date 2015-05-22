@@ -32,28 +32,25 @@ var coordinate = false;
 	
 	try {
 		$currentUser = $controller->getLoggedUser ( $socialNetwork );
-		$isRegistered = $controller->isUserRegistered($currentUser->socialId);
-		if ($isRegistered) {
-			$currentUser = $controller->search($currentUser->socialId);
-			?>
-			coordinate = {
-    			coords: {
-    				latitude: <?php echo $currentUser->latitude ?> ,
-    		        longitude: <?php echo $currentUser->longitude ?>,
-    				}
-				};
-			<?php
+		if ($currentUser->socialId !== null) {
+			if ($_SESSION ["isRegistered"]) {
+				$currentUser = $controller->search($currentUser->socialId);
+				?>
+					coordinate = {
+		    			coords: {
+		    				latitude: <?php echo $currentUser->latitude ?> ,
+		    		        longitude: <?php echo $currentUser->longitude ?>,
+		    				}
+						};
+				<?php
+				}
+			} else {
+				$loginUrl = $currentUser->loginUrl;
+				}
+		} catch (Exception $se) {
+			$_SESSION ["error_code"] = $se->getCode();
+			$_SESSION ["error_private_msg"] = $se->getMessage();
 		}
-		$_SESSION ["id"] = $currentUser->socialId;
-		$_SESSION ["name"] = $currentUser->name;
-		$_SESSION ["mail"] = $currentUser->email;
-		$_SESSION ["avatarUrl"] = $currentUser->avatarUrl;
-		$_SESSION ["socialPageUrl"] = $currentUser->socialPageUrl;
-		$_SESSION ["sn"] = $socialNetwork;
-		
-	} catch (Exception $se) {
-		$loginUrl = $se->getMessage();
-	}
 	?>
 </script>
 </head>
@@ -64,7 +61,7 @@ var coordinate = false;
 	<div id="headerseparator"></div>
 	<div class="corpo">
 		<div class="wrap">
-		<?php if ($currentUser !== null ) { ?>
+		<?php if ($currentUser->socialId !== null ) { ?>
 		<form name="coordinateForm" action="operation.php" method="post">
 			<div class="left_col">
 				<div><img src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture" /></div>
@@ -79,11 +76,12 @@ var coordinate = false;
 				<div><input type="text" name="longitude" id="longitude" readonly/></div>
 				<div class="label">Something about me</div>
 				<?php 
-				if ($isRegistered) {
+				if ($_SESSION ["isRegistered"]) {
 				?>
 				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ><?php echo $currentUser->description; ?></textarea></div>
 				<div><input type="submit" name="modify_button" value="Modify"/></div>
 				<div><input type="submit" name="delete_button" value="Delete"/></div>
+				<div><input type="submit" name="logout_button" value="Logout"/></div>
 					<?php	
 				} else {
 				?>

@@ -107,8 +107,10 @@ function account_autoload() {
 
 function search_autoload() {
 	$dirs = getDirs();
+	$tcp = $dirs['tcp'];
 	$file1 = $dirs['controllers'] . 'Controller.php';
-	$dep_array = array($file1);
+	$file2 = $dirs['configuration'] . 'SiteConfig' . $tcp . '.php';
+	$dep_array = array($file1, $file2);
 	require_array($dep_array);
 }
 
