@@ -36,6 +36,7 @@ function controller_autoload() {
 
 function FB_API_autoload() {
 	$dirs = getDirs();
+	$file = $dirs['library'] . '/facebook-php-sdk/autoload.php';
 	require_once($file);
 }
 

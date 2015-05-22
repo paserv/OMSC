@@ -47,8 +47,7 @@ class Controller {
 	function register(DBUser $dbData) {
 		$this->registerUserIntoDB ( $dbData );
 		try {
-			//$this->registerUserIntoFusionTable ( $dbData );
-			//$this->registerFakeUserIntoFusionTable ( $dbData );
+			$this->registerUserIntoFusionTable ( $dbData );
 			$_SESSION ["id"] = $dbData->socialId;
 			$_SESSION ["name"] = $dbData->name;
 			$_SESSION ["mail"] = $dbData->email;
@@ -65,7 +64,7 @@ class Controller {
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
-			//$this->deleteUserFromFusionTable($dbData);
+			$this->deleteUserFromFusionTable($dbData);
 			$_SESSION ["id"] = null;
 			$_SESSION ["name"] =null;
 			$_SESSION ["mail"] = null;
@@ -83,7 +82,7 @@ class Controller {
 		$oldUser = $this->search($dbData->socialId);
 		$this->updateUserIntoDB($dbData);
 		try {
-			//$this->updateUserIntoFusionTable($dbData);
+			$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), 302);
