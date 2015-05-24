@@ -18,16 +18,14 @@ var coordinate = false;
 	
 	$controller = new Controller ();
 	
-	if(isset($_GET['sn'])){
-		if ($_SESSION['sn'] !== $_GET['sn']) {
+	if(isset($_REQUEST['sn'])){
+		if ($_SESSION['sn'] !== $_REQUEST['sn']) {
 			$controller->logout();
 		}
-		$_SESSION['sn'] = $_GET['sn'];
+		$_SESSION['sn'] = $_REQUEST['sn'];
 	}
 	
-	if (isset($_SESSION ["sn"])) {
-		$socialNetwork = $_SESSION ["sn"];
-	} else {
+	if (!isset($_SESSION ["sn"])) {
 		die("<script>location.href = 'index.php'</script>");
 	}
 	
@@ -35,7 +33,7 @@ var coordinate = false;
 	$loginUrl = null;
 	
 	try {
-		$currentUser = $controller->getLoggedUser ( $socialNetwork );
+		$currentUser = $controller->getLoggedUser ( $_SESSION ["sn"] );
 		if ($currentUser->socialId !== null) {
 			if ($_SESSION ["isRegistered"]) {
 				$currentUser = $controller->search($currentUser->socialId);

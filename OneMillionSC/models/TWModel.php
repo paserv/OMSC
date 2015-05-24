@@ -6,12 +6,14 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 class TWModel extends AbstractSocialModel {
 	
 	function getUser() {
-		if(!empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret'])){
+		if(!empty($_REQUEST['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret'])){
+			if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
+				throw new Exception('Something Wrong', 500);
+			}
 			$twitteroauth = new TwitterOAuth(TW_CONSUMER_KEY, TW_CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 			$access_token = $twitteroauth->oauth("oauth/access_token", array("oauth_verifier" => $_REQUEST['oauth_verifier']));
 			$twitteroauth = new TwitterOAuth(TW_CONSUMER_KEY, TW_CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 			$user_info = $twitteroauth->get('account/verify_credentials');
-			print_r($user_info);
 			$socialId = $user_info->id;
 			$name = $user_info->name;
 			$email = 'not available';
