@@ -30,6 +30,9 @@
 			
 			400 => array('Fusion Tables are full', 'public/img/login_ico.png'),
 			
+			#FB Error#
+	
+			#TW Error#
 	);
 	
 	if(isset($_SESSION ["error_code"]) && $_SESSION ["error_code"] !== false){

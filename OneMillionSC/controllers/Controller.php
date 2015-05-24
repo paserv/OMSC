@@ -23,7 +23,7 @@ class Controller {
 					$model = new FBModel ();
 					break;
 				case "TW" :
-					$model = new DummyModel ();
+					$model = new TWModel ();
 					break;
 				case "PL" :
 					$model = new PLModel ();

@@ -30,7 +30,8 @@ function controller_autoload() {
 	$file5 = $dirs['models'] . 'DummyModel.php';
 	$file6 = $dirs['dto'] . 'DBUser.php';
 	$file7 = $dirs['configuration'] . 'Config' . $tcp . '.php';
-	$dep_array = array($file0, $file1, $file2, $file3, $file4, $file5, $file6, $file7);
+	$file8 = $dirs['models'] . 'TWModel.php';
+	$dep_array = array($file0, $file1, $file2, $file3, $file4, $file5, $file6, $file7, $file8);
 	require_array($dep_array);
 }
 
@@ -43,6 +44,12 @@ function FB_API_autoload() {
 function Google_API_autoload() {
 	$dirs = getDirs();
 	$file = $dirs['library'] . '/google-php-api/autoload.php';
+	require_once($file);
+}
+
+function Twitter_API_autoload() {
+	$dirs = getDirs();
+	$file = $dirs['library'] . '/twitter-php-api/autoload.php';
 	require_once($file);
 }
 

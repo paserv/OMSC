@@ -68,7 +68,7 @@ var coordinate = false;
 		<?php if ($currentUser->socialId !== null ) { ?>
 		<form name="coordinateForm" action="operation.php" method="post">
 			<div class="left_col">
-				<div><img src="https://graph.facebook.com/<?php echo $currentUser->socialId; ?>/picture" /></div>
+				<div><img src="<?php echo $currentUser->avatarUrl; ?>" /></div>
 				<div class="label">Name</div>
 				<div><?php echo $currentUser->name; ?></div>
 				<div class="label">Email</div>

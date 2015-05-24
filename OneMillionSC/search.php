@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="public/css/omsc.css" rel="stylesheet">
+</head>
 <script type="text/javascript">
 var markers = [];
 <?php
@@ -72,8 +73,6 @@ if ($_SESSION ["isRegistered"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
 	}
 ?>
 </script>
-
-</head>
 <body>
 <?php include 'header.php'; ?>
 <!-- 
@@ -84,7 +83,7 @@ if ($_SESSION ["error_code"]) {
 	include 'error.php';
 } else {
 	?>
-	<div id="map-canvas" class="corpo"></div>
+	<div id="map-canvas"></div>
 <?php
 }
 include 'footer.php';

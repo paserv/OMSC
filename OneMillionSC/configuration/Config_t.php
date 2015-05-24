@@ -23,6 +23,12 @@ define ('PL_REQUIRED_SCOPE1', 'https://www.googleapis.com/auth/userinfo.profile'
 define ('PL_REQUIRED_SCOPE2', 'https://www.googleapis.com/auth/userinfo.email');
 define ('PL_ID', 'PL');
 
+#TW CONFIG#
+define ('TW_CONSUMER_KEY', '9bdho2YXjpDYRheYAlYeStb3E');
+define ('TW_CONSUMER_SECRET', 'vXC4WTdPuxVZ8uBmK6I48UOJuWNnSw5AL30uMjKuygI2EEOkvK');
+define ('TW_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/account.php');
+define ('TW_ID', 'TW');
+
 #FUSION CONFIG#
 define ('FUSION_CLIENT_ID', '217190497352-qijsqgp3hjl88ir2q3c3nafcp9349tps.apps.googleusercontent.com');
 define ('FUSION_SERVICE_ACCOUNT_NAME', '217190497352-qijsqgp3hjl88ir2q3c3nafcp9349tps@developer.gserviceaccount.com');

@@ -19,10 +19,12 @@ class PLModel extends AbstractSocialModel {
 			$me = $service->people->get("me");
 			$socialId = $me['id'];
 			$name = $me['displayName'];
-			$email = $me['emails'][0]['value'];
+			$emails = $me->getEmails();
+			$email = $emails[0]['value'];
 			$socialPageUrl = $me['url'];
 			$avatarUrl = $me['image']['url'];
-			$user = new SocialUser($socialId, $name, $name, $socialPageUrl, $avatarUrl, PL_ID);
+			$user = new SocialUser($socialId, $name, $email, $socialPageUrl, $avatarUrl, PL_ID);
+			return $user;
 		} else {
 			$authUrl = $client->createAuthUrl();
 			return SocialUser::createLoginUrl($authUrl);
