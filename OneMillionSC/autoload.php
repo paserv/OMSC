@@ -31,7 +31,8 @@ function controller_autoload() {
 	$file6 = $dirs['dto'] . 'DBUser.php';
 	$file7 = $dirs['configuration'] . 'Config' . $tcp . '.php';
 	$file8 = $dirs['models'] . 'TWModel.php';
-	$dep_array = array($file0, $file1, $file2, $file3, $file4, $file5, $file6, $file7, $file8);
+	$file8 = $dirs['models'] . 'PPModel.php';
+	$dep_array = array($file0, $file1, $file2, $file3, $file4, $file5, $file6, $file7, $file8, $file9);
 	require_array($dep_array);
 }
 
@@ -53,9 +54,15 @@ function Twitter_API_autoload() {
 	require_once($file);
 }
 
+function PayPal_API_autoload() {
+	$dirs = getDirs();
+	$file = $dirs['library'] . '/paypal-php-sdk/autoload.php';
+	require_once($file);
+}
+
 function GeoLocation_autoload() {
 	$dirs = getDirs();
-	$file = $dirs['library'] . '/GeoLocation/GeoLocation.php';
+	$file = $dirs['library'] . '/geolocation/GeoLocation.php';
 	require_once ($file);
 }
 

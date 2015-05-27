@@ -40,6 +40,11 @@ define ('FUSION_TABLE_ID3', '1LkJaffRvmM8B_lr9qVJZbXP8O8bg3Bei1syah1i8');
 define ('FUSION_TABLE_ID4', '1JaKfO_o43acSHPh5s5cJccQLiuOUljSK2KDblRWK');
 define ('FUSION_TABLE_ID5', '1MVpFMOH0dr0f5pUq6CoqLiFvFqc6T-Um7OgkRRUB');
 
+#PAYPAL CONFIG#
+define ('PP_CLIENT_ID', 'AZ7UfpicExpcHhCBcTHrPZ9YSh__HXuO_eXrwqn1pvCl_BPY5z4GyAVymN6CLOjFWffdGvzDLu-HRrtb');
+define ('PP_CLIENT_SECRET', 'ENha4YyzwWm77DEqOawuERHe3GF3wpjEg6rDsTysTK8jof1Vx54ljMSLpWvjpOnKKs0NnpmDTgGgK8Fx');
+define ('PP_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/operation.php');
+
 #SITE CONFIG#
 define ('MAX_SEARCH', '3');
 ?>

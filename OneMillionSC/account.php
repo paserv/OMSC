@@ -45,7 +45,9 @@ var coordinate = false;
 		    				}
 						};
 				<?php
-				}
+				} else {
+					$paypal_url = $controller->getPayPalUrl();
+					}
 			} else {
 				$loginUrl = $currentUser->loginUrl;
 				}
@@ -89,6 +91,7 @@ var coordinate = false;
 				?>
 				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
 				<input type="submit" name="register_button" value="Register"/>
+				<a href="<?php echo $paypal_url ?>">Pay with PayPal</a>";
 				<?php } ?>
 			</div>
 			<div class="right_col">

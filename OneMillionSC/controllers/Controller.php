@@ -12,6 +12,12 @@ class Controller {
 		$_SESSION ["sn"] = null;
 		$_SESSION ["isRegistered"] = null;
 	}
+	
+	function getPayPalUrl() {
+		$model = new PayPalModel();
+		return $model->createPaymentUrl();
+	}
+	
 	function getLoggedUser($socialNetwork) {
 		$_SESSION ["sn"] = $socialNetwork;
 		if (isset ($_SESSION ["id"]) && $_SESSION ["id"] !== null ) {
