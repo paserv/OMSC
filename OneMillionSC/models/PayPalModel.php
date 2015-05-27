@@ -64,7 +64,7 @@ class PayPalModel {
 		
 		$approvalUrl = $payment->getApprovalLink();
 		
-		return echo $approvalUrl;
+		return $approvalUrl;
 		
 	}
 }
