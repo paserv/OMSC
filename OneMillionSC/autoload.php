@@ -32,7 +32,8 @@ function controller_autoload() {
 	$file7 = $dirs['configuration'] . 'Config' . $tcp . '.php';
 	$file8 = $dirs['models'] . 'TWModel.php';
 	$file9 = $dirs['models'] . 'PayPalModel.php';
-	$dep_array = array($file0, $file1, $file2, $file3, $file4, $file5, $file6, $file7, $file8, $file9);
+	$file10 = $dirs['dto'] . 'CustomException.php';
+	$dep_array = array($file0, $file1, $file2, $file3, $file4, $file5, $file6, $file7, $file8, $file9, $file10);
 	require_array($dep_array);
 }
 

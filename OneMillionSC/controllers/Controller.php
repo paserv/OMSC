@@ -2,6 +2,10 @@
 require_once 'autoload.php';
 controller_autoload();
 
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
+
 class Controller {
 	function logout() {
 		$_SESSION ["id"] = null;
@@ -16,6 +20,79 @@ class Controller {
 	function getPayPalUrl() {
 		$model = new PayPalModel();
 		return $model->createPaymentUrl();
+	}
+	
+	function executePayment($paymentId, $payerID) {
+		$model = new PayPalModel();
+		$payment = Payment::get ( $paymentId, $model->apiContext );
+		
+		$execution = new PaymentExecution ();
+		$execution->setPayerId ( $payerID );
+		
+		try {
+			$result = $payment->execute ( $execution, $model->apiContext );
+			try {
+				$payment = Payment::get ( $paymentId, $model->apiContext );
+			} catch ( Exception $ex ) {
+				throw new Exception($ex->getMessage(), 300);
+			}
+		} catch ( Exception $ex ) {
+			throw new Exception($ex->getMessage(), 300);
+		}
+		
+		return $payment;
+		
+	}
+	
+	function getUser($socialNetwork) {
+		if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) {
+			$user = $this->getLoggedUserFromSession();
+			if (isset($_SESSION ["latitude"]) && isset($_SESSION ["longitude"]) && isset($_SESSION ["aboutme"])) {
+				$user->latitude = $_SESSION ["latitude"];
+				$user->longitude = $_SESSION ["longitude"];
+				$user->description = $_SESSION ["aboutme"];
+			} else {
+				$isRegistered = $this->isUserRegistered($user->socialId);
+				if ($isRegistered) {
+					$currentUser = $controller->search($user->socialId);
+					$user->latitude = $currentUser->latitude;
+					$user->longitude = $currentUser->longitude;
+					$user->description = $currentUser->aboutme;
+				}
+			}
+			return $user;
+		} else {
+			switch ($socialNetwork) {
+				case "FB" :
+					$model = new FBModel ();
+					break;
+				case "TW" :
+					$model = new DummyModel ();
+					break;
+				case "PL" :
+					$model = new PLModel ();
+					break;
+			}
+			$socialUser = $model->getUser();
+			if ($socialUser->socialId !== null) {
+				$user = DBUser::createDBUser($socialUser);
+				$user->socialNetwork = $socialNetwork;
+				$_SESSION ["id"] = $user->socialId;
+				$_SESSION ["name"] = $user->name;
+				$_SESSION ["mail"] = $user->email;
+				$_SESSION ["avatarUrl"] = $user->avatarUrl;
+				$_SESSION ["socialPageUrl"] = $user->socialPageUrl;
+				$_SESSION ["isLogged"] = true;
+				$isRegistered = $this->isUserRegistered($user->socialId);
+				if ($isRegistered) {
+					$currentUser = $controller->search($user->socialId);
+					$user->latitude = $currentUser->latitude;
+					$user->longitude = $currentUser->longitude;
+					$user->description = $currentUser->aboutme;
+				}
+			}
+			return $user;
+		}
 	}
 	
 	function getLoggedUser($socialNetwork) {
@@ -50,17 +127,51 @@ class Controller {
 		}
 	}
 	
+	function getLoggedUserFromSession() {
+		$socialId = $_SESSION["id"];
+		$name = $_SESSION["name"];
+		$mail = $_SESSION["mail"];
+		$socialNetwork = $_SESSION["sn"];
+		$avatarUrl = $_SESSION["avatarUrl"];
+		$socialPageUrl = $_SESSION["socialPageUrl"];
+		$user = new DBUser($socialId, $name, $mail, "", "", "", $socialPageUrl, $avatarUrl, "", $socialNetwork);
+		return $user;
+	}
+	
+	function getUserFromSession() {
+		$socialId = $_SESSION["id"];
+		$name = $_SESSION["name"];
+		$mail = $_SESSION["mail"];
+		$socialNetwork = $_SESSION["sn"];
+		$avatarUrl = $_SESSION["avatarUrl"];
+		$socialPageUrl = $_SESSION["socialPageUrl"];
+		
+		$timestamp = date("Y-m-d H:i:s");
+		
+		$latitude = "";
+		$longitude = "";
+		if (isset($_SESSION["latitude"]) && isset($_SESSION["longitude"])) {
+			$latitude = $_SESSION["latitude"];
+			$longitude = $_SESSION["longitude"];
+		}
+		
+		$aboutme = "";
+		if (isset($_SESSION["aboutme"])) {
+			$aboutme = $_SESSION["aboutme"];
+		}
+		
+		$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, $aboutme, $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
+		return $user;
+	}
+	
 	function register(DBUser $dbData) {
 		$this->registerUserIntoDB ( $dbData );
 		try {
 // 			$this->registerUserIntoFusionTable ( $dbData );
-			$_SESSION ["id"] = $dbData->socialId;
-			$_SESSION ["name"] = $dbData->name;
-			$_SESSION ["mail"] = $dbData->email;
-			$_SESSION ["avatarUrl"] = $dbData->avatarUrl;
-			$_SESSION ["socialPageUrl"] = $dbData->socialPageUrl;
-			$_SESSION ["sn"] = $dbData->socialNetwork;
-			$_SESSION ["isRegistered"] = true;
+			$payPalUrl = $this->getPayPalUrl();
+			header("Location: " . $payPalUrl);
+			die();
+			
 		} catch ( Exception $e ) {
 			$this->deleteUserFromDB($dbData);
 			throw new Exception($e->getMessage(), 300);
@@ -71,13 +182,7 @@ class Controller {
 		$this->deleteUserFromDB($dbData);
 		try {
 // 			$this->deleteUserFromFusionTable($dbData);
-			$_SESSION ["id"] = null;
-			$_SESSION ["name"] =null;
-			$_SESSION ["mail"] = null;
-			$_SESSION ["avatarUrl"] = null;
-			$_SESSION ["socialPageUrl"] = null;
-			$_SESSION ["sn"] = null;
-			$_SESSION ["isRegistered"] = null;
+			$this->logout();
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
 			throw new Exception($e->getMessage(), 301);

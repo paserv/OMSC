@@ -22,6 +22,10 @@ class DBUser extends SocialUser {
 		$this->socialNetwork = $socialNetwork;
 	}
 	
+	static function createDBUser(SocialUser $socialUser) {
+		return new DBUser($socialUser->socialId, $socialUser->name, $socialUser->email, "", "", "", $socialUser->socialPageUrl, $socialUser->avatarUrl, "", "");
+	}
+	
 	function stringify() {
 		echo "Social ID: " . $this->socialId ."<br>" . 
 		"Name: " . $this->name ."<br>" .

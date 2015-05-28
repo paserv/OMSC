@@ -35,16 +35,17 @@
 			#TW Error#
 	);
 	
-	if(isset($_SESSION ["error_code"]) && $_SESSION ["error_code"] !== false){
-		$error_code = $_SESSION ['error_code'];
+// 	if(isset($_SESSION ["error_code"]) && $_SESSION ["error_code"] !== false){
+	if($excep->error_code){
+// 		$error_code = $_SESSION ['error_code'];
 		$message = $codes[$error_code][0];
-		$private_err_msg = "";
-		if (isset ($_SESSION ["error_private_msg"]) ) {
-			$private_err_msg = $_SESSION ["error_private_msg"];
-		}
+// 		$private_err_msg = "";
+// 		if (isset ($_SESSION ["error_private_msg"]) ) {
+// 			$private_err_msg = $_SESSION ["error_private_msg"];
+// 		}
 		$icon = $codes[$error_code][1];
 		if ($message != false) {
-			echo '<br><br><br><br><div style="margin-left:30px; align=center"><div><img src="' . $icon . '">' . $message . '</div><div>' . $private_err_msg . '</div></div>';
+			echo '<br><br><br><br><div style="margin-left:30px; align=center"><div><img src="' . $icon . '">' . $message . '</div><div>' . $excep->private_message . '</div></div>';
 			//TODO log into DB
 			//TODO send mail
 		} else {

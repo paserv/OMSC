@@ -4,44 +4,48 @@
 	require_once 'autoload.php';
 	autoload();
 	
-	$_SESSION ["error_code"] = false;
+	$excep = new CustomException;
 	
-	$socialId = $_SESSION["id"];
-	$name = $_SESSION["name"];
-	$mail = $_SESSION["mail"];
-	$socialNetwork = $_SESSION["sn"];
-	$avatarUrl = $_SESSION["avatarUrl"];
-	$socialPageUrl = $_SESSION["socialPageUrl"];
-	$timestamp = date("Y-m-d H:i:s");
-	$latitude = $_POST['latitude'];
-// 	$_SESSION["latitude"] = $latitude;
-	$longitude = $_POST['longitude'];
-// 	$_SESSION["longitude"] = $longitude;
-	$aboutme = "";
-	if ( !empty($_POST['aboutme'])){
-		$aboutme = $_POST['aboutme'];
-	}
-	
-	$user = new DBUser($socialId, $name, $mail, $latitude, $longitude, $aboutme, $socialPageUrl, $avatarUrl, $timestamp, $socialNetwork);
 	$controller = new Controller();
+	$user = $controller->getUserFromSession();
 	
-	try {
-		if (isset($_POST['delete_button'])) {
-		    $controller->delete($user);
-		    $latitude = "";
-		    $longitude = "";
-		} else if (isset($_POST['modify_button'])) {
-		    $controller->update($user);
-		} else if (isset($_POST['register_button'])){
-		    $controller->register($user);
-		} else if (isset($_POST['logout_button'])){
-		    $controller->logout();
-		    $latitude = "";
-		    $longitude = "";
+	/**
+	 * If it comes from paypal store page
+	 */
+	if (isset ( $_GET ['success'] ) && $_GET ['success'] == 'true') {
+		$controller->executePayment($_GET ['paymentId'], $_GET ['PayerID']);
+	} elseif (isset ( $_GET ['success'] ) && $_GET ['success'] == 'false') {
+		$excep->setError(700, "User Cancelled the Approval");
+	} else {
+		/**
+		 * If it comes from account.php
+		 */
+		# If "Register" button OR "Modify" button -> save latitude, longitude and about me in SESSION #
+		if(isset($_POST['modify_button']) || isset($_POST['register_button'])) {
+			$_SESSION["latitude"] = $_POST['latitude'];
+			$_SESSION["longitude"] = $_POST['longitude'];
+			$_SESSION["aboutme"] = $_POST['aboutme'];
 		}
-	} catch (Exception $e) {
-		$_SESSION ["error_code"] = $e->getCode();
-		$_SESSION ["error_private_msg"] = $e->getMessage();
+		
+		$user = $controller->getUserFromSession();
+		
+		try {
+			if (isset($_POST['delete_button'])) {
+				$controller->delete($user);
+				$user->latitude = "";
+				$user->longitude = "";
+			} else if (isset($_POST['modify_button'])) {
+				$controller->update($user);
+			} else if (isset($_POST['register_button'])){
+				$controller->register($user);
+			} else if (isset($_POST['logout_button'])){
+				$controller->logout();
+				$user->latitude = "";
+				$user->longitude = "";
+			}
+		} catch (Exception $e) {
+			$excep->setError($e->getCode(), $e->getMessage());
+		}
 	}
 ?>
 
@@ -57,12 +61,8 @@
 <link href="public/css/omsc.css" rel="stylesheet">
 </head>
 <body>
-<?php
-include 'header.php'; 
-if ($_SESSION ["error_code"]) {
-	include 'error.php';
-} 
-?>
+<?php include 'header.php'; ?>
+
 	<div id="headerseparator"></div>
 	<br>
 	<br>
@@ -71,9 +71,15 @@ if ($_SESSION ["error_code"]) {
 	<br>
 	<br>
 	<br>
+	<?php
+		if ($excep->existProblem) {
+			include 'error.php';
+		} else {
+	?>
 	Operation Success!
-	<div><a href="index.php<?php echo "?latitude=" . $latitude . "&longitude=" . $longitude ?>">Come Back Home</a></div>
+	<div><a href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>">Come Back Home</a></div>
 	</div>
+	<?php } ?>
 <?php include 'footer.php'; ?>
 </body>
 </html>

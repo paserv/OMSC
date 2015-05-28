@@ -9,7 +9,7 @@ define ( 'DB_SEARCH_LIMIT', '500' ); // DB name
 #FB CONFIG#
 define ('FB_APP_ID', '1629515017282874');
 define ('FB_APP_SECRET', 'acb244e348547db2889fb9995d36d3a4');
-define ('FB_REDIRECT_URL', 'http://localhost/OMSC/OneMillionSC/account.php');
+define ('FB_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/account.php');
 define ('FB_GRAPH_URL', 'https://graph.facebook.com/');
 define ('FB_ROOT_URL', 'https://www.facebook.com/');
 define ('FB_ID', 'FB');

@@ -85,13 +85,13 @@ var coordinate = false;
 				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ><?php echo $currentUser->description; ?></textarea></div>
 				<div><input type="submit" name="modify_button" value="Modify"/></div>
 				<div><input type="submit" name="delete_button" value="Delete"/></div>
-				<div><input type="submit" name="logout_button" value="Logout"/></div>
+				<!-- <div><input type="submit" name="logout_button" value="Logout"/></div> -->
 					<?php	
 				} else {
 				?>
 				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
 				<input type="submit" name="register_button" value="Register"/>
-				<a href="<?php echo $paypal_url ?>">Pay with PayPal</a>";
+				<a href="<?php echo $paypal_url ?>">Pay with PayPal</a>
 				<?php } ?>
 			</div>
 			<div class="right_col">

@@ -12,7 +12,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 
 class PayPalModel {
-	private $apiContext;
+	public $apiContext;
 	
 	function __construct () {
 		$this->apiContext = PayPalModel::getAPIContext();
@@ -26,6 +26,7 @@ class PayPalModel {
 						PP_CLIENT_SECRET
 				)
 		);
+		return $apiContext;
 	}
 	
 	function createPaymentUrl() {
@@ -49,7 +50,7 @@ class PayPalModel {
 		$transaction->setAmount($amount)->setItemList($itemList)->setDescription("Payment for the 'One Million Social Club'")->setInvoiceNumber(uniqid());
 		
 		$redirectUrls = new RedirectUrls();
-		$redirectUrls->setReturnUrl("$baseUrl?success=true")->setCancelUrl("$baseUrl?success=false");
+		$redirectUrls->setReturnUrl(PP_REDIRECT_URL . "?success=true")->setCancelUrl(PP_REDIRECT_URL . "?success=false");
 		
 		$payment = new Payment();
 		$payment->setIntent("sale")->setPayer($payer)->setRedirectUrls($redirectUrls)->setTransactions(array($transaction));
