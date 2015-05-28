@@ -23,7 +23,7 @@ class DBUser extends SocialUser {
 	}
 	
 	static function createDBUser(SocialUser $socialUser) {
-		return new DBUser($socialUser->socialId, $socialUser->name, $socialUser->email, "", "", "", $socialUser->socialPageUrl, $socialUser->avatarUrl, "", "");
+		return new DBUser($socialUser->socialId, $socialUser->name, $socialUser->email, null, null, null, $socialUser->socialPageUrl, $socialUser->avatarUrl, null, null);
 	}
 	
 	function stringify() {

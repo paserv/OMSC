@@ -17,6 +17,7 @@ var coordinate = false;
 	autoload();
 	
 	$controller = new Controller ();
+	$excep = new CustomException();
 	
 	if(isset($_REQUEST['sn'])){
 		if ($_SESSION['sn'] !== $_REQUEST['sn']) {
@@ -29,14 +30,10 @@ var coordinate = false;
 		die("<script>location.href = 'index.php'</script>");
 	}
 	
-	$currentUser = null;
-	$loginUrl = null;
-	
 	try {
-		$currentUser = $controller->getLoggedUser ( $_SESSION ["sn"] );
+		$currentUser = $controller->getUser ( $_SESSION ["sn"] );
 		if ($currentUser->socialId !== null) {
-			if ($_SESSION ["isRegistered"]) {
-				$currentUser = $controller->search($currentUser->socialId);
+			if ($currentUser->latitude != null && $currentUser->longitude != null) {
 				?>
 					coordinate = {
 		    			coords: {
@@ -52,8 +49,7 @@ var coordinate = false;
 				$loginUrl = $currentUser->loginUrl;
 				}
 		} catch (Exception $se) {
-			$_SESSION ["error_code"] = $se->getCode();
-			$_SESSION ["error_private_msg"] = $se->getMessage();
+			$excep->setError(700, "User Cancelled the Approval");
 		}
 	?>
 </script>
@@ -75,12 +71,12 @@ var coordinate = false;
 				<div><?php echo $currentUser->email; ?></div>
 				<div class="label">My Coordinates</div>
 				<div><b>Latitude</b></div>
-				<div><input type="text" name="latitude" id="latitude" readonly/></div>
+				<div><input type="text" name="latitude" id="latitude"/></div>
 				<div><b>Longitude</b></div>
-				<div><input type="text" name="longitude" id="longitude" readonly/></div>
+				<div><input type="text" name="longitude" id="longitude"/></div>
 				<div class="label">Something about me</div>
 				<?php 
-				if ($_SESSION ["isRegistered"]) {
+				if ($currentUser->description != null) {
 				?>
 				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ><?php echo $currentUser->description; ?></textarea></div>
 				<div><input type="submit" name="modify_button" value="Modify"/></div>

@@ -4,7 +4,7 @@
 	require_once 'autoload.php';
 	autoload();
 	
-	$excep = new CustomException;
+	$excep = new CustomException();
 	
 	$controller = new Controller();
 	$user = $controller->getUserFromSession();

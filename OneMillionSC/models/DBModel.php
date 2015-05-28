@@ -61,6 +61,8 @@ class DBModel {
 			$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
 			$conn->close ();
 			return $currUser;
+		} else {
+			return null;
 		}
 	}
 	function searchByNameAndCoords($name, $lat, $lng, $ray) {

@@ -52,12 +52,14 @@ class Controller {
 				$user->longitude = $_SESSION ["longitude"];
 				$user->description = $_SESSION ["aboutme"];
 			} else {
-				$isRegistered = $this->isUserRegistered($user->socialId);
-				if ($isRegistered) {
-					$currentUser = $controller->search($user->socialId);
-					$user->latitude = $currentUser->latitude;
-					$user->longitude = $currentUser->longitude;
-					$user->description = $currentUser->aboutme;
+				$registeredUser = $this->search($user->socialId);
+				if ($registeredUser != null) {
+					$user->latitude = $registeredUser->latitude;
+					$user->longitude = $registeredUser->longitude;
+					$user->description = $registeredUser->aboutme;
+					$_SESSION ["latitude"] = $user->latitude;
+					$_SESSION ["longitude"] = $user->longitude;
+					$_SESSION ["aboutme"] = $user->description;
 				}
 			}
 			return $user;
@@ -73,8 +75,8 @@ class Controller {
 					$model = new PLModel ();
 					break;
 			}
-			$socialUser = $model->getUser();
-			if ($socialUser->socialId !== null) {
+			$user = $model->getUser();
+			if ($user->socialId !== null) {
 				$user = DBUser::createDBUser($socialUser);
 				$user->socialNetwork = $socialNetwork;
 				$_SESSION ["id"] = $user->socialId;
@@ -83,12 +85,14 @@ class Controller {
 				$_SESSION ["avatarUrl"] = $user->avatarUrl;
 				$_SESSION ["socialPageUrl"] = $user->socialPageUrl;
 				$_SESSION ["isLogged"] = true;
-				$isRegistered = $this->isUserRegistered($user->socialId);
-				if ($isRegistered) {
-					$currentUser = $controller->search($user->socialId);
-					$user->latitude = $currentUser->latitude;
-					$user->longitude = $currentUser->longitude;
-					$user->description = $currentUser->aboutme;
+				$registeredUser = $this->search($user->socialId);
+				if ($registeredUser != null) {
+					$user->latitude = $registeredUser->latitude;
+					$user->longitude = $registeredUser->longitude;
+					$user->description = $registeredUser->aboutme;
+					$_SESSION ["latitude"] = $user->latitude;
+					$_SESSION ["longitude"] = $user->longitude;
+					$_SESSION ["aboutme"] = $user->description;
 				}
 			}
 			return $user;
@@ -134,7 +138,7 @@ class Controller {
 		$socialNetwork = $_SESSION["sn"];
 		$avatarUrl = $_SESSION["avatarUrl"];
 		$socialPageUrl = $_SESSION["socialPageUrl"];
-		$user = new DBUser($socialId, $name, $mail, "", "", "", $socialPageUrl, $avatarUrl, "", $socialNetwork);
+		$user = new DBUser($socialId, $name, $mail, null, null, null, $socialPageUrl, $avatarUrl, null, $socialNetwork);
 		return $user;
 	}
 	
