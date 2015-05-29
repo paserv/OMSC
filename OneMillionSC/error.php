@@ -33,27 +33,26 @@
 			#FB Error#
 	
 			#TW Error#
+	
+			#PayPal Error
+			700 => array('User Not Approval...', 'public/img/login_ico.png'),
 	);
 	
-// 	if(isset($_SESSION ["error_code"]) && $_SESSION ["error_code"] !== false){
+	$publicMessage = "No Error to display";
+	$icon = "public/img/login_ico.png";
 	if($excep->error_code){
-// 		$error_code = $_SESSION ['error_code'];
-		$message = $codes[$error_code][0];
-// 		$private_err_msg = "";
-// 		if (isset ($_SESSION ["error_private_msg"]) ) {
-// 			$private_err_msg = $_SESSION ["error_private_msg"];
-// 		}
-		$icon = $codes[$error_code][1];
-		if ($message != false) {
-			echo '<br><br><br><br><div style="margin-left:30px; align=center"><div><img src="' . $icon . '">' . $message . '</div><div>' . $excep->private_message . '</div></div>';
-			//TODO log into DB
-			//TODO send mail
+		$publicMessage = "Error Code Not Found";
+		if (in_array($excep->error_code, $codes)) {
+			$publicMessage = $codes[$excep->error_code][0];
+			$icon = $codes[$excep->error_code][1];
+			echo '<br><br><br><br><div style="margin-left:30px; align=center"><div><img src="' . $icon . '">' . $publicMessage . '</div><div>' . $excep->private_message . '</div></div>';
 		} else {
-			echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="public/img/login_ico.png">Error Code not found</div>';
+			echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="' . $icon . '">' . $publicMessage . '</div>';
 		}
-		
+		//TODO log private message into DB
+		//TODO send mail
 	} else {
-		echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="public/img/login_ico.png">No Error to display</div>';
+		echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="' . $icon . '">' . $publicMessage . '</div>';
 	}
 	?>	
 </div>

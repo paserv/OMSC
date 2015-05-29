@@ -13,8 +13,15 @@
 	 * If it comes from paypal store page
 	 */
 	if (isset ( $_GET ['success'] ) && $_GET ['success'] == 'true') {
-		$controller->executePayment($_GET ['paymentId'], $_GET ['PayerID']);
+		try {
+			$controller->register($user, $_GET ['paymentId'], $_GET ['PayerID']);
+		} catch (Exception $ex) {
+			$excep->setError($ex->getCode(), $ex->getMessage());
+		}
 	} elseif (isset ( $_GET ['success'] ) && $_GET ['success'] == 'false') {
+		$_SESSION["latitude"] = null;
+		$_SESSION["longitude"] = null;
+		$_SESSION["aboutme"] = null;
 		$excep->setError(700, "User Cancelled the Approval");
 	} else {
 		/**
@@ -37,7 +44,7 @@
 			} else if (isset($_POST['modify_button'])) {
 				$controller->update($user);
 			} else if (isset($_POST['register_button'])){
-				$controller->register($user);
+				$controller->redirectToPaypal();
 			} else if (isset($_POST['logout_button'])){
 				$controller->logout();
 				$user->latitude = "";
@@ -79,7 +86,6 @@
 	Operation Success!
 	<div><a href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>">Come Back Home</a></div>
 	</div>
-	<?php } ?>
-<?php include 'footer.php'; ?>
+<?php } include 'footer.php'; ?>
 </body>
 </html>

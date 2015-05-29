@@ -17,23 +17,14 @@ var coordinate = false;
 	autoload();
 	
 	$controller = new Controller ();
+	$controller->setSocialLogRequest();
+	
 	$excep = new CustomException();
-	
-	if(isset($_REQUEST['sn'])){
-		if ($_SESSION['sn'] !== $_REQUEST['sn']) {
-			$controller->logout();
-		}
-		$_SESSION['sn'] = $_REQUEST['sn'];
-	}
-	
-	if (!isset($_SESSION ["sn"])) {
-		die("<script>location.href = 'index.php'</script>");
-	}
 	
 	try {
 		$currentUser = $controller->getUser ( $_SESSION ["sn"] );
-		if ($currentUser->socialId !== null) {
-			if ($currentUser->latitude != null && $currentUser->longitude != null) {
+		if ($currentUser->isLogged()) {
+			if ($currentUser->isRegistered()) {
 				?>
 					coordinate = {
 		    			coords: {
@@ -49,7 +40,7 @@ var coordinate = false;
 				$loginUrl = $currentUser->loginUrl;
 				}
 		} catch (Exception $se) {
-			$excep->setError(700, "User Cancelled the Approval");
+			$excep->setError(700, "Write here");
 		}
 	?>
 </script>
@@ -60,51 +51,55 @@ var coordinate = false;
 
 	<div id="headerseparator"></div>
 	<div class="corpo">
-		<div class="wrap">
-		<?php if ($currentUser->socialId !== null ) { ?>
-		<form name="coordinateForm" action="operation.php" method="post">
-			<div class="left_col">
-				<div><img src="<?php echo $currentUser->avatarUrl; ?>" /></div>
-				<div class="label">Name</div>
-				<div><?php echo $currentUser->name; ?></div>
-				<div class="label">Email</div>
-				<div><?php echo $currentUser->email; ?></div>
-				<div class="label">My Coordinates</div>
-				<div><b>Latitude</b></div>
-				<div><input type="text" name="latitude" id="latitude"/></div>
-				<div><b>Longitude</b></div>
-				<div><input type="text" name="longitude" id="longitude"/></div>
-				<div class="label">Something about me</div>
-				<?php 
-				if ($currentUser->description != null) {
-				?>
-				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ><?php echo $currentUser->description; ?></textarea></div>
-				<div><input type="submit" name="modify_button" value="Modify"/></div>
-				<div><input type="submit" name="delete_button" value="Delete"/></div>
-				<!-- <div><input type="submit" name="logout_button" value="Logout"/></div> -->
-					<?php	
-				} else {
-				?>
-				<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
-				<input type="submit" name="register_button" value="Register"/>
-				<a href="<?php echo $paypal_url ?>">Pay with PayPal</a>
-				<?php } ?>
-			</div>
-			<div class="right_col">
-				<div class="label">Search Coordinates by Address</div>
-				<div><input type="text" id="address" /></div>
-				<div class="label">Pick Your Address</div>
-	        	<div id="map" style="width: 100%; height: 380px;"></div>
-	    	</div>
-			</form>
-			<?php } else if ($loginUrl !== null) { ?>
-				<div><a href="<?php echo $loginUrl; ?>">Login</a></div>
-				<?php } else { ?>
-				<div>Something Wrong</div>
-				<?php } ?>
-		</div>
+	<?php
+		if ($excep->existProblem) {
+			include 'error.php';
+		} else {
+	?>
+				<div class="wrap">
+				<?php if ($currentUser->isLogged()) { ?>
+				<form name="coordinateForm" action="operation.php" method="post">
+					<div class="left_col">
+						<div><img src="<?php echo $currentUser->avatarUrl; ?>" /></div>
+						<div class="label">Name</div>
+						<div><?php echo $currentUser->name; ?></div>
+						<div class="label">Email</div>
+						<div><?php echo $currentUser->email; ?></div>
+						<div class="label">My Coordinates</div>
+						<div><b>Latitude</b></div>
+						<div><input type="text" name="latitude" id="latitude"/></div>
+						<div><b>Longitude</b></div>
+						<div><input type="text" name="longitude" id="longitude"/></div>
+						<div class="label">Something about me</div>
+						<?php 
+							if ($currentUser->isRegistered()) {
+							?>
+							<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ><?php echo $currentUser->description; ?></textarea></div>
+							<div><input type="submit" name="modify_button" value="Modify"/></div>
+							<div><input type="submit" name="delete_button" value="Delete"/></div>
+								<?php	
+							} else {
+							?>
+							<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
+							<input type="submit" name="register_button" value="Register"/>
+							<?php } ?>
+						<div><input type="submit" name="logout_button" value="Logout"/></div>
+					</div>
+					<div class="right_col">
+						<div class="label">Search Coordinates by Address</div>
+						<div><input type="text" id="address" /></div>
+						<div class="label">Pick Your Address</div>
+			        	<div id="map" style="width: 100%; height: 380px;"></div>
+			    	</div>
+					</form>
+					<?php } else if ($loginUrl !== null) { ?>
+						<div><a href="<?php echo $loginUrl; ?>">Login</a></div>
+						<?php } else { ?>
+						<div>Something Wrong</div>
+						<?php } ?>
+				</div>
 	</div>
-<?php include 'footer.php'; ?>
+<?php } include 'footer.php'; ?>
 <script type="text/javascript" src="public/js/location_choose.js"></script>
 </body>
 </html>

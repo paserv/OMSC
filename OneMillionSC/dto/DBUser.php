@@ -26,6 +26,11 @@ class DBUser extends SocialUser {
 		return new DBUser($socialUser->socialId, $socialUser->name, $socialUser->email, null, null, null, $socialUser->socialPageUrl, $socialUser->avatarUrl, null, null);
 	}
 	
+	function isRegistered() {
+		if ($this->latitude != null && $this->longitude != null) return true;
+		return false;
+	}
+	
 	function stringify() {
 		echo "Social ID: " . $this->socialId ."<br>" . 
 		"Name: " . $this->name ."<br>" .

@@ -17,6 +17,11 @@ class SocialUser {
 		$this->socialNetwork = $socialNetwork;
 	}
 	
+	function isLogged() {
+		if ($this->socialId != null) return true;
+		return false;
+	}
+	
 	static function createLoginUrl($loginUrl) {
 		$user = new SocialUser(null, null, null, null, null, null);
 		$user->loginUrl = $loginUrl;
