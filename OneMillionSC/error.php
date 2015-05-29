@@ -35,14 +35,14 @@
 			#TW Error#
 	
 			#PayPal Error
-			700 => array('User Not Approval...', 'public/img/login_ico.png'),
+			701 => array('User Not Approval...', 'public/img/login_ico.png'),
 	);
 	
 	$publicMessage = "No Error to display";
 	$icon = "public/img/login_ico.png";
 	if($excep->error_code){
 		$publicMessage = "Error Code Not Found";
-		if (in_array($excep->error_code, $codes)) {
+		if (array_key_exists($excep->error_code, $codes)) {
 			$publicMessage = $codes[$excep->error_code][0];
 			$icon = $codes[$excep->error_code][1];
 			echo '<br><br><br><br><div style="margin-left:30px; align=center"><div><img src="' . $icon . '">' . $publicMessage . '</div><div>' . $excep->private_message . '</div></div>';

@@ -18,7 +18,7 @@ define ('FB_REQUIRED_SCOPE', 'public_profile,email');
 #PLUS CONFIG#
 define ('PL_CLIENT_ID', '217190497352-m61b2h642osrunjqbfhv7tsl3h7p697u.apps.googleusercontent.com');
 define ('PL_CLIENT_SECRET', 'TBKtpO4s1mNBDsUUwa-O0oKd');
-define ('PL_REDIRECT_URL', 'http://localhost/OMSC/OneMillionSC/account.php');
+define ('PL_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/account.php');
 define ('PL_REQUIRED_SCOPE1', 'https://www.googleapis.com/auth/userinfo.profile');
 define ('PL_REQUIRED_SCOPE2', 'https://www.googleapis.com/auth/userinfo.email');
 define ('PL_ID', 'PL');
