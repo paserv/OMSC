@@ -93,8 +93,10 @@ var coordinate = false;
 			    	</div>
 					</form>
 					<?php } else if ($loginUrl !== null) { ?>
-						<div><img src="public/img/login_ico.png"></div>
-						<div><a href="<?php echo $loginUrl; ?>"><img src="public/img/login_<?php echo $_SESSION ["sn"]; ?>.png"></a></div>
+						<div style="width:100%; text-align: center;">
+							<div><img src="public/img/login_ico.png"></div>
+							<div><a href="<?php echo $loginUrl; ?>"><img src="public/img/login_<?php echo $_SESSION ["sn"]; ?>.png"></a></div>
+						</div>
 						<?php } else { ?>
 						<div>Something Wrong</div>
 						<?php } ?>

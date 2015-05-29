@@ -98,16 +98,29 @@ class DBModel {
 		}
 		$conn->close ();
 	}
+	function addUsers($num) {
+		$result = $this->countUsers();
+		$result = $result + $num;
+		$conn = $this->getConnection ();
+		$sql = "UPDATE members SET total = '$result' WHERE 1";
+		if ($conn->query ( $sql ) === FALSE) {
+			$error = $conn->error;
+			$conn->close ();
+			throw new Exception ( "Error insert user " . $dbData->socialId, 207 );
+		}
+		return $result;
+		$conn->close ();
+	}
 	function countUsers() {
 		$result = 0;
 		$conn = $this->getConnection ();
-		$sql = "SELECT COUNT(socialId) as total_users FROM user WHERE 1";
+		$sql = "SELECT total FROM members";
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception ( "Select count error", 210 );
+			throw new Exception ( "Write Here", 210 );
 		} else if ($result->num_rows == 1) {
 			$row = $result->fetch_assoc();
-			$result = $row["total_users"];
+			$result = $row["total"];
 		}
 		$conn->close ();
 		return $result;

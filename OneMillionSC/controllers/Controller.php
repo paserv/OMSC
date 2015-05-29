@@ -84,6 +84,7 @@ class Controller {
 		$_SESSION ["socialPageUrl"] = null;
 		$_SESSION ["sn"] = null;
 		$_SESSION ["isLogged"] = null;
+// 		$_SESSION ["total_users"] = null;
 	}
 	
 	function register(DBUser $dbData, $paymentId, $payerID) {
@@ -105,6 +106,7 @@ class Controller {
 			//$this->deleteUserFromFusionTable($dbData);
 			throw new Exception($e->getMessage(), 300);
 		}
+		$this->incrementMembers();
 	}
 	
 	function delete(DBUser $dbData) {
@@ -116,6 +118,7 @@ class Controller {
 			$this->registerUserIntoDB($dbData);
 			throw new Exception($e->getMessage(), 301);
 		}
+		$this->decrementMembers();
 	}
 	
 	function update(DBUser $dbData) {
@@ -182,6 +185,24 @@ class Controller {
 	/**
 	 * DB CONTROLS
 	 */
+
+	function incrementMembers() {
+		$model = new DBModel ();
+		$total_users = $model->addUsers(1);
+		$_SESSION ["total_users"] = $total_users;
+	}
+	
+	function decrementMembers() {
+		$model = new DBModel ();
+		$total_users = $model->addUsers(-1);
+		$_SESSION ["total_users"] = $total_users;
+	}
+	
+	function countMembers() {
+		$model = new DBModel ();
+		$total_users = $model->countUsers();
+		$_SESSION ["total_users"] = $total_users;
+	}
 	
 	function registerUserIntoDB(DBUser $dbData) {
 		$model = new DBModel ();

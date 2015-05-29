@@ -26,7 +26,7 @@ html,body {
 	width: 100%;
 	position: fixed;
 	top: 7%;
-	height: 90%;
+	height: 87%;
 }
 
 #footer {
@@ -177,4 +177,22 @@ html,body {
 
 .gmnoprint img {
 	max-width: none;
+}
+
+#footer .wrap {
+    width: 100%;
+    padding: 0px;
+}
+
+#footer .left_col {
+    float: left;
+    width: 45%;
+    margin-top: 5px;
+    text-align: left;
+}
+
+#footer .right_col {
+    float: right;
+    width: 45%;
+    margin-top: 15px;
 }

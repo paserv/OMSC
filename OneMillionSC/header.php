@@ -2,7 +2,14 @@
 	<div class="menuButton"><a href="index.php"><img src="public/img/home.png"></a></div>
 	<div class="menuButton" id="searchPerBtn"><a><img src="public/img/searchPerson.png"></a></div>
 	<div class="menuButton" id="joinus"><a><img src="public/img/joinus.png"></a></div>
-
+	<?php 
+	if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) {
+		echo "<div>" . $_SESSION ["name"] . "<a><img style='border:2px solid white;' src=" . $_SESSION ["avatarUrl"] . "></a><img src='public/img/row.png'></div>";
+	} else {
+		echo "<div><a><img src='public/img/anonym_user.png'></a></div>";
+	}
+	?>
+	
 </div>
 <div id="inputSearchPer">
 	<p>Find people</p>

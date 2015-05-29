@@ -29,6 +29,8 @@ $( "#searchPlText" ).keypress(function(e) {
 });
 </script>
 <?php
+require_once 'autoload.php';
+autoload ();
 if (! empty ( $_GET['latitude'] ) && ! empty ( $_GET['longitude'] )) {
 	?>
 	<script type="text/javascript">var latitude = <?php echo $_GET['latitude']; ?>;</script>

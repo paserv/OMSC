@@ -20,13 +20,20 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 ALTER TABLE `user`
- ADD PRIMARY KEY (`socialId`), ADD KEY `latitude` (`lat`), ADD KEY `longitude` (`lng`);
+ ADD PRIMARY KEY (`socialId`,`socialNetwork`), ADD KEY `latitude` (`lat`), ADD KEY `longitude` (`lng`);
 
 ALTER TABLE `user`
  ADD FULLTEXT KEY `description` (`description`);
  
 ALTER TABLE `user`
  ADD FULLTEXT KEY `name` (`name`);
+
+CREATE TABLE IF NOT EXISTS `members` (
+  `total` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `members` (`total`) VALUES
+(999999);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
