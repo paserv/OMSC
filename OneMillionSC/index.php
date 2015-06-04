@@ -52,7 +52,7 @@ if(isset($_GET['searchPerson'])){
 
 include 'header.php';
 ?>
-		<div id="map-canvas" class="corpo"></div>
+		<div id="map-canvas"></div>
 <?php include 'footer.php'; ?>
 
 </body>

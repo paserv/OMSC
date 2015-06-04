@@ -5,41 +5,37 @@ html,body {
 	background: ##EFF5FB;
 }
 
+
+
 #header {
 	width: 100%;
 	position: fixed;
-	height: 7%;
 	min-height: 60px;
 	max-height: 100px;
 	background-color: #3F61BE;
 	z-index: 1;
-	padding-left: 10px;
+	height: 80px;
 }
 
-#headerseparator {
-	min-height: 7%;
-	min-height: 60px;
-	max-height: 80px;
+#header .wrap {
+    width: 100%;
 }
 
-.corpo {
-	width: 100%;
-	position: fixed;
-	top: 7%;
-	height: 87%;
+#header .left_col {
+    float: left;
+    width: 45%;
+    text-align: left;
 }
 
-#footer {
-	width: 100%;
-	position: fixed;
-	top: 94%;
-	height: 6%;
-	background-color: #3F61BE;
-	padding: 3px;
-	text-align: right;
-	font-family: sans-serif;
-	font-style: italic;
-	color: #ECECEC;
+#header .right_col {
+    float: right;
+    width: 45%;
+    text-align: right;
+    margin-top: 15px;
+    margin-right: 25px;
+    font-family: sans-serif;
+    font-style: italic;
+    color: #ECECEC;
 }
 
 #header .textusers {
@@ -76,7 +72,7 @@ html,body {
 }
 
 #inputSearchPl {
-	top: 80px;
+	top: 85px;
 	width: 100%;
 	text-align: right;
 	position: fixed;
@@ -121,62 +117,66 @@ html,body {
 	margin-top: 5px;
 }
 
-.wrap {
+
+#corpo {
+    width: 100%;
+    position: fixed;
+    top: 80px;
+    height: 87%;
+}
+
+#corpo .wrap {
 	width: 80%;
 	padding: 40px 20px 0px 20px;
 }
 
-.wrap div {
+#corpo .wrap div {
 	margin-top: 3px;
 }
 
-.left_col {
+#corpo .left_col {
 	float: left;
 	width: 35%;
 }
 
-.right_col {
+#corpo .right_col {
 	float: right;
 	width: 50%;
 }
 
-.left_col textarea {
+#corpo .left_col textarea {
 	width: 100%;
 	resize: none;
 }
 
-.left_col input {
+#corpo .left_col input {
 	width: 100%;
 }
 
-.right_col input {
+#corpo .right_col input {
 	width: 100%;
 }
 
-.label {
+#corpo .label {
 	font-weight: bold;
 	margin-top: 5px;
 }
 
-.searchresult {
-	margin-top: 10px;
-	border-bottom-style: dotted;
-	border-bottom-color: #3F61BE;
-}
 
-#map-canvas {
-	width: auto;
-	position: fixed;
-	top: 7%;
-	height: 90%;
-}
 
-#map-canvas img {
-	max-width: none
-}
 
-.gmnoprint img {
-	max-width: none;
+
+#footer {
+    width: 100%;
+    position: fixed;
+    top: 94%;
+    height: 50px;
+    background-color: #3F61BE;
+    padding: 3px;
+    text-align: right;
+    font-family: sans-serif;
+    font-style: italic;
+    color: #ECECEC;
 }
 
 #footer .wrap {
@@ -195,4 +195,32 @@ html,body {
     float: right;
     width: 45%;
     margin-top: 15px;
+}
+
+
+
+
+
+
+
+
+.searchresult {
+    margin-top: 10px;
+    border-bottom-style: dotted;
+    border-bottom-color: #3F61BE;
+}
+
+#map-canvas {
+    width: 100%;
+    position: fixed;
+    top: 80px;
+    height: 87%;
+}
+
+#map-canvas img {
+	max-width: none
+}
+
+.gmnoprint img {
+	max-width: none;
 }

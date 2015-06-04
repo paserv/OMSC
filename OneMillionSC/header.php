@@ -1,14 +1,20 @@
 <div id="header">
-	<div class="menuButton"><a href="index.php"><img src="public/img/home.png"></a></div>
-	<div class="menuButton" id="searchPerBtn"><a><img src="public/img/searchPerson.png"></a></div>
-	<div class="menuButton" id="joinus"><a><img src="public/img/joinus.png"></a></div>
-	<?php 
-	if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) {
-		echo "<div>" . $_SESSION ["name"] . "<a><img style='border:2px solid white;' src=" . $_SESSION ["avatarUrl"] . "></a><img src='public/img/row.png'></div>";
-	} else {
-		echo "<div><a><img src='public/img/anonym_user.png'></a></div>";
-	}
-	?>
+	<div class="wrap">
+		<div class="left_col">
+			<div class="menuButton"><a href="index.php"><img src="public/img/home.png"></a></div>
+			<div class="menuButton" id="searchPerBtn"><a><img src="public/img/searchPerson.png"></a></div>
+			<div class="menuButton" id="joinus"><a><img src="public/img/joinus.png"></a></div>
+		</div>
+		<div class="right_col">
+			<?php 
+			if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) {
+				echo $_SESSION ["name"] . "&nbsp<img style='border:2px solid white;vertical-align:middle' src=" . $_SESSION ["avatarUrl"] . "><img style='vertical-align:bottom' src='public/img/row.png'>";
+			} else {
+				echo "<img src='public/img/anonym_user.png'><img style='vertical-align:bottom' src='public/img/row.png'>";
+			}
+			?>
+		</div>
+	</div>
 	
 </div>
 <div id="inputSearchPer">

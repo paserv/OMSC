@@ -73,7 +73,7 @@
 	<div id="headerseparator"></div>
 	<br>
 	<br>
-	<div class="corpo">
+	<div id="corpo">
 	<br>
 	<br>
 	<br>

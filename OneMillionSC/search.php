@@ -15,7 +15,11 @@
 <script type="text/javascript">
 var markers = [];
 <?php
-$_SESSION ["error_code"] = false;
+require_once 'autoload.php';
+autoload();
+
+$excep = new CustomException();
+
 if (isset ( $_SESSION ["numSearch"] )) {
 	$_SESSION ["numSearch"] = $_SESSION ["numSearch"] + 1;
 } else {
@@ -23,9 +27,7 @@ if (isset ( $_SESSION ["numSearch"] )) {
 	$numSearch = $_SESSION ["numSearch"];
 }
 
-require_once 'autoload.php';
-autoload ();
-if ($_SESSION ["isRegistered"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
+if ($_SESSION ["latitude"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
 	
 	$controller = new Controller ();
 	
@@ -39,14 +41,14 @@ if ($_SESSION ["isRegistered"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
 		else if ( isset ($_GET ['lat']) && $_GET ['lat'] != '' && isset($_GET ['lng']) && $_GET ['lng'] != '' && isset($_GET ['ray']) && $_GET ['ray'] != '') {
 			$results = $controller->searchByCoords ( $_GET ['lat'], $_GET ['lng'], $_GET ['ray'], $_GET ['ray'] );
 		} else {
-			$_SESSION ["error_code"] = 102;
+			$excep->setError(700, "Write here");
 			}
 		
 		} catch ( Exception $ex ) {
-			$_SESSION ["error_code"] = $ex->getCode ();
+			$excep->setError(700, "Write here");
 		}
 		
-	if (!$_SESSION ["error_code"]) {
+	if (!$excep->existProblem) {
 		if ($results !== null) {
 			foreach ( $results as $currUser ) {
 		?>
@@ -65,11 +67,11 @@ if ($_SESSION ["isRegistered"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
 	    <?php
 				}
 			} else {
-				$_SESSION ["error_code"] = 100;
+				$excep->setError(700, "Write here");
 			}
 	}
 } else {
-		$_SESSION ["error_code"] = 101;
+		$excep->setError(700, "Write here");
 	}
 ?>
 </script>
@@ -79,14 +81,10 @@ if ($_SESSION ["isRegistered"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
 <div id="headerseparator"></div>
  -->
 <?php
-if ($_SESSION ["error_code"]) {
+if ($excep->existProblem) {
 	include 'error.php';
-} else {
-	?>
+} else { ?>
 	<div id="map-canvas"></div>
-<?php
-}
-include 'footer.php';
-?>
+<?php } include 'footer.php'; ?>
 </body>
 </html>

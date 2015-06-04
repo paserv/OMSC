@@ -49,13 +49,11 @@ var coordinate = false;
 
 <?php include 'header.php'; ?>
 
-	<div id="headerseparator"></div>
-	<div class="corpo">
+	<div id="corpo">
 	<?php
 		if ($excep->existProblem) {
 			include 'error.php';
-		} else {
-	?>
+		} else { ?>
 				<div class="wrap">
 				<?php if ($currentUser->isLogged()) { ?>
 				<form name="coordinateForm" action="operation.php" method="post">
