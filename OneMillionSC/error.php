@@ -36,6 +36,10 @@
 	
 			#PayPal Error
 			701 => array('User Not Approval...', 'public/img/login_ico.png'),
+			
+			#SEARCH ERROR
+			700 => array('ASSA', 'public/img/login_ico.png'),
+			702 => array('NOT FOUND', 'public/img/login_ico.png'),
 	);
 	
 	$publicMessage = "No Error to display";

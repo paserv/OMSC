@@ -76,6 +76,13 @@ class Controller {
 		return $user;
 	}
 	
+	function isUserLoggedAndRegistered() {
+		if ($_SESSION ["latitude"] && $_SESSION ["longitude"] && $_SESSION ["aboutme"]) {
+			return true;
+		}
+		return false;
+	}
+	
 	function logout() {
 		$_SESSION ["id"] = null;
 		$_SESSION ["name"] =null;
@@ -84,7 +91,9 @@ class Controller {
 		$_SESSION ["socialPageUrl"] = null;
 		$_SESSION ["sn"] = null;
 		$_SESSION ["isLogged"] = null;
-// 		$_SESSION ["total_users"] = null;
+		$_SESSION ["latitude"] = null;
+		$_SESSION ["longitude"] = null;
+		$_SESSION ["aboutme"] = null;
 	}
 	
 	function register(DBUser $dbData, $paymentId, $payerID) {
@@ -99,12 +108,14 @@ class Controller {
 			$this->deleteUserFromDB($dbData);
 			throw new Exception($e->getMessage(), 300);
 		}
-		try {
-			$this->executePayment($paymentId, $payerID);
-		}  catch ( Exception $e ) {
-			$this->deleteUserFromDB($dbData);
-			//$this->deleteUserFromFusionTable($dbData);
-			throw new Exception($e->getMessage(), 300);
+		if (IS_PAYPAL_ENABLED) {
+			try {
+				$this->executePayment($paymentId, $payerID);
+			}  catch ( Exception $e ) {
+				$this->deleteUserFromDB($dbData);
+				//$this->deleteUserFromFusionTable($dbData);
+				throw new Exception($e->getMessage(), 300);
+			}
 		}
 		$this->incrementMembers();
 	}

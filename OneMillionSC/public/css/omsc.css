@@ -36,7 +36,14 @@ html,body {
     font-family: sans-serif;
     font-style: italic;
     color: #ECECEC;
+    display:inline-block; 
 }
+
+
+#header .right_col div {
+    display:inline-block; 
+}
+
 
 #header .textusers {
 	width: 98%;
@@ -117,6 +124,22 @@ html,body {
 	margin-top: 5px;
 }
 
+#userMenu {
+    background-color: #FFFFFF;
+    border: 1px solid gray;
+    text-align: center;
+    width: 200px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    color: navy;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#userMenu p {
+    margin-top: 10px;
+}
 
 #corpo {
     width: 100%;
@@ -223,4 +246,11 @@ html,body {
 
 .gmnoprint img {
 	max-width: none;
+}
+
+a:-webkit-any-link{
+    text-decoration:none !important;
+    font-family: sans-serif;
+    font-style: italic;
+    color: navy;
 }

@@ -17,7 +17,7 @@ var markers = [];
 <?php
 require_once 'autoload.php';
 autoload();
-
+$controller = new Controller ();
 $excep = new CustomException();
 
 if (isset ( $_SESSION ["numSearch"] )) {
@@ -27,9 +27,7 @@ if (isset ( $_SESSION ["numSearch"] )) {
 	$numSearch = $_SESSION ["numSearch"];
 }
 
-if ($_SESSION ["latitude"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
-	
-	$controller = new Controller ();
+if ($controller->isUserLoggedAndRegistered() || $_SESSION ["numSearch"] <= MAX_SEARCH) {
 	
 	try {
 	
@@ -67,7 +65,7 @@ if ($_SESSION ["latitude"] || $_SESSION ["numSearch"] <= MAX_SEARCH) {
 	    <?php
 				}
 			} else {
-				$excep->setError(700, "Write here");
+				$excep->setError(702, "Write here");
 			}
 	}
 } else {

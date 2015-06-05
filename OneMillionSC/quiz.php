@@ -24,8 +24,19 @@ $excep = new CustomException();
 		<?php
 		if ($excep->existProblem) {
 			include 'error.php';
-		} else { ?>
-			<div>Content Here</div>
+		} elseif (isset ( $_REQUEST ['solution'] ) && $_REQUEST ['solution'] == QUIZ_SOLUTION) {
+			$_SESSION["okquiz"] = QUIZ_SOLUTION;
+		?>
+		<div>Get Your Placemark for Free</div>
+		<div>Sign in with: </div>
+		<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>
+		<a href="account.php?sn=TW"><img src="public/img/twitter.png"></a>
+		<a href="account.php?sn=PL"><img src="public/img/gplus.png"></a>
+		<?php } else { ?>
+			<form name="coordinateForm" action="quiz.php" method="post">
+				<input type="text" name="solution" id="solution"/>
+				<input type="submit" name="solution_button" value="solution"/>
+			</form>
 	</div>
 <?php } include 'footer.php'; ?>
 </body>
