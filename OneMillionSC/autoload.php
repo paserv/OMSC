@@ -77,8 +77,10 @@ function DummyModel_autoload() {
 
 function DBUser_autoload() {
 	$dirs = getDirs();
-	$file = $dirs['dto'] . 'SocialUser.php';
-	require_once($file);
+	$file1 = $dirs['dto'] . 'SocialUser.php';
+	$file2 = $dirs['dto'] . 'QuizDTO.php';
+	$dep_array = array($file1, $file2);
+	require_array($dep_array);
 }
 
 function require_array($dep_array) {

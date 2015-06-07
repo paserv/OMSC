@@ -33,7 +33,18 @@ CREATE TABLE IF NOT EXISTS `members` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `members` (`total`) VALUES
-(999999);
+(0);
+
+CREATE TABLE IF NOT EXISTS `quiz` (
+  `id` int(11) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `threshold` int(11) NOT NULL,
+  `counter` int(11) NOT NULL,
+  `solution` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `quiz`
+  ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

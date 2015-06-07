@@ -49,5 +49,5 @@ define ('PP_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/operation.php
 define ('MAX_SEARCH', '3');
 define ('IS_PAYPAL_ENABLED', true);
 define ('IS_QUIZ_ENABLED', true);
-define ('QUIZ_SOLUTION', 'assa');
+define ('QUIZ_ID', 1);
 ?>

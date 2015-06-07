@@ -44,11 +44,13 @@
 			} else if (isset($_REQUEST['modify_button'])) {
 				$controller->update($user);
 			} else if (isset($_REQUEST['register_button'])){
-				if (IS_PAYPAL_ENABLED && $_SESSION["okquiz"] != QUIZ_SOLUTION) {
-					$_SESSION["okquiz"] = null;
-					$controller->redirectToPaypal();
+				if (!IS_PAYPAL_ENABLED) {
+					$controller->registerFree($user);
+				} elseif ($_SESSION["okquiz"] === true) {
+					$_SESSION["okquiz"] = false;
+					$controller->registerQuiz($user);
 				} else {
-					$controller->register($user, 'fake', 'fake');
+					$controller->redirectToPaypal();
 				}
 			} else if (isset($_REQUEST['logout_button'])){
 				$controller->logout();

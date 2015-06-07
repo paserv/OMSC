@@ -96,6 +96,14 @@ class Controller {
 		$_SESSION ["aboutme"] = null;
 	}
 	
+	function registerFree(DBUser $dbData) {
+		$this->register($dbData, 'fake', 'fake');
+	}
+	function registerQuiz(DBUser $dbData) {
+		$this->register($dbData, 'fake', 'fake');
+		$model = new DBModel();
+		$model->incrementQuizCounter(QUIZ_ID);
+	}
 	function register(DBUser $dbData, $paymentId, $payerID) {
 		try {
 			$this->registerUserIntoDB ( $dbData );
@@ -147,6 +155,21 @@ class Controller {
 	
 	}
 	
+	function checkQuizSolution($quizId, $givenSolution) {
+		$model = new DBModel();
+		$result = $model->getQuizData($quizId);
+		if ($result->solution === $givenSolution) {
+			if ($result->counter < $result->threshold) {
+				$_SESSION["okquiz"] = true;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	/*DELETE*/
 	function setSocialLogRequest () {
 		if(isset($_REQUEST['sn'])){
 			if ($_SESSION['sn'] !== $_REQUEST['sn']) {

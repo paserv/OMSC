@@ -16,6 +16,8 @@ require_once 'autoload.php';
 autoload();
 $controller = new Controller ();
 $excep = new CustomException();
+
+$_SESSION["okquiz"] = false;
 ?>
 
 <body>
@@ -24,8 +26,7 @@ $excep = new CustomException();
 		<?php
 		if ($excep->existProblem) {
 			include 'error.php';
-		} elseif (isset ( $_REQUEST ['solution'] ) && $_REQUEST ['solution'] == QUIZ_SOLUTION) {
-			$_SESSION["okquiz"] = QUIZ_SOLUTION;
+		} elseif (isset ( $_REQUEST ['solution'] ) && $controller->checkQuizSolution(QUIZ_ID, $_REQUEST ['solution'])) {
 		?>
 		<div>Get Your Placemark for Free</div>
 		<div>Sign in with: </div>

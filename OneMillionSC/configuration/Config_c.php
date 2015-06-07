@@ -44,5 +44,5 @@ define ('FUSION_TABLE_ID5', '');
 define ('MAX_SEARCH', '3');
 define ('IS_PAYPAL_ENABLED', true);
 define ('IS_QUIZ_ENABLED', false);
-define ('QUIZ_SOLUTION', 'assa');
+define ('QUIZ_ID', 1);
 ?>

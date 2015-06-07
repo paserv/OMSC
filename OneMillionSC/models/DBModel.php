@@ -10,6 +10,36 @@ class DBModel {
 		}
 		return $conn;
 	}
+	function getQuizData($quizId) {
+		$conn = $this->getConnection();
+		$sql = "SELECT * FROM quiz WHERE quiz.id = " . $quizId;
+		$result = $conn->query ( $sql );
+		if (!$result) {
+			$conn->close ();
+			throw new Exception("Impossible search by Quiz ID " . $quizId, 204);
+		} else if ($result->num_rows > 0) {
+			$row = $result->fetch_assoc();
+			$quiz = new QuizDTO($row["id"], $row["name"], $row["threshold"], $row["counter"], $row["solution"]);
+			$conn->close ();
+			return $quiz;
+		} else {
+			$conn->close ();
+			return null;
+		}
+	}
+	function incrementQuizCounter($quizId) {
+		$result = $this->getQuizData($quizId);
+		$counter = $result->counter;
+		$counter = $counter + 1;
+		$conn = $this->getConnection ();
+		$sql = "UPDATE quiz SET counter = '$counter' WHERE 1";
+		if ($conn->query ( $sql ) === FALSE) {
+			$error = $conn->error;
+			$conn->close ();
+			throw new Exception ( "Error insert user ", 207 );
+		}
+		$conn->close ();
+	}
 	function deleteUser($idUser) {
 		$conn = $this->getConnection ();
 		$sql = "DELETE FROM user WHERE user.socialId like " . $idUser;

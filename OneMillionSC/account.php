@@ -10,15 +10,18 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="public/css/omsc.css" rel="stylesheet">
-<?php 
-require_once 'autoload.php';
-autoload();
-$controller = new Controller ();
-$controller->setSocialLogRequest();
-?>
 <script type="text/javascript">
 var coordinate = false;
 <?php
+	require_once 'autoload.php';
+	autoload();
+
+	if (isset($_REQUEST["sn"])) {
+		$_SESSION ["sn"] = $_REQUEST["sn"];
+	}
+	
+	$controller = new Controller ();
+	
 	$excep = new CustomException();
 	
 	try {
@@ -96,7 +99,12 @@ var coordinate = false;
 							<div><a href="<?php echo $loginUrl; ?>"><img src="public/img/login_<?php echo $_SESSION ["sn"]; ?>.png"></a></div>
 						</div>
 						<?php } else { ?>
-						<div>Something Wrong</div>
+						<div>
+							<div>Sign in with: </div>
+							<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>
+							<a href="account.php?sn=TW"><img src="public/img/twitter.png"></a>
+							<a href="account.php?sn=PL"><img src="public/img/gplus.png"></a>
+						</div>
 						<?php } ?>
 				</div>
 	</div>
