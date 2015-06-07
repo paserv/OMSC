@@ -30,7 +30,7 @@ class Controller {
 					$model = new FBModel ();
 					break;
 				case "TW" :
-					$model = new DummyModel ();
+					$model = new TWModel ();
 					break;
 				case "PL" :
 					$model = new PLModel ();
@@ -100,11 +100,13 @@ class Controller {
 		try {
 			$this->registerUserIntoDB ( $dbData );
 		}  catch ( Exception $e ) {
+			$this->logout();
 			throw new Exception($e->getMessage(), 300);
 		}
 		try {
 			//$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
+			$this->logout();
 			$this->deleteUserFromDB($dbData);
 			throw new Exception($e->getMessage(), 300);
 		}
@@ -112,6 +114,7 @@ class Controller {
 			try {
 				$this->executePayment($paymentId, $payerID);
 			}  catch ( Exception $e ) {
+				$this->logout();
 				$this->deleteUserFromDB($dbData);
 				//$this->deleteUserFromFusionTable($dbData);
 				throw new Exception($e->getMessage(), 300);

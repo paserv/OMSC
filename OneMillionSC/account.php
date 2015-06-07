@@ -10,15 +10,15 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="public/css/omsc.css" rel="stylesheet">
+<?php 
+require_once 'autoload.php';
+autoload();
+$controller = new Controller ();
+$controller->setSocialLogRequest();
+?>
 <script type="text/javascript">
 var coordinate = false;
 <?php
-	require_once 'autoload.php';
-	autoload();
-	
-	$controller = new Controller ();
-	$controller->setSocialLogRequest();
-	
 	$excep = new CustomException();
 	
 	try {
