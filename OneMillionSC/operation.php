@@ -48,7 +48,7 @@
 					$controller->registerFree($user);
 				} elseif ($_SESSION["okquiz"] === true) {
 					$_SESSION["okquiz"] = false;
-					$controller->registerQuiz($user);
+					$controller->registerFree($user);
 				} else {
 					$controller->redirectToPaypal();
 				}

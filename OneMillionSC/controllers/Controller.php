@@ -84,27 +84,23 @@ class Controller {
 	}
 	
 	function logout() {
-		$_SESSION ["id"] = null;
-		$_SESSION ["name"] =null;
-		$_SESSION ["mail"] = null;
-		$_SESSION ["avatarUrl"] = null;
-		$_SESSION ["socialPageUrl"] = null;
-		$_SESSION ["sn"] = null;
-		$_SESSION ["isLogged"] = null;
-		$_SESSION ["latitude"] = null;
-		$_SESSION ["longitude"] = null;
-		$_SESSION ["aboutme"] = null;
+// 		$_SESSION ["id"] = null;
+// 		$_SESSION ["name"] =null;
+// 		$_SESSION ["mail"] = null;
+// 		$_SESSION ["avatarUrl"] = null;
+// 		$_SESSION ["socialPageUrl"] = null;
+// 		$_SESSION ["sn"] = null;
+// 		$_SESSION ["isLogged"] = null;
+// 		$_SESSION ["latitude"] = null;
+// 		$_SESSION ["longitude"] = null;
+// 		$_SESSION ["aboutme"] = null;
+		session_unset();
 	}
 	
 	function registerFree(DBUser $dbData) {
-		$this->register($dbData, 'fake', 'fake');
+		$this->register($dbData, 'fake', 'fake', true);
 	}
-	function registerQuiz(DBUser $dbData) {
-		$this->register($dbData, 'fake', 'fake');
-		$model = new DBModel();
-		$model->incrementQuizCounter(QUIZ_ID);
-	}
-	function register(DBUser $dbData, $paymentId, $payerID) {
+	function register(DBUser $dbData, $paymentId, $payerID, $free) {
 		try {
 			$this->registerUserIntoDB ( $dbData );
 		}  catch ( Exception $e ) {
@@ -118,7 +114,7 @@ class Controller {
 			$this->deleteUserFromDB($dbData);
 			throw new Exception($e->getMessage(), 300);
 		}
-		if (IS_PAYPAL_ENABLED) {
+		if (!$free) {
 			try {
 				$this->executePayment($paymentId, $payerID);
 			}  catch ( Exception $e ) {

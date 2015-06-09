@@ -34,10 +34,13 @@ $_SESSION["okquiz"] = false;
 		<a href="account.php?sn=TW"><img src="public/img/twitter.png"></a>
 		<a href="account.php?sn=PL"><img src="public/img/gplus.png"></a>
 		<?php } else { ?>
-			<form name="coordinateForm" action="quiz.php" method="post">
-				<input type="text" name="solution" id="solution"/>
-				<input type="submit" name="solution_button" value="solution"/>
-			</form>
+			<div class="wrap">
+				Three gods A, B, and C are called, in no particular order, True, False, and Random. True always speaks truly, False always speaks falsely, but whether Random speaks truly or falsely is a completely random matter. Your task is to determine the identities of A, B, and C by asking three yes-no questions; each question must be put to exactly one god. The gods understand English, but will answer all questions in their own language, in which the words for yes and no are da and ja, in some order. You do not know which word means which.
+				<form name="coordinateForm" action="quiz.php" method="post">
+					<input type="text" name="solution" id="solution"/>
+					<input type="submit" name="solution_button" value="solution"/>
+				</form>
+			</div>
 	</div>
 <?php } include 'footer.php'; ?>
 </body>

@@ -47,6 +47,7 @@ define ('PP_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/operation.php
 
 #SITE CONFIG#
 define ('MAX_SEARCH', '3');
+define ('DELETE_BTN_ENABLED', true);
 define ('IS_PAYPAL_ENABLED', true);
 define ('IS_QUIZ_ENABLED', true);
 define ('QUIZ_ID', 1);

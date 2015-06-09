@@ -77,8 +77,11 @@ var coordinate = false;
 							?>
 							<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ><?php echo $currentUser->description; ?></textarea></div>
 							<div><input type="submit" name="modify_button" value="Modify"/></div>
-							<div><input type="submit" name="delete_button" value="Delete"/></div>
-								<?php	
+							<?php 
+								if (DELETE_BTN_ENABLED) {
+								?>
+									<div><input type="submit" name="delete_button" value="Delete"/></div>
+								<?php }	
 							} else {
 							?>
 							<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
