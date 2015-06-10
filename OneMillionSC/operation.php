@@ -7,14 +7,17 @@
 	$excep = new CustomException();
 	
 	$controller = new Controller();
-	$user = $controller->getUserFromSession();
+	$user = null;
+	if (isset($_SESSION["latitude"])) {
+		$user = $controller->getUserFromSession();
+	}
 	
 	/**
 	 * If it comes from paypal store page
 	 */
 	if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 		try {
-			$controller->register($user, $_REQUEST ['paymentId'], $_REQUEST ['PayerID']);
+			$controller->register($user, $_REQUEST ['paymentId'], $_REQUEST ['PayerID'], false);
 		} catch (Exception $ex) {
 			$excep->setError($ex->getCode(), $ex->getMessage());
 		}
@@ -34,7 +37,9 @@
 			$_SESSION["aboutme"] = $_REQUEST['aboutme'];
 		}
 		
+	if (isset($_SESSION["latitude"])) {
 		$user = $controller->getUserFromSession();
+	}
 		
 		try {
 			if (isset($_REQUEST['delete_button'])) {
@@ -52,7 +57,7 @@
 				} else {
 					$controller->redirectToPaypal();
 				}
-			} else if (isset($_REQUEST['logout_button'])){
+			} else if (isset($_REQUEST['logout_button']) && isset($_SESSION["latitude"])){
 				$controller->logout();
 				$user->latitude = "";
 				$user->longitude = "";
@@ -75,11 +80,19 @@
 <link href="public/css/omsc.css" rel="stylesheet">
 </head>
 <body>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v2.3&appId=1421469004782445";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 <?php include 'header.php'; ?>
 
-	<div id="headerseparator"></div>
-	<br>
-	<br>
 	<div id="corpo">
 	<br>
 	<br>
@@ -88,11 +101,31 @@
 	<?php
 		if ($excep->existProblem) {
 			include 'error.php';
-		} else {
-	?>
-	Operation Success!
-	<div><a href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>">Come Back Home</a></div>
+		} else { ?>
+			<div>Operation Success!</div>
+			<div>
+			<?php if ($user !== null) {?>
+				<a href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>">Come Back Home</a>
+			<?php } else { ?>
+				<a href="index.php">Come Back Home</a>
+			<?php } ?>
+			</div>
+			<?php if (isset($_SESSION['sn']) && $_SESSION['sn'] === 'FB') {
+			?>
+			<div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div>
+			<?php } elseif (isset($_SESSION['sn']) && $_SESSION['sn'] === 'TW') {?>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
+			<?php } elseif (isset($_SESSION['sn']) && $_SESSION['sn'] === 'PL') {?>
+			<a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share.png" alt="Share on Google+"/></a>
+			<?php } ?>
+		<?php } ?>
 	</div>
-<?php } include 'footer.php'; ?>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+<?php include 'footer.php'; ?>
 </body>
 </html>
