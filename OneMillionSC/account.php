@@ -43,7 +43,7 @@ var coordinate = false;
 				$loginUrl = $currentUser->loginUrl;
 				}
 		} catch (Exception $se) {
-			$excep->setError(700, "Write here");
+			$excep->setError($se->getCode(), $se->getMessage());
 		}
 	?>
 </script>

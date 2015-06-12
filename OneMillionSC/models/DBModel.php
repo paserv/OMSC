@@ -16,7 +16,7 @@ class DBModel {
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			$conn->close ();
-			throw new Exception("Impossible search by Quiz ID " . $quizId, 204);
+			throw new Exception("Impossible search by Quiz ID " . $quizId, 200);
 		} else if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
 			$quiz = new QuizDTO($row["id"], $row["name"], $row["threshold"], $row["counter"], $row["solution"]);
@@ -36,7 +36,7 @@ class DBModel {
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();
-			throw new Exception ( "Error insert user ", 207 );
+			throw new Exception ( "Error increment quiz counter " . $quizId, 200 );
 		}
 		$conn->close ();
 	}
@@ -45,7 +45,7 @@ class DBModel {
 		$sql = "DELETE FROM user WHERE user.socialId like " . $idUser;
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception("Impossible to delete User " . $idUser, 201);
+			throw new Exception("Impossible to delete User " . $idUser, 200);
 		}
 		$conn->close ();
 	}
@@ -54,7 +54,7 @@ class DBModel {
 		$sql = "SELECT * FROM user WHERE user.socialId = " . $idUser;
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception("Impossible check User is registered " . $idUser, 202);
+			throw new Exception("Impossible check User is registered " . $idUser, 200);
 		} else if ($result->num_rows > 0) {
 			$conn->close ();
 			return TRUE;
@@ -68,7 +68,7 @@ class DBModel {
 		$sql = "SELECT * FROM user WHERE user.name like '%" . $name . "%' limit " . DB_SEARCH_LIMIT;
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception("Impossible search User " . $name, 203);
+			throw new Exception("Impossible search User " . $name, 200);
 		} else if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 				$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
@@ -85,7 +85,7 @@ class DBModel {
 		$sql = "SELECT * FROM user WHERE user.socialId = " . $socialId;
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception("Impossible search by ID " . $socialId, 204);
+			throw new Exception("Impossible search by ID " . $socialId, 200);
 		} else if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
 			$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
@@ -116,7 +116,7 @@ class DBModel {
 		$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND Lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ") HAVING user.name like '%" . $name . "%'";
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception("Impossible search by Name and Coords " . $name . " " . $lat . " " . $lng . " " . $ray, 211);
+			throw new Exception("Impossible search by Name and Coords " . $name . " " . $lat . " " . $lng . " " . $ray, 200);
 		} else if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 				$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
@@ -124,7 +124,7 @@ class DBModel {
 			}
 			return $res;
 		} else {
-			throw new Exception("No Result found in search by Name And Coords", 213);
+			throw new Exception("No Result found in search by Name And Coords", 200);
 		}
 		$conn->close ();
 	}
@@ -136,7 +136,7 @@ class DBModel {
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();
-			throw new Exception ( "Error insert user " . $dbData->socialId, 207 );
+			throw new Exception ( "Error insert user " . $dbData->socialId, 200 );
 		}
 		return $result;
 		$conn->close ();
@@ -147,7 +147,7 @@ class DBModel {
 		$sql = "SELECT total FROM members";
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception ( "Write Here", 210 );
+			throw new Exception ( "Error Count Users", 200 );
 		} else if ($result->num_rows == 1) {
 			$row = $result->fetch_assoc();
 			$result = $row["total"];
@@ -176,7 +176,7 @@ class DBModel {
 		$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND Lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ")";
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception("Impossible search by Coords " . $lat . " " . $lng . " " . $ray, 211);
+			throw new Exception("Impossible search by Coords " . $lat . " " . $lng . " " . $ray, 200);
 		} else if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 				$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
@@ -184,7 +184,7 @@ class DBModel {
 			}
 			return $res;
 		} else {
-			throw new Exception("No Result found in search by Coords", 212);
+			throw new Exception("No Result found in search by Coords", 200);
 		}
 		$conn->close ();
 	}
@@ -196,10 +196,10 @@ class DBModel {
 	}
 	function insertUser(DBUser $dbData) {
 		if ($this->isUserRegistered ( $dbData->socialId )) {
-			throw new Exception ( "User Already Registered " . $dbData->socialId, 205 );
+			throw new Exception ( "User Already Registered " . $dbData->socialId, 200 );
 		}
 		if ($this->areUsersMoreThan ( 1000000 )) {
-			throw new Exception ( "One Million Users already registered " . $dbData->socialId, 206 );
+			throw new Exception ( "One Million Users already registered " . $dbData->socialId, 200 );
 		}
 		$conn = $this->getConnection ();
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
@@ -209,13 +209,13 @@ class DBModel {
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();
-			throw new Exception ( "Error insert user " . $dbData->socialId, 207 );
+			throw new Exception ( "Error insert user " . $dbData->socialId, 200 );
 		}
 		$conn->close ();
 	}
 	function updateUser(DBUser $dbData) {
 		if (!$this->isUserRegistered ( $dbData->socialId )) {
-			throw new Exception ( "Error User Not Registered " . $dbData->socialId, 208 );
+			throw new Exception ( "Error User Not Registered " . $dbData->socialId, 200 );
 		}
 		$conn = $this->getConnection ();
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
@@ -224,7 +224,7 @@ class DBModel {
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();
-			throw new Exception ( "Error update User " . $dbData->socialId, 209 );
+			throw new Exception ( "Error update User " . $dbData->socialId, 200 );
 		}
 		$conn->close ();
 	}
@@ -233,7 +233,7 @@ class DBModel {
 		$sql = "SELECT COUNT(*) as total_users FROM user WHERE 1";
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception ( "Select count error for more than " . $num, 210 );
+			throw new Exception ( "Select count error for more than " . $num, 200 );
 		} else if ($result->num_rows == 1) {
 			$row = $result->fetch_assoc();
 			if ($row["total_users"] >= 1000000) {
@@ -250,7 +250,7 @@ class DBModel {
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();
-			throw new Exception ( "Error: " . $sql . "<br>" . $error );
+			throw new Exception ( "Error insert Fake User", 200 );
 		}
 		$conn->close ();
 	}

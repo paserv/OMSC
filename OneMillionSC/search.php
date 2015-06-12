@@ -12,8 +12,8 @@
 <link href="public/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="public/css/omsc.css" rel="stylesheet">
 </head>
+<script type="text/javascript">var markers = [];</script>
 <script type="text/javascript">
-var markers = [];
 <?php
 require_once 'autoload.php';
 autoload();
@@ -43,7 +43,7 @@ if ($controller->isUserLoggedAndRegistered() || $_SESSION ["numSearch"] <= MAX_S
 			}
 		
 		} catch ( Exception $ex ) {
-			$excep->setError(700, "Write here");
+			$excep->setError($ex->getCode(), $ex->getMessage());
 		}
 		
 	if (!$excep->existProblem) {
@@ -65,11 +65,11 @@ if ($controller->isUserLoggedAndRegistered() || $_SESSION ["numSearch"] <= MAX_S
 	    <?php
 				}
 			} else {
-				$excep->setError(702, "Write here");
+				$excep->setError(700, "Write here");
 			}
 	}
 } else {
-		$excep->setError(700, "Write here");
+		$excep->setError(701, "Write here");
 	}
 ?>
 </script>

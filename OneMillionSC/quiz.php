@@ -18,6 +18,14 @@ $controller = new Controller ();
 $excep = new CustomException();
 
 $_SESSION["okquiz"] = false;
+
+if (isset ( $_REQUEST ['solution'] )) {
+	try {
+		$quizok = $controller->checkQuizSolution(QUIZ_ID, $_REQUEST ['solution']);
+	} catch (Exception $ex) {
+		$excep->setError($ex->getCode(), $ex->getMessage());
+	}
+}
 ?>
 
 <body>
@@ -26,13 +34,15 @@ $_SESSION["okquiz"] = false;
 		<?php
 		if ($excep->existProblem) {
 			include 'error.php';
-		} elseif (isset ( $_REQUEST ['solution'] ) && $controller->checkQuizSolution(QUIZ_ID, $_REQUEST ['solution'])) {
+		} elseif (isset ( $_REQUEST ['solution'] ) && $quizok) {
 		?>
 		<div>Get Your Placemark for Free</div>
 		<div>Sign in with: </div>
 		<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>
 		<a href="account.php?sn=TW"><img src="public/img/twitter.png"></a>
 		<a href="account.php?sn=PL"><img src="public/img/gplus.png"></a>
+		<?php } elseif ((isset ( $_REQUEST ['solution'] ) && !$quizok)) { ?>
+		<div>Wrong Response</div>
 		<?php } else { ?>
 			<div class="wrap">
 				Three gods A, B, and C are called, in no particular order, True, False, and Random. True always speaks truly, False always speaks falsely, but whether Random speaks truly or falsely is a completely random matter. Your task is to determine the identities of A, B, and C by asking three yes-no questions; each question must be put to exactly one god. The gods understand English, but will answer all questions in their own language, in which the words for yes and no are da and ja, in some order. You do not know which word means which.

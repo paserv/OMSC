@@ -46,7 +46,7 @@ define ('PP_CLIENT_SECRET', 'ENha4YyzwWm77DEqOawuERHe3GF3wpjEg6rDsTysTK8jof1Vx54
 define ('PP_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/operation.php');
 
 #SITE CONFIG#
-define ('MAX_SEARCH', '3');
+define ('MAX_SEARCH', '300');
 define ('DELETE_BTN_ENABLED', true);
 define ('IS_PAYPAL_ENABLED', true);
 define ('IS_QUIZ_ENABLED', true);

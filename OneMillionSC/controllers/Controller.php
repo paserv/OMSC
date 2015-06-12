@@ -2,9 +2,9 @@
 require_once 'autoload.php';
 controller_autoload();
 
-use PayPal\Api\ExecutePayment;
-use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
+// use PayPal\Api\ExecutePayment;
+// use PayPal\Api\Payment;
+// use PayPal\Api\PaymentExecution;
 
 class Controller {
 	
@@ -84,16 +84,6 @@ class Controller {
 	}
 	
 	function logout() {
-// 		$_SESSION ["id"] = null;
-// 		$_SESSION ["name"] =null;
-// 		$_SESSION ["mail"] = null;
-// 		$_SESSION ["avatarUrl"] = null;
-// 		$_SESSION ["socialPageUrl"] = null;
-// 		$_SESSION ["sn"] = null;
-// 		$_SESSION ["isLogged"] = null;
-// 		$_SESSION ["latitude"] = null;
-// 		$_SESSION ["longitude"] = null;
-// 		$_SESSION ["aboutme"] = null;
 		session_unset();
 	}
 	
@@ -105,14 +95,14 @@ class Controller {
 			$this->registerUserIntoDB ( $dbData );
 		}  catch ( Exception $e ) {
 			$this->logout();
-			throw new Exception($e->getMessage(), 300);
+			throw new Exception($e->getMessage(), 800);
 		}
 		try {
 			//$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$this->logout();
 			$this->deleteUserFromDB($dbData);
-			throw new Exception($e->getMessage(), 300);
+			throw new Exception($e->getMessage(), 801);
 		}
 		if (!$free) {
 			try {
@@ -121,7 +111,7 @@ class Controller {
 				$this->logout();
 				$this->deleteUserFromDB($dbData);
 				//$this->deleteUserFromFusionTable($dbData);
-				throw new Exception($e->getMessage(), 300);
+				throw new Exception($e->getMessage(), 802);
 			}
 		}
 		$this->incrementMembers();
@@ -134,7 +124,7 @@ class Controller {
 			$this->logout();
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
-			throw new Exception($e->getMessage(), 301);
+			throw new Exception($e->getMessage(), 803);
 		}
 		$this->decrementMembers();
 	}
@@ -146,7 +136,7 @@ class Controller {
 			//$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
-			throw new Exception($e->getMessage(), 302);
+			throw new Exception($e->getMessage(), 804);
 		}
 	
 	}
@@ -163,21 +153,6 @@ class Controller {
 		return false;
 	}
 	
-	
-	
-	/*DELETE*/
-	function setSocialLogRequest () {
-		if(isset($_REQUEST['sn'])){
-			if ($_SESSION['sn'] !== $_REQUEST['sn']) {
-				$this->logout();
-			}
-			$_SESSION['sn'] = $_REQUEST['sn'];
-		}
-		
-		if (!isset($_SESSION ["sn"])) {
-			die("<script>location.href = 'index.php'</script>");
-		}
-	}
 	/**
 	 * PAYPAL CONTROLS 
 	 */
@@ -194,23 +169,24 @@ class Controller {
 	
 	function executePayment($paymentId, $payerID) {
 		$model = new PayPalModel();
-		$payment = Payment::get ( $paymentId, $model->apiContext );
+		return $model->executePayment($paymentId, $payerID);
+// 		$payment = Payment::get ( $paymentId, $model->apiContext );
 		
-		$execution = new PaymentExecution ();
-		$execution->setPayerId ( $payerID );
+// 		$execution = new PaymentExecution ();
+// 		$execution->setPayerId ( $payerID );
 		
-		try {
-			$result = $payment->execute ( $execution, $model->apiContext );
-			try {
-				$payment = Payment::get ( $paymentId, $model->apiContext );
-			} catch ( Exception $ex ) {
-				throw new Exception($ex->getMessage(), 300);
-			}
-		} catch ( Exception $ex ) {
-			throw new Exception($ex->getMessage(), 300);
-		}
+// 		try {
+// 			$result = $payment->execute ( $execution, $model->apiContext );
+// 			try {
+// 				$payment = Payment::get ( $paymentId, $model->apiContext );
+// 			} catch ( Exception $ex ) {
+// 				throw new Exception($ex->getMessage(), 300);
+// 			}
+// 		} catch ( Exception $ex ) {
+// 			throw new Exception($ex->getMessage(), 300);
+// 		}
 		
-		return $payment;
+// 		return $payment;
 		
 	}
 	
@@ -298,7 +274,19 @@ class Controller {
 		$model->updateUser($dbData);
 	}
 	
+	/*TO DELETE*/
+	// 	function setSocialLogRequest () {
+	// 		if(isset($_REQUEST['sn'])){
+	// 			if ($_SESSION['sn'] !== $_REQUEST['sn']) {
+	// 				$this->logout();
+	// 			}
+	// 			$_SESSION['sn'] = $_REQUEST['sn'];
+	// 		}
 	
+	// 		if (!isset($_SESSION ["sn"])) {
+	// 			die("<script>location.href = 'index.php'</script>");
+	// 		}
+	// 	}
 // 	function getLoggedUser($socialNetwork) {
 // 		$_SESSION ["sn"] = $socialNetwork;
 // 		if (isset ($_SESSION ["id"]) && $_SESSION ["id"] !== null ) {

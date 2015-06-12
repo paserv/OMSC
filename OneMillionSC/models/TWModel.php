@@ -8,7 +8,7 @@ class TWModel extends AbstractSocialModel {
 	function getUser() {
 		if(!empty($_REQUEST['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret'])){
 			if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
-				throw new Exception('Something Wrong', 500);
+				throw new Exception('Something Wrong Twitter Get User', 600);
 			}
 			$twitteroauth = new TwitterOAuth(TW_CONSUMER_KEY, TW_CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 			$access_token = $twitteroauth->oauth("oauth/access_token", array("oauth_verifier" => $_REQUEST['oauth_verifier']));
@@ -31,7 +31,7 @@ class TWModel extends AbstractSocialModel {
 				$url = $twitteroauth->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
 				return SocialUser::createLoginUrl($url);
 			} else {
-				throw new Exception('Something Wrong', 500);
+				throw new Exception('Something Wrong', 600);
 			}
 		}	
 	}

@@ -23,9 +23,9 @@ class FBModel extends AbstractSocialModel {
 		try {
 			$session = $helper->getSessionFromRedirect();
 		} catch ( FacebookRequestException $ex ) {
-			throw new Exception($ex->getMessage(), 300);
+			throw new Exception($ex->getMessage(), 500);
 		} catch (Exception $ex) {
-			throw new Exception($ex->getMessage(), 301);
+			throw new Exception($ex->getMessage(), 500);
 		}
 		
 		if (isset ( $session )) {
@@ -55,9 +55,9 @@ class FBModel extends AbstractSocialModel {
 		try {
 			$session = $helper->getSessionFromRedirect();
 		} catch ( FacebookRequestException $ex ) {
-			throw new Exception($ex->getMessage(), 300);
+			throw new Exception($ex->getMessage(), 500);
 		} catch (Exception $ex) {
-			throw new Exception($ex->getMessage(), 301);
+			throw new Exception($ex->getMessage(), 500);
 		}
 		if (isset ( $session )) {
 			try {

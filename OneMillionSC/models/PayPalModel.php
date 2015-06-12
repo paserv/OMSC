@@ -7,9 +7,11 @@ use PayPal\Api\Details;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
-use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
 
 class PayPalModel {
 	public $apiContext;
@@ -19,7 +21,7 @@ class PayPalModel {
 	}
 	
 	
-	private static function getAPIContext () {
+	private function getAPIContext () {
 		$apiContext = new \PayPal\Rest\ApiContext(
 				new \PayPal\Auth\OAuthTokenCredential(
 						PP_CLIENT_ID,
@@ -60,13 +62,35 @@ class PayPalModel {
 		try {
 			$payment->create($this->apiContext);
 		} catch (Exception $ex) {
-			throw new Exception("Impossible to create PayPal Payment: " . $ex->getMessage(), 600);
+			throw new Exception($ex->getMessage(), 700);
 		}
 		
 		$approvalUrl = $payment->getApprovalLink();
 		
 		return $approvalUrl;
 		
+	}
+	
+	function executePayment($paymentId, $payerID) {
+		$model = new PayPalModel();
+		$payment = Payment::get ( $paymentId, $this->getAPIContext () );
+	
+		$execution = new PaymentExecution ();
+		$execution->setPayerId ( $payerID );
+	
+		try {
+			$result = $payment->execute ( $execution, $this->getAPIContext () );
+			try {
+				$payment = Payment::get ( $paymentId, $this->getAPIContext () );
+			} catch ( Exception $ex ) {
+				throw new Exception($ex->getMessage(), 700);
+			}
+		} catch ( Exception $ex ) {
+			throw new Exception($ex->getMessage(), 700);
+		}
+	
+		return $payment;
+	
 	}
 }
 ?>
