@@ -77,7 +77,7 @@ class Controller {
 	}
 	
 	function isUserLoggedAndRegistered() {
-		if ($_SESSION ["latitude"] && $_SESSION ["longitude"] && $_SESSION ["aboutme"]) {
+		if (isset ($_SESSION ["latitude"]) && isset($_SESSION ["longitude"]) && isset($_SESSION ["aboutme"])) {
 			return true;
 		}
 		return false;

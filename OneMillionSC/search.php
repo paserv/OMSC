@@ -13,7 +13,6 @@
 <link href="public/css/omsc.css" rel="stylesheet">
 </head>
 <script type="text/javascript">var markers = [];</script>
-<script type="text/javascript">
 <?php
 require_once 'autoload.php';
 autoload();
@@ -49,6 +48,7 @@ if ($controller->isUserLoggedAndRegistered() || $_SESSION ["numSearch"] <= MAX_S
 	if (!$excep->existProblem) {
 		if ($results !== null) {
 			foreach ( $results as $currUser ) {
+				echo "<script type='text/javascript'>";
 		?>
 				markers.push({
 			        latitude: "<?php echo $currUser->latitude; ?>",
@@ -63,6 +63,7 @@ if ($controller->isUserLoggedAndRegistered() || $_SESSION ["numSearch"] <= MAX_S
 			        socialNetwork: "<?php echo $currUser->socialNetwork; ?>",
 				    });
 	    <?php
+	    echo "</script>";
 				}
 			} else {
 				$excep->setError(700, "Write here");
@@ -72,7 +73,6 @@ if ($controller->isUserLoggedAndRegistered() || $_SESSION ["numSearch"] <= MAX_S
 		$excep->setError(701, "Write here");
 	}
 ?>
-</script>
 <body>
 <?php include 'header.php'; ?>
 <!-- 
