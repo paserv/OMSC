@@ -96,8 +96,17 @@ var coordinate = false;
 								} else {
 								?>
 								<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
+								<?php 
+								if (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) {
+								?>
+								<input type="submit" name="register_button" value="Free Registration"/>
+								<?php 
+								} else {
+								?>
 								<input type="submit" name="register_button" value="" style="background:url(public/img/paypal-button.png) no-repeat;width:180px;height:40px;border: none;"/>
-								<?php } ?>
+								<?php 
+									} 
+								} ?>
 							<!-- <div><input type="submit" name="logout_button" value="Logout"/></div> -->
 						</div>
 						<div class="right_col">
