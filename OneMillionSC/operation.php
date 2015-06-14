@@ -1,5 +1,4 @@
 <?php session_start(); ?>
- 
 <?php
 	require_once 'autoload.php';
 	autoload();
@@ -51,23 +50,24 @@
 			} else if (isset($_REQUEST['register_button'])){
 				if (!IS_PAYPAL_ENABLED) {
 					$controller->registerFree($user);
-				} elseif ($_SESSION["okquiz"] === true) {
+				} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) {
 					$_SESSION["okquiz"] = false;
 					$controller->registerFree($user);
 				} else {
 					$controller->redirectToPaypal();
 				}
-			} else if (isset($_REQUEST['logout_button']) && isset($_SESSION["latitude"])){
+			} else if (isset($_REQUEST['logout_button'])){
 				$controller->logout();
-				$user->latitude = "";
-				$user->longitude = "";
+				if (isset($_SESSION["latitude"])) {
+					$user->latitude = "";
+					$user->longitude = "";
+				}
 			}
 		} catch (Exception $e) {
 			$excep->setError($e->getCode(), $e->getMessage());
 		}
 	}
 ?>
-
 <!doctype html>
 <head>
 <title>One Million Social Club - Registration</title>
@@ -110,14 +110,16 @@
 				<a href="index.php">Come Back Home</a>
 			<?php } ?>
 			</div>
-			<?php if (isset($_SESSION['sn']) && $_SESSION['sn'] === 'FB') {
-			?>
-			<div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div>
-			<?php } elseif (isset($_SESSION['sn']) && $_SESSION['sn'] === 'TW') {?>
-			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
-			<?php } elseif (isset($_SESSION['sn']) && $_SESSION['sn'] === 'PL') {?>
-			<a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share.png" alt="Share on Google+"/></a>
-			<?php } ?>
+			<?php 
+			if (!isset($_REQUEST['logout_button']) && isset($_SESSION['sn'])) {
+				if ($_SESSION['sn'] === 'FB') { ?>
+				<div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div>
+				<?php } elseif ($_SESSION['sn'] === 'TW') {?>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
+				<?php } elseif ($_SESSION['sn'] === 'PL') {?>
+				<a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share.png" alt="Share on Google+"/></a>
+				<?php } 
+				} ?>
 		<?php } ?>
 	</div>
 	<br>

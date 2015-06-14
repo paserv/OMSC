@@ -70,7 +70,7 @@ if ($controller->isUserLoggedAndRegistered() || $_SESSION ["numSearch"] <= MAX_S
 			}
 	}
 } else {
-		$excep->setError(701, "Write here");
+		$excep->setError(701, "You are a Fox");
 	}
 ?>
 <body>

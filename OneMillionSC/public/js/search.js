@@ -19,15 +19,15 @@ function initialize() {
 	}
 	map.fitBounds(bounds);
     //map.panToBounds(bounds);
-    var listener = google.maps.event.addListener(map, "idle", function() { 
-    	map.setCenter(bounds.getCenter());  
-    	if (map.getZoom() > 8) {
-    		  map.setZoom(8);
-    	  } else if (map.getZoom() < 3) {
-    		  map.setZoom(3);
-    	  }
-    	  google.maps.event.removeListener(listener);
-    });
+//    var listener = google.maps.event.addListener(map, "idle", function() { 
+//    	map.setCenter(bounds.getCenter());  
+//    	if (map.getZoom() > 8) {
+//    		  map.setZoom(8);
+//    	  } else if (map.getZoom() < 3) {
+//    		  map.setZoom(3);
+//    	  }
+//    	  google.maps.event.removeListener(listener);
+//    });
 }
 
 function getIconSize() {

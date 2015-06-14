@@ -84,7 +84,19 @@ class Controller {
 	}
 	
 	function logout() {
-		session_unset();
+		$_SESSION ["id"] = null;
+		$_SESSION ["name"] = null;
+		$_SESSION ["mail"] = null;
+		$_SESSION ["avatarUrl"] = null;
+		$_SESSION ["socialPageUrl"] = null;
+		$_SESSION ["isLogged"] = null;
+		$_SESSION ["latitude"] = null;
+		$_SESSION ["longitude"] = null;
+		$_SESSION ["aboutme"] = null;
+		$_SESSION['oauth_token'] = null;
+		$_SESSION['oauth_token_secret'] = null;
+		$_SESSION ["isLogged"] = false;
+// 		session_unset();
 	}
 	
 	function registerFree(DBUser $dbData) {
@@ -98,7 +110,7 @@ class Controller {
 			throw new Exception($e->getMessage(), 800);
 		}
 		try {
-			//$this->registerUserIntoFusionTable ( $dbData );
+			$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$this->logout();
 			$this->deleteUserFromDB($dbData);
@@ -110,7 +122,7 @@ class Controller {
 			}  catch ( Exception $e ) {
 				$this->logout();
 				$this->deleteUserFromDB($dbData);
-				//$this->deleteUserFromFusionTable($dbData);
+				$this->deleteUserFromFusionTable($dbData);
 				throw new Exception($e->getMessage(), 802);
 			}
 		}
@@ -120,7 +132,7 @@ class Controller {
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
-			//$this->deleteUserFromFusionTable($dbData);
+			$this->deleteUserFromFusionTable($dbData);
 			$this->logout();
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
@@ -133,7 +145,7 @@ class Controller {
 		$oldUser = $this->search($dbData->socialId);
 		$this->updateUserIntoDB($dbData);
 		try {
-			//$this->updateUserIntoFusionTable($dbData);
+			$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), 804);
@@ -158,6 +170,7 @@ class Controller {
 	 */
 	function redirectToPayPal() {
 		$payPalUrl = $this->getPayPalUrl();
+// 		echo '<script type="text/javascript">window.location.replace("' . $payPalUrl . '");';
 		header("Location: " . $payPalUrl);
 		die();
 	}

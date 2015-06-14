@@ -16,17 +16,17 @@ define ('FB_ID', 'FB');
 define ('FB_REQUIRED_SCOPE', 'public_profile,email');
 
 #PLUS CONFIG#
-define ('PL_CLIENT_ID', '217190497352-m61b2h642osrunjqbfhv7tsl3h7p697u.apps.googleusercontent.com');
-define ('PL_CLIENT_SECRET', 'TBKtpO4s1mNBDsUUwa-O0oKd');
-define ('PL_REDIRECT_URL', 'http://localhost/OMSC/OneMillionSC/account.php');
+define ('PL_CLIENT_ID', '391344423153-gobbk4prs4gm5g6p1kpg160ruqnnq5ii.apps.googleusercontent.com');
+define ('PL_CLIENT_SECRET', 'UinzvIKqV2ii1z3mAR2TNlew');
+define ('PL_REDIRECT_URL', 'http://www.aoapao.com/account.php');
 define ('PL_REQUIRED_SCOPE1', 'https://www.googleapis.com/auth/userinfo.profile');
 define ('PL_REQUIRED_SCOPE2', 'https://www.googleapis.com/auth/userinfo.email');
 define ('PL_ID', 'PL');
 
 #TW CONFIG#
-define ('TW_CONSUMER_KEY', '9bdho2YXjpDYRheYAlYeStb3E');
-define ('TW_CONSUMER_SECRET', 'vXC4WTdPuxVZ8uBmK6I48UOJuWNnSw5AL30uMjKuygI2EEOkvK');
-define ('TW_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/account.php');
+define ('TW_CONSUMER_KEY', 'xzsfVU7nqr046Wrj1TfHxA');
+define ('TW_CONSUMER_SECRET', 'PAehPWey2ySlSAwftbNKFl1e9viYEbiGbans4a2Q3m4');
+define ('TW_REDIRECT_URL', 'http://www.aoapao.com/account.php');
 define ('TW_ID', 'TW');
 
 #FUSION CONFIG#
@@ -40,10 +40,15 @@ define ('FUSION_TABLE_ID3', '');
 define ('FUSION_TABLE_ID4', '');
 define ('FUSION_TABLE_ID5', '');
 
+#PAYPAL CONFIG#
+define ('PP_CLIENT_ID', 'AYKadkzNMiBtS3oxMBkVdrg3TzCbMC38Ux-7vxaG9GNgiXmZ9nbmSAZUg25fEjTV2lo_813fUyHDsvQz');
+define ('PP_CLIENT_SECRET', 'EIpAdanSZA-VvGTMi7UhZajsOSPKmXVN4GUdjPKudMnrFZDUiuRRo0aCNVUIEsbwf9naK8a-uEOCVYNK');
+define ('PP_REDIRECT_URL', 'http://www.aoapao.com/operation.php');
+
 #SITE CONFIG#
 define ('MAX_SEARCH', '3');
 define ('DELETE_BTN_ENABLED', true);
 define ('IS_PAYPAL_ENABLED', true);
-define ('IS_QUIZ_ENABLED', false);
+define ('IS_QUIZ_ENABLED', true);
 define ('QUIZ_ID', 1);
 ?>
