@@ -1,9 +1,15 @@
+<?php 
+	if (!isset($_SESSION ["total_users"])) { 
+		$controller = new Controller(); 
+		$total = $controller->countMembers(); 
+	}
+?>
 <div id="header">
 	<div class="wrap">
 		<div class="left_col">
 			<div class="menuButton"><a href="index.php"><img src="public/img/home.png"></a></div>
-			<div class="menuButton"><a href="index.php"><img src="public/img/map.png"></a></div>
 			<div class="menuButton" id="searchPerBtn"><a><img src="public/img/searchPerson.png"></a></div>
+			<div class="menuButton"><a href="account.php?choose=yes"><img src="public/img/map.png"></a></div>
 			<?php if (IS_QUIZ_ENABLED) {
 				echo "<div class='menuButton'><a href='quiz.php'><img src='public/img/quiz.png'></a></div>";
 			} ?>
@@ -19,7 +25,7 @@
 				?>
 				<a href="#" onMouseOver="return changeImageRow()" onMouseOut= "return changeImageBackRow()" onMouseDown="return handleMDownRow()" onMouseUp="return handleMUpRow()"><div id = "rowBtn"><img style="vertical-align:top" name="rowButton" src="public/img/row.png"></div></a>
 				<p>
-					<div id="userMenu">
+					<div id="userMenu" style="display: none;" >
 							<?php if (isset($_SESSION ["latitude"]) && $_SESSION ["latitude"] != null) { ?>
 								<p><a href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">My Profile</a></p>
 								<p><a href="operation.php?logout_button=Logout">Logout</a></p>
@@ -38,7 +44,7 @@
 	</div>
 	
 </div>
-<div id="inputSearchPer">
+<div id="inputSearchPer" style="display: none;" >
 	<p>Find people</p>
 	<p><input id="nameInput" type="text" placeholder="Enter a name"></input></p>
 	<p><input id="searchPerLoc" type="text"></input></p>
@@ -50,7 +56,8 @@
 	<p><a href="#" onMouseOver="return changeImageFindBtn()" onMouseOut= "return changeImageBackFindBtn()" onMouseDown="return handleMDownFindBtn()" onMouseUp="return handleMUpFindBtn()"><div id = "findBtn"><img name="findButton" src="public/img/find.png"></div></a></p>
 </div>
 
-<div id="sociallogin">
+<!-- 
+<div id="sociallogin" style="display: none;" >
 	<p>
 		<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>
 	</p>
@@ -61,7 +68,7 @@
 		<a href="account.php?sn=PL"><img src="public/img/gplus.png"></a>
 	</p>
 </div>
-
+ -->
 
 
 <script type="text/javascript">

@@ -62,7 +62,7 @@ class PayPalModel {
 		try {
 			$payment->create($this->apiContext);
 		} catch (Exception $ex) {
-			throw new Exception($ex->getMessage(), 700);
+			throw new Exception($ex->getMessage(), 400);
 		}
 		
 		$approvalUrl = $payment->getApprovalLink();
@@ -83,10 +83,10 @@ class PayPalModel {
 			try {
 				$payment = Payment::get ( $paymentId, $this->getAPIContext () );
 			} catch ( Exception $ex ) {
-				throw new Exception($ex->getMessage(), 700);
+				throw new Exception($ex->getMessage(), 400);
 			}
 		} catch ( Exception $ex ) {
-			throw new Exception($ex->getMessage(), 700);
+			throw new Exception($ex->getMessage(), 400);
 		}
 	
 		return $payment;

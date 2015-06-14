@@ -29,15 +29,15 @@
 			#Fusion Error#
 			300 => array('Fusion Table Error', 'public/img/login_ico.png'),
 			
+			#PayPal Error
+			400 => array('Paypal Error', 'public/img/login_ico.png'),
+			
 			#FB Error#
 			500 => array('Facebook Error', 'public/img/login_ico.png'),
 	
 			#TW Error#
 			600 => array('Twitter Error', 'public/img/login_ico.png'),
 	
-			#PayPal Error
-			700 => array('Paypal Error', 'public/img/login_ico.png'),
-			
 			#SEARCH ERROR
 			700 => array('Sorry no results found', 'public/img/login_ico.png'),
 			701 => array('Please Register for unlimited search', 'public/img/login_ico.png'),
@@ -48,6 +48,11 @@
 			802 => array('Impossible Execute Payment', 'public/img/login_ico.png'),
 			803 => array('Impossible Delete User into Fusion Table', 'public/img/login_ico.png'),
 			804 => array('Impossible Update User into Fusion Table', 'public/img/login_ico.png'),
+			
+			#Fusion Error#
+			900 => array('Incorrect Solution', 'public/img/login_ico.png'),
+			901 => array('Limit for free quiz subscription reached', 'public/img/login_ico.png'),
+			
 	);
 	
 	$publicMessage = "No Error to display";

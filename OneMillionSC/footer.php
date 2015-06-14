@@ -5,11 +5,8 @@
 			<?php 
 				if (isset($_SESSION ["total_users"])) { 
 					echo ($_SESSION ["total_users"]); 
-				} else { 
-					$controller = new Controller(); 
-					$total = $controller->countMembers(); 
-					echo ($total);
-				}?>
+				} 
+				?>
 		</div>
 		<div class="right_col">
 			Share on&nbsp

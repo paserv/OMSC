@@ -95,6 +95,7 @@ class Controller {
 		$_SESSION ["aboutme"] = null;
 		$_SESSION['oauth_token'] = null;
 		$_SESSION['oauth_token_secret'] = null;
+		$_SESSION ["sn"] = false;
 		$_SESSION ["isLogged"] = false;
 // 		session_unset();
 	}
@@ -106,13 +107,13 @@ class Controller {
 		try {
 			$this->registerUserIntoDB ( $dbData );
 		}  catch ( Exception $e ) {
-			$this->logout();
+// 			$this->logout();
 			throw new Exception($e->getMessage(), 800);
 		}
 		try {
 			$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
-			$this->logout();
+// 			$this->logout();
 			$this->deleteUserFromDB($dbData);
 			throw new Exception($e->getMessage(), 801);
 		}
@@ -120,15 +121,17 @@ class Controller {
 			try {
 				$this->executePayment($paymentId, $payerID);
 			}  catch ( Exception $e ) {
-				$this->logout();
+// 				$this->logout();
 				$this->deleteUserFromDB($dbData);
 				$this->deleteUserFromFusionTable($dbData);
 				throw new Exception($e->getMessage(), 802);
 			}
+		} else {
+			$this->incrementQuizCounter(QUIZ_ID);
 		}
 		$this->incrementMembers();
 	}
-	
+
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
@@ -160,7 +163,11 @@ class Controller {
 			if ($result->counter < $result->threshold) {
 				$_SESSION["okquiz"] = true;
 				return true;
+			} else {
+				throw new Exception('Limit for free quiz subscription (' . $result->threshold . ') reached', 901);
 			}
+		} else {
+			throw new Exception('Incorrect Solution ' . $givenSolution, 900);
 		}
 		return false;
 	}
@@ -263,6 +270,11 @@ class Controller {
 		$model = new DBModel ();
 		$result = $model->searchByCoords($lat, $lng, $ray);
 		return $result;
+	}
+	
+	function incrementQuizCounter($id) {
+		$model = new DBModel ();
+		$model->incrementQuizCounter($id);
 	}
 	
 	/**

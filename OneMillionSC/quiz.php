@@ -45,8 +45,8 @@ if (isset ( $_REQUEST ['solution'] )) {
 		<div>Wrong Response</div>
 		<?php } else { ?>
 			<div class="wrap">
-				Trentatrè trentini entrarono a Trento tutti e trentatrè...
-				<form name="coordinateForm" action="quiz.php" method="post">
+				What tastes better than it smells?
+				<form name="quizForm" action="quiz.php" method="post">
 					<input type="text" name="solution" id="solution"/>
 					<input type="submit" name="solution_button" value="solution"/>
 				</form>

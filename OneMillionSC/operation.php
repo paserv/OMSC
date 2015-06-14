@@ -24,7 +24,7 @@
 		$_SESSION["latitude"] = null;
 		$_SESSION["longitude"] = null;
 		$_SESSION["aboutme"] = null;
-		$excep->setError(700, "User Cancelled the Approval");
+		$excep->setError(400, "User Cancelled the Approval");
 	} else {
 		/**
 		 * If it comes from account.php
@@ -87,7 +87,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v2.3&appId=1421469004782445";
+  js.src = "//connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v2.3&appId=1421469004782445";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
@@ -111,13 +111,13 @@
 			<?php } ?>
 			</div>
 			<?php 
-			if (!isset($_REQUEST['logout_button']) && isset($_SESSION['sn'])) {
+			if (!isset($_REQUEST['logout_button']) && !isset($_REQUEST['delete_button']) && isset($_SESSION['sn'])) {
 				if ($_SESSION['sn'] === 'FB') { ?>
 				<div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div>
 				<?php } elseif ($_SESSION['sn'] === 'TW') {?>
 				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
 				<?php } elseif ($_SESSION['sn'] === 'PL') {?>
-				<a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share.png" alt="Share on Google+"/></a>
+				<a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share2.png" alt="Share on Google+"/></a>
 				<?php } 
 				} ?>
 		<?php } ?>
