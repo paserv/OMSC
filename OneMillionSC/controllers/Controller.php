@@ -2,10 +2,6 @@
 require_once 'autoload.php';
 controller_autoload();
 
-// use PayPal\Api\ExecutePayment;
-// use PayPal\Api\Payment;
-// use PayPal\Api\PaymentExecution;
-
 class Controller {
 	
 	/**
@@ -95,7 +91,7 @@ class Controller {
 		$_SESSION ["aboutme"] = null;
 		$_SESSION['oauth_token'] = null;
 		$_SESSION['oauth_token_secret'] = null;
-		$_SESSION ["sn"] = false;
+		$_SESSION ["sn"] = null;
 		$_SESSION ["isLogged"] = false;
 // 		session_unset();
 	}
@@ -107,13 +103,13 @@ class Controller {
 		try {
 			$this->registerUserIntoDB ( $dbData );
 		}  catch ( Exception $e ) {
-// 			$this->logout();
+			$this->logout();
 			throw new Exception($e->getMessage(), 800);
 		}
 		try {
-			$this->registerUserIntoFusionTable ( $dbData );
+// 			$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
-// 			$this->logout();
+			$this->logout();
 			$this->deleteUserFromDB($dbData);
 			throw new Exception($e->getMessage(), 801);
 		}
@@ -121,7 +117,7 @@ class Controller {
 			try {
 				$this->executePayment($paymentId, $payerID);
 			}  catch ( Exception $e ) {
-// 				$this->logout();
+				$this->logout();
 				$this->deleteUserFromDB($dbData);
 				$this->deleteUserFromFusionTable($dbData);
 				throw new Exception($e->getMessage(), 802);
@@ -135,7 +131,7 @@ class Controller {
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
-			$this->deleteUserFromFusionTable($dbData);
+// 			$this->deleteUserFromFusionTable($dbData);
 			$this->logout();
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
@@ -148,7 +144,7 @@ class Controller {
 		$oldUser = $this->search($dbData->socialId);
 		$this->updateUserIntoDB($dbData);
 		try {
-			$this->updateUserIntoFusionTable($dbData);
+// 			$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), 804);
