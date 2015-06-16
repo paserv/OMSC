@@ -26,7 +26,7 @@ var coordinate = false;
 		$_SESSION ["sn"] = $_REQUEST["sn"];
 	}
 	
-	if (isset($_SESSION["sn"])) {
+	if (!isset($_REQUEST["choose"]) && isset($_SESSION["sn"])) {
 	try {
 		$currentUser = $controller->getUser ( $_SESSION ["sn"] );
 		if ($currentUser->isLogged()) {
@@ -62,7 +62,7 @@ var coordinate = false;
 			include 'error.php';
 		} else { ?>
 				<div class="wrap">
-				<?php if (!isset($_SESSION["sn"])) { ?>
+				<?php if (!isset($_SESSION["sn"]) || isset($_REQUEST["choose"])) { ?>
 					<div>
 						<div>Sign in with: </div>
 						<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>

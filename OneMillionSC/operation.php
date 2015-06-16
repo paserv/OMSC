@@ -39,32 +39,33 @@
 	if (isset($_SESSION["latitude"])) {
 		$user = $controller->getUserFromSession();
 	}
-		
-		try {
-			if (isset($_REQUEST['delete_button'])) {
-				$controller->delete($user);
-				$user->latitude = "";
-				$user->longitude = "";
-			} else if (isset($_REQUEST['modify_button'])) {
-				$controller->update($user);
-			} else if (isset($_REQUEST['register_button'])){
-				if (!IS_PAYPAL_ENABLED) {
-					$controller->registerFree($user);
-				} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) {
-					$_SESSION["okquiz"] = false;
-					$controller->registerFree($user);
-				} else {
-					$controller->redirectToPaypal();
-				}
-			} else if (isset($_REQUEST['logout_button'])){
-				$controller->logout();
-				if (isset($_SESSION["latitude"])) {
+		if ($user !== null) {
+			try {
+				if (isset($_REQUEST['delete_button'])) {
+					$controller->delete($user);
 					$user->latitude = "";
 					$user->longitude = "";
+				} else if (isset($_REQUEST['modify_button'])) {
+					$controller->update($user);
+				} else if (isset($_REQUEST['register_button'])){
+					if (!IS_PAYPAL_ENABLED) {
+						$controller->registerFree($user);
+					} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) {
+						$_SESSION["okquiz"] = false;
+						$controller->registerFree($user);
+					} else {
+						$controller->redirectToPaypal();
+					}
+				} else if (isset($_REQUEST['logout_button'])){
+					$controller->logout();
+					if (isset($_SESSION["latitude"])) {
+						$user->latitude = "";
+						$user->longitude = "";
+					}
 				}
+			} catch (Exception $e) {
+				$excep->setError($e->getCode(), $e->getMessage());
 			}
-		} catch (Exception $e) {
-			$excep->setError($e->getCode(), $e->getMessage());
 		}
 	}
 ?>

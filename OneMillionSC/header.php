@@ -9,7 +9,7 @@
 		<div class="left_col">
 			<div class="menuButton"><a href="index.php"><img src="public/img/home.png"></a></div>
 			<div class="menuButton" id="searchPerBtn"><a><img src="public/img/searchPerson.png"></a></div>
-			<div class="menuButton"><a href="account.php"><img src="public/img/map.png"></a></div>
+			<div class="menuButton"><a href="account.php?choose=yes"><img src="public/img/map.png"></a></div>
 			<?php if (IS_QUIZ_ENABLED) {
 				echo "<div class='menuButton'><a href='quiz.php'><img src='public/img/quiz.png'></a></div>";
 			} ?>
