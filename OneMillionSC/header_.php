@@ -4,6 +4,12 @@
 		$total = $controller->countMembers(); 
 	}
 ?>
+<script>
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+</script>
 <div class="navbar-fixed">
 	<ul id="dropdown1" class="dropdown-content">
 	<?php if (isset($_SESSION ["latitude"]) && $_SESSION ["latitude"] != null) { ?>
@@ -25,11 +31,11 @@
 	<nav>
 		<div class="nav-wrapper blue darken-3">
 			<ul class="left hide-on-med-and-down">
-				<li><a href="index_.php"><i class="mdi-social-public"></i></a></li>
-				<li><a href="sass.html"><i class="mdi-action-search"></i></a></li>
-				<li><a href="account_.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
+				<li><a class="waves-effect waves-light" href="index_.php"><i class="mdi-social-public"></i></a></li>
+				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search"></i></a></li>
+				<li><a class="waves-effect waves-light" href="account_.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
-					<li><a href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
+					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
 				<?php } ?>
 			</ul>
 			<ul class="right hide-on-med-and-down">
@@ -43,3 +49,13 @@
 		</div>
 	</nav>
 </div>
+
+<div id="modal1" class="modal">
+    				<div class="modal-content">
+	      				<h4>Modal Header</h4>
+	      				<p>A bunch of text</p>
+    				</div>
+	    			<div class="modal-footer">
+	      				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+	    			</div>
+  				</div>

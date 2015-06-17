@@ -23,7 +23,6 @@ autoload (); ?>
 		</head>
 	
 	<body>
-		
 		<?php if (! empty ( $_GET['latitude'] ) && ! empty ( $_GET['longitude'] )) {?>
 		<script type="text/javascript">var latitude = <?php echo $_GET['latitude']; ?>;</script>
 		<script type="text/javascript">var longitude = <?php echo $_GET['longitude']; ?>;</script>

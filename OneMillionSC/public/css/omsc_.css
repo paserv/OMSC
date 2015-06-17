@@ -22,10 +22,6 @@ html,body {
     margin-left: 5px;
 }
 
-.container-footer {
-    padding: 0px 10px 0px 20px;
-}
-
 #map-canvas {
     width: 100%;
     margin-top: 0px;
