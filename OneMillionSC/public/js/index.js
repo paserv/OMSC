@@ -1,6 +1,15 @@
 window.onload = loadScript;
 var geom = null;
 
+var input = document.getElementById('zoom_place');
+var autocomplete = new google.maps.places.Autocomplete(input);
+
+$( "#zoom_place" ).keypress(function(e) {
+	if (e.keyCode == 13) {
+		window.location = "index.php?searchPlace=" + $( "#zoom_place" ).val();
+	}
+});
+
 function loadScript() {
 	var mapApi = document.createElement('script');
 	mapApi.type = 'text/javascript';

@@ -12,7 +12,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.19&libraries=places&language=en"></script>
 <script type="text/javascript" src="public/js/index.js"></script>
 <script type="text/javascript" src="public/js/config.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link type="text/css" rel="stylesheet" href="public/css/jquery-ui.css">
 <link href="public/css/omsc.css" rel="stylesheet" type="text/css">
 </head>
 <body>

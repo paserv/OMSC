@@ -6,7 +6,6 @@
 ?>
 <script>
 $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal-trigger').leanModal();
   });
 </script>
@@ -51,11 +50,95 @@ $(document).ready(function(){
 </div>
 
 <div id="modal1" class="modal">
-    				<div class="modal-content">
-	      				<h4>Modal Header</h4>
-	      				<p>A bunch of text</p>
-    				</div>
-	    			<div class="modal-footer">
-	      				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-	    			</div>
-  				</div>
+    <div class="modal-content">
+		<h4>Find people</h4>
+		<div class="input-field col s6">
+          <i class="mdi-action-account-circle prefix"></i>
+          <input id="search_name" type="text" class="validate" placeholder="Enter a name">
+        </div>
+        <div class="input-field col s6">
+          <i class="mdi-maps-map prefix"></i>
+          <input id="search_place" type="text" class="validate">
+        </div>
+        <p class="range-field">
+        	<i id="icon_slide_bar" class="mdi-device-location-searching prefix"></i>
+        	<label id="label_slide_bar" for="slide_bar">Ray (Km)</label>
+      		<input id="slide_bar" class="blue darken-3" type="range" id="test5" min="0" max="100" value="50"/>
+   		</p>
+    </div>
+	<div class="modal-footer">
+		<button id = "findBtn" class="btn blue darken-3 waves-effect waves-light" type="submit" name="action">Search
+			<i class="mdi-content-send right"></i>
+		</button>
+		<a href="#!" class=" modal-action modal-close waves-effect waves-blue btn-flat">Cancel</a>
+	</div>
+</div>
+<script>
+var input = document.getElementById('search_place');
+var autocomplete = new google.maps.places.Autocomplete(input);
+
+$( "#icon_slide_bar" ).hide();
+$( "#label_slide_bar" ).hide();
+$( "#slide_bar" ).hide();
+
+$('#search_place').bind('input', function() {
+	if (input.value === '') {
+		$( "#icon_slide_bar" ).hide();
+		$( "#label_slide_bar" ).hide();
+		$( "#slide_bar" ).hide();
+	} else {
+		$( "#icon_slide_bar" ).show();
+		$( "#label_slide_bar" ).show();
+		$( "#slide_bar" ).show();
+	}
+});
+
+$( "#findBtn" ).click(function() {
+	var queryString;
+	var ray = $( "#slide_bar" ).val();
+	if ($( "#search_place" ).val() !== '' && $( "#search_name" ).val() !== '') {
+		var lat;
+		var lng;
+		var geocoder = new google.maps.Geocoder();
+	    geocoder.geocode({
+	      address: $( "#search_place" ).val()
+	    }, function(results, status) {
+		  var res = results;
+		  var st = status;
+	      if (status == google.maps.GeocoderStatus.OK) {
+	    	geom = results[0].geometry;
+	    	lat = geom.location.lat();
+	    	lng = geom.location.lng();
+	    	queryString = "?name=" + $( "#search_name" ).val() + "&lat=" + lat + "&lng=" + lng + "&ray=" + ray;
+			window.location = "search.php" + queryString;
+	      } else {
+	    	  window.alert('Address could not be geocoded: ' + status);
+		      }
+	    });
+		} else if ($( "#search_place" ).val() !== '') {
+		var lat;
+		var lng;
+		var geocoder = new google.maps.Geocoder();
+	    geocoder.geocode({
+	      address: $( "#search_place" ).val()
+	    }, function(results, status) {
+		  var res = results;
+		  var st = status;
+	      if (status == google.maps.GeocoderStatus.OK) {
+	    	geom = results[0].geometry;
+	    	lat = geom.location.lat();
+	    	lng = geom.location.lng();
+	    	queryString = "?lat=" + lat + "&lng=" + lng + "&ray=" + ray;
+	    	window.location = "search.php" + queryString;
+	      } else {
+	    	  window.alert('Address could not be geocoded: ' + status);
+		      }
+	    });
+	} else if ($( "#search_name" ).val() !== '') {
+		queryString = "?name=" + $( "#search_name" ).val();
+		window.location = "search.php" + queryString;
+		} else {
+			window.location = "search.php";
+			}
+});
+</script>

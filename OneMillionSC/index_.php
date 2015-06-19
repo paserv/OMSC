@@ -6,7 +6,7 @@ autoload (); ?>
 		<head>
 			<title>One Million Social Club - Home Page</title>
 			<link type="text/css" rel="stylesheet" href="public/css/materialize.min.css"  media="screen,projection"/>
-			<link type="text/css" rel="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+			<link type="text/css" rel="stylesheet" href="public/css/jquery-ui.css">
 			<link type="text/css" rel="stylesheet" href="public/css/omsc_.css" />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 			<meta property="og:title" content="OMSC">
@@ -31,6 +31,7 @@ autoload (); ?>
 		<?php } ?>
 		
 		<?php include 'header_.php'; ?>
+			<input id="zoom_place" type="text"></input>
 			<div id="map-canvas"></div>
 		<?php include 'footer_.php'; ?>
 		
