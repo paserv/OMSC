@@ -8,6 +8,7 @@ $excep = new CustomException(); ?>
 	<head>
 		<title>One Million Social Club - Home Page</title>
 		<link type="text/css" rel="stylesheet" href="public/css/materialize.min.css"  media="screen,projection"/>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link type="text/css" rel="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<link type="text/css" rel="stylesheet" href="public/css/omsc_.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>

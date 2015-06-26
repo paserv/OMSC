@@ -7,9 +7,16 @@
 <script>
 $(document).ready(function(){
     $('.modal-trigger').leanModal();
+    $(".dropdown-button").dropdown();
   });
+
+$(".button-collapse").sideNav({
+    closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+  }
+);
+
+$('.collapsible').collapsible();
 </script>
-<div class="navbar-fixed">
 	<ul id="dropdown1" class="dropdown-content">
 	<?php if (isset($_SESSION ["latitude"]) && $_SESSION ["latitude"] != null) { ?>
 	  <li><a href="account_.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
@@ -27,9 +34,10 @@ $(document).ready(function(){
 	  <li><a href="account_.php?sn=PL"><img src="public/img/PL_pic.png"></a></li>
 	<?php } ?>
 	</ul>
+	<div class="navbar-fixed">
 	<nav>
 		<div class="nav-wrapper blue darken-3">
-			<ul class="left hide-on-med-and-down">
+			<ul class="left hide-on-small-only">
 				<li><a class="waves-effect waves-light" href="index_.php"><i class="mdi-social-public"></i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search"></i></a></li>
 				<li><a class="waves-effect waves-light" href="account_.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
@@ -37,14 +45,61 @@ $(document).ready(function(){
 					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
 				<?php } ?>
 			</ul>
-			<ul class="right hide-on-med-and-down">
+			<ul class="right hide-on-small-only">
 			<?php if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) { ?>
 		  		<li><img class="header-img" src="<?php echo $_SESSION ["avatarUrl"]; ?>" /></li>
 			<?php } else { ?>
 		  		<li><img class="header-img" src="public/img/anonym_user.png" /></li>
 			<?php } ?>
-				<li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="mdi-navigation-more-vert right"></i></a></li>
+				<li><a class="dropdown-button" href="#" data-activates="dropdown1"><i class="material-icons right">more_vert</i></a></li>
 			</ul>
+			
+			<ul id="slide-out" class="side-nav">
+			    <li class="no-padding">
+			      <ul class="collapsible collapsible-accordion">
+			        <li>
+			        	<a class="collapsible-header"><i class="mdi-navigation-arrow-drop-down"></i></a>
+				        <?php if (isset($_SESSION ["latitude"]) && $_SESSION ["latitude"] != null) { ?>
+				  		<img class="header-img" src="<?php echo $_SESSION ["avatarUrl"]; ?>" />
+				  		<div class="collapsible-body">
+				            <ul>
+				              <li><a href="account_.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
+				              <li><a href="operation.php?logout_button=Logout">Logout</a></li>
+				            </ul>
+				          </div>
+						<?php } else if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) { ?>
+					  	<img class="header-img" src="<?php echo $_SESSION ["avatarUrl"]; ?>" />
+				  		<div class="collapsible-body">
+				            <ul>
+				              <li><a href="account_.php?sn=<?php echo $_SESSION ["sn"] ?>">Register</a></li>
+							  <li><a href="operation.php?logout_button=Logout">Logout</a></li>
+				            </ul>
+				          </div>
+						<?php } else { ?>
+							<img class="header-img" src="public/img/anonym_user.png" />
+							<div class="collapsible-body">
+					            <ul>
+					              <li class="blue-text text-darken-4">Sign In With:</li>
+								  <li class="divider"></li>
+								  <li><a href="account_.php?sn=FB"><img src="public/img/FB_pic.png" /> Facebook</a></li>
+								  <li><a href="account_.php?sn=TW"><img src="public/img/TW_pic.png"> Twitter</a></li>
+								  <li><a href="account_.php?sn=PL"><img src="public/img/PL_pic.png"> Google Plus</a></li>
+					            </ul>
+					          </div>
+						<?php } ?>
+			        </li>
+			      </ul>
+			    </li>
+				 
+				<li class="divider"></li>
+		    	<li><a class="waves-effect waves-light" href="index_.php"><i class="mdi-social-public">Home</i></a></li>
+				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search">Search</i></a></li>
+				<li><a class="waves-effect waves-light" href="account_.php?choose=yes"><i class="mdi-social-person-add">Sign In</i></a></li>
+				<?php if (IS_QUIZ_ENABLED) { ?>
+					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help">Quiz</i></a></li>
+				<?php } ?>
+				</ul>
+			<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 		</div>
 	</nav>
 </div>

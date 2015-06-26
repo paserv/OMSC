@@ -8,6 +8,7 @@ autoload (); ?>
 			<link type="text/css" rel="stylesheet" href="public/css/materialize.min.css"  media="screen,projection"/>
 			<link type="text/css" rel="stylesheet" href="public/css/jquery-ui.css">
 			<link type="text/css" rel="stylesheet" href="public/css/omsc_.css" />
+			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 			<meta property="og:title" content="OMSC">
 			<meta property="og:image" content="http://www.aoapao.com/public/img/find.png">
@@ -17,7 +18,7 @@ autoload (); ?>
 			<script type="text/javascript" src="public/js/jquery-2.1.3.min.js"></script>
 			<script type="text/javascript" src="public/js/jquery-ui-1.11.4.js"></script>
 			<script type="text/javascript" src="public/js/materialize.min.js"></script>
-			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.19&libraries=places&language=en"></script>
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.19&signed_in=true&libraries=places&language=en"></script>
 			<script type="text/javascript" src="public/js/index.js"></script>
 			<script type="text/javascript" src="public/js/config.js"></script>
 		</head>
@@ -34,7 +35,17 @@ autoload (); ?>
 			<input id="zoom_place" type="text"></input>
 			<div id="map-canvas"></div>
 		<?php include 'footer_.php'; ?>
-		
+			
+			
+			<script>
+			var input = document.getElementById('zoom_place');
+			var autocomplete = new google.maps.places.Autocomplete(input);
+			$( "#zoom_place" ).keypress(function(e) {
+				if (e.keyCode == 13) {
+					window.location = "index.php?searchPlace=" + $( "#zoom_place" ).val();
+				}
+			});
+			</script>
 	</body>
 	
 	</html>

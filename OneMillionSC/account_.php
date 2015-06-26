@@ -10,6 +10,7 @@ $excep = new CustomException(); ?>
 		<link type="text/css" rel="stylesheet" href="public/css/materialize.min.css"  media="screen,projection"/>
 		<link type="text/css" rel="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<link type="text/css" rel="stylesheet" href="public/css/omsc_.css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<meta property="og:title" content="OMSC">
 		<meta property="og:image" content="http://www.aoapao.com/public/img/find.png">
@@ -66,13 +67,42 @@ $excep = new CustomException(); ?>
 	?>
 				<div class="container">
 				<?php if (!isset($_SESSION["sn"]) || isset($_REQUEST["choose"])) { ?>
-					<div>
-						<div>Sign in with: </div>
-						<a href="account_.php?sn=FB"><img src="public/img/facebook.png"></a>
-						<a href="account_.php?sn=TW"><img src="public/img/twitter.png"></a>
-						<a href="account_.php?sn=PL"><img src="public/img/gplus.png"></a>
+					<div class="card-panel">
+						<div class="row">
+						    <div class="col s12"><p>Sign in with: </p></div>
+					  	</div>
+						<div class="row">
+						    <div class="col s4 center"><a href="account_.php?sn=FB"><img src="public/img/facebook.png"></a></div>
+						    <div class="col s4 center"><a href="account_.php?sn=TW"><img src="public/img/twitter.png"></a></div>
+						    <div class="col s4 center"><a href="account_.php?sn=PL"><img src="public/img/gplus.png"></a></div>
+					  	</div>
+					  	<div class="row">
+						    <div class="col s4 center">Facebook</div>
+						    <div class="col s4 center">Twitter</div>
+						    <div class="col s4 center">Google Plus</a></div>
+					  	</div>
 					</div>
 					<?php } elseif ($currentUser->isLogged()) { ?>
+					<div class="card-panel">
+						<div class="row">
+							<form class="col s12">
+							<div class="col s12 m6 l6">
+								<img src="<?php echo $currentUser->avatarUrl; ?>" />
+							</div>
+							<div class="input-field col s12 m12 l12 disabled">
+								<input placeholder="<?php echo $currentUser->name; ?>" id="name" type="text" class="validate">
+          						<label for="first_name">Name</label>
+							</div>
+								<div class="col s12 m6 l6">
+									<img src="<?php echo $currentUser->avatarUrl; ?>" />
+	          						Name
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					
+					
 					<form name="coordinateForm" action="operation.php" method="post">
 						<div class="left_col">
 							<div><img src="<?php echo $currentUser->avatarUrl; ?>" /></div>
