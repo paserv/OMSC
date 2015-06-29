@@ -23,29 +23,29 @@ $('.collapsible').collapsible();
 	  <li class="divider"></li>
 	  <li><a href="operation.php?logout_button=Logout">Logout</a></li>
 	<?php } else if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) {?>
-	  <li><a href="account_.php?sn=<?php echo $_SESSION ["sn"] ?>">Register</a></li>
+	  <li><a href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">Register</a></li>
 	  <li class="divider"></li>
 	  <li><a href="operation.php?logout_button=Logout">Logout</a></li>
 	<?php } else {?>
 	  <li class="blue-text text-darken-4">Sign In With:</li>
 	  <li class="divider"></li>
-	  <li><a href="account_.php?sn=FB"><img src="public/img/FB_pic.png" /></a></li>
-	  <li><a href="account_.php?sn=TW"><img src="public/img/TW_pic.png"></a></li>
-	  <li><a href="account_.php?sn=PL"><img src="public/img/PL_pic.png"></a></li>
+	  <li><a href="account.php?sn=FB"><img src="public/img/FB_pic.png" /></a></li>
+	  <li><a href="account.php?sn=TW"><img src="public/img/TW_pic.png"></a></li>
+	  <li><a href="account.php?sn=PL"><img src="public/img/PL_pic.png"></a></li>
 	<?php } ?>
 	</ul>
 	<div class="navbar-fixed">
 	<nav>
 		<div class="nav-wrapper blue darken-3">
-			<ul class="left hide-on-small-only">
-				<li><a class="waves-effect waves-light" href="index_.php"><i class="mdi-social-public"></i></a></li>
+			<ul class="left hide-on-med-and-down">
+				<li><a class="waves-effect waves-light" href="index.php"><i class="mdi-social-public"></i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search"></i></a></li>
-				<li><a class="waves-effect waves-light" href="account_.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
+				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
 					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
 				<?php } ?>
 			</ul>
-			<ul class="right hide-on-small-only">
+			<ul class="right hide-on-med-and-down">
 			<?php if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) { ?>
 		  		<li><img class="header-img" src="<?php echo $_SESSION ["avatarUrl"]; ?>" /></li>
 			<?php } else { ?>
@@ -63,7 +63,7 @@ $('.collapsible').collapsible();
 				  		<img class="header-img" src="<?php echo $_SESSION ["avatarUrl"]; ?>" />
 				  		<div class="collapsible-body">
 				            <ul>
-				              <li><a href="account_.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
+				              <li><a href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
 				              <li><a href="operation.php?logout_button=Logout">Logout</a></li>
 				            </ul>
 				          </div>
@@ -71,7 +71,7 @@ $('.collapsible').collapsible();
 					  	<img class="header-img" src="<?php echo $_SESSION ["avatarUrl"]; ?>" />
 				  		<div class="collapsible-body">
 				            <ul>
-				              <li><a href="account_.php?sn=<?php echo $_SESSION ["sn"] ?>">Register</a></li>
+				              <li><a href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">Register</a></li>
 							  <li><a href="operation.php?logout_button=Logout">Logout</a></li>
 				            </ul>
 				          </div>
@@ -81,9 +81,9 @@ $('.collapsible').collapsible();
 					            <ul>
 					              <li class="blue-text text-darken-4">Sign In With:</li>
 								  <li class="divider"></li>
-								  <li><a href="account_.php?sn=FB"><img src="public/img/FB_pic.png" /> Facebook</a></li>
-								  <li><a href="account_.php?sn=TW"><img src="public/img/TW_pic.png"> Twitter</a></li>
-								  <li><a href="account_.php?sn=PL"><img src="public/img/PL_pic.png"> Google Plus</a></li>
+								  <li><a href="account.php?sn=FB"><img src="public/img/FB_pic.png" /> Facebook</a></li>
+								  <li><a href="account.php?sn=TW"><img src="public/img/TW_pic.png"> Twitter</a></li>
+								  <li><a href="account.php?sn=PL"><img src="public/img/PL_pic.png"> Google Plus</a></li>
 					            </ul>
 					          </div>
 						<?php } ?>
@@ -92,9 +92,9 @@ $('.collapsible').collapsible();
 			    </li>
 				 
 				<li class="divider"></li>
-		    	<li><a class="waves-effect waves-light" href="index_.php"><i class="mdi-social-public">Home</i></a></li>
+		    	<li><a class="waves-effect waves-light" href="index.php"><i class="mdi-social-public">Home</i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search">Search</i></a></li>
-				<li><a class="waves-effect waves-light" href="account_.php?choose=yes"><i class="mdi-social-person-add">Sign In</i></a></li>
+				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-social-person-add">Sign In</i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
 					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help">Quiz</i></a></li>
 				<?php } ?>

@@ -61,7 +61,7 @@ $excep = new CustomException(); ?>
 					}
 				}
 	?>
-	<?php include 'header_.php'; ?>
+	<?php include 'header.php'; ?>
 	
 	<?php if ($excep->existProblem) {
 		include 'error.php';
@@ -90,8 +90,13 @@ $excep = new CustomException(); ?>
 						<div class="card-panel">
 							<div class="row">
 								<div class="col s12 m12 l6">
-									<div class="col s12">
+									<div class="col s6">
 										<img src="<?php echo $currentUser->avatarUrl; ?>" />
+									</div>
+									<div class="col s6">
+										<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
+					    				<i class="material-icons">undo</i>
+					    				</button>
 									</div>
 									<div class="col s12">
 										<div class="input-field">
@@ -151,9 +156,6 @@ $excep = new CustomException(); ?>
 									<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="modify_button">Modify
 				    				<i class="material-icons">edit</i>
 				  					</button>
-				  					<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
-				    				<i class="material-icons">undo</i>
-				    				</button>
 				  				</div>
 			  					<?php if (DELETE_BTN_ENABLED) { ?>
 					  					<div class="col s12 m6 right">
@@ -166,15 +168,19 @@ $excep = new CustomException(); ?>
 						  				<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="register_button">Free Registration
 					    				<i class="material-icons">done</i>
 					  					</button>
-					  					<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
-					    				<i class="material-icons">undo</i>
-					    				</button>
 					    			</div>
 			  					<?php } else { ?>
 				  					<div class="card-panel">
 						  				<div class="row">
 						  					<div class="col s12 m12 l6 center">
-							  					Assa
+							  					<div class="row">
+							  						<div class="col s6 blue-grey lighten-4">Description</div>
+							  						<div class="col s6 blue-grey lighten-4">Total Amount</div>
+							  					</div>
+							  					<div class="row">
+							  						<div class="col s6">One Million Social Club Subscription</div>
+							  						<div class="col s6">1 EUR</div>
+							  					</div>
 						  					</div>
 						  					<div class="col s12 m12 l6 center">
 							  					<button type="submit" name="register_button" style="background:url(public/img/paypal-button.png) no-repeat;width:180px;height:40px;border: none;">
@@ -182,13 +188,6 @@ $excep = new CustomException(); ?>
 						  					</div>
 						  				</div>
 						  			</div>
-						  			<div class="row">
-							  			<div class="col s12 right">
-							  				<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
-							    			<i class="material-icons">undo</i>
-							    			</button>
-							    		</div>
-				  					</div>
 			  					<?php } ?>
 			  				</div>
 					</form>
@@ -202,7 +201,7 @@ $excep = new CustomException(); ?>
 						<?php } ?>
 				</div>
 	
-	<?php } include 'footer_.php'; ?>
+	<?php } include 'footer.php'; ?>
 	<script type="text/javascript" src="public/js/location_choose.js"></script>
 </body>
 

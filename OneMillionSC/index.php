@@ -31,10 +31,10 @@ autoload (); ?>
 		<script type="text/javascript">var searchPlace = "<?php echo $_GET['searchPlace']; ?>;"</script>
 		<?php } ?>
 		
-		<?php include 'header_.php'; ?>
+		<?php include 'header.php'; ?>
 			<input id="zoom_place" type="text"></input>
 			<div id="map-canvas"></div>
-		<?php include 'footer_.php'; ?>
+		<?php include 'footer.php'; ?>
 			
 			
 			<script>

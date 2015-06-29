@@ -104,9 +104,27 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
-	<?php include 'header_.php'; if ($excep->existProblem) { include 'error.php'; } else {	?>
-	CONTENT
-	<?php } include 'footer_.php'; ?>
+	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else {	?>
+	<div class="container">
+		<div class="card-panel center">
+			<h5>Operation Success!</h5>
+			<?php if ($user !== null) {?>
+				<a class="waves-effect waves-light btn blue darken-3" href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>"><i class="material-icons right">backspace</i>Come Back Home</a>
+			<?php } else { ?>
+				<a class="waves-effect waves-light btn blue darken-3" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
+			<?php } 
+			if (!isset($_REQUEST['logout_button']) && !isset($_REQUEST['delete_button']) && isset($_SESSION['sn'])) {
+				if ($_SESSION['sn'] === 'FB') { ?>
+				<div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div>
+				<?php } elseif ($_SESSION['sn'] === 'TW') {?>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
+				<?php } elseif ($_SESSION['sn'] === 'PL') {?>
+				<a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share2.png" alt="Share on Google+"/></a>
+				<?php } 
+				} ?>
+		</div>
+	</div>
+	<?php } include 'footer.php'; ?>
 </body>
 
 </html>
