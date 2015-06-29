@@ -64,6 +64,7 @@ $excep = new CustomException(); ?>
 	<?php include 'header_.php'; ?>
 	
 	<?php if ($excep->existProblem) {
+		include 'error.php';
 		} else {
 	?>
 				<div class="container" style="width:90%">

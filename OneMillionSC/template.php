@@ -26,11 +26,7 @@ $excep = new CustomException(); ?>
 	</head>
 
 <body>
-	<?php include 'header_.php'; ?>
-	
-	<?php if ($excep->existProblem) {
-		} else {
-	?>
+	<?php include 'header_.php'; if ($excep->existProblem) { include 'error.php'; } else {	?>
 	CONTENT
 	<?php } include 'footer_.php'; ?>
 </body>
