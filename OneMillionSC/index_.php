@@ -38,8 +38,8 @@ autoload (); ?>
 			
 			
 			<script>
-			var input = document.getElementById('zoom_place');
-			var autocomplete = new google.maps.places.Autocomplete(input);
+			var input_zoom_place = document.getElementById('zoom_place');
+			var autocomplete = new google.maps.places.Autocomplete(input_zoom_place);
 			$( "#zoom_place" ).keypress(function(e) {
 				if (e.keyCode == 13) {
 					window.location = "index.php?searchPlace=" + $( "#zoom_place" ).val();

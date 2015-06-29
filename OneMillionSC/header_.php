@@ -129,15 +129,15 @@ $('.collapsible').collapsible();
 	</div>
 </div>
 <script>
-var input = document.getElementById('search_place');
-var autocomplete = new google.maps.places.Autocomplete(input);
+var input_search_place = document.getElementById('search_place');
+var autocomplete = new google.maps.places.Autocomplete(input_search_place);
 
 $( "#icon_slide_bar" ).hide();
 $( "#label_slide_bar" ).hide();
 $( "#slide_bar" ).hide();
 
-$('#search_place').bind('input', function() {
-	if (input.value === '') {
+$('#search_place').bind('change', function() {
+	if ($('#search_place').value === '') {
 		$( "#icon_slide_bar" ).hide();
 		$( "#label_slide_bar" ).hide();
 		$( "#slide_bar" ).hide();

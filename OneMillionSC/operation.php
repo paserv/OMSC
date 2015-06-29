@@ -33,7 +33,9 @@
 		if(isset($_REQUEST['modify_button']) || isset($_REQUEST['register_button'])) {
 			$_SESSION["latitude"] = $_REQUEST['latitude'];
 			$_SESSION["longitude"] = $_REQUEST['longitude'];
-			$_SESSION["aboutme"] = $_REQUEST['aboutme'];
+			if (isset($_REQUEST['aboutme'])) {
+				$_SESSION["aboutme"] = $_REQUEST['aboutme'];
+			}
 		}
 		
 	if (isset($_SESSION["latitude"])) {
@@ -56,15 +58,15 @@
 					} else {
 						$controller->redirectToPaypal();
 					}
-				} else if (isset($_REQUEST['logout_button'])){
-					$controller->logout();
-					if (isset($_SESSION["latitude"])) {
-						$user->latitude = "";
-						$user->longitude = "";
-					}
 				}
 			} catch (Exception $e) {
 				$excep->setError($e->getCode(), $e->getMessage());
+			}
+		} elseif (isset($_REQUEST['logout_button'])){
+			$controller->logout();
+			if (isset($_SESSION["latitude"])) {
+				$user->latitude = "";
+				$user->longitude = "";
 			}
 		}
 	}

@@ -64,7 +64,7 @@ var coordinate = false;
 				<div class="wrap">
 				<?php if (!isset($_SESSION["sn"]) || isset($_REQUEST["choose"])) { ?>
 					<div>
-						<div>Sign in with: </div>
+						<h3>Sign in with: </h3>
 						<a href="account.php?sn=FB"><img src="public/img/facebook.png"></a>
 						<a href="account.php?sn=TW"><img src="public/img/twitter.png"></a>
 						<a href="account.php?sn=PL"><img src="public/img/gplus.png"></a>

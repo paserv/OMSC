@@ -23,6 +23,7 @@ $excep = new CustomException(); ?>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.19&libraries=places&language=en"></script>
 		<script type="text/javascript" src="public/js/index.js"></script>
 		<script type="text/javascript" src="public/js/config.js"></script>
+		<script type="text/javascript" src="public/js/locationpicker.jquery.min.js"></script>
 	</head>
 
 <body>
@@ -65,11 +66,11 @@ $excep = new CustomException(); ?>
 	<?php if ($excep->existProblem) {
 		} else {
 	?>
-				<div class="container">
+				<div class="container" style="width:90%">
 				<?php if (!isset($_SESSION["sn"]) || isset($_REQUEST["choose"])) { ?>
 					<div class="card-panel">
 						<div class="row">
-						    <div class="col s12"><p>Sign in with: </p></div>
+						    <div class="col s12"><h5>Sign in with: </h5></div>
 					  	</div>
 						<div class="row">
 						    <div class="col s4 center"><a href="account_.php?sn=FB"><img src="public/img/facebook.png"></a></div>
@@ -83,76 +84,119 @@ $excep = new CustomException(); ?>
 					  	</div>
 					</div>
 					<?php } elseif ($currentUser->isLogged()) { ?>
-					<div class="card-panel">
-						<div class="row">
-							<form class="col s12">
-							<div class="col s12 m6 l6">
-								<img src="<?php echo $currentUser->avatarUrl; ?>" />
-							</div>
-							<div class="input-field col s12 m12 l12 disabled">
-								<input placeholder="<?php echo $currentUser->name; ?>" id="name" type="text" class="validate">
-          						<label for="first_name">Name</label>
-							</div>
-								<div class="col s12 m6 l6">
-									<img src="<?php echo $currentUser->avatarUrl; ?>" />
-	          						Name
-								</div>
-							</form>
-						</div>
-					</div>
-					
-					
-					
+					<h5>My Profile</h5>
 					<form name="coordinateForm" action="operation.php" method="post">
-						<div class="left_col">
-							<div><img src="<?php echo $currentUser->avatarUrl; ?>" /></div>
-							<div class="label">Name</div>
-							<div><?php echo $currentUser->name; ?></div>
-							<div class="label">Email</div>
-							<div><?php echo $currentUser->email; ?></div>
-							<div class="label">My Coordinates</div>
-							<div><b>Latitude</b></div>
-							<div><input type="text" name="latitude" id="latitude"/></div>
-							<div><b>Longitude</b></div>
-							<div><input type="text" name="longitude" id="longitude"/></div>
-							<div class="label">Something about me</div>
-							<?php 
-								if ($currentUser->isRegistered()) {
-								?>
-								<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ><?php echo $currentUser->description; ?></textarea></div>
-								<div><input type="submit" name="modify_button" value="Modify"/></div>
-								<?php 
-									if (DELETE_BTN_ENABLED) {
-									?>
-										<div><input type="submit" name="delete_button" value="Delete"/></div>
-									<?php }	
-								} else {
-								?>
-								<div><textarea name="aboutme" id="aboutme" rows="2" cols="40" maxlength="160" ></textarea></div>
-								<?php 
-								if (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) {
-								?>
-								<input type="submit" name="register_button" value="Free Registration"/>
-								<?php 
-								} else {
-								?>
-								<input type="submit" name="register_button" value="" style="background:url(public/img/paypal-button.png) no-repeat;width:180px;height:40px;border: none;"/>
-								<?php 
-									} 
-								} ?>
-							<!-- <div><input type="submit" name="logout_button" value="Logout"/></div> -->
+						<div class="card-panel">
+							<div class="row">
+								<div class="col s12 m12 l6">
+									<div class="col s12">
+										<img src="<?php echo $currentUser->avatarUrl; ?>" />
+									</div>
+									<div class="col s12">
+										<div class="input-field">
+								          <input disabled placeholder=<?php echo $currentUser->name; ?> id="name" type="text" class="validate">
+								          <label for="name">Name</label>
+								        </div>
+									</div>
+									<div class="col s12">
+										<div class="input-field">
+								          <input disabled placeholder=<?php echo $currentUser->email; ?> id="email" type="text" class="validate">
+								          <label for="email">Email</label>
+								        </div>
+									</div>
+									<div class="col s12">
+										<div class="input-field">
+									         <input name="latitude" id="latitude" type="text" class="validate">
+									         <label for="latitude">Latitude</label>
+									    </div>
+									</div>
+									<div class="col s12">
+										<div class="input-field">
+										    <input name="longitude" id="longitude" type="text" class="validate">
+									        <label for="longitude">Longitude</label>
+									    </div>
+									</div>
+									<div class="col s12">
+										<div class="input-field">
+										    <?php if ($currentUser->isRegistered()) { ?>
+										    <textarea id="aboutme" name="aboutme" class="materialize-textarea" maxlength="160" length="160"><?php echo $currentUser->description; ?></textarea>
+										    <?php } else { ?>
+										    <textarea id="aboutme" name="aboutme" class="materialize-textarea" maxlength="160" length="160"></textarea>
+            								<?php } ?>
+            								<label for="aboutme">Something about me</label>
+									    </div>
+									</div>
+								</div>
+								
+								<div class="col s12 m12 l6">
+									<div class="col s12">
+										<div class="input-field">
+									         <input id="address" type="text" class="validate">
+									         <label for="address">Find Coordinates by Address</label>
+									    </div>
+									</div>
+									<div class="col s12">
+										<label>Pick Your Address</label>
+									</div>
+									<div class="col s12">
+										<div id="map" style="width: 100%; height: 380px;"></div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="right_col">
-							<div class="label">Search Coordinates by Address</div>
-							<div><input type="text" id="address" /></div>
-							<div class="label">Pick Your Address</div>
-				        	<div id="map" style="width: 100%; height: 380px;"></div>
-				    	</div>
-						</form>
+							<div class="row">
+							<?php if ($currentUser->isRegistered()) { ?>
+								<div class="col s12 m6 right">
+									<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="modify_button">Modify
+				    				<i class="material-icons">edit</i>
+				  					</button>
+				  					<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
+				    				<i class="material-icons">undo</i>
+				    				</button>
+				  				</div>
+			  					<?php if (DELETE_BTN_ENABLED) { ?>
+					  					<div class="col s12 m6 right">
+						  					<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="delete_button">Delete
+						    				<i class="material-icons">delete</i>
+						  					</button>
+					  					</div>
+				  				<?php }	} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) { ?>
+						  			<div class="col s12 m6 right">	
+						  				<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="register_button">Free Registration
+					    				<i class="material-icons">done</i>
+					  					</button>
+					  					<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
+					    				<i class="material-icons">undo</i>
+					    				</button>
+					    			</div>
+			  					<?php } else { ?>
+				  					<div class="card-panel">
+						  				<div class="row">
+						  					<div class="col s12 m12 l6 center">
+							  					Assa
+						  					</div>
+						  					<div class="col s12 m12 l6 center">
+							  					<button type="submit" name="register_button" style="background:url(public/img/paypal-button.png) no-repeat;width:180px;height:40px;border: none;">
+							  					</button>
+						  					</div>
+						  				</div>
+						  			</div>
+						  			<div class="row">
+							  			<div class="col s12 right">
+							  				<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
+							    			<i class="material-icons">undo</i>
+							    			</button>
+							    		</div>
+				  					</div>
+			  					<?php } ?>
+			  				</div>
+					</form>
 						<?php } else if ($loginUrl !== null) { ?>
-							<div style="width:100%; text-align: center;">
-								<div><img src="public/img/login_ico.png"></div>
-								<div><a href="<?php echo $loginUrl; ?>"><img src="public/img/login_<?php echo $_SESSION ["sn"]; ?>.png"></a></div>
+							<div class="card-panel">
+								<div class="row">
+									<div class="col s12 center"><img src="public/img/login_ico.png"></div>
+									<div class="col s12 center"><a href="<?php echo $loginUrl; ?>"><img src="public/img/login_<?php echo $_SESSION ["sn"]; ?>.png"></a></div>
+								</div>
 							</div>
 						<?php } ?>
 				</div>
