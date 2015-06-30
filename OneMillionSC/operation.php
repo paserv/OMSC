@@ -56,17 +56,17 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 				} else {
 					$controller->redirectToPaypal();
 				}
-			}
+			} elseif (isset($_REQUEST['logout_button'])){
+				$controller->logout();
+				if (isset($_SESSION["latitude"])) {
+					$user->latitude = "";
+					$user->longitude = "";
+				}
+	}
 		} catch (Exception $e) {
 			$excep->setError($e->getCode(), $e->getMessage());
 		}
-	} elseif (isset($_REQUEST['logout_button'])){
-		$controller->logout();
-		if (isset($_SESSION["latitude"])) {
-			$user->latitude = "";
-			$user->longitude = "";
-		}
-	}
+	} 
 }
 
 ?>
@@ -105,23 +105,36 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 </script>
 	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else {	?>
 	<div class="container">
-		<div class="card-panel center">
-			<h5>Operation Success!</h5>
-			<?php if ($user !== null) {?>
-				<a class="waves-effect waves-light btn blue darken-3" href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>"><i class="material-icons right">backspace</i>Come Back Home</a>
-			<?php } else { ?>
-				<a class="waves-effect waves-light btn blue darken-3" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
-			<?php } 
-			if (!isset($_REQUEST['logout_button']) && !isset($_REQUEST['delete_button']) && isset($_SESSION['sn'])) {
-				if ($_SESSION['sn'] === 'FB') { ?>
-				<div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div>
-				<?php } elseif ($_SESSION['sn'] === 'TW') {?>
-				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
-				<?php } elseif ($_SESSION['sn'] === 'PL') {?>
-				<a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share2.png" alt="Share on Google+"/></a>
-				<?php } 
-				} ?>
+		<div class="row">
+			<div class="col s12"><h5>Operation Result<i class="material-icons left small">settings</i></h5></div>
 		</div>
+		<div class="card-panel">
+			<div class="row">
+				<div class="col s12"><h5>Success<i class="material-icons left small">done</i></h5></div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<?php if (!isset($_REQUEST['logout_button']) && !isset($_REQUEST['delete_button']) && isset($_SESSION['sn'])) {
+						if ($_SESSION['sn'] === 'FB') { ?>
+						Share on Facebook <div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div>
+						<?php } elseif ($_SESSION['sn'] === 'TW') {?>
+						Tweet this <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
+						<?php } elseif ($_SESSION['sn'] === 'PL') {?>
+						Share on >Google Plus <a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share2.png" alt="Share on Google+"/></a>
+						<?php } 
+						} ?>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col s12">
+					<?php if ($user !== null) {?>
+						<a class="waves-effect waves-light btn blue darken-3 right" href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>"><i class="material-icons right">backspace</i>Come Back Home</a>
+					<?php } else { ?>
+						<a class="waves-effect waves-light btn blue darken-3 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
+					<?php } ?>
+				</div>
+			</div>
 	</div>
 	<?php } include 'footer.php'; ?>
 </body>

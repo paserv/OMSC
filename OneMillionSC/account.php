@@ -62,144 +62,149 @@ $excep = new CustomException(); ?>
 	?>
 	<?php include 'header.php'; ?>
 	
-	<?php if ($excep->existProblem) {
-		include 'error.php';
-		} else {
-	?>
-				<div class="container" style="width:90%">
+	<?php if ($excep->existProblem) { include 'error.php'; } else {	?>
 				<?php if (!isset($_SESSION["sn"]) || isset($_REQUEST["choose"])) { ?>
-					<div class="card-panel">
+					<div class="container">
 						<div class="row">
-						    <div class="col s12"><h5>Sign in with: </h5></div>
-					  	</div>
-						<div class="row">
-						    <div class="col s4 center"><a href="account_.php?sn=FB"><img src="public/img/facebook.png"></a></div>
-						    <div class="col s4 center"><a href="account_.php?sn=TW"><img src="public/img/twitter.png"></a></div>
-						    <div class="col s4 center"><a href="account_.php?sn=PL"><img src="public/img/gplus.png"></a></div>
-					  	</div>
-					  	<div class="row">
-						    <div class="col s4 center">Facebook</div>
-						    <div class="col s4 center">Twitter</div>
-						    <div class="col s4 center">Google Plus</a></div>
-					  	</div>
-					</div>
-					<?php } elseif ($currentUser->isLogged()) { ?>
-					<h5>My Profile</h5>
-					<form name="coordinateForm" action="operation.php" method="post">
+							<div class="col s12"><h5>Sign in with: <i class="mdi-social-person-add left small"></i></h5></div>
+						</div>
 						<div class="card-panel">
 							<div class="row">
-								<div class="col s12 m12 l6">
-									<div class="col s6">
-										<img src="<?php echo $currentUser->avatarUrl; ?>" />
+							    <div class="col s4 center"><a href="account.php?sn=FB"><img src="public/img/facebook.png"></a></div>
+							    <div class="col s4 center"><a href="account.php?sn=TW"><img src="public/img/twitter.png"></a></div>
+							    <div class="col s4 center"><a href="account.php?sn=PL"><img src="public/img/gplus.png"></a></div>
+						  	</div>
+						  	<div class="row">
+							    <div class="col s4 center">Facebook</div>
+							    <div class="col s4 center">Twitter</div>
+							    <div class="col s4 center">Google Plus</a></div>
+						  	</div>
+						</div>
+					</div>
+					<?php } elseif ($currentUser->isLogged()) { ?>
+					<div class="container"  style="width:90%">
+						<div class="row">
+							<div class="col s12"><h5>My Profile<i class="material-icons left small">face</i></h5></div>
+						</div>
+						<form name="coordinateForm" action="operation.php" method="post">
+							<div class="card-panel">
+								<div class="row">
+									<div class="col s12 m12 l6">
+										<div class="col s6">
+											<img src="<?php echo $currentUser->avatarUrl; ?>" />
+										</div>
+										<div class="col s6">
+											<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
+						    				<i class="material-icons">undo</i>
+						    				</button>
+										</div>
+										<div class="col s12">
+											<div class="input-field">
+									          <input disabled placeholder=<?php echo $currentUser->name; ?> id="name" type="text" class="validate">
+									          <label for="name">Name</label>
+									        </div>
+										</div>
+										<div class="col s12">
+											<div class="input-field">
+									          <input disabled placeholder=<?php echo $currentUser->email; ?> id="email" type="text" class="validate">
+									          <label for="email">Email</label>
+									        </div>
+										</div>
+										<div class="col s12">
+											<div class="input-field">
+										         <input name="latitude" id="latitude" type="text" class="validate">
+										         <label for="latitude">Latitude</label>
+										    </div>
+										</div>
+										<div class="col s12">
+											<div class="input-field">
+											    <input name="longitude" id="longitude" type="text" class="validate">
+										        <label for="longitude">Longitude</label>
+										    </div>
+										</div>
+										<div class="col s12">
+											<div class="input-field">
+											    <?php if ($currentUser->isRegistered()) { ?>
+											    <textarea id="aboutme" name="aboutme" class="materialize-textarea" maxlength="160" length="160"><?php echo $currentUser->description; ?></textarea>
+											    <?php } else { ?>
+											    <textarea id="aboutme" name="aboutme" class="materialize-textarea" maxlength="160" length="160"></textarea>
+	            								<?php } ?>
+	            								<label for="aboutme">Something about me</label>
+										    </div>
+										</div>
 									</div>
-									<div class="col s6">
-										<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
-					    				<i class="material-icons">undo</i>
-					    				</button>
-									</div>
-									<div class="col s12">
-										<div class="input-field">
-								          <input disabled placeholder=<?php echo $currentUser->name; ?> id="name" type="text" class="validate">
-								          <label for="name">Name</label>
-								        </div>
-									</div>
-									<div class="col s12">
-										<div class="input-field">
-								          <input disabled placeholder=<?php echo $currentUser->email; ?> id="email" type="text" class="validate">
-								          <label for="email">Email</label>
-								        </div>
-									</div>
-									<div class="col s12">
-										<div class="input-field">
-									         <input name="latitude" id="latitude" type="text" class="validate">
-									         <label for="latitude">Latitude</label>
-									    </div>
-									</div>
-									<div class="col s12">
-										<div class="input-field">
-										    <input name="longitude" id="longitude" type="text" class="validate">
-									        <label for="longitude">Longitude</label>
-									    </div>
-									</div>
-									<div class="col s12">
-										<div class="input-field">
-										    <?php if ($currentUser->isRegistered()) { ?>
-										    <textarea id="aboutme" name="aboutme" class="materialize-textarea" maxlength="160" length="160"><?php echo $currentUser->description; ?></textarea>
-										    <?php } else { ?>
-										    <textarea id="aboutme" name="aboutme" class="materialize-textarea" maxlength="160" length="160"></textarea>
-            								<?php } ?>
-            								<label for="aboutme">Something about me</label>
-									    </div>
-									</div>
-								</div>
-								
-								<div class="col s12 m12 l6">
-									<div class="col s12">
-										<div class="input-field">
-									         <input id="address" type="text" class="validate">
-									         <label for="address">Find Coordinates by Address</label>
-									    </div>
-									</div>
-									<div class="col s12">
-										<label>Pick Your Address</label>
-									</div>
-									<div class="col s12">
-										<div id="map" style="width: 100%; height: 380px;"></div>
+									
+									<div class="col s12 m12 l6">
+										<div class="col s12">
+											<div class="input-field">
+										         <input id="address" type="text" class="validate">
+										         <label for="address">Find Coordinates by Address</label>
+										    </div>
+										</div>
+										<div class="col s12">
+											<label>Pick Your Address</label>
+										</div>
+										<div class="col s12">
+											<div id="map" style="width: 100%; height: 380px;"></div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-							<div class="row">
-							<?php if ($currentUser->isRegistered()) { ?>
-								<div class="col s12 m6 right">
-									<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="modify_button">Modify
-				    				<i class="material-icons">edit</i>
-				  					</button>
-				  				</div>
-			  					<?php if (DELETE_BTN_ENABLED) { ?>
-					  					<div class="col s12 m6 right">
-						  					<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="delete_button">Delete
-						    				<i class="material-icons">delete</i>
-						  					</button>
-					  					</div>
-				  				<?php }	} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) { ?>
-						  			<div class="col s12 m6 right">	
-						  				<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="register_button">Free Registration
-					    				<i class="material-icons">done</i>
+								<div class="row">
+								<?php if ($currentUser->isRegistered()) { ?>
+									<div class="col s12 m6 right">
+										<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="modify_button">Modify
+					    				<i class="material-icons">edit</i>
 					  					</button>
-					    			</div>
-			  					<?php } else { ?>
-				  					<div class="card-panel">
-						  				<div class="row">
-						  					<div class="col s12 m12 l6 center">
-							  					<div class="row">
-							  						<div class="col s6 blue-grey lighten-4">Description</div>
-							  						<div class="col s6 blue-grey lighten-4">Total Amount</div>
-							  					</div>
-							  					<div class="row">
-							  						<div class="col s6">One Million Social Club Subscription</div>
-							  						<div class="col s6">1 EUR</div>
-							  					</div>
-						  					</div>
-						  					<div class="col s12 m12 l6 center">
-							  					<button type="submit" name="register_button" style="background:url(public/img/paypal-button.png) no-repeat;width:180px;height:40px;border: none;">
+					  				</div>
+				  					<?php if (DELETE_BTN_ENABLED) { ?>
+						  					<div class="col s12 m6 right">
+							  					<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="delete_button">Delete
+							    				<i class="material-icons">delete</i>
 							  					</button>
 						  					</div>
-						  				</div>
-						  			</div>
-			  					<?php } ?>
-			  				</div>
-					</form>
+					  				<?php }	} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) { ?>
+							  			<div class="col s12 m6 right">	
+							  				<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="register_button">Free Registration
+						    				<i class="material-icons">done</i>
+						  					</button>
+						    			</div>
+				  					<?php } else { ?>
+					  					<div class="card-panel">
+							  				<div class="row">
+							  					<div class="col s12 m12 l6 center">
+								  					<div class="row">
+								  						<div class="col s6 blue-grey lighten-4">Description</div>
+								  						<div class="col s6 blue-grey lighten-4">Total Amount</div>
+								  					</div>
+								  					<div class="row">
+								  						<div class="col s6">One Million Social Club Subscription</div>
+								  						<div class="col s6">1 EUR</div>
+								  					</div>
+							  					</div>
+							  					<div class="col s12 m12 l6 center">
+								  					<button type="submit" name="register_button" style="background:url(public/img/paypal-button.png) no-repeat;width:180px;height:40px;border: none;">
+								  					</button>
+							  					</div>
+							  				</div>
+							  			</div>
+				  					<?php } ?>
+				  				</div>
+							</form>
+						</div>
 						<?php } else if ($loginUrl !== null) { ?>
+						<div class="container">
+							<div class="row">
+								<div class="col s12"><h5>Social Login<i class="material-icons left small">people</i></h5></div>
+							</div>
 							<div class="card-panel">
 								<div class="row">
 									<div class="col s12 center"><img src="public/img/login_ico.png"></div>
 									<div class="col s12 center"><a href="<?php echo $loginUrl; ?>"><img src="public/img/login_<?php echo $_SESSION ["sn"]; ?>.png"></a></div>
 								</div>
 							</div>
+						</div>
 						<?php } ?>
-				</div>
-	
 	<?php } include 'footer.php'; ?>
 	<script type="text/javascript" src="public/js/location_choose.js"></script>
 </body>

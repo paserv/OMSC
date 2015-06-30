@@ -6,7 +6,7 @@
 ?>
 	<ul id="dropdown1" class="dropdown-content">
 	<?php if (isset($_SESSION ["latitude"]) && $_SESSION ["latitude"] != null) { ?>
-	  <li><a href="account_.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
+	  <li><a href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
 	  <li class="divider"></li>
 	  <li><a href="operation.php?logout_button=Logout">Logout</a></li>
 	<?php } else if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) {?>

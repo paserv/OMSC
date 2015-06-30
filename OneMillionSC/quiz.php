@@ -38,14 +38,17 @@ if (isset ( $_REQUEST ['solution'] )) {
 <body>
 	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { if (isset ( $_REQUEST ['solution'] ) && $quizok) { ?>
 	<div class="container">
+		<div class="row">
+				<div class="col s12"><h5>Get Free Subscription<i class="material-icons left small">thumb_up</i></h5></div>
+			</div>
 		<div class="card-panel">
 			<div class="row">
-				<div class="col s12"><h5>Get Free Subscription, sign in with: </h5></div>
+				<div class="col s12"><h5>Sign in with: </h5></div>
 			</div>
 			<div class="row">
-			    <div class="col s4 center"><a href="account_.php?sn=FB"><img src="public/img/facebook.png"></a></div>
-			    <div class="col s4 center"><a href="account_.php?sn=TW"><img src="public/img/twitter.png"></a></div>
-			    <div class="col s4 center"><a href="account_.php?sn=PL"><img src="public/img/gplus.png"></a></div>
+			    <div class="col s4 center"><a href="account.php?sn=FB"><img src="public/img/facebook.png"></a></div>
+			    <div class="col s4 center"><a href="account.php?sn=TW"><img src="public/img/twitter.png"></a></div>
+			    <div class="col s4 center"><a href="account.php?sn=PL"><img src="public/img/gplus.png"></a></div>
 			</div>
 			<div class="row">
 			    <div class="col s4 center">Facebook</div>

@@ -74,6 +74,9 @@
 							<div class="col s12">' . $excep->private_message . '</h5></div>
 						</div>
 					</div>
+					<div class="row">
+						<a class="waves-effect waves-light btn blue darken-3 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
+					</div>
 				</div>';
 		} else {
 			echo '<div class="container">
@@ -84,6 +87,9 @@
 						<div class="row">
 							<div class="col s12">' . $publicMessage . '</h5></div>
 						</div>
+					</div>
+					<div class="row">
+						<a class="waves-effect waves-light btn blue darken-3 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
 					</div>
 				</div>';
 		}
@@ -98,6 +104,9 @@
 						<div class="row">
 							<div class="col s12">' . $publicMessage . '</h5></div>
 						</div>
+					</div>
+					<div class="row">
+						<a class="waves-effect waves-light btn blue darken-3 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
 					</div>
 				</div>';
 	}
