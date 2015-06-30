@@ -1,5 +1,12 @@
 window.onload = initialize();
 
+$('#address').keypress(function(event){
+
+    if (event.keyCode == 10 || event.keyCode == 13) 
+        event.preventDefault();
+
+  });
+
 function initialize() {
 	if (coordinate !== false) {
 		drawMap(coordinate);

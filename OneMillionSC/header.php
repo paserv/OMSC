@@ -16,9 +16,9 @@
 	<?php } else {?>
 	  <li class="blue-text text-darken-4">Sign In With:</li>
 	  <li class="divider"></li>
-	  <li><a href="account.php?sn=FB"><img src="public/img/FB_pic.png" /></a></li>
-	  <li><a href="account.php?sn=TW"><img src="public/img/TW_pic.png"></a></li>
-	  <li><a href="account.php?sn=PL"><img src="public/img/PL_pic.png"></a></li>
+	  <li><a class="blue-text text-darken-4" href="account.php?sn=FB"><img src="public/img/FB_pic.png" /> Facebook</a></li>
+	  <li><a class="blue-text text-darken-4" href="account.php?sn=TW"><img src="public/img/TW_pic.png"> Twitter</a></li>
+	  <li><a class="blue-text text-darken-4" href="account.php?sn=PL"><img src="public/img/PL_pic.png"> Plus</a></li>
 	<?php } ?>
 	</ul>
 	<div class="navbar-fixed">
@@ -118,7 +118,10 @@
 <script>
 $(document).ready(function(){
     $('.modal-trigger').leanModal();
-    $(".dropdown-button").dropdown();
+    $('.dropdown-button').dropdown({
+        constrain_width: false, // Does not change width of dropdown to that of the activator
+      }
+    );
   });
 
 $(".button-collapse").sideNav({

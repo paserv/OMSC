@@ -82,7 +82,7 @@ $excep = new CustomException(); ?>
 						</div>
 					</div>
 					<?php } elseif ($currentUser->isLogged()) { ?>
-					<div class="container"  style="width:90%">
+					<div class="container width90 mb100">
 						<div class="row">
 							<div class="col s12"><h5>My Profile<i class="material-icons left small">face</i></h5></div>
 						</div>
@@ -112,13 +112,13 @@ $excep = new CustomException(); ?>
 										</div>
 										<div class="col s12">
 											<div class="input-field">
-										         <input name="latitude" id="latitude" type="text" class="validate">
+										         <input name="latitude" id="latitude" type="text" class="validate" required>
 										         <label for="latitude">Latitude</label>
 										    </div>
 										</div>
 										<div class="col s12">
 											<div class="input-field">
-											    <input name="longitude" id="longitude" type="text" class="validate">
+											    <input name="longitude" id="longitude" type="text" class="validate" required>
 										        <label for="longitude">Longitude</label>
 										    </div>
 										</div>
@@ -137,12 +137,12 @@ $excep = new CustomException(); ?>
 									<div class="col s12 m12 l6">
 										<div class="col s12">
 											<div class="input-field">
-										         <input id="address" type="text" class="validate">
-										         <label for="address">Find Coordinates by Address</label>
+										         <input id="address" type="text" class="validate" placeholder=" ">
+										         <label class="active" for="address">Find Coordinates by Address</label>
 										    </div>
 										</div>
 										<div class="col s12">
-											<label>Pick Your Address</label>
+											<label class="active">Pick Your Address</label>
 										</div>
 										<div class="col s12">
 											<div id="map" style="width: 100%; height: 380px;"></div>

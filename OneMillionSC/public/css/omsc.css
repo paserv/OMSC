@@ -12,10 +12,20 @@ html,body {
     margin: 0;
     padding: 0;
     height: 80px;
+    z-index: 1;
 }
 
 .header-img {
     vertical-align:middle;
+    border: 1px white solid;
+}
+
+.width90 {
+    width:90%;
+}
+
+.mb100 {
+	 margin-bottom: 100px;
 }
 
 #zoom_place {
