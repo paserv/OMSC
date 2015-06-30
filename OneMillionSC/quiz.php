@@ -75,7 +75,7 @@ if (isset ( $_REQUEST ['solution'] )) {
 					 <div class="col s12">What tastes better than it smells?</div>
 					 <form name="quizForm" action="quiz.php" method="post" class="col s12">
 					 	<div class="input-field">
-							<input name="solution" id="solution" type="text" class="validate">
+							<input name="solution" id="solution" type="text" class="validate" required>
 							<label for="name">Solution</label>
 						</div>
 						<button class="btn waves-effect waves-light blue darken-3 right" type="submit" name="solution_button" value="solution">Try

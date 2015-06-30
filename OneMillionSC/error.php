@@ -5,7 +5,7 @@
 			100 => array('No query', 'public/img/login_ico.png'),
 			
 			#DB Error#
-			200 => array('DB Connection Error', 'public/img/login_ico.png'),
+			200 => array('DB Error', 'public/img/login_ico.png'),
 // 			201 => array('Impossible find by Quiz ID', 'public/img/login_ico.png'),
 // 			202 => array('Error increment quiz counter', 'public/img/login_ico.png'),
 // 			203 => array('Impossible to delete User', 'public/img/login_ico.png'),

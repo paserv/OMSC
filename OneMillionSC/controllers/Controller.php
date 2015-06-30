@@ -10,7 +10,7 @@ class Controller {
 	function getUser($socialNetwork) {
 		if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) {
 			$user = $this->getUserFromSession();
-			$registeredUser = $this->search($user->socialId);
+			$registeredUser = $this->search($user->socialId, $socialNetwork);
 			if ($registeredUser != null) {
 				$user->latitude = $registeredUser->latitude;
 				$user->longitude = $registeredUser->longitude;
@@ -42,7 +42,7 @@ class Controller {
 				$_SESSION ["avatarUrl"] = $user->avatarUrl;
 				$_SESSION ["socialPageUrl"] = $user->socialPageUrl;
 				$_SESSION ["isLogged"] = true;
-				$registeredUser = $this->search($user->socialId);
+				$registeredUser = $this->search($user->socialId, $socialNetwork);
 				if ($registeredUser != null) {
 					$user->latitude = $registeredUser->latitude;
 					$user->longitude = $registeredUser->longitude;
@@ -141,7 +141,7 @@ class Controller {
 	}
 	
 	function update(DBUser $dbData) {
-		$oldUser = $this->search($dbData->socialId);
+		$oldUser = $this->search($dbData->socialId, $dbData->socialNetwork);
 		$this->updateUserIntoDB($dbData);
 		try {
 // 			$this->updateUserIntoFusionTable($dbData);
@@ -236,7 +236,7 @@ class Controller {
 	
 	function deleteUserFromDB(DBUser $dbData) {
 		$model = new DBModel ();
-		$model->deleteUser($dbData->socialId);
+		$model->deleteUser($dbData->socialId, $dbData->socialNetwork);
 	}
 	
 	function updateUserIntoDB(DBUser $dbData) {
@@ -244,9 +244,9 @@ class Controller {
 		$model->updateUser($dbData);
 	}
 	
-	function search($socialId) {
+	function search($socialId, $sn) {
 		$model = new DBModel();
-		$result = $model->searchById($socialId);
+		$result = $model->searchById($socialId, $sn);
 		return $result;
 	}
 	

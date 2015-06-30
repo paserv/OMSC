@@ -40,18 +40,18 @@ class DBModel {
 		}
 		$conn->close ();
 	}
-	function deleteUser($idUser) {
+	function deleteUser($idUser, $sn) {
 		$conn = $this->getConnection ();
-		$sql = "DELETE FROM user WHERE user.socialId like " . $idUser;
+		$sql = "DELETE FROM user WHERE user.socialId like " . $idUser . " AND user.socialNetwork like '" . $sn . "'";
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			throw new Exception("Impossible to delete User " . $idUser, 200);
 		}
 		$conn->close ();
 	}
-	function isUserRegistered($idUser) {
+	function isUserRegistered($idUser, $sn) {
 		$conn = $this->getConnection ();
-		$sql = "SELECT * FROM user WHERE user.socialId = " . $idUser;
+		$sql = "SELECT * FROM user WHERE user.socialId = " . $idUser . " AND user.socialNetwork like '" . $sn . "'";
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			throw new Exception("Impossible check User is registered " . $idUser, 200);
@@ -80,12 +80,12 @@ class DBModel {
 		}
 		$conn->close ();
 	}
-	function searchById($socialId) {
+	function searchById($socialId, $sn) {
 		$conn = $this->getConnection ();
-		$sql = "SELECT * FROM user WHERE user.socialId = " . $socialId;
+		$sql = "SELECT * FROM user WHERE user.socialId = " . $socialId . " AND user.socialNetwork like '" . $sn . "'";
 		$result = $conn->query ( $sql );
 		if (!$result) {
-			throw new Exception("Impossible search by ID " . $socialId, 200);
+			throw new Exception("Impossible search by ID " . $socialId . "Query: " . $sql, 200);
 		} else if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
 			$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
@@ -195,7 +195,7 @@ class DBModel {
 		return $urlEscaped;
 	}
 	function insertUser(DBUser $dbData) {
-		if ($this->isUserRegistered ( $dbData->socialId )) {
+		if ($this->isUserRegistered ( $dbData->socialId, $dbData->socialNetwork )) {
 			throw new Exception ( "User Already Registered " . $dbData->socialId, 200 );
 		}
 		if ($this->areUsersMoreThan ( 1000000 )) {
@@ -214,13 +214,13 @@ class DBModel {
 		$conn->close ();
 	}
 	function updateUser(DBUser $dbData) {
-		if (!$this->isUserRegistered ( $dbData->socialId )) {
+		if (!$this->isUserRegistered ( $dbData->socialId, $dbData->socialNetwork )) {
 			throw new Exception ( "Error User Not Registered " . $dbData->socialId, 200 );
 		}
 		$conn = $this->getConnection ();
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
-		$sql = "UPDATE user SET description = '$dbData->description', lat = '$dbData->latitude', lng = '$dbData->longitude' WHERE socialId = '$dbData->socialId'";
+		$sql = "UPDATE user SET description = '$dbData->description', lat = '$dbData->latitude', lng = '$dbData->longitude' WHERE socialId = '$dbData->socialId' AND socialNetwork like '$dbData->socialNetwork'";
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();
