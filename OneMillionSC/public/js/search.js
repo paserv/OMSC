@@ -1,4 +1,5 @@
-window.onload = loadScript;
+window.onload = initialize;
+var markers = [];
 
 function loadScript() {
 	var mapApi = document.createElement('script');
