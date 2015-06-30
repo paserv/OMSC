@@ -21,7 +21,6 @@ $excep = new CustomException(); ?>
 		<script type="text/javascript" src="public/js/jquery-ui-1.11.4.js"></script>
 		<script type="text/javascript" src="public/js/materialize.min.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.19&libraries=places&language=en"></script>
-		<script type="text/javascript" src="public/js/index.js"></script>
 		<script type="text/javascript" src="public/js/config.js"></script>
 	</head>
 

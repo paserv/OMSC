@@ -4,19 +4,6 @@
 		$total = $controller->countMembers(); 
 	}
 ?>
-<script>
-$(document).ready(function(){
-    $('.modal-trigger').leanModal();
-    $(".dropdown-button").dropdown();
-  });
-
-$(".button-collapse").sideNav({
-    closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
-  }
-);
-
-$('.collapsible').collapsible();
-</script>
 	<ul id="dropdown1" class="dropdown-content">
 	<?php if (isset($_SESSION ["latitude"]) && $_SESSION ["latitude"] != null) { ?>
 	  <li><a href="account_.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
@@ -129,6 +116,18 @@ $('.collapsible').collapsible();
 	</div>
 </div>
 <script>
+$(document).ready(function(){
+    $('.modal-trigger').leanModal();
+    $(".dropdown-button").dropdown();
+  });
+
+$(".button-collapse").sideNav({
+    closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+  }
+);
+
+$('.collapsible').collapsible();
+
 var input_search_place = document.getElementById('search_place');
 var autocomplete = new google.maps.places.Autocomplete(input_search_place);
 
@@ -137,7 +136,7 @@ $( "#label_slide_bar" ).hide();
 $( "#slide_bar" ).hide();
 
 $('#search_place').bind('change', function() {
-	if ($('#search_place').value === '') {
+	if ($('#search_place').val() === '' || typeof $('#search_place').val() === 'undefined') {
 		$( "#icon_slide_bar" ).hide();
 		$( "#label_slide_bar" ).hide();
 		$( "#slide_bar" ).hide();

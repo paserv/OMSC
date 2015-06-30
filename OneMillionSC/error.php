@@ -62,14 +62,44 @@
 		if (array_key_exists($excep->error_code, $codes)) {
 			$publicMessage = $codes[$excep->error_code][0];
 			$icon = $codes[$excep->error_code][1];
-			echo '<br><br><br><br><div style="margin-left:30px; align=center"><div><img src="' . $icon . '">' . $publicMessage . '</div><div>' . $excep->private_message . '</div></div>';
+			echo '<div class="container">
+					<div class="row">
+						<div class="col s12"><h5>Error<i class="material-icons left small">error</i></h5></div>
+					</div>
+					<div class="card-panel">
+						<div class="row">
+							<div class="col s12">' . $publicMessage . '</h5></div>
+						</div>
+						<div class="row">
+							<div class="col s12">' . $excep->private_message . '</h5></div>
+						</div>
+					</div>
+				</div>';
 		} else {
-			echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="' . $icon . '">' . $publicMessage . '</div>';
+			echo '<div class="container">
+					<div class="row">
+						<div class="col s12"><h5>Error<i class="material-icons left small">error</i></h5></div>
+					</div>
+					<div class="card-panel">
+						<div class="row">
+							<div class="col s12">' . $publicMessage . '</h5></div>
+						</div>
+					</div>
+				</div>';
 		}
 		//TODO log private message into DB
 		//TODO send mail
 	} else {
-		echo '<br><br><br><br><div style="margin-left:30px; align=center"><img src="' . $icon . '">' . $publicMessage . '</div>';
+		echo '<div class="container">
+					<div class="row">
+						<div class="col s12"><h5>Error<i class="material-icons left small">error</i></h5></div>
+					</div>
+					<div class="card-panel">
+						<div class="row">
+							<div class="col s12">' . $publicMessage . '</h5></div>
+						</div>
+					</div>
+				</div>';
 	}
 	?>	
 </div>
