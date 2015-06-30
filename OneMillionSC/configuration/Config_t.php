@@ -44,6 +44,7 @@ define ('FUSION_TABLE_ID5', '1MVpFMOH0dr0f5pUq6CoqLiFvFqc6T-Um7OgkRRUB');
 define ('PP_CLIENT_ID', 'AZ7UfpicExpcHhCBcTHrPZ9YSh__HXuO_eXrwqn1pvCl_BPY5z4GyAVymN6CLOjFWffdGvzDLu-HRrtb');
 define ('PP_CLIENT_SECRET', 'ENha4YyzwWm77DEqOawuERHe3GF3wpjEg6rDsTysTK8jof1Vx54ljMSLpWvjpOnKKs0NnpmDTgGgK8Fx');
 define ('PP_REDIRECT_URL', 'http://localhost.com/OMSC/OneMillionSC/operation.php');
+define ('PP_PRICE', 0.1);
 
 #SITE CONFIG#
 define ('MAX_SEARCH', '300');

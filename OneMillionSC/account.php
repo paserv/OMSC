@@ -77,7 +77,7 @@ $excep = new CustomException(); ?>
 						  	<div class="row">
 							    <div class="col s4 center">Facebook</div>
 							    <div class="col s4 center">Twitter</div>
-							    <div class="col s4 center">Google Plus</a></div>
+							    <div class="col s4 center">Google Plus</div>
 						  	</div>
 						</div>
 					</div>
@@ -179,7 +179,7 @@ $excep = new CustomException(); ?>
 								  					</div>
 								  					<div class="row">
 								  						<div class="col s6">One Million Social Club Subscription</div>
-								  						<div class="col s6">1 EUR</div>
+								  						<div class="col s6"><?php echo PP_PRICE;?> EUR</div>
 								  					</div>
 							  					</div>
 							  					<div class="col s12 m12 l6 center">

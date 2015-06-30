@@ -67,6 +67,14 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 			$excep->setError($e->getCode(), $e->getMessage());
 		}
 	} 
+	if (isset($_REQUEST['logout_button'])){
+		$controller->logout();
+		if (isset($_SESSION["latitude"])) {
+			$user->latitude = "";
+			$user->longitude = "";
+		}
+	}
+	
 }
 
 ?>
@@ -120,7 +128,7 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 						<?php } elseif ($_SESSION['sn'] === 'TW') {?>
 						Tweet this <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
 						<?php } elseif ($_SESSION['sn'] === 'PL') {?>
-						Share on >Google Plus <a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share2.png" alt="Share on Google+"/></a>
+						Share on Google Plus <a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share2.png" alt="Share on Google+"/></a>
 						<?php } 
 						} ?>
 				</div>

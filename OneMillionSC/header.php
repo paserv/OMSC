@@ -14,7 +14,7 @@
 	  <li class="divider"></li>
 	  <li><a href="operation.php?logout_button=Logout">Logout</a></li>
 	<?php } else {?>
-	  <li class="blue-text text-darken-4">Sign In With:</li>
+	  <li class="blue-text text-darken-4"> Sign In With:</li>
 	  <li class="divider"></li>
 	  <li><a class="blue-text text-darken-4" href="account.php?sn=FB"><img src="public/img/FB_pic.png" /> Facebook</a></li>
 	  <li><a class="blue-text text-darken-4" href="account.php?sn=TW"><img src="public/img/TW_pic.png"> Twitter</a></li>

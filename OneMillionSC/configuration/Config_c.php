@@ -44,6 +44,7 @@ define ('FUSION_TABLE_ID5', '');
 define ('PP_CLIENT_ID', 'AYKadkzNMiBtS3oxMBkVdrg3TzCbMC38Ux-7vxaG9GNgiXmZ9nbmSAZUg25fEjTV2lo_813fUyHDsvQz');
 define ('PP_CLIENT_SECRET', 'EIpAdanSZA-VvGTMi7UhZajsOSPKmXVN4GUdjPKudMnrFZDUiuRRo0aCNVUIEsbwf9naK8a-uEOCVYNK');
 define ('PP_REDIRECT_URL', 'http://www.aoapao.com/operation.php');
+define ('PP_PRICE', 1);
 
 #SITE CONFIG#
 define ('MAX_SEARCH', '3');

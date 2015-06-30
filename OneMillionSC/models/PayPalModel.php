@@ -37,16 +37,16 @@ class PayPalModel {
 		$payer->setPaymentMethod("paypal");
 		
 		$item = new Item();
-		$item->setName('One Million Social Club')->setCurrency('EUR')->setQuantity(1)->setPrice(1);
+		$item->setName('One Million Social Club')->setCurrency('EUR')->setQuantity(1)->setPrice(PP_PRICE);
 		
 		$itemList = new ItemList();
 		$itemList->setItems(array($item));
 		
 		$details = new Details();
-		$details->setShipping(0)->setTax(0)->setSubtotal(1);
+		$details->setShipping(0)->setTax(0)->setSubtotal(PP_PRICE);
 		
 		$amount = new Amount();
-		$amount->setCurrency("EUR")->setTotal(1)->setDetails($details);
+		$amount->setCurrency("EUR")->setTotal(PP_PRICE)->setDetails($details);
 		
 		$transaction = new Transaction();
 		$transaction->setAmount($amount)->setItemList($itemList)->setDescription("Payment for the 'One Million Social Club'")->setInvoiceNumber(uniqid());
