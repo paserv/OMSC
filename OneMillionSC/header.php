@@ -150,6 +150,14 @@ $('#search_place').bind('change', function() {
 	}
 });
 
+$('#search_place').keypress(function(event) {
+    if (event.keyCode == 13) {
+    	$( "#icon_slide_bar" ).show();
+		$( "#label_slide_bar" ).show();
+		$( "#slide_bar" ).show();
+    }
+});
+
 $( "#findBtn" ).click(function() {
 	var queryString;
 	var ray = $( "#slide_bar" ).val();

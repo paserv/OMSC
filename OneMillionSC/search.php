@@ -48,7 +48,7 @@ if (isset ( $_SESSION ["numSearch"] )) {
 			else if ( isset ($_GET ['lat']) && $_GET ['lat'] != '' && isset($_GET ['lng']) && $_GET ['lng'] != '' && isset($_GET ['ray']) && $_GET ['ray'] != '') {
 				$results = $controller->searchByCoords ( $_GET ['lat'], $_GET ['lng'], $_GET ['ray'], $_GET ['ray'] );
 			} else {
-				$excep->setError(700, "Write here");
+				$excep->setError(700, "Search parameters not correct");
 			}
 	
 		} catch ( Exception $ex ) {
@@ -76,7 +76,7 @@ if (isset ( $_SESSION ["numSearch"] )) {
 		    echo "</script>";
 					}
 				} else {
-					$excep->setError(700, "Write here");
+					$excep->setError(700, "No results for this search");
 				}
 		}
 	} else {
