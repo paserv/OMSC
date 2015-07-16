@@ -1,6 +1,6 @@
 	<footer class="page-footer blue darken-4 footer">
-		<div class="footer-copyright container-footer" style="padding:0 20px 0 20px">
-			<div class="grey-text text-lighten-4 left">Total members: 
+		<div class="footer-copyright" style="padding:0 20px 0 20px">
+			<div class="grey-text text-lighten-3 left">Total members: 
 			<?php
 			if (isset ( $_SESSION ["total_users"] )) {
 				echo ($_SESSION ["total_users"]);

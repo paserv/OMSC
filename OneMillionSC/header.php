@@ -25,11 +25,12 @@
 	<nav>
 		<div class="nav-wrapper blue darken-3">
 			<ul class="left hide-on-med-and-down">
-				<li><a class="waves-effect waves-light" href="index.php"><i class="mdi-social-public"></i></a></li>
-				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search"></i></a></li>
-				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Home" href="index.php" ><i class="mdi-social-public" alt="Home Page"></i></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="About" href="about.php"><i class="mdi-action-assignment"></i></i></a></li>
+				<li><a class="waves-effect waves-light modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search people" href="#modal1"><i class="mdi-action-search"></i></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Register" href="account.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
-					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
+					<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Try quiz for free subscription" href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
 				<?php } ?>
 			</ul>
 			<ul class="right hide-on-med-and-down">
@@ -80,8 +81,9 @@
 				 
 				<li class="divider"></li>
 		    	<li><a class="waves-effect waves-light" href="index.php"><i class="mdi-social-public">Home</i></a></li>
+				<li><a class="waves-effect waves-light" href="about.php"><i class="mdi-action-assignment">About us</i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search">Search</i></a></li>
-				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-social-person-add">Sign In</i></a></li>
+				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-social-person-add">Register</i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
 					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help">Quiz</i></a></li>
 				<?php } ?>
