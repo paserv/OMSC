@@ -172,10 +172,10 @@ $excep = new CustomException(); ?>
 				  					<?php } else { ?>
 					  					<div class="card-panel">
 							  				<div class="row">
-								  				<div class="col s6 m6 l6 center">
+								  				<div class="col s12 m6 l6 center">
 								  					Privacy
 								  				</div>
-							  					<div class="col s6 m6 l6 center">
+							  					<div class="col s12 m6 l6 center">
 								  					<div class="row">
 								  						<div class="col s6 blue-grey lighten-4">Description</div>
 								  						<div class="col s6 blue-grey lighten-4">Total Amount</div>
