@@ -46,10 +46,15 @@ define ('PP_CLIENT_SECRET', 'EIpAdanSZA-VvGTMi7UhZajsOSPKmXVN4GUdjPKudMnrFZDUiuR
 define ('PP_REDIRECT_URL', 'http://www.aoapao.com/operation.php');
 define ('PP_PRICE', 1);
 
+#RECAPTCHA CONFIG#
+define ('RC_SECRET_SITE', '6LdYDgsTAAAAAKwhsnmkc4HH_echjjSviT5KXZNa');
+define ('RC_SECRET_KEY', '6LdYDgsTAAAAAJcsTKHItpU8hwLU7YdUqUSZUIj7');
+
 #SITE CONFIG#
 define ('MAX_SEARCH', '3');
 define ('DELETE_BTN_ENABLED', true);
 define ('IS_PAYPAL_ENABLED', true);
 define ('IS_QUIZ_ENABLED', true);
 define ('QUIZ_ID', 1);
+define ('WEBMASTER_MAIL', 'paserv@gmail.com');
 ?>

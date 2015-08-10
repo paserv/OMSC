@@ -1,6 +1,7 @@
 <?php
 require_once 'autoload.php';
 controller_autoload();
+ReCaptcha_autoload();
 
 class Controller {
 	
@@ -108,7 +109,7 @@ class Controller {
 			throw new Exception($e->getMessage(), 800);
 		}
 		try {
- 			$this->registerUserIntoFusionTable ( $dbData );
+// 			$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$this->logout();
 			$this->deleteUserFromDB($dbData);
@@ -132,7 +133,7 @@ class Controller {
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
- 			$this->deleteUserFromFusionTable($dbData);
+// 			$this->deleteUserFromFusionTable($dbData);
 			$this->logout();
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
@@ -145,7 +146,7 @@ class Controller {
 		$oldUser = $this->search($dbData->socialId, $dbData->socialNetwork);
 		$this->updateUserIntoDB($dbData);
 		try {
- 			$this->updateUserIntoFusionTable($dbData);
+// 			$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), 804);
@@ -294,6 +295,33 @@ class Controller {
 	function updateUserIntoFusionTable(DBUser $dbData) {
 		$model = new FusionModel();
 		$model->updateUser($dbData);
+	}
+	
+	
+	/**
+	 * CAPTCHA CONTROLS
+	 */
+	function checkIsRobot($recaptcha_response) {
+		//$recaptcha = new \ReCaptcha\ReCaptcha(RC_SECRET_KEY);
+		$recaptcha = new \ReCaptcha\ReCaptcha(RC_SECRET_KEY, new \ReCaptcha\RequestMethod\Curl());
+		$resp = $recaptcha->verify($recaptcha_response, $_SERVER['REMOTE_ADDR']);
+// 		echo var_export($resp);
+		if ($resp->isSuccess()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	
+	/**
+	 * MAIL
+	 */
+	function sendEmail($name, $email, $message) {
+		$subject = "OMSC Form submission";
+		$msg = wordwrap($name . " wrote the following:" . "\n\n" . $message, 70, "\r\n");
+		$headers = "From:" . $email;
+		return mail(WEBMASTER_MAIL, $subject, $msg, $headers);
 	}
 	
 	/*TO DELETE*/

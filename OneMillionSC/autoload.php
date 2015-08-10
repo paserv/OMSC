@@ -37,6 +37,12 @@ function controller_autoload() {
 	require_array($dep_array);
 }
 
+function ReCaptcha_autoload() {
+	$dirs = getDirs();
+	$file = $dirs['library'] . '/recaptcha/autoload.php';
+	require_once($file);
+}
+
 function FB_API_autoload() {
 	$dirs = getDirs();
 	$file = $dirs['library'] . '/facebook-php-sdk/autoload.php';

@@ -53,6 +53,8 @@
 			900 => array('Incorrect Solution', 'public/img/login_ico.png'),
 			901 => array('Limit for free quiz subscription reached', 'public/img/login_ico.png'),
 			
+			902 => array('Captcha is not correct, please try again', 'public/img/login_ico.png')
+			
 	);
 	
 	$publicMessage = "No Error to display";

@@ -29,6 +29,7 @@
 				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="About" href="about.php"><i class="mdi-action-assignment"></i></i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search people" href="#modal1"><i class="mdi-action-search"></i></a></li>
 				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Register" href="account.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Contact Us" href="contact.php"><i class="mdi-content-mail"></i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
 					<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Try quiz for free subscription" href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
 				<?php } ?>
@@ -84,6 +85,7 @@
 				<li><a class="waves-effect waves-light" href="about.php"><i class="mdi-action-assignment">About us</i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search">Search</i></a></li>
 				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-social-person-add">Register</i></a></li>
+				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-content-mail">Contact Us</i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
 					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help">Quiz</i></a></li>
 				<?php } ?>
@@ -152,13 +154,13 @@ $('#search_place').bind('change', function() {
 	}
 });
 
-$('#search_place').keypress(function(event) {
-    if (event.keyCode == 13) {
-    	$( "#icon_slide_bar" ).show();
-		$( "#label_slide_bar" ).show();
-		$( "#slide_bar" ).show();
-    }
-});
+
+
+
+
+
+
+
 
 $( "#findBtn" ).click(function() {
 	var queryString;
