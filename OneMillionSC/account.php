@@ -82,7 +82,7 @@ $excep = new CustomException(); ?>
 						</div>
 					</div>
 					<?php } elseif ($currentUser->isLogged()) { ?>
-					<div class="container width90 mb100">
+					<div class="container width90">
 						<div class="row">
 							<div class="col s12"><h5>My Profile<i class="material-icons left small">face</i></h5></div>
 						</div>
@@ -172,19 +172,21 @@ $excep = new CustomException(); ?>
 				  					<?php } else { ?>
 					  					<div class="card-panel">
 							  				<div class="row">
-							  					<div class="col s12 m12 l6 center">
+								  				<div class="col s6 m6 l6 center">
+								  					Privacy
+								  				</div>
+							  					<div class="col s6 m6 l6 center">
 								  					<div class="row">
 								  						<div class="col s6 blue-grey lighten-4">Description</div>
 								  						<div class="col s6 blue-grey lighten-4">Total Amount</div>
 								  					</div>
 								  					<div class="row">
-								  						<div class="col s6">One Million Social Club Subscription</div>
+								  						<div class="col s6">One Million Social Club Registration</div>
 								  						<div class="col s6"><?php echo PP_PRICE;?> EUR</div>
 								  					</div>
-							  					</div>
-							  					<div class="col s12 m12 l6 center">
-								  					<button type="submit" name="register_button" style="background:url(public/img/paypal-button.png) no-repeat;width:180px;height:40px;border: none;">
-								  					</button>
+								  					<div class="row">
+								  						<button type="submit" name="register_button" style="background:url(public/img/paypal-button.png) no-repeat;width:180px;height:40px;border:none"></button>
+								  					</div>
 							  					</div>
 							  				</div>
 							  			</div>

@@ -1,4 +1,4 @@
-	<footer class="page-footer blue darken-4 footer">
+	<footer class="page-footer blue darken-4 footer" style="margin-top:0px;">
 		<div class="footer-copyright container-footer blue darken-4" style="padding:0 20px 0 20px">
 			<div class="blue-text text-lighten-4 left">Total members: 
 			<?php

@@ -23,7 +23,7 @@
 	</ul>
 	<div class="navbar-fixed">
 	<nav>
-		<div class="nav-wrapper blue darken-3">
+		<div class="nav-wrapper blue darken-3 h80">
 			<ul class="left hide-on-med-and-down">
 				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="Home" href="index.php" ><i class="mdi-social-public" alt="Home Page"></i></a></li>
 				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="About" href="about.php"><i class="mdi-action-assignment"></i></i></a></li>
