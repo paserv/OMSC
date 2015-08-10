@@ -199,13 +199,16 @@ $excep = new CustomException(); ?>
 							</div>
 							<div class="card-panel">
 								<div class="row">
-									<div class="col s12 center"><img src="public/img/login_ico.png"></div>
+									<!-- <div class="col s12 center"><img src="public/img/login_ico.png"></div> -->
 									<div class="col s12 center"><a href="<?php echo $loginUrl; ?>"><img src="public/img/login_<?php echo $_SESSION ["sn"]; ?>.png"></a></div>
 								</div>
 							</div>
 						</div>
-						<?php } ?>
-	<?php } include 'footer.php'; ?>
+						<?php } } ?> 
+	<div class="row">
+		<div class="col s12 center" style="margin-bottom:40px"></div>
+	</div>
+	<?php include 'footer.php'; ?>
 	<script type="text/javascript" src="public/js/location_choose.js"></script>
 </body>
 

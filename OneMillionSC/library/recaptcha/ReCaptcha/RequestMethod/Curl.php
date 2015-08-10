@@ -35,7 +35,11 @@ class Curl implements RequestMethod
             CURLINFO_HEADER_OUT => false,
             CURLOPT_HEADER => false,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSL_VERIFYPEER => true
+            CURLOPT_SSL_VERIFYPEER => true,
+        		
+        	CURLOPT_SSL_VERIFYPEER => false,
+        	CURLOPT_PROXY          => 'http://localhost:5865',
+        	CURLOPT_PROXYPORT      => 5865
         );
         curl_setopt_array($handle, $options);
 

@@ -114,7 +114,7 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else {	?>
 	<div class="container">
 		<div class="row">
-			<div class="col s12"><h5>Operation Result<i class="material-icons left small">settings</i></h5></div>
+			<div class="col s12"><h5>Operation Result<i class="mdi-action-settings left small"></i></h5></div>
 		</div>
 		<div class="card-panel">
 			<div class="row">
@@ -137,9 +137,9 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 		<div class="row">
 				<div class="col s12">
 					<?php if ($user !== null) {?>
-						<a class="waves-effect waves-light btn blue darken-3 right" href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>"><i class="material-icons right">backspace</i>Come Back Home</a>
+						<a class="waves-effect waves-light btn blue darken-4 right" href="index.php<?php echo "?latitude=" . $user->latitude . "&longitude=" . $user->longitude ?>"><i class="material-icons right">backspace</i>Come Back Home</a>
 					<?php } else { ?>
-						<a class="waves-effect waves-light btn blue darken-3 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
+						<a class="waves-effect waves-light btn blue darken-4 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
 					<?php } ?>
 				</div>
 			</div>

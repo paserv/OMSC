@@ -45,11 +45,25 @@ $excep = new CustomException();
 					</div>
 				<?php } else {
 				$isDelivered = $controller->sendEmail($_POST['name'], $_POST['email'], $_POST['message']);
-				if ($isDelivered) {
-					echo "Delivered";
-				} else {
-					echo "NOT Delivered";
-					}
+				if ($isDelivered) { ?>
+					<div class="row">
+						<div class="col s12"><h5>Operation Result<i class="mdi-action-settings left small"></i></h5></div>
+					</div>
+					<div class="card-panel">
+						<div class="row">
+							<div class="col s12"><h5>Success<i class="material-icons left small">done</i></h5></div>
+						</div>
+					</div>
+				<?php } else { ?>
+					<div class="row">
+						<div class="col s12"><h5>Operation Error<i class="mdi-content-block left"></i></h5></div>
+					</div>
+					<div class="card-panel">
+						<div class="row">
+							<h5>At the moment is not possible to send mails. Please retry later!</h5>
+						</div>
+					</div>
+					<?php }
 				}
 			} else {?>
 		

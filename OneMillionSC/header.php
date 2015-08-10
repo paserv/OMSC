@@ -6,13 +6,13 @@
 ?>
 	<ul id="dropdown1" class="dropdown-content">
 	<?php if (isset($_SESSION ["latitude"]) && $_SESSION ["latitude"] != null) { ?>
-	  <li><a href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
+	  <li><a class="blue-text text-darken-4" href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">My Account</a></li>
 	  <li class="divider"></li>
-	  <li><a href="operation.php?logout_button=Logout">Logout</a></li>
+	  <li><a class="blue-text text-darken-4" href="operation.php?logout_button=Logout">Logout</a></li>
 	<?php } else if (isset($_SESSION ["isLogged"]) && $_SESSION ["isLogged"] == true) {?>
-	  <li><a href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">Register</a></li>
+	  <li><a class="blue-text text-darken-4" href="account.php?sn=<?php echo $_SESSION ["sn"] ?>">Register</a></li>
 	  <li class="divider"></li>
-	  <li><a href="operation.php?logout_button=Logout">Logout</a></li>
+	  <li><a class="blue-text text-darken-4" href="operation.php?logout_button=Logout">Logout</a></li>
 	<?php } else {?>
 	  <li class="blue-text text-darken-4"> Sign In With:</li>
 	  <li class="divider"></li>
@@ -25,13 +25,13 @@
 	<nav>
 		<div class="nav-wrapper blue darken-3">
 			<ul class="left hide-on-med-and-down">
-				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Home" href="index.php" ><i class="mdi-social-public" alt="Home Page"></i></a></li>
-				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="About" href="about.php"><i class="mdi-action-assignment"></i></i></a></li>
-				<li><a class="waves-effect waves-light modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search people" href="#modal1"><i class="mdi-action-search"></i></a></li>
-				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Register" href="account.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
-				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Contact Us" href="contact.php"><i class="mdi-content-mail"></i></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="Home" href="index.php" ><i class="mdi-social-public" alt="Home Page"></i></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="About" href="about.php"><i class="mdi-action-assignment"></i></i></a></li>
+				<li><a class="waves-effect waves-light modal-trigger tooltipped" data-position="bottom" data-delay="100" data-tooltip="Search people" href="#modal1"><i class="mdi-action-search"></i></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="Register" href="account.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="1000" data-tooltip="Contact Us" href="contact.php"><i class="mdi-content-mail"></i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
-					<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Try quiz for free subscription" href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
+					<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="Try quiz for free subscription" href="quiz.php"><i class="mdi-communication-live-help"></i></a></li>
 				<?php } ?>
 			</ul>
 			<ul class="right hide-on-med-and-down">
@@ -85,7 +85,7 @@
 				<li><a class="waves-effect waves-light" href="about.php"><i class="mdi-action-assignment">About us</i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i class="mdi-action-search">Search</i></a></li>
 				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-social-person-add">Register</i></a></li>
-				<li><a class="waves-effect waves-light" href="account.php?choose=yes"><i class="mdi-content-mail">Contact Us</i></a></li>
+				<li><a class="waves-effect waves-light" href="contact.php"><i class="mdi-content-mail">Contact Us</i></a></li>
 				<?php if (IS_QUIZ_ENABLED) { ?>
 					<li><a class="waves-effect waves-light" href="quiz.php"><i class="mdi-communication-live-help">Quiz</i></a></li>
 				<?php } ?>
