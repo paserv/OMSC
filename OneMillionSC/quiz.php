@@ -39,8 +39,8 @@ if (isset ( $_REQUEST ['solution'] )) {
 	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { if (isset ( $_REQUEST ['solution'] ) && $quizok) { ?>
 	<div class="container">
 		<div class="row">
-				<div class="col s12"><h5>Get Free Subscription<i class="material-icons left small">thumb_up</i></h5></div>
-			</div>
+			<div class="col s12"><h5>Get Free Subscription<i class="material-icons left small">thumb_up</i></h5></div>
+		</div>
 		<div class="card-panel">
 			<div class="row">
 				<div class="col s12"><h5>Sign in with: </h5></div>

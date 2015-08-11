@@ -97,7 +97,7 @@
 
 <div id="modal1" class="modal">
     <div class="modal-content">
-		<h4>Find people</h4>
+		<h4>Find people<i class="mdi-action-search left small"></i></h4>
 		<div class="input-field col s6">
           <i class="mdi-action-account-circle prefix"></i>
           <input id="search_name" type="text" class="validate" placeholder="Enter a name">
@@ -151,6 +151,20 @@ $('#search_place').bind('change', function() {
 		$( "#icon_slide_bar" ).show();
 		$( "#label_slide_bar" ).show();
 		$( "#slide_bar" ).show();
+	}
+});
+
+$( "#search_place" ).keypress(function(e) {
+	if (e.keyCode == 13) {
+		if ($('#search_place').val() === '' || typeof $('#search_place').val() === 'undefined') {
+			$( "#icon_slide_bar" ).hide();
+			$( "#label_slide_bar" ).hide();
+			$( "#slide_bar" ).hide();
+		} else {
+			$( "#icon_slide_bar" ).show();
+			$( "#label_slide_bar" ).show();
+			$( "#slide_bar" ).show();
+		}
 	}
 });
 

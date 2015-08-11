@@ -33,14 +33,14 @@ $excep = new CustomException();
 			$isRobot = $controller->checkIsRobot($_POST['g-recaptcha-response']);
 				if ($isRobot) { ?>
 					<div class="row">
-						<div class="col s12"><h5>Uncorrect Captcha<i class="mdi-content-block left"></i></h5></div>
+						<div class="col s12"><h5>Captcha error<i class="mdi-content-block left"></i></h5></div>
 					</div>
 					<div class="card-panel">
 						<div class="row">
-							<h5>Please try again</h5>
+							<h5>Fill I'm not a robot, please!</h5>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row" style="margin-right:0px;">
 						<a class="btn waves-effect waves-light blue darken-3 right" href="contact.php"><i class="mdi-action-cached right"></i>Try Again</a>
 					</div>
 				<?php } else {
@@ -54,6 +54,9 @@ $excep = new CustomException();
 							<div class="col s12"><h5>Success<i class="material-icons left small">done</i></h5></div>
 						</div>
 					</div>
+					<div class="row" style="margin-right:0px;">
+						<a class="waves-effect waves-light btn blue darken-4 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
+					</div>
 				<?php } else { ?>
 					<div class="row">
 						<div class="col s12"><h5>Operation Error<i class="mdi-content-block left"></i></h5></div>
@@ -63,6 +66,9 @@ $excep = new CustomException();
 							<h5>At the moment is not possible to send mails. Please retry later!</h5>
 						</div>
 					</div>
+					<div class="row" style="margin-right:0px;">
+						<a class="waves-effect waves-light btn blue darken-4 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
+					</div>
 					<?php }
 				}
 			} else {?>
@@ -70,43 +76,43 @@ $excep = new CustomException();
 			<div class="row">
 				<div class="col s12"><h5>Contact Us<i class="mdi-content-mail left small"></i></h5></div>
 			</div>
-			<div class="card-panel">
-				<div class="row">
-					<form class="col s12" name="contactForm" action="contact.php" method="post">
-						<div class="row">
-							<div class="input-field col s12">
-								<i class="mdi-action-account-circle prefix"></i>
-	          					<input id="name" name="name" type="text" class="validate" required>
-	          					<label for="name">Name</label>
-	        				</div>
-	 				    </div>
-		 				<div class="row">
-	        				<div class="input-field col s12">
-	        					<i class="mdi-content-drafts prefix"></i>
-		          				<input id="email" name="email" type="email" class="validate" required>
-		          				<label for="email" data-error="Wrong Email Address" data-success="OK">Email</label>
-					    	</div>
-      					</div>
-      					<div class="row">
-					    	<div class="input-field col s12">
-					        	<i class="mdi-content-create prefix"></i>
-					    		<textarea id="message" name="message" class="materialize-textarea" required></textarea>
-					    		<label for="message">Message</label>
-					        </div>
-					    </div>
-					   <div class="row">
-					   		<div class="input-field col s6">
-					   			<div class="g-recaptcha" data-sitekey="6LdYDgsTAAAAAKwhsnmkc4HH_echjjSviT5KXZNa"></div>
-					   		</div>
-					   		<div class="input-field col s6">
-						   		<button class="btn waves-effect waves-light blue darken-3 right" type="submit" name="contact_button" value="contact">Send Message
-									<i class="mdi-content-send right"></i>
-								</button>
-							</div>
-					   </div>
-					</form>
+			<form class="col s12" name="contactForm" action="contact.php" method="post">
+				<div class="card-panel">
+					<div class="row">
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="mdi-action-account-circle prefix"></i>
+		          					<input id="name" name="name" type="text" class="validate" required>
+		          					<label for="name">Name</label>
+		        				</div>
+		 				    </div>
+			 				<div class="row">
+		        				<div class="input-field col s12">
+		        					<i class="mdi-content-drafts prefix"></i>
+			          				<input id="email" name="email" type="email" class="validate" required>
+			          				<label for="email" data-error="Wrong Email Address" data-success="OK">Email</label>
+						    	</div>
+	      					</div>
+	      					<div class="row">
+						    	<div class="input-field col s12">
+						        	<i class="mdi-content-create prefix"></i>
+						    		<textarea id="message" name="message" class="materialize-textarea" required></textarea>
+						    		<label for="message">Message</label>
+						        </div>
+						    </div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<div class="g-recaptcha right" data-sitekey="6LdYDgsTAAAAAKwhsnmkc4HH_echjjSviT5KXZNa" data-size="compact"></div>
+						</div>
+						<div class="input-field col s12 m12 l12">
+					   		<button class="btn waves-effect waves-light blue darken-3 right" type="submit" name="contact_button" value="contact">Send Message
+								<i class="mdi-content-send right"></i>
+							</button>
+						</div>
+					</div>
 				</div>
-			</div>
+			</form>
 	<?php } } ?> 
 	</div>
 	

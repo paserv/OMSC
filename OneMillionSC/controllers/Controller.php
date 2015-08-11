@@ -81,21 +81,21 @@ class Controller {
 	}
 	
 	function logout() {
-		$_SESSION ["id"] = null;
-		$_SESSION ["name"] = null;
-		$_SESSION ["mail"] = null;
-		$_SESSION ["avatarUrl"] = null;
-		$_SESSION ["socialPageUrl"] = null;
-		$_SESSION ["isLogged"] = null;
-		$_SESSION ["latitude"] = null;
-		$_SESSION ["longitude"] = null;
-		$_SESSION ["aboutme"] = null;
-		$_SESSION['oauth_token'] = null;
-		$_SESSION['oauth_token_secret'] = null;
-		$_SESSION ["sn"] = null;
-		$_SESSION ["isLogged"] = false;
-		$_SESSION ["total_users"] = null;
-// 		session_unset();
+// 		$_SESSION ["id"] = null;
+// 		$_SESSION ["name"] = null;
+// 		$_SESSION ["mail"] = null;
+// 		$_SESSION ["avatarUrl"] = null;
+// 		$_SESSION ["socialPageUrl"] = null;
+// 		$_SESSION ["isLogged"] = null;
+// 		$_SESSION ["latitude"] = null;
+// 		$_SESSION ["longitude"] = null;
+// 		$_SESSION ["aboutme"] = null;
+// 		$_SESSION['oauth_token'] = null;
+// 		$_SESSION['oauth_token_secret'] = null;
+// 		$_SESSION ["sn"] = null;
+// 		$_SESSION ["isLogged"] = false;
+// 		$_SESSION ["total_users"] = null;
+ 		session_unset();
 	}
 	
 	function registerFree(DBUser $dbData) {

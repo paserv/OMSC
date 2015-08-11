@@ -150,7 +150,6 @@ $excep = new CustomException(); ?>
 									</div>
 								</div>
 							</div>
-								<div class="row">
 								<?php if ($currentUser->isRegistered()) { ?>
 									<div class="col s12 m6 right">
 										<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="modify_button">Modify
@@ -163,19 +162,34 @@ $excep = new CustomException(); ?>
 							    				<i class="material-icons">delete</i>
 							  					</button>
 						  					</div>
-					  				<?php }	} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) { ?>
-							  			<div class="col s12 m6 right">	
-							  				<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="register_button">Free Registration
-						    				<i class="material-icons">done</i>
-						  					</button>
-						    			</div>
+					  				<?php }	} elseif ( (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) || (!IS_PAYPAL_ENABLED) ){ ?>
+							  				<div class="row">
+								  				<div class="col s12 m6 l6 center">
+									  					<div class="card blue-grey lighten-5" style="margin-top:0px">
+									  						<div class="card-content">
+									  							<span class="card-title black-text">Terms and Conditions</span>
+									  							<p>By registering up, you agree to our <a href="terms.php">Terms</a> and that you have read our <a href="datapolicy.php">Data Policy</a>, including our <a href="cookiepolicy.php">Cookie Use</a>.</p>
+									  						</div>
+									  					</div>
+									  				</div>
+									  			<div class="col s12 m6 center">	
+									  				<button style="margin-top:25px;" class="btn waves-effect waves-light blue darken-4" type="submit" name="register_button">Free Registration
+								    				<i class="material-icons">done</i>
+								  					</button>
+								    			</div>
+							    			</div>
 				  					<?php } else { ?>
 					  					<div class="card-panel">
 							  				<div class="row">
-								  				<div class="col s12 m6 l6 center">
-								  					Privacy
-								  				</div>
 							  					<div class="col s12 m6 l6 center">
+								  					<div class="card blue-grey lighten-5" style="margin-top:0px">
+								  						<div class="card-content">
+								  							<span class="card-title black-text">Terms and Conditions</span>
+								  							<p>By registering up, you agree to our <a href="terms.php">Terms</a> and that you have read our <a href="datapolicy.php">Data Policy</a>, including our <a href="cookiepolicy.php">Cookie Use</a>.</p>
+								  						</div>
+								  					</div>
+								  				</div>
+								  				<div class="col s12 m6 l6 center">
 								  					<div class="row">
 								  						<div class="col s6 blue-grey lighten-4">Description</div>
 								  						<div class="col s6 blue-grey lighten-4">Total Amount</div>
@@ -191,7 +205,6 @@ $excep = new CustomException(); ?>
 							  				</div>
 							  			</div>
 				  					<?php } ?>
-				  				</div>
 							</form>
 						</div>
 						<?php } else if ($loginUrl !== null) { ?>
