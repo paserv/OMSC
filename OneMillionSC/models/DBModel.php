@@ -113,7 +113,8 @@ class DBModel {
 		$maxLng = $result[1]->getLongitudeInDegrees();
 		
 		$conn = $this->getConnection ();
-		$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND Lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ") HAVING user.name like '%" . $name . "%'";
+		//$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND Lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ") HAVING user.name like '%" . $name . "%'";
+		$sql = "SELECT * FROM user WHERE user.name like '%" . $name . "%' HAVING (user.lat >= " . $minLat . " AND Lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ") limit " . DB_SEARCH_LIMIT;
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			throw new Exception("Impossible search by Name and Coords " . $name . " " . $lat . " " . $lng . " " . $ray, 200);
@@ -173,7 +174,7 @@ class DBModel {
 		$maxLng = $result[1]->getLongitudeInDegrees();
 		
 		$conn = $this->getConnection ();
-		$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND Lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ")";
+		$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND Lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ") limit " . DB_SEARCH_LIMIT;
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			throw new Exception("Impossible search by Coords " . $lat . " " . $lng . " " . $ray, 200);
