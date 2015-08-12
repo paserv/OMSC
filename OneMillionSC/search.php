@@ -75,7 +75,10 @@ if (isset ( $_SESSION ["numSearch"] )) {
 		    <?php
 		    echo "</script>";
 					}
-				} else {
+				if (count($results) == DB_SEARCH_LIMIT ) {
+					echo "<script>Materialize.toast('Search is limited to a maximum of " . DB_SEARCH_LIMIT . " people', 5000, 'rounded')</script>";
+				}
+			} else {
 					$excep->setError(700, "No results for this search");
 				}
 		}
