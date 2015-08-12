@@ -40,13 +40,13 @@ if (isset ( $_SESSION ["numSearch"] )) {
 	
 		try {
 	
-			if (isset ( $_GET ['name'] ) && $_GET ['name'] != '' && isset ($_GET ['lat']) && $_GET ['lat'] != '' && isset($_GET ['lng']) && $_GET ['lng'] != '' && isset($_GET ['ray']) && $_GET ['ray'] != '') {
-				$results = $controller->searchByNameAndCoords ( $_GET ['name'], $_GET ['lat'], $_GET ['lng'], $_GET ['ray'] );
-			} else if (isset ( $_GET ['name'] ) && $_GET ['name'] != '' ) {
-				$results = $controller->searchByName ( $_GET ['name'] );
+			if (isset ( $_REQUEST ['name'] ) && $_REQUEST ['name'] != '' && isset ($_REQUEST ['lat']) && $_REQUEST ['lat'] != '' && isset($_REQUEST ['lng']) && $_REQUEST ['lng'] != '' && isset($_REQUEST ['ray']) && $_REQUEST ['ray'] != '') {
+				$results = $controller->searchByNameAndCoords ( $_REQUEST ['name'], $_REQUEST ['lat'], $_REQUEST ['lng'], $_REQUEST ['ray'] );
+			} else if (isset ( $_REQUEST ['name'] ) && $_REQUEST ['name'] != '' ) {
+				$results = $controller->searchByName ( $_REQUEST ['name'] );
 			}
-			else if ( isset ($_GET ['lat']) && $_GET ['lat'] != '' && isset($_GET ['lng']) && $_GET ['lng'] != '' && isset($_GET ['ray']) && $_GET ['ray'] != '') {
-				$results = $controller->searchByCoords ( $_GET ['lat'], $_GET ['lng'], $_GET ['ray'], $_GET ['ray'] );
+			else if ( isset ($_REQUEST ['lat']) && $_REQUEST ['lat'] != '' && isset($_REQUEST ['lng']) && $_REQUEST ['lng'] != '' && isset($_REQUEST ['ray']) && $_REQUEST ['ray'] != '') {
+				$results = $controller->searchByCoords ( $_REQUEST ['lat'], $_REQUEST ['lng'], $_REQUEST ['ray'], $_REQUEST ['ray'] );
 			} else {
 				$excep->setError(700, "Search parameters not correct");
 			}

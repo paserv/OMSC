@@ -95,30 +95,31 @@
 	</nav>
 </div>
 
-<div id="modal1" class="modal">
-    <div class="modal-content">
-		<h4>Find people<i class="mdi-action-search left small"></i></h4>
-		<div class="input-field col s6">
-          <i class="mdi-action-account-circle prefix"></i>
-          <input id="search_name" type="text" class="validate" placeholder="Enter a name">
-        </div>
-        <div class="input-field col s6">
-          <i class="mdi-maps-map prefix"></i>
-          <input id="search_place" type="text" class="validate">
-        </div>
-        <p class="range-field">
-        	<i id="icon_slide_bar" class="mdi-device-location-searching prefix"></i>
-        	<label id="label_slide_bar" for="slide_bar">Ray (Km)</label>
-      		<input id="slide_bar" class="blue darken-3" type="range" id="test5" min="0" max="100" value="50"/>
-   		</p>
-    </div>
-	<div class="modal-footer">
-		<button id = "findBtn" class="btn blue darken-3 waves-effect waves-light" type="submit" name="action">Search
-			<i class="mdi-content-send right"></i>
-		</button>
-		<a href="#!" class=" modal-action modal-close waves-effect waves-blue btn-flat">Cancel</a>
+	<div id="modal1" class="modal">
+	    <div class="modal-content">
+			<h4>Find people<i class="mdi-action-search left small"></i></h4>
+			<div class="input-field col s6">
+	          <i class="mdi-action-account-circle prefix"></i>
+	          <input id="search_name" type="text" class="validate" placeholder="Enter a name">
+	        </div>
+	        <div class="input-field col s6">
+	          <i class="mdi-maps-map prefix"></i>
+	          <input id="search_place" type="text" class="validate">
+	        </div>
+	        <p class="range-field">
+	        	<i id="icon_slide_bar" class="mdi-device-location-searching prefix"></i>
+	        	<label id="label_slide_bar" for="slide_bar">Ray (Km)</label>
+	      		<input id="slide_bar" class="blue darken-3" type="range" id="test5" min="0" max="100" value="50"/>
+	   		</p>
+	    </div>
+		<div class="modal-footer">
+			<button id = "findBtn" class="btn blue darken-3 waves-effect waves-light" type="submit" name="search">Search
+				<i class="mdi-content-send right"></i>
+			</button>
+			<a href="#!" class=" modal-action modal-close waves-effect waves-blue btn-flat">Cancel</a>
+		</div>
 	</div>
-</div>
+
 <script>
 $(document).ready(function(){
     $('.modal-trigger').leanModal();
@@ -168,13 +169,29 @@ $( "#search_place" ).keypress(function(e) {
 	}
 });
 
+function postData(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
 
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
 
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
 
+            form.appendChild(hiddenField);
+         }
+    }
 
-
-
-
+    document.body.appendChild(form);
+    form.submit();
+}
 
 $( "#findBtn" ).click(function() {
 	var queryString;
@@ -192,8 +209,9 @@ $( "#findBtn" ).click(function() {
 	    	geom = results[0].geometry;
 	    	lat = geom.location.lat();
 	    	lng = geom.location.lng();
-	    	queryString = "?name=" + $( "#search_name" ).val() + "&lat=" + lat + "&lng=" + lng + "&ray=" + ray;
-			window.location = "search.php" + queryString;
+// 	    	queryString = "?name=" + $( "#search_name" ).val() + "&lat=" + lat + "&lng=" + lng + "&ray=" + ray;
+// 			window.location = "search.php" + queryString;
+	    	postData('search.php', {name: $( "#search_name" ).val(), lat: lat, lng: lng, ray: ray});
 	      } else {
 	    	  window.alert('Address could not be geocoded: ' + status);
 		      }
@@ -211,15 +229,17 @@ $( "#findBtn" ).click(function() {
 	    	geom = results[0].geometry;
 	    	lat = geom.location.lat();
 	    	lng = geom.location.lng();
-	    	queryString = "?lat=" + lat + "&lng=" + lng + "&ray=" + ray;
-	    	window.location = "search.php" + queryString;
+// 	    	queryString = "?lat=" + lat + "&lng=" + lng + "&ray=" + ray;
+// 	    	window.location = "search.php" + queryString;
+	    	postData('search.php', {lat: lat, lng: lng, ray: ray});
 	      } else {
 	    	  window.alert('Address could not be geocoded: ' + status);
 		      }
 	    });
 	} else if ($( "#search_name" ).val() !== '') {
-		queryString = "?name=" + $( "#search_name" ).val();
-		window.location = "search.php" + queryString;
+// 		queryString = "?name=" + $( "#search_name" ).val();
+// 		window.location = "search.php" + queryString;
+		postData('search.php', {name: $( "#search_name" ).val()});
 		} else {
 			window.location = "search.php";
 			}

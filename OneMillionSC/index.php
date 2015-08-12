@@ -24,11 +24,11 @@ autoload (); ?>
 		</head>
 	
 	<body>
-		<?php if (! empty ( $_GET['latitude'] ) && ! empty ( $_GET['longitude'] )) {?>
-		<script type="text/javascript">var latitude = <?php echo $_GET['latitude']; ?>;</script>
-		<script type="text/javascript">var longitude = <?php echo $_GET['longitude']; ?>;</script>
-		<?php } if(isset($_GET['searchPlace'])){ ?>
-		<script type="text/javascript">var searchPlace = "<?php echo $_GET['searchPlace']; ?>;"</script>
+		<?php if (! empty ( $_REQUEST['latitude'] ) && ! empty ( $_REQUEST['longitude'] )) {?>
+		<script type="text/javascript">var latitude = <?php echo $_REQUEST['latitude']; ?>;</script>
+		<script type="text/javascript">var longitude = <?php echo $_REQUEST['longitude']; ?>;</script>
+		<?php } if(isset($_REQUEST['searchPlace'])){ ?>
+		<script type="text/javascript">var searchPlace = "<?php echo $_REQUEST['searchPlace']; ?>;"</script>
 		<?php } ?>
 		
 		<?php include 'header.php'; ?>
