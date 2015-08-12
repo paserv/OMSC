@@ -168,7 +168,7 @@ $excep = new CustomException(); ?>
 									  					<div class="card blue-grey lighten-5" style="margin-top:0px">
 									  						<div class="card-content">
 									  							<span class="card-title black-text">Terms and Conditions</span>
-									  							<p>By registering up, you agree to our <a href="terms.php">Terms</a> and that you have read our <a href="datapolicy.php">Data Policy</a>, including our <a href="cookiepolicy.php">Cookie Use</a>.</p>
+									  							<p>By registering, you agree to our <a href="terms.php">Terms</a> and that you have read our <a href="privacypolicy.php">Privacy Policy</a>, including our <a href="cookiepolicy.php">Cookie Use</a>.</p>
 									  						</div>
 									  					</div>
 									  				</div>
