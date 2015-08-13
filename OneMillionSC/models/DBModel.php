@@ -156,6 +156,9 @@ class DBModel {
 		$conn->close ();
 		return $result;
 	}
+	function searchByCoordsSpatial($lat, $lng, $ray) {
+		
+	}
 	function searchByCoords($lat, $lng, $ray) {
 		$res = array();
 		
@@ -175,6 +178,7 @@ class DBModel {
 		
 		$conn = $this->getConnection ();
 		$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND user.lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ") limit " . DB_SEARCH_LIMIT;
+		//echo $lat . " " . $lng . " " . $sql;
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			throw new Exception("Impossible search by Coords " . $lat . " " . $lng . " " . $ray, 200);
