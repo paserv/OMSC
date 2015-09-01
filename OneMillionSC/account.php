@@ -162,7 +162,7 @@ $excep = new CustomException(); ?>
 							    				<i class="material-icons">delete</i>
 							  					</button>
 						  					</div>
-					  				<?php }	} elseif ( (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) || (!IS_PAYPAL_ENABLED) ){ ?>
+					  				<?php }	} elseif ( (IS_QUIZ_ENABLED && isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) || (!IS_PAYPAL_ENABLED) ){ ?>
 							  				<div class="row">
 								  				<div class="col s12 m6 l6 center">
 									  					<div class="card blue-grey lighten-5" style="margin-top:0px">

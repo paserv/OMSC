@@ -65,7 +65,7 @@ if (isset ( $_REQUEST ['solution'] )) {
 				</div>
 			</div>
 		</div>
-		<?php } else { ?>
+		<?php } elseif (IS_QUIZ_ENABLED) { ?>
 		<div class="container">
 		<div class="row">
 			<div class="col s12"><h5>Quiz<i class="mdi-communication-live-help left small"></i></h5></div>

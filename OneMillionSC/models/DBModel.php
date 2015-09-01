@@ -95,6 +95,32 @@ class DBModel {
 			return null;
 		}
 	}
+	function searchByNameAndCoordsSpatial($name, $lat, $lng, $ray) {
+		$res = array();
+		
+		if ($ray > 100) {
+			$ray = 100;
+		}
+		
+		$latDegree = $ray/100;
+		$lngDegree = $ray/100;//(111*cos($lat));
+		
+		$conn = $this->getConnection ();
+		$sql = "SELECT * FROM user WHERE Contains(GeomFromText(CONCAT('POLYGON((',X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $lngDegree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $lngDegree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $lngDegree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $lngDegree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $lngDegree .", '))')), location) HAVING user.name like '%" . $name . "%' limit " . DB_SEARCH_LIMIT;
+		$result = $conn->query ( $sql );
+		if (!$result) {
+			throw new Exception("Impossible search by Name and Coords " . $name . " " . $lat . " " . $lng . " " . $ray, 200);
+		} else if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
+				array_push($res, $currUser);
+			}
+			return $res;
+		} else {
+			throw new Exception("No Result found in search by Name And Coords", 700);
+		}
+		$conn->close ();
+	}
 	function searchByNameAndCoords($name, $lat, $lng, $ray) {
 		$res = array();
 		
@@ -157,8 +183,36 @@ class DBModel {
 		return $result;
 	}
 	function searchByCoordsSpatial($lat, $lng, $ray) {
+		$res = array();
 		
+		if ($ray > 100) {
+			$ray = 100;
+		}
+		
+		$latDegree = $ray/100;
+		$lngDegree = $ray/100;//(111*cos($lat));
+		
+		$conn = $this->getConnection ();
+		//$sql = "SELECT * FROM user WHERE Contains(GeomFromText(CONCAT('POLYGON((',X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $degree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $degree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $degree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $degree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $degree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $degree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $degree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $degree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $degree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $degree .", '))')), location) limit " . DB_SEARCH_LIMIT;
+		$sql = "SELECT * FROM user WHERE Contains(GeomFromText(CONCAT('POLYGON((',X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $lngDegree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $lngDegree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $lngDegree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) + " . $lngDegree .", ',', X(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $latDegree .", ' ', Y(GeomFromText('POINT(" . $lat . " " . $lng . ")')) - " . $lngDegree .", '))')), location) limit " . DB_SEARCH_LIMIT;
+// 		echo $lat . " " . $lng . " " . $sql;
+		
+		$result = $conn->query ( $sql );
+		
+		if (!$result) {
+			throw new Exception("Impossible search by Coords " . $lat . " " . $lng . " " . $ray, 200);
+		} else if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$currUser = new DBUser($row["socialId"], $row["name"], $row["email"], $row["lat"], $row["lng"], $row["description"], $row["socialPageUrl"], $row["avatarUrl"], $row["timestamp"], $row["socialNetwork"]);
+				array_push($res, $currUser);
+			}
+			return $res;
+		} else {
+			throw new Exception("No Result found in search by Coords", 700);
+		}
+		$conn->close ();
 	}
+	
 	function searchByCoords($lat, $lng, $ray) {
 		$res = array();
 		
@@ -178,7 +232,7 @@ class DBModel {
 		
 		$conn = $this->getConnection ();
 		$sql = "SELECT * FROM user WHERE (user.lat >= " . $minLat . " AND user.lat <= " . $maxLat . ") AND (user.lng >= " . $minLng . " AND user.lng <= " . $maxLng . ") limit " . DB_SEARCH_LIMIT;
-		//echo $lat . " " . $lng . " " . $sql;
+// 		echo $lat . " " . $lng . " " . $sql;
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			throw new Exception("Impossible search by Coords " . $lat . " " . $lng . " " . $ray, 200);
@@ -210,7 +264,8 @@ class DBModel {
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
 		$timestamp = date("Y-m-d H:i:s");
-		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, lat, lng, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$timestamp', '$dbData->socialNetwork')";
+// 		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, lat, lng, timestamp, socialNetwork) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$timestamp', '$dbData->socialNetwork')";
+		$sql = "INSERT INTO user (socialId, name, email, avatarUrl, description, socialPageUrl, lat, lng, timestamp, socialNetwork, location) VALUES ('$dbData->socialId', '$dbData->name', '$dbData->email', '$dbData->avatarUrl', '$dbData->description', '$dbData->socialPageUrl', '$dbData->latitude', '$dbData->longitude', '$timestamp', '$dbData->socialNetwork', GeomFromText('POINT($dbData->latitude $dbData->longitude)'))";
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();
@@ -225,7 +280,8 @@ class DBModel {
 		$conn = $this->getConnection ();
 		$avatUrl = DBModel::escapeUrl ( $conn, $dbData->avatarUrl );
 		$profileUrl = DBModel::escapeUrl ( $conn, $dbData->socialPageUrl );
-		$sql = "UPDATE user SET description = '$dbData->description', lat = '$dbData->latitude', lng = '$dbData->longitude' WHERE socialId = '$dbData->socialId' AND socialNetwork like '$dbData->socialNetwork'";
+// 		$sql = "UPDATE user SET description = '$dbData->description', lat = '$dbData->latitude', lng = '$dbData->longitude' WHERE socialId = '$dbData->socialId' AND socialNetwork like '$dbData->socialNetwork'";
+		$sql = "UPDATE user SET description = '$dbData->description', lat = '$dbData->latitude', lng = '$dbData->longitude', location = GeomFromText('POINT($dbData->latitude $dbData->longitude)') WHERE socialId = '$dbData->socialId' AND socialNetwork like '$dbData->socialNetwork'";
 		if ($conn->query ( $sql ) === FALSE) {
 			$error = $conn->error;
 			$conn->close ();

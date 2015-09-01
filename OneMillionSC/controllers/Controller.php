@@ -264,9 +264,21 @@ class Controller {
 		return $result;
 	}
 	
+	function searchByNameAndCoordsSpatial ($name, $lat, $lng, $ray) {
+		$model = new DBModel();
+		$result = $model->searchByNameAndCoordsSpatial($name, $lat, $lng, $ray);
+		return $result;
+	}
+	
 	function searchByCoords ($lat, $lng, $ray) {
 		$model = new DBModel ();
 		$result = $model->searchByCoords($lat, $lng, $ray);
+		return $result;
+	}
+	
+	function searchByCoordsSpatial ($lat, $lng, $ray) {
+		$model = new DBModel ();
+		$result = $model->searchByCoordsSpatial($lat, $lng, $ray);
 		return $result;
 	}
 	
