@@ -4,8 +4,12 @@ GeoLocation_autoload();
 
 class DBModel {
 	function getConnection() {
-		$conn = new mysqli ( DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE );
-		if ($conn->connect_error) {
+		try {
+			$conn = new mysqli ( DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE );
+		} catch (Exception $ex) {
+			
+		}
+		if (isset ($conn) && $conn->connect_error) {
 			throw new Exception($conn->connect_error, 200);
 		}
 		return $conn;
@@ -16,7 +20,7 @@ class DBModel {
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			$conn->close ();
-			throw new Exception("Impossible search by Quiz ID " . $quizId, 200);
+			throw new Exception("Impossible to reach DB for Quiz ID: " . $quizId, 200);
 		} else if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
 			$quiz = new QuizDTO($row["id"], $row["name"], $row["threshold"], $row["counter"], $row["solution"]);

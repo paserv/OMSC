@@ -36,7 +36,7 @@ if (isset ( $_REQUEST ['solution'] )) {
 	</head>
 
 <body>
-	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { if (isset ( $_REQUEST ['solution'] ) && $quizok) { ?>
+	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { if (isset ( $_REQUEST ['solution'] ) && isset ($quizok) && $quizok) { ?>
 	<div class="container">
 		<div class="row">
 			<div class="col s12"><h5>Get Free Subscription<i class="material-icons left small">thumb_up</i></h5></div>
@@ -57,7 +57,7 @@ if (isset ( $_REQUEST ['solution'] )) {
 			</div>
 		</div>
 	</div>
-		<?php } elseif ((isset ( $_REQUEST ['solution'] ) && !$quizok)) { ?>
+		<?php } elseif ((isset ( $_REQUEST ['solution'] ) && isset ($quizok) && !$quizok)) { ?>
 		<div class="container">	
 			<div class="card-panel">
 				<div class="row">

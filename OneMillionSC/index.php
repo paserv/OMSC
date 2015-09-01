@@ -1,6 +1,8 @@
 <?php session_start(); 
 require_once 'autoload.php';
-autoload (); ?>
+autoload ();
+$excep = new CustomException();
+?>
 <!DOCTYPE html>
 	<html>
 		<head>
@@ -31,10 +33,10 @@ autoload (); ?>
 		<script type="text/javascript">var searchPlace = "<?php echo $_REQUEST['searchPlace']; ?>;"</script>
 		<?php } ?>
 		
-		<?php include 'header.php'; ?>
+		<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { ?>
 			<input id="zoom_place" type="text"></input>
 			<div id="map-canvas"></div>
-		<?php include 'footer.php'; ?>
+		<?php } include 'footer.php'; ?>
 			
 			
 			<script>

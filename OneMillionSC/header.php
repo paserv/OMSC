@@ -1,7 +1,11 @@
 <?php 
 	if (!isset($_SESSION ["total_users"])) { 
 		$controller = new Controller(); 
-		$total = $controller->countMembers(); 
+		try {
+			$total = $controller->countMembers();
+		} catch (Exception $ex) {
+			//$excep->setError($ex->getCode(), $ex->getMessage());
+		}
 	}
 ?>
 	<ul id="dropdown1" class="dropdown-content">
