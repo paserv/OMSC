@@ -171,13 +171,15 @@ class DBModel {
 	function countUsers() {
 		$result = 0;
 		$conn = $this->getConnection ();
-		$sql = "SELECT total FROM members";
+// 		$sql = "SELECT total FROM members";
+		$sql = "SELECT count(socialId) as memberCount FROM user";
 		$result = $conn->query ( $sql );
 		if (!$result) {
 			throw new Exception ( "Error Count Users", 200 );
 		} else if ($result->num_rows == 1) {
 			$row = $result->fetch_assoc();
-			$result = $row["total"];
+// 			$result = $row["total"];
+			$result = $row["memberCount"];
 		}
 		$conn->close ();
 		return $result;

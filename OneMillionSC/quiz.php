@@ -58,11 +58,17 @@ if (isset ( $_REQUEST ['solution'] )) {
 		</div>
 	</div>
 		<?php } elseif ((isset ( $_REQUEST ['solution'] ) && isset ($quizok) && !$quizok)) { ?>
-		<div class="container">	
+		<div class="container">
+			<div class="row">
+				<div class="col s12"><h5>Quiz result<i class="material-icons left small">error</i></h5></div>
+			</div>
 			<div class="card-panel">
 				<div class="row">
 					<div class="col s12"><h5>Wrong Response!</h5></div>
 				</div>
+			</div>
+			<div class="row">
+				<a class="waves-effect waves-light btn blue darken-3 right" href="quiz.php"><i class="material-icons right">backspace</i>Come Back to Quiz</a>
 			</div>
 		</div>
 		<?php } elseif (IS_QUIZ_ENABLED) { ?>

@@ -54,7 +54,7 @@
 							<div class="col s12">' . $publicMessage . '</h5></div>
 						</div>
 						<div class="row">
-							<div class="col s12">' . $excep->private_message . '</h5></div>
+							<div class="col s12">Please try again later, if problem persists <a href="contact.php">Contact Us</a>.</h5></div>
 						</div>
 					</div>
 					<div class="row">

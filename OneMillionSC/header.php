@@ -2,7 +2,9 @@
 	if (!isset($_SESSION ["total_users"])) { 
 		$controller = new Controller(); 
 		try {
-			$total = $controller->countMembers();
+// 			$total = $controller->countMembers();
+			$total = $controller->countMembersFromFile();
+			$_SESSION ["total_users"] = $total;
 		} catch (Exception $ex) {
 			//$excep->setError($ex->getCode(), $ex->getMessage());
 		}

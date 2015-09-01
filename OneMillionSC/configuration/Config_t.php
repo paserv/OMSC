@@ -53,7 +53,7 @@ define ('RC_SECRET_KEY', '6LdYDgsTAAAAAJcsTKHItpU8hwLU7YdUqUSZUIj7');
 #SITE CONFIG#
 define ('MAX_SEARCH', '300');
 define ('DELETE_BTN_ENABLED', true);
-define ('IS_PAYPAL_ENABLED', false);
+define ('IS_PAYPAL_ENABLED', true);
 define ('IS_QUIZ_ENABLED', true);
 define ('QUIZ_ID', 1);
 define ('WEBMASTER_MAIL', 'paserv@gmail.com');

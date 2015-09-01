@@ -127,7 +127,8 @@ class Controller {
 		} else {
 			$this->incrementQuizCounter(QUIZ_ID);
 		}
-		$this->incrementMembers();
+// 		$this->incrementMembers();
+		$this->updateMembersCount();
 	}
 
 	function delete(DBUser $dbData) {
@@ -139,7 +140,8 @@ class Controller {
 			$this->registerUserIntoDB($dbData);
 			throw new Exception($e->getMessage(), 803);
 		}
-		$this->decrementMembers();
+// 		$this->decrementMembers();
+		$this->updateMembersCount();
 	}
 	
 	function update(DBUser $dbData) {
@@ -165,7 +167,7 @@ class Controller {
 				throw new Exception('Limit for free quiz subscription (' . $result->threshold . ') reached', 901);
 			}
 		} else {
-			throw new Exception('Incorrect Solution ' . $givenSolution, 900);
+			//throw new Exception('Incorrect Solution ' . $givenSolution, 900);
 		}
 		return false;
 	}
@@ -212,7 +214,15 @@ class Controller {
 	/**
 	 * DB CONTROLS
 	 */
-
+	function updateMembersCount() {
+		$model = new DBModel ();
+		$total_users = $model->countUsers();
+		$myfile = fopen("members.omsc", "w");
+		fwrite($myfile, $total_users);
+		fclose($myfile);
+		$_SESSION ["total_users"] = $total_users;
+	}
+	
 	function incrementMembers() {
 		$model = new DBModel ();
 		$total_users = $model->addUsers(1);
@@ -228,7 +238,18 @@ class Controller {
 	function countMembers() {
 		$model = new DBModel ();
 		$total_users = $model->countUsers();
-		$_SESSION ["total_users"] = $total_users;
+		return $total_users;
+	}
+	
+	function countMembersFromFile() {
+		try {
+			$myfile = fopen("members.omsc", "r");
+			$result = fgets($myfile);
+			fclose($myfile);
+		} catch (Exception $ex) {
+			throw new Exception ( "Error Count Users", 200 );
+		}
+		return $result;
 	}
 	
 	function registerUserIntoDB(DBUser $dbData) {
