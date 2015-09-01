@@ -4,11 +4,7 @@ GeoLocation_autoload();
 
 class DBModel {
 	function getConnection() {
-		try {
-			$conn = new mysqli ( DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE );
-		} catch (Exception $ex) {
-			
-		}
+		$conn = @new mysqli ( DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE );
 		if (isset ($conn) && $conn->connect_error) {
 			throw new Exception($conn->connect_error, 200);
 		}

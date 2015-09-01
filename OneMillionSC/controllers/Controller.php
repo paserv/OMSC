@@ -109,7 +109,7 @@ class Controller {
 			throw new Exception($e->getMessage(), 800);
 		}
 		try {
-// 			$this->registerUserIntoFusionTable ( $dbData );
+//  			$this->registerUserIntoFusionTable ( $dbData );
 		} catch ( Exception $e ) {
 			$this->logout();
 			$this->deleteUserFromDB($dbData);
@@ -133,7 +133,7 @@ class Controller {
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
 		try {
-// 			$this->deleteUserFromFusionTable($dbData);
+//  			$this->deleteUserFromFusionTable($dbData);
 			$this->logout();
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
@@ -146,7 +146,7 @@ class Controller {
 		$oldUser = $this->search($dbData->socialId, $dbData->socialNetwork);
 		$this->updateUserIntoDB($dbData);
 		try {
-// 			$this->updateUserIntoFusionTable($dbData);
+//  			$this->updateUserIntoFusionTable($dbData);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), 804);
