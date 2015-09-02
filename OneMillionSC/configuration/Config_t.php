@@ -57,4 +57,5 @@ define ('IS_PAYPAL_ENABLED', false);
 define ('IS_QUIZ_ENABLED', true);
 define ('QUIZ_ID', 1);
 define ('WEBMASTER_MAIL', 'paserv@gmail.com');
+define ('SHARE_ENABLED', true);
 ?>

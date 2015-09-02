@@ -122,14 +122,17 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 			</div>
 			<div class="row">
 				<div class="col s12">
-					<?php if (!isset($_REQUEST['logout_button']) && !isset($_REQUEST['delete_button']) && isset($_SESSION['sn'])) {
-						if ($_SESSION['sn'] === 'FB') { ?>
-						Share on Facebook <div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div>
-						<?php } elseif ($_SESSION['sn'] === 'TW') {?>
-						Tweet this <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a>
-						<?php } elseif ($_SESSION['sn'] === 'PL') {?>
-						Share on Google Plus <a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share2.png" alt="Share on Google+"/></a>
-						<?php } 
+					<?php 
+						if (SHARE_ENABLED) {
+							if (!isset($_REQUEST['logout_button']) && !isset($_REQUEST['delete_button']) && isset($_SESSION['sn'])) {
+								if ($_SESSION['sn'] === 'FB') { ?>
+								<p>Share on Facebook <div class="fb-share-button" data-href="https://aoapoa.com/" data-layout="button"></div></p>
+								<?php } elseif ($_SESSION['sn'] === 'TW') { ?>
+								<p>Tweet this <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://aoapoa.com" data-count="none" data-hashtags="omsc">Tweet</a></p>
+								<?php } elseif ($_SESSION['sn'] === 'PL') { ?>
+								<p>Share on Google Plus <a href="https://plus.google.com/share?url=http://www.aoapao.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="public/img/plus_share2.png" alt="Share on Google+"/></a></p>
+								<?php } 
+							} 
 						} ?>
 				</div>
 			</div>
