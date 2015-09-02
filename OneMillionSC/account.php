@@ -49,7 +49,7 @@ $excep = new CustomException(); ?>
 								};
 							</script>
 						<?php
-						} else {
+						} elseif (IS_PAYPAL_ENABLED) {
 							$paypal_url = $controller->getPayPalUrl();
 							}
 					} else {
@@ -60,10 +60,10 @@ $excep = new CustomException(); ?>
 					}
 				}
 	?>
-	<?php include 'header.php'; ?>
-	
-	<?php if ($excep->existProblem) { include 'error.php'; } else {	?>
-				<?php if (!isset($_SESSION["sn"]) || isset($_REQUEST["choose"])) { ?>
+	<?php include 'header.php'; 
+
+	if ($excep->existProblem) { include 'error.php'; } else {	
+				if (!isset($_SESSION["sn"]) || isset($_REQUEST["choose"])) { ?>
 					<div class="container">
 						<div class="row">
 							<div class="col s12"><h5>Sign in with: <i class="mdi-social-person-add left small"></i></h5></div>
@@ -81,7 +81,13 @@ $excep = new CustomException(); ?>
 						  	</div>
 						</div>
 					</div>
-					<?php } elseif ($currentUser->isLogged()) { ?>
+					<?php } elseif ($currentUser->isLogged()) {
+						if ($controller->isFreeUser($currentUser->socialId)) {
+							$_SESSION ["freeuser"] = true;
+						} else {
+							$_SESSION ["freeuser"] = false;
+						}
+						?>
 					<div class="container width90">
 						<div class="row">
 							<div class="col s12"><h5>My Profile<i class="material-icons left small">face</i></h5></div>
@@ -94,9 +100,11 @@ $excep = new CustomException(); ?>
 											<img src="<?php echo $currentUser->avatarUrl; ?>" />
 										</div>
 										<div class="col s6">
+											<!-- 
 											<button style="margin-left:10px" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="logout_button">Logout
 						    				<i class="material-icons">undo</i>
 						    				</button>
+						    				 -->
 										</div>
 										<div class="col s12">
 											<div class="input-field">
@@ -157,12 +165,33 @@ $excep = new CustomException(); ?>
 					  					</button>
 					  				</div>
 				  					<?php if (DELETE_BTN_ENABLED) { ?>
+						  					<!-- 
 						  					<div class="col s12 m6 right">
 							  					<button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right" type="submit" name="delete_button">Delete
 							    				<i class="material-icons">delete</i>
 							  					</button>
 						  					</div>
-					  				<?php }	} elseif ( (IS_QUIZ_ENABLED && isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) || (!IS_PAYPAL_ENABLED) ){ ?>
+						  					 -->
+						  					<div class="col s12 m6 right">
+							  					<a href="#modalDelete" class="modal-trigger"><button style="margin-left:10px;" class="btn waves-effect waves-light blue darken-3 right">Delete<i class="material-icons">delete</i></button></a>
+						  					</div>
+						  					<div id="modalDelete" class="modal">
+											    <div class="modal-content">
+											      <h4>Confirm Operation</h4>
+											      <p>This operation is going to remove your account from One Million Social Club.</p>
+											      <p>Are you sure?</p>
+											    </div>
+											    <div class="modal-footer">
+											      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+											      <a id="yesdelete" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+											    </div>
+											 </div>
+											 <script>
+											 $("#yesdelete").click(function(event) {
+												 postData('operation.php', {delete_button: "true"});
+											 });
+											 </script>
+					  				<?php }	} elseif ( (IS_QUIZ_ENABLED && isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) || (!IS_PAYPAL_ENABLED) || ( $_SESSION ["freeuser"] ) ) { ?>
 							  				<div class="row">
 								  				<div class="col s12 m6 l6 center">
 									  					<div class="card blue-grey lighten-5" style="margin-top:0px">

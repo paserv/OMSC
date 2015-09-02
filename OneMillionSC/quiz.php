@@ -9,6 +9,9 @@ $_SESSION["okquiz"] = false;
 if (isset ( $_REQUEST ['solution'] )) {
 	try {
 		$quizok = $controller->checkQuizSolution(QUIZ_ID, $_REQUEST ['solution']);
+			if ($quizok) {
+				$_SESSION["okquiz"] = true;
+			}
 	} catch (Exception $ex) {
 		$excep->setError($ex->getCode(), $ex->getMessage());
 	}
@@ -36,7 +39,7 @@ if (isset ( $_REQUEST ['solution'] )) {
 	</head>
 
 <body>
-	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { if (isset ( $_REQUEST ['solution'] ) && isset ($quizok) && $quizok) { ?>
+	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { if (isset ( $_REQUEST ['solution'] ) && isset ($_SESSION["okquiz"]) && $_SESSION["okquiz"]) { ?>
 	<div class="container">
 		<div class="row">
 			<div class="col s12"><h5>Get Free Subscription<i class="material-icons left small">thumb_up</i></h5></div>
@@ -53,18 +56,22 @@ if (isset ( $_REQUEST ['solution'] )) {
 			<div class="row">
 			    <div class="col s4 center">Facebook</div>
 			    <div class="col s4 center">Twitter</div>
-			    <div class="col s4 center">Google Plus</a></div>
+			    <div class="col s4 center">Google Plus</div>
 			</div>
 		</div>
 	</div>
-		<?php } elseif ((isset ( $_REQUEST ['solution'] ) && isset ($quizok) && !$quizok)) { ?>
+		<?php } elseif ((isset ( $_REQUEST ['solution'] ) && isset ($_SESSION["okquiz"]) && !$_SESSION["okquiz"])) { ?>
 		<div class="container">
 			<div class="row">
 				<div class="col s12"><h5>Quiz result<i class="material-icons left small">error</i></h5></div>
 			</div>
 			<div class="card-panel">
 				<div class="row">
+					<?php if ( isset ($incorrectsolution) &&  $incorrectsolution) { ?>
 					<div class="col s12"><h5>Wrong Response!</h5></div>
+					<?php } elseif (isset ($quizlimit) &&  $quizlimit) { ?>
+					<div class="col s12"><h5>Limit for free quiz subscription reached!</h5></div>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="row">

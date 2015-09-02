@@ -317,6 +317,21 @@ class DBModel {
 		}
 		$conn->close ();
 	}
+	
+	function isFreeUser($socialId) {
+		$conn = $this->getConnection ();
+		$sql = "SELECT COUNT(*) as user FROM freeuser WHERE socialId = " . $socialId;
+		$result = $conn->query ( $sql );
+		if (!$result) {
+			throw new Exception ( "Error searching for Free User " . $socialId, 200 );
+		} else if ($result->num_rows == 1) {
+			$row = $result->fetch_assoc();
+			if ($row["user"] === "1") {
+				return true;
+			} else return false;
+		}
+		$conn->close ();
+	}
 }
 
 ?>

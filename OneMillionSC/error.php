@@ -30,7 +30,7 @@
 			803 =>'Impossible Delete User into Fusion Table',
 			804 => 'Impossible Update User into Fusion Table',
 			
-			#Fusion Error#
+			#Quiz Error#
 			900 => 'Incorrect Solution',
 			901 => 'Limit for free quiz subscription reached',
 			
@@ -52,15 +52,17 @@
 					<div class="card-panel">
 						<div class="row">
 							<div class="col s12">' . $publicMessage . '</h5></div>
-						</div>
-						<div class="row">
-							<div class="col s12">Please try again later, if problem persists <a href="contact.php">Contact Us</a>.</h5></div>
-						</div>
-					</div>
-					<div class="row">
-						<a class="waves-effect waves-light btn blue darken-3 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
-					</div>
-				</div>';
+						</div>';
+			if ( (int) $excep->error_code < 700 || ( (int) $excep->error_code >= 800 && (int) $excep->error_code < 900 )) {
+				echo   '<div class="row">
+						    <div class="col s12">Please try again later, if problem persists <a href="contact.php">Contact Us</a>.</h5></div>
+						</div>';
+				}
+			echo   '</div>
+					    <div class="row">
+							<a class="waves-effect waves-light btn blue darken-3 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
+					    </div>
+				   </div>';
 
 		$controller->sendEmail("Administrator OMSC", "administrator@omsc.com", "Public Message: " . $publicMessage . " - Private Message: " . $excep->private_message . " - Timestamp: " . date('l jS \of F Y h:i:s A'));
 		error_log("Public Message: " . $publicMessage . " - Private Message: " . $excep->private_message . " - Timestamp: " . date('l jS \of F Y h:i:s A'));

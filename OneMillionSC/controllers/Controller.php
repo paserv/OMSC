@@ -124,7 +124,7 @@ class Controller {
 				$this->deleteUserFromFusionTable($dbData);
 				throw new Exception($e->getMessage(), 802);
 			}
-		} else {
+		} elseif (!$this->isFreeUser($dbData->socialId)) {
 			$this->incrementQuizCounter(QUIZ_ID);
 		}
 // 		$this->incrementMembers();
@@ -161,13 +161,12 @@ class Controller {
 		$result = $model->getQuizData($quizId);
 		if ($result->solution === $givenSolution) {
 			if ($result->counter < $result->threshold) {
-				$_SESSION["okquiz"] = true;
 				return true;
 			} else {
 				throw new Exception('Limit for free quiz subscription (' . $result->threshold . ') reached', 901);
 			}
 		} else {
-			//throw new Exception('Incorrect Solution ' . $givenSolution, 900);
+			throw new Exception('Incorrect Solution ' . $givenSolution, 900);
 		}
 		return false;
 	}
@@ -239,6 +238,12 @@ class Controller {
 		$model = new DBModel ();
 		$total_users = $model->countUsers();
 		return $total_users;
+	}
+	
+	function isFreeUser($id) {
+		$model = new DBModel ();
+		$result = $model->isFreeUser($id);
+		return $result;
 	}
 	
 	function countMembersFromFile() {

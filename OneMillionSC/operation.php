@@ -48,7 +48,7 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 			} else if (isset($_REQUEST['modify_button'])) {
 				$controller->update($user);
 			} else if (isset($_REQUEST['register_button'])){
-				if (!IS_PAYPAL_ENABLED) {
+				if (!IS_PAYPAL_ENABLED || $_SESSION ["freeuser"]) {
 					$controller->registerFree($user);
 				} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) {
 					$_SESSION["okquiz"] = false;
