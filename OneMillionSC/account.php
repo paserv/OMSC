@@ -50,7 +50,7 @@ $excep = new CustomException(); ?>
 							</script>
 						<?php
 						} elseif (IS_PAYPAL_ENABLED) {
-							$paypal_url = $controller->getPayPalUrl();
+// 							$paypal_url = $controller->getPayPalUrl();
 							}
 					} else {
 						$loginUrl = $currentUser->loginUrl;

@@ -14,7 +14,7 @@ if (isset($_SESSION["latitude"])) {
  */
 if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 	try {
-		$controller->register($user, $_REQUEST ['paymentId'], $_REQUEST ['PayerID'], false);
+		$controller->register($user, $_REQUEST ['paymentId'], $_REQUEST ['PayerID'], false, false);
 	} catch (Exception $ex) {
 		$excep->setError($ex->getCode(), $ex->getMessage());
 	}
@@ -52,7 +52,7 @@ if (isset ( $_REQUEST ['success'] ) && $_REQUEST ['success'] == 'true') {
 					$controller->registerFree($user);
 				} elseif (isset($_SESSION["okquiz"]) && $_SESSION["okquiz"] === true) {
 					$_SESSION["okquiz"] = false;
-					$controller->registerFree($user);
+					$controller->registerQuiz($user);
 				} else {
 					$controller->redirectToPaypal();
 				}

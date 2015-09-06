@@ -85,7 +85,7 @@ if (isset ( $_REQUEST ['solution'] )) {
 		</div>
 			<div class="card-panel">
 				<div class="row">
-					 <div class="col s12">For a martian 15 + 5 = 22, how many fingers he has?</div>
+					 <div class="col s12">33 trentini entrarono a Trento tutti e 33...</div>
 					 <form name="quizForm" action="quiz.php" method="post" class="col s12">
 					 	<div class="input-field">
 							<input name="solution" id="solution" type="text" class="validate" required>
