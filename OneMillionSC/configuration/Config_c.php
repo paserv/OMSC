@@ -47,8 +47,8 @@ define ('PP_REDIRECT_URL', 'http://www.aoapao.com/operation.php');
 define ('PP_PRICE', 1);
 
 #RECAPTCHA CONFIG#
-define ('RC_SECRET_SITE', '6LdYDgsTAAAAAKwhsnmkc4HH_echjjSviT5KXZNa');
-define ('RC_SECRET_KEY', '6LdYDgsTAAAAAJcsTKHItpU8hwLU7YdUqUSZUIj7');
+define ('RC_SECRET_SITE', '6LcpbwwTAAAAACWCd1DQ46pYo-OeoRJBT7sZxqAZ');
+define ('RC_SECRET_KEY', '6LcpbwwTAAAAAEdeE4utXOjzeWZHFSwCNB1qd1tO');
 
 #SITE CONFIG#
 define ('MAX_SEARCH', '3');

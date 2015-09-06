@@ -103,7 +103,7 @@ $excep = new CustomException();
 					</div>
 					<div class="row">
 						<div class="input-field col s12 m12 l12">
-							<div class="g-recaptcha right" data-sitekey="6LdYDgsTAAAAAKwhsnmkc4HH_echjjSviT5KXZNa" data-size="compact"></div>
+							<div class="g-recaptcha right" data-sitekey="<?php echo RC_SECRET_SITE; ?>" data-size="compact"></div>
 						</div>
 						<div class="input-field col s12 m12 l12">
 					   		<button class="btn waves-effect waves-light blue darken-3 right" type="submit" name="contact_button" value="contact">Send Message

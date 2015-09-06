@@ -7,7 +7,7 @@ function getDirs() {
 			"configuration" => __DIR__ . '/configuration/',
 			"controllers" =>  __DIR__ . '/controllers/',
 			"library" =>  __DIR__ . '/library/',
-			"tcp" => '_c',
+			"tcp" => '_t',
 	);
 	return $dirs;
 }
