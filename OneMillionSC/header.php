@@ -217,7 +217,7 @@ $( "#findBtn" ).click(function() {
 	    	lng = geom.location.lng();
 // 	    	queryString = "?name=" + $( "#search_name" ).val() + "&lat=" + lat + "&lng=" + lng + "&ray=" + ray;
 // 			window.location = "search.php" + queryString;
-	    	postData('search.php', {name: $( "#search_name" ).val(), lat: lat, lng: lng, ray: ray});
+	    	postData('search.php', {name: $( "#search_name" ).val(), lat: lat, lng: lng, ray: ray, place: $( "#search_place" ).val()});
 	      } else {
 	    	  window.alert('Address could not be geocoded: ' + status);
 		      }
@@ -237,7 +237,7 @@ $( "#findBtn" ).click(function() {
 	    	lng = geom.location.lng();
 // 	    	queryString = "?lat=" + lat + "&lng=" + lng + "&ray=" + ray;
 // 	    	window.location = "search.php" + queryString;
-	    	postData('search.php', {lat: lat, lng: lng, ray: ray});
+	    	postData('search.php', {lat: lat, lng: lng, ray: ray, place: $( "#search_place" ).val()});
 	      } else {
 	    	  window.alert('Address could not be geocoded: ' + status);
 		      }
