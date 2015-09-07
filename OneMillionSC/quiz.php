@@ -9,9 +9,17 @@ $_SESSION["okquiz"] = false;
 if (isset ( $_REQUEST ['solution'] )) {
 	try {
 		$quizok = $controller->checkQuizSolution(QUIZ_ID, $_REQUEST ['solution']);
-			if ($quizok) {
+		switch ($quizok) {
+			case "ok":
 				$_SESSION["okquiz"] = true;
-			}
+				break;
+			case "notok":
+				$incorrectsolution = true;
+				break;
+			case "limit":
+				$quizlimit = true;
+				break;
+		}
 	} catch (Exception $ex) {
 		$excep->setError($ex->getCode(), $ex->getMessage());
 	}

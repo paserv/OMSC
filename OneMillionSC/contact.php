@@ -57,7 +57,9 @@ $excep = new CustomException();
 					<div class="row" style="margin-right:0px;">
 						<a class="waves-effect waves-light btn blue darken-4 right" href="index.php"><i class="material-icons right">backspace</i>Come Back Home</a>
 					</div>
-				<?php } else { ?>
+				<?php } else { 
+					$controller->logError("Unable to send Mail: " . $_POST['name'], $_POST['email'], $_POST['message']);
+					?>
 					<div class="row">
 						<div class="col s12"><h5>Operation Error<i class="mdi-content-block left"></i></h5></div>
 					</div>

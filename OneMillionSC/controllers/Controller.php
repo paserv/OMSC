@@ -182,14 +182,16 @@ class Controller {
 		if ($result->solution === $givenSolution) {
 			if ($result->counter < $result->threshold) {
 				$this->logInfo("Quiz try OK for QUIZ_ID: " . $quizId . " and SOLUTION: " . $givenSolution);
-				return true;
+				return "ok";
 			} else {
 				$this->logInfo("Limit for free quiz subscription: (" . $result->threshold . ") reached");
-				throw new Exception('Limit for free quiz subscription (' . $result->threshold . ') reached', 901);
+				return "limit";
+// 				throw new Exception('Limit for free quiz subscription (' . $result->threshold . ') reached', 901);
 			}
 		} else {
 			$this->logInfo("Quiz try NOT OK for QUIZ_ID: " . $quizId . " and SOLUTION: " . $givenSolution);
-			throw new Exception('Incorrect Solution ' . $givenSolution, 900);
+			return "notok";
+// 			throw new Exception('Incorrect Solution ' . $givenSolution, 900);
 		}
 		return false;
 	}
