@@ -35,25 +35,27 @@ if (isset ( $_SESSION ["numSearch"] )) {
 
 <body>
 
-	<?php 
+	<?php
+	$toShow = "results";
+	$results = null;
 	if ($controller->isUserLoggedAndRegistered() || $_SESSION ["numSearch"] <= MAX_SEARCH) {
-	
 		try {
 	
 			if (isset ( $_REQUEST ['name'] ) && $_REQUEST ['name'] != '' && isset ($_REQUEST ['lat']) && $_REQUEST ['lat'] != '' && isset($_REQUEST ['lng']) && $_REQUEST ['lng'] != '' && isset($_REQUEST ['ray']) && $_REQUEST ['ray'] != '') {
 // 				$results = $controller->searchByNameAndCoords ( $_REQUEST ['name'], $_REQUEST ['lat'], $_REQUEST ['lng'], $_REQUEST ['ray'] );
 				$results = $controller->searchByNameAndCoordsSpatial ( $_REQUEST ['name'], $_REQUEST ['lat'], $_REQUEST ['lng'], $_REQUEST ['ray'] );
-				$controller->logSearch("NC;". $_REQUEST ['name'] . ";" . $_REQUEST ['place'] . ";" . $_REQUEST ['lat'] . ";" . $_REQUEST ['lng'] . ";" . $_REQUEST ['ray']);
+				$controller->logSearch("NC;". $_REQUEST ['name'] . ";" . $_REQUEST ['place'] . ";" . $_REQUEST ['lat'] . ";" . $_REQUEST ['lng'] . ";" . $_REQUEST ['ray'] . ";" . count($results));
 			} else if (isset ( $_REQUEST ['name'] ) && $_REQUEST ['name'] != '' ) {
 				$results = $controller->searchByName ( $_REQUEST ['name'] );
-				$controller->logSearch("N;". $_REQUEST ['name'] . ";;;;");
+				$controller->logSearch("N;". $_REQUEST ['name'] . ";;;;;" . count($results));
 			}
 			else if ( isset ($_REQUEST ['lat']) && $_REQUEST ['lat'] != '' && isset($_REQUEST ['lng']) && $_REQUEST ['lng'] != '' && isset($_REQUEST ['ray']) && $_REQUEST ['ray'] != '') {
 // 				$results = $controller->searchByCoords ( $_REQUEST ['lat'], $_REQUEST ['lng'], $_REQUEST ['ray'] );
 				$results = $controller->searchByCoordsSpatial ( $_REQUEST ['lat'], $_REQUEST ['lng'], $_REQUEST ['ray']);
-				$controller->logSearch("C;;" . $_REQUEST ['place'] . ";" . $_REQUEST ['lat'] . ";" . $_REQUEST ['lng'] . ";" . $_REQUEST ['ray']);
+				$controller->logSearch("C;;" . $_REQUEST ['place'] . ";" . $_REQUEST ['lat'] . ";" . $_REQUEST ['lng'] . ";" . $_REQUEST ['ray'] . ";" . count($results));
 			} else {
-				$excep->setError(700, "Search parameters not correct");
+				//$excep->setError(700, "Search parameters not correct");
+				$toShow = "uncorrectparams";
 			}
 	
 		} catch ( Exception $ex ) {
@@ -62,7 +64,6 @@ if (isset ( $_SESSION ["numSearch"] )) {
 	
 		if (!$excep->existProblem) {
 			if ($results !== null) {
-				$controller->logInfo("Search results: " . count($results));
 				foreach ( $results as $currUser ) {
 					echo "<script type='text/javascript'>";
 					?>
@@ -83,20 +84,67 @@ if (isset ( $_SESSION ["numSearch"] )) {
 					}
 				if (count($results) == DB_SEARCH_LIMIT ) {
 					echo "<script>Materialize.toast('Search is limited to a maximum of " . DB_SEARCH_LIMIT . " people', 5000, 'rounded')</script>";
-					$controller->logInfo("Search result more than " . DB_SEARCH_LIMIT);
 				}
 			} else {
-					$excep->setError(700, "No results for this search");
-					$controller->logInfo("No results for this search");
+					//$excep->setError(700, "No results for this search");
+					$toShow = "noresults";
 				}
 		}
 	} else {
-			$excep->setError(701, "You are a Fox");
+			//$excep->setError(701, "You are a Fox");
+			$toShow = "limit";
+			$controller->logInfo("Free search limit reached");
 		}
 	?>
 
 	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else {	?>
-	<div id="map-canvas"></div>
+	<?php 
+	switch ($toShow) {
+		case "results":
+			echo "<div id='map-canvas'></div>";
+			break;
+		case "uncorrectparams":
+			echo '<div class="container">
+					<div class="row">
+						<div class="col s12"><h5>Search Result<i class="material-icons left small">error</i></h5></div>
+					</div>
+					<div class="card-panel">
+						<div class="row">
+							<div class="col s12"><h5>Search parameters are not correct</h5></div>
+						</div>
+					</div>
+				</div>';
+			break;
+		case "noresults":
+			echo '<div class="container">
+					<div class="row">
+						<div class="col s12"><h5>Search Result<i class="material-icons left small">error</i></h5></div>
+					</div>
+					<div class="card-panel">
+						<div class="row">
+							<div class="col s12"><h5>No results for this search</h5></div>
+						</div>
+					</div>
+				</div>';
+			break;
+		case "limit":
+			echo '<div class="container">
+					<div class="row">
+						<div class="col s12"><h5>Search Result<i class="material-icons left small">error</i></h5></div>
+					</div>
+					<div class="card-panel">
+						<div class="row">
+							<div class="col s12"><h5>Free search limit reached, please Register for unlimited search</h5></div>
+						</div>
+					</div>
+					<div class="row">
+						<a class="waves-effect waves-light btn blue darken-3 right" href="account.php?choose=yes"><i class="mdi-social-person-add"></i>Register</a>
+					</div>
+				</div>';
+			break;
+	}
+	?>
+	
 	<?php } include 'footer.php'; ?>
 </body>
 

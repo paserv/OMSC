@@ -305,9 +305,9 @@ class Controller {
 	}
 	
 	function searchByName($name) {
-		$this->logInfo("Search By Name: " . $name);
 		$model = new DBModel();
 		$result = $model->searchByName($name);
+		$this->logInfo("Search By Name: " . $name . " results: " . count($result));
 		return $result;
 	}
 	
@@ -319,9 +319,9 @@ class Controller {
 	}
 	
 	function searchByNameAndCoordsSpatial ($name, $lat, $lng, $ray) {
-		$this->logInfo("Search By Name and Coords: " . $name . " " . $lat . " " . $lng . " " . $ray);
 		$model = new DBModel();
 		$result = $model->searchByNameAndCoordsSpatial($name, $lat, $lng, $ray);
+		$this->logInfo("Search By Name and Coords: " . $name . " " . $lat . " " . $lng . " " . $ray . " results: " . count($result));
 		return $result;
 	}
 	
@@ -333,9 +333,9 @@ class Controller {
 	}
 	
 	function searchByCoordsSpatial ($lat, $lng, $ray) {
-		$this->logInfo("Search By Coords: " . $lat . " " . $lng . " " . $ray);
 		$model = new DBModel ();
 		$result = $model->searchByCoordsSpatial($lat, $lng, $ray);
+		$this->logInfo("Search By Coords: " . $lat . " " . $lng . " " . $ray . " results: " . count($result));
 		return $result;
 	}
 	

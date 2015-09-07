@@ -117,7 +117,8 @@ class DBModel {
 			}
 			return $res;
 		} else {
-			throw new Exception("No Result found in search by Name And Coords", 700);
+			return null;
+			//throw new Exception("No Result found in search by Name And Coords", 700);
 		}
 		$conn->close ();
 	}
@@ -210,7 +211,8 @@ class DBModel {
 			}
 			return $res;
 		} else {
-			throw new Exception("No Result found in search by Coords", 700);
+			return null;
+			//throw new Exception("No Result found in search by Coords", 700);
 		}
 		$conn->close ();
 	}
