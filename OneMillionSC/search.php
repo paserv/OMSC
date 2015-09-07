@@ -59,6 +59,7 @@ if (isset ( $_SESSION ["numSearch"] )) {
 	
 		if (!$excep->existProblem) {
 			if ($results !== null) {
+				$controller->logInfo("Search results: " . count($results));
 				foreach ( $results as $currUser ) {
 					echo "<script type='text/javascript'>";
 					?>
@@ -79,9 +80,11 @@ if (isset ( $_SESSION ["numSearch"] )) {
 					}
 				if (count($results) == DB_SEARCH_LIMIT ) {
 					echo "<script>Materialize.toast('Search is limited to a maximum of " . DB_SEARCH_LIMIT . " people', 5000, 'rounded')</script>";
+					$controller->logInfo("Search result more than " . DB_SEARCH_LIMIT);
 				}
 			} else {
 					$excep->setError(700, "No results for this search");
+					$controller->logInfo("No results for this search");
 				}
 		}
 	} else {

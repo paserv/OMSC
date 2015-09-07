@@ -1,4 +1,6 @@
 <?php
+error_log("Test\r", 3, "log/assa_" . date("Ymd") . ".log");
+
 $lat = 40.9230386;
 $lng = 14.309303999999997;
 

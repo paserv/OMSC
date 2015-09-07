@@ -64,11 +64,11 @@
 					    </div>
 				   </div>';
 
-		$controller->sendEmail("Administrator OMSC", "administrator@omsc.com", "Public Message: " . $publicMessage . " - Private Message: " . $excep->private_message . " - Timestamp: " . date('l jS \of F Y h:i:s A'));
-		//error_log("Public Message: " . $publicMessage . " - Private Message: " . $excep->private_message . " - Timestamp: " . date('l jS \of F Y h:i:s A'));
+		$controller->sendEmail("Administrator OMSC", "administrator@omsc.com", " Public Message: " . $publicMessage . " - Private Message: " . $excep->private_message . " - Timestamp: " . date('l jS \of F Y h:i:s A'));
+		$controller->logError("Timestamp: " . date('l jS \of F Y h:i:s A') . " Public Message: " . $publicMessage . " - Private Message: " . $excep->private_message);
 	} else {
-		$controller->sendEmail("Administrator OMSC", "administrator@omsc.com", "Public Message: " . $publicMessage . " - Private Message: EMPTY - Timestamp: " . date('l jS \of F Y h:i:s A'));
-		//error_log("Public Message: " . $publicMessage . " - Private Message: EMPTY - Timestamp: " . date('l jS \of F Y h:i:s A'));
+		$controller->sendEmail("Administrator OMSC", "administrator@omsc.com", " Public Message: " . $publicMessage . " - Private Message: EMPTY - Timestamp: " . date('l jS \of F Y h:i:s A'));
+		$controller->logError("Timestamp: " . date('l jS \of F Y h:i:s A') . " Public Message: " . $publicMessage . " - Private Message: EMPTY");
 		echo '<div class="container">
 					<div class="row">
 						<div class="col s12"><h5>Error<i class="material-icons left small">error</i></h5></div>
