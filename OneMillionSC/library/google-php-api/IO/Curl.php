@@ -72,13 +72,13 @@ class Google_IO_Curl extends Google_IO_Abstract
     curl_setopt($curl, CURLOPT_USERAGENT, $request->getUserAgent());
 
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     // 1 is CURL_SSLVERSION_TLSv1, which is not always defined in PHP.
     curl_setopt($curl, CURLOPT_SSLVERSION, 1);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_HEADER, true);
-    //curl_setopt($curl, CURLOPT_PROXY, 'http://localhost');
-    //curl_setopt($curl, CURLOPT_PROXYPORT, 3128);
+    curl_setopt($curl, CURLOPT_PROXY, 'http://localhost');
+    curl_setopt($curl, CURLOPT_PROXYPORT, 3128);
 
     if ($request->canGzip()) {
       curl_setopt($curl, CURLOPT_ENCODING, 'gzip,deflate');

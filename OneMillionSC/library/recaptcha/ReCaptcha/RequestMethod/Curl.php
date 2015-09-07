@@ -38,8 +38,8 @@ class Curl implements RequestMethod
             CURLOPT_SSL_VERIFYPEER => true,
         		
         	CURLOPT_SSL_VERIFYPEER => false,
-        	//CURLOPT_PROXY          => 'http://localhost:5865',
-        	//CURLOPT_PROXYPORT      => 5865
+        	CURLOPT_PROXY          => 'http://localhost:5865',
+        	CURLOPT_PROXYPORT      => 5865
         );
         curl_setopt_array($handle, $options);
 

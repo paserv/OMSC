@@ -116,7 +116,7 @@ class Controller {
 			throw new Exception($e->getMessage(), 800);
 		}
 		try {
- 			$this->registerUserIntoFusionTable ( $dbData );
+//  			$this->registerUserIntoFusionTable ( $dbData );
  			$this->logInfo("User Registered into FUSION Table -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork);
 		} catch ( Exception $e ) {
 			$this->logout();
@@ -141,16 +141,16 @@ class Controller {
 		}
 // 		$this->incrementMembers();
 		$tot_usres = $this->updateMembersCount();
-		$this->logInfo("Registered new User -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
-		$this->sendEmail("Administrator OMSC", "administrator@omsc.com", "Registered new User -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
+		$this->logInfo("Registered new User -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . " Total Users: " . $tot_usres);
+		$this->sendEmail("Administrator OMSC", "administrator@omsc.com", "Registered new User -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . " Total Users: " . $tot_usres);
 	}
 
 	function delete(DBUser $dbData) {
 		$this->deleteUserFromDB($dbData);
-		$this->logInfo("Deleted User from DB -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
+		$this->logInfo("Deleted User from DB -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork);
 		try {
- 			$this->deleteUserFromFusionTable($dbData);
- 			$this->logInfo("Deleted User FUSION Table -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
+//  			$this->deleteUserFromFusionTable($dbData);
+ 			$this->logInfo("Deleted User FUSION Table -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork);
 			$this->logout();
 		} catch ( Exception $e ) {
 			$this->registerUserIntoDB($dbData);
@@ -158,22 +158,22 @@ class Controller {
 		}
 // 		$this->decrementMembers();
 		$tot_usres = $this->updateMembersCount();
-		$this->logInfo("Deleted User -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
+		$this->logInfo("Deleted User -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . " Total Users: " . $tot_usres);
 		$this->sendEmail("Administrator OMSC", "administrator@omsc.com", "Deleted new User -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
 	}
 	
 	function update(DBUser $dbData) {
 		$oldUser = $this->search($dbData->socialId, $dbData->socialNetwork);
 		$this->updateUserIntoDB($dbData);
-		$this->logInfo("Updated User Info into DB -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
+		$this->logInfo("Updated User Info into DB -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork);
 		try {
- 			$this->updateUserIntoFusionTable($dbData);
- 			$this->logInfo("Updated User Info into FUSION Table -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
+//  			$this->updateUserIntoFusionTable($dbData);
+ 			$this->logInfo("Updated User Info into FUSION Table -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork);
 		} catch ( Exception $e ) {
 			$this->updateUserIntoDB($oldUser);
 			throw new Exception($e->getMessage(), 804);
 		}
-		$this->logInfo("Updated User Info -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork . "Total Users: " . $tot_usres);
+		$this->logInfo("Updated User Info -> ID: " . $dbData->socialId . " Name: " . $dbData->name . " SN: " . $dbData->socialNetwork);
 	}
 	
 	function checkQuizSolution($quizId, $givenSolution) {
@@ -395,11 +395,15 @@ class Controller {
 	 * LOG
 	 */
 	function logError($message) {
-		error_log("Timestamp: " . date('l jS \of F Y h:i:s A') . " " . $message . "\r", 3, "log/error_" . date("Ymd") . ".log");
+		error_log("Timestamp: " . date('YmdHis') . " " . $message . "\r", 3, "log/error_" . date("Ymd") . ".log");
 	}
 	
 	function logInfo($message) {
-		error_log("Timestamp: " . date('l jS \of F Y h:i:s A') . " " . $message . "\r", 3, "log/info_" . date("Ymd") . ".log");
+		error_log("Timestamp: " . date('YmdHis') . " " . $message . "\r", 3, "log/info_" . date("Ymd") . ".log");
+	}
+	
+	function logSearch($message) {
+		error_log(date('YmdHis') . ";" . $message . "\r", 3, "log/search_" . date("Ymd") . ".log");
 	}
 	
 	/*TO DELETE*/
