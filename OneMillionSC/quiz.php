@@ -29,13 +29,13 @@ if (isset ( $_REQUEST ['solution'] )) {
 <html>
 	<head>
 		<title>One Million Social Club - Home Page</title>
+		<link rel="icon" href="favicon.ico" />
 		<link type="text/css" rel="stylesheet" href="public/css/materialize.min.css"  media="screen,projection"/>
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link type="text/css" rel="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<link type="text/css" rel="stylesheet" href="public/css/omsc.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<meta property="og:title" content="OMSC">
-		<meta property="og:image" content="http://www.aoapao.com/public/img/find.png">
+		<meta property="og:image" content="http://www.aoapao.com/public/img/ico.png">
 		<meta property="og:site_name" content="One Million Social Club">
 		<meta property="og:description" content="Join One Million Social Club">
 		<meta property="og:locale" content="en_UK">
