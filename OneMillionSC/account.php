@@ -26,6 +26,7 @@ $excep = new CustomException(); ?>
 	</head>
 
 <body>
+	<?php include_once("analyticstracking.php") ?>
 	<script type="text/javascript">var coordinate = false;</script>
 	<?php 
 		if (isset($_REQUEST["sn"])) {

@@ -34,7 +34,7 @@ if (isset ( $_SESSION ["numSearch"] )) {
 	</head>
 
 <body>
-
+	<?php include_once("analyticstracking.php") ?>	
 	<?php
 	$toShow = "results";
 	$results = null;

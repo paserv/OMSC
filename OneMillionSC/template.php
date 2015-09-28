@@ -25,6 +25,7 @@ $excep = new CustomException(); ?>
 	</head>
 
 <body>
+	<?php include_once("analyticstracking.php") ?>
 	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else {	?>
 	CONTENT
 	<?php } include 'footer.php'; ?>

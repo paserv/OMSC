@@ -47,6 +47,7 @@ if (isset ( $_REQUEST ['solution'] )) {
 	</head>
 
 <body>
+	<?php include_once("analyticstracking.php") ?>
 	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { if (isset ( $_REQUEST ['solution'] ) && isset ($_SESSION["okquiz"]) && $_SESSION["okquiz"]) { ?>
 	<div class="container">
 		<div class="row">

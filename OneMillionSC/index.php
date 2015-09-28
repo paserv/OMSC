@@ -26,6 +26,7 @@ $excep = new CustomException();
 		</head>
 	
 	<body>
+		<?php include_once("analyticstracking.php") ?>
 		<?php if (! empty ( $_REQUEST['latitude'] ) && ! empty ( $_REQUEST['longitude'] )) {?>
 		<script type="text/javascript">var latitude = <?php echo $_REQUEST['latitude']; ?>;</script>
 		<script type="text/javascript">var longitude = <?php echo $_REQUEST['longitude']; ?>;</script>

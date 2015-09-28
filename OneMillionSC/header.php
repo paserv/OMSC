@@ -31,7 +31,7 @@
 	<nav>
 		<div class="nav-wrapper blue darken-3 h80">
 			<ul class="left hide-on-med-and-down">
-				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="Home" href="index.php" ><img src="public/img/home_white.png"></a></li>
+				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="Home" href="index.php" ><img src="public/img/home_white.png" style="vertical-align:middle"></a></li>
 				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="About" href="about.php"><i class="mdi-action-assignment"></i></i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger tooltipped" data-position="bottom" data-delay="100" data-tooltip="Search people" href="#modal1"><i class="mdi-action-search"></i></a></li>
 				<li><a class="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="Register" href="account.php?choose=yes"><i class="mdi-social-person-add"></i></a></li>

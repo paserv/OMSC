@@ -27,6 +27,7 @@ $excep = new CustomException();
 	</head>
 
 <body>
+	<?php include_once("analyticstracking.php") ?>
 	<?php include 'header.php'; if ($excep->existProblem) { include 'error.php'; } else { ?>
 	<div class="container">
 		<?php if (isset($_POST['g-recaptcha-response'])) {
